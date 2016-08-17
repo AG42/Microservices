@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>MicroService4Net</id>
+    <version>2.0.5948.28056</version>
+    <title>MicroService4Net</title>
+    <authors>Code Cleaner</authors>
+    <owners>Code Cleaner</owners>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/TheCodeCleaner/MicroService4Net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Create Micro Service</description>
+    <summary />
+    <releaseNotes>Started using Owin.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>MicroService SelfHosting Owin</tags>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.WebApi.OwinSelfHost" version="5.2.3" />
+      <dependency id="Microsoft.Owin.Cors" version="3.0.1" />
+    </dependencies>
+  </metadata>
+</package>
