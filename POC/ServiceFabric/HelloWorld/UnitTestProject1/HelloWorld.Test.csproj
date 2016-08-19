@@ -92,6 +92,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="OrganizationContollerTest.cs" />
     <Compile Include="ProductContollerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,9 +101,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Denodo\Denodo.csproj">
+      <Project>{86b3afd1-cf0a-4e1b-9ecf-91de5e6515e7}</Project>
+      <Name>Denodo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HelloWorldAPI\HelloWorldAPI.csproj">
       <Project>{0f11cdda-9922-422a-850f-582dbc219c38}</Project>
       <Name>HelloWorldAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{cd4c5a0d-9c7d-43fb-b8b7-dbff76382885}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

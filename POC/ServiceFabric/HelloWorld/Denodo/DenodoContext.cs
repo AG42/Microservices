@@ -7,7 +7,7 @@ using Models;
 
 namespace Denodo
 {
-    public class DenodoContext
+    public class DenodoContext: IDenodoContext
     {
         const string MEDIA_TYPE = "application/json";
         readonly string _denodoBaseUri;

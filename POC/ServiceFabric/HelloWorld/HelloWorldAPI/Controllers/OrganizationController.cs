@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Denodo;
 using Models;
+using System.Net.Http;
 
 namespace DenodoTestingApi.Controllers
 {
     [RoutePrefix("api/organizations")]
     public class OrganizationController : ApiController
     {
-        private readonly DenodoContext _denodoContext;
+        private readonly IDenodoContext _denodoContext;
 
         public OrganizationController()
         {
@@ -17,16 +18,16 @@ namespace DenodoTestingApi.Controllers
         }
 
         [Route("")]
-        public List<Organization> Get()
+        public IHttpActionResult Get()
         {
             List<Organization> organizations = _denodoContext.GetData<Organization>("wtorganization/views/wtorganization");
-            return organizations;
+            return Ok<List<Organization>>(organizations);
         }
 
         [Route("{id}")]
-        public Organization Get(string id)
+        public IHttpActionResult Get(string id)
         {
-                return _denodoContext.GetData<Organization>("wtorganization/views/wtorganization", id);
+            return Ok<Organization>(_denodoContext.GetData<Organization>("wtorganization/views/wtorganization", id));
         }
 
         public IHttpActionResult Post(Organization organization)
