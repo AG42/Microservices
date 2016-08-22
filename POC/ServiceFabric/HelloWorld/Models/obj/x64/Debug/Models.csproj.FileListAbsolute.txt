@@ -1,0 +1,5 @@
+C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\Models\bin\x64\Debug\Models.dll
+C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\Models\bin\x64\Debug\Models.pdb
+C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\Models\obj\x64\Debug\Models.csprojResolveAssemblyReference.cache
+C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\Models\obj\x64\Debug\Models.dll
+C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\Models\obj\x64\Debug\Models.pdb

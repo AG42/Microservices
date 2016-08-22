@@ -31,9 +31,6 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\POC\ServiceFabric\HelloWorld\He
 C:\Vinod\Project\TFS\Microservices\SourceControl\POC\ServiceFabric\HelloWorld\HelloWorldAPI\obj\x64\Debug\HelloWorldAPI.exe
 C:\Vinod\Project\TFS\Microservices\SourceControl\POC\ServiceFabric\HelloWorld\HelloWorldAPI\obj\x64\Debug\HelloWorldAPI.pdb
 C:\Vinod\Project\TFS\Microservices\SourceControl\POC\ServiceFabric\HelloWorld\HelloWorldAPI\obj\x64\Debug\HelloWorldAPI.csprojResolveAssemblyReference.cache
-C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\obj\x64\Debug\HelloWorldAPI.csprojResolveAssemblyReference.cache
-C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\obj\x64\Debug\HelloWorldAPI.exe
-C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\obj\x64\Debug\HelloWorldAPI.pdb
 C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\bin\x64\Debug\HelloWorldAPI.exe.config
 C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\bin\x64\Debug\HelloWorldAPI.exe
 C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\bin\x64\Debug\HelloWorldAPI.pdb
@@ -68,3 +65,6 @@ C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\bi
 C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\bin\x64\Debug\System.Web.Http.xml
 C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\bin\x64\Debug\System.Web.Http.Owin.xml
 C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\bin\x64\Debug\en-us\Microsoft.ServiceFabric.Internal.Strings.resources.dll
+C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\obj\x64\Debug\HelloWorldAPI.csprojResolveAssemblyReference.cache
+C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\obj\x64\Debug\HelloWorldAPI.exe
+C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorldAPI\obj\x64\Debug\HelloWorldAPI.pdb
