@@ -1,0 +1,4 @@
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.DataLayer\bin\Debug\ProjectOrder.DataLayer.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.DataLayer\bin\Debug\ProjectOrder.DataLayer.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.DataLayer\obj\Debug\ProjectOrder.DataLayer.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.DataLayer\obj\Debug\ProjectOrder.DataLayer.pdb

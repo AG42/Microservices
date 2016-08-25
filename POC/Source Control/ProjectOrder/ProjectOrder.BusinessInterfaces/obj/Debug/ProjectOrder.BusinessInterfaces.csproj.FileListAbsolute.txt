@@ -1,0 +1,4 @@
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.BusinessInterfaces\bin\Debug\ProjectOrder.BusinessInterfaces.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.BusinessInterfaces\bin\Debug\ProjectOrder.BusinessInterfaces.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.BusinessInterfaces\obj\Debug\ProjectOrder.BusinessInterfaces.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.BusinessInterfaces\obj\Debug\ProjectOrder.BusinessInterfaces.pdb

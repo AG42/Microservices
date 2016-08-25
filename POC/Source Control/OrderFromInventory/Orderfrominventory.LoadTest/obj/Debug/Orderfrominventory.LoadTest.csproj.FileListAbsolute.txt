@@ -1,0 +1,8 @@
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.LoadTest\bin\Debug\WebTest1.webtest
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.LoadTest\bin\Debug\Orderfrominventory.LoadTest.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.LoadTest\bin\Debug\Orderfrominventory.LoadTest.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.LoadTest\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.LoadTest\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.xml
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.LoadTest\obj\Debug\Orderfrominventory.LoadTest.csprojResolveAssemblyReference.cache
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.LoadTest\obj\Debug\Orderfrominventory.LoadTest.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.LoadTest\obj\Debug\Orderfrominventory.LoadTest.pdb
