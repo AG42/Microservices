@@ -1,0 +1,6 @@
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\CustomerInformation.Common.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\CustomerInformation.Common.pdb
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\NLog.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\NLog.xml
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Common\obj\Debug\CustomerInformation.Common.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Common\obj\Debug\CustomerInformation.Common.pdb

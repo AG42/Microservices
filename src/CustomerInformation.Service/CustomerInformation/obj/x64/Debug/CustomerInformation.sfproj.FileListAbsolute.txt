@@ -1,0 +1,1 @@
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation\obj\x64\Debug\CustomerInformation.sfprojResolveAssemblyReference.cache

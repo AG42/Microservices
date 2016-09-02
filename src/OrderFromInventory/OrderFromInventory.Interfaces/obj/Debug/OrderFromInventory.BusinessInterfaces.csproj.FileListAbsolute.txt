@@ -1,0 +1,4 @@
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Interfaces\bin\Debug\OrderFromInventory.Interfaces.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Interfaces\bin\Debug\OrderFromInventory.Interfaces.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Interfaces\obj\Debug\OrderFromInventory.Interfaces.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Interfaces\obj\Debug\OrderFromInventory.Interfaces.pdb

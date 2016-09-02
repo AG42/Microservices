@@ -1,0 +1,5 @@
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Model\bin\Debug\CustomerInformation.Model.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Model\bin\Debug\CustomerInformation.Model.pdb
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Model\obj\Debug\CustomerInformation.Model.csprojResolveAssemblyReference.cache
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Model\obj\Debug\CustomerInformation.Model.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.Model\obj\Debug\CustomerInformation.Model.pdb

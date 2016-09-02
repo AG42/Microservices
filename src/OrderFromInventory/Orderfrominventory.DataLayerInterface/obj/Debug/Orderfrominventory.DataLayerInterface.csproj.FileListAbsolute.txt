@@ -1,0 +1,4 @@
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.DataLayerInterface\bin\Debug\Orderfrominventory.DataLayerInterface.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.DataLayerInterface\bin\Debug\Orderfrominventory.DataLayerInterface.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.DataLayerInterface\obj\Debug\Orderfrominventory.DataLayerInterface.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Orderfrominventory.DataLayerInterface\obj\Debug\Orderfrominventory.DataLayerInterface.pdb

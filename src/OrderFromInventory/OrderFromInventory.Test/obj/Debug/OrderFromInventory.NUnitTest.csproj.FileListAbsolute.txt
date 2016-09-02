@@ -1,0 +1,7 @@
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Test\bin\Debug\OrderFromInventory.Test.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Test\bin\Debug\OrderFromInventory.Test.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Test\obj\Debug\OrderFromInventory.NUnitTest.csprojResolveAssemblyReference.cache
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Test\obj\Debug\OrderFromInventory.Test.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.Test\obj\Debug\OrderFromInventory.Test.pdb

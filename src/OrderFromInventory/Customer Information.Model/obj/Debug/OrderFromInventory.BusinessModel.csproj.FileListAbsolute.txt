@@ -1,0 +1,5 @@
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Customer Information.Model\bin\Debug\Customer Information.Model.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Customer Information.Model\bin\Debug\Customer Information.Model.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Customer Information.Model\obj\Debug\OrderFromInventory.BusinessModel.csprojResolveAssemblyReference.cache
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Customer Information.Model\obj\Debug\Customer Information.Model.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\Customer Information.Model\obj\Debug\Customer Information.Model.pdb

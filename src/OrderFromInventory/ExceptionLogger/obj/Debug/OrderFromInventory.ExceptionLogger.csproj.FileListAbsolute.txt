@@ -1,0 +1,5 @@
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\ExceptionLogger\bin\Debug\ExceptionLogger.dll
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\ExceptionLogger\bin\Debug\ExceptionLogger.pdb
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\ExceptionLogger\obj\Debug\OrderFromInventory.ExceptionLogger.csprojResolveAssemblyReference.cache
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\ExceptionLogger\obj\Debug\ExceptionLogger.dll
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\ExceptionLogger\obj\Debug\ExceptionLogger.pdb
