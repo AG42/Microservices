@@ -1,0 +1,4 @@
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\Customer Information.Model\bin\Debug\Customer Information.Model.dll
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\Customer Information.Model\bin\Debug\Customer Information.Model.pdb
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\Customer Information.Model\obj\Debug\Customer Information.Model.dll
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\Customer Information.Model\obj\Debug\Customer Information.Model.pdb

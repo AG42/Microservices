@@ -1,0 +1,4 @@
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.BusinessLayer\bin\Debug\ProjectOrder.BusinessLayer.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.BusinessLayer\bin\Debug\ProjectOrder.BusinessLayer.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.BusinessLayer\obj\Debug\ProjectOrder.BusinessLayer.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.BusinessLayer\obj\Debug\ProjectOrder.BusinessLayer.pdb

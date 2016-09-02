@@ -1,0 +1,4 @@
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Denodo\bin\Debug\ProjectOrder.Denodo.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Denodo\bin\Debug\ProjectOrder.Denodo.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Denodo\obj\Debug\ProjectOrder.Denodo.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Denodo\obj\Debug\ProjectOrder.Denodo.pdb

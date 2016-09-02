@@ -1,0 +1,7 @@
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\OrderFromInventory.BusinessLayer\obj\Debug\OrderFromInventory.BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.BusinessLayer\bin\Debug\OrderFromInventory.BusinessLayer.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.BusinessLayer\bin\Debug\OrderFromInventory.BusinessLayer.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.BusinessLayer\bin\Debug\Customer Information.Model.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.BusinessLayer\bin\Debug\Customer Information.Model.pdb
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.BusinessLayer\obj\Debug\OrderFromInventory.BusinessLayer.dll
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory.BusinessLayer\obj\Debug\OrderFromInventory.BusinessLayer.pdb

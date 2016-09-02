@@ -1,0 +1,2 @@
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\OrderFromInventory\obj\x64\Debug\OrderFromInventory.sfprojResolveAssemblyReference.cache
+C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\OrderFromInventory\OrderFromInventory\bin\Debug\antlr.runtime.dll

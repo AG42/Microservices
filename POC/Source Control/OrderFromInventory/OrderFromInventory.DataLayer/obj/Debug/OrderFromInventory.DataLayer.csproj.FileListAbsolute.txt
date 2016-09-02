@@ -1,0 +1,5 @@
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\OrderFromInventory.DataLayer\bin\Debug\OrderFromInventory.DataLayer.dll
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\OrderFromInventory.DataLayer\bin\Debug\OrderFromInventory.DataLayer.pdb
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\OrderFromInventory.DataLayer\obj\Debug\OrderFromInventory.DataLayer.csprojResolveAssemblyReference.cache
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\OrderFromInventory.DataLayer\obj\Debug\OrderFromInventory.DataLayer.dll
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\OrderFromInventory.DataLayer\obj\Debug\OrderFromInventory.DataLayer.pdb

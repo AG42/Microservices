@@ -1,0 +1,5 @@
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\Denodo\bin\Debug\Denodo.dll
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\Denodo\bin\Debug\Denodo.pdb
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\Denodo\obj\Debug\OrderFromInventory.Denodo.csprojResolveAssemblyReference.cache
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\Denodo\obj\Debug\Denodo.dll
+c:\users\ckshirsu\documents\visual studio 2015\Projects\OrderFromInventory\Denodo\obj\Debug\Denodo.pdb
