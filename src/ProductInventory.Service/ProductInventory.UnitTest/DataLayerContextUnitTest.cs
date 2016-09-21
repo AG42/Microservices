@@ -157,6 +157,9 @@ namespace ProductInventory.UnitTest
             SetMockDataForProductModels();
             var mocks = MockRepository.GenerateMock<IDenodoContext>();
 
+            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+                 .IgnoreArguments().Throw(new Exception());
+
             var dataLayer = new DataLayerContext();
             var result = dataLayer.GetItemWareHouse(string.Empty, string.Empty, string.Empty);
             Assert.IsNotNull(result);
@@ -169,6 +172,9 @@ namespace ProductInventory.UnitTest
         {
             SetMockDataForProductModels();
             var mocks = MockRepository.GenerateMock<IDenodoContext>();
+
+            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+                .IgnoreArguments().Throw(new Exception());
 
             var dataLayer = new DataLayerContext();
             var result = dataLayer.GetStockItemByProductCode(string.Empty, string.Empty);
@@ -183,6 +189,9 @@ namespace ProductInventory.UnitTest
             SetMockDataForProductModels();
             var mocks = MockRepository.GenerateMock<IDenodoContext>();
 
+            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+                .IgnoreArguments().Throw(new Exception());
+
             var dataLayer = new DataLayerContext();
             var result = dataLayer.GetItemWareHouseByProductCode(string.Empty, string.Empty);
             Assert.IsNotNull(result);
@@ -195,6 +204,9 @@ namespace ProductInventory.UnitTest
         {
             SetMockDataForProductModels();
             var mocks = MockRepository.GenerateMock<IDenodoContext>();
+
+            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+                .IgnoreArguments().Throw(new Exception());
 
             var dataLayer = new DataLayerContext();
             var result = dataLayer.GetItemWareHouseByLocationId(string.Empty, string.Empty);
@@ -209,6 +221,9 @@ namespace ProductInventory.UnitTest
             SetMockDataForProductModels();
             var mocks = MockRepository.GenerateMock<IDenodoContext>();
 
+            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+                .IgnoreArguments().Throw(new Exception());
+
             var dataLayer = new DataLayerContext();
             var result = dataLayer.GetProductInvetoryByLocationId(string.Empty, string.Empty);
             Assert.IsNotNull(result);
@@ -220,8 +235,9 @@ namespace ProductInventory.UnitTest
         public void GetProductInvetoryByProductNameExceptionTest()
         {
             SetMockDataForProductModels();
-            //var mocks = MockRepository.GenerateMock<IDenodoContext>();
-            //mocks.Stub(x => x.SearchData<CustomerMaster>(companyViewUri, customerName)).Throw(new Exception());
+            var mocks = MockRepository.GenerateMock<IDenodoContext>();
+            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+                .IgnoreArguments().Throw(new Exception());
 
             var dataLayer = new DataLayerContext();
             var result = dataLayer.GetProductInvetoryByProductName(string.Empty, string.Empty);

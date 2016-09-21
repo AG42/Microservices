@@ -1,0 +1,839 @@
+09/21/2016 12:17:43
+ M2383315 
+ 14628 
+ vstest.executionengine.x86
+ Exception of type 'System.Exception' was thrown.
+ Database
+ 
+ Error
+    at Rhino.Mocks.Expectations.AbstractExpectation.ReturnOrThrow(IInvocation invocation, Object[] args)
+   at Rhino.Mocks.Impl.ReplayDynamicMockState.DoMethodCall(IInvocation invocation, MethodInfo method, Object[] args)
+   at Rhino.Mocks.Impl.ReplayMockState.MethodCall(IInvocation invocation, MethodInfo method, Object[] args)
+   at Rhino.Mocks.MockRepository.MethodCall(IInvocation invocation, Object proxy, MethodInfo method, Object[] args)
+   at Rhino.Mocks.Impl.Invocation.Actions.RegularInvocation.PerformAgainst(IInvocation invocation)
+   at Rhino.Mocks.Impl.RhinoInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.IDenodoContextProxy7913a99e9ebe44d3b80248cebac1a2d3.IDenodoContext.GetData[T](String viewUri)
+   at ProductInventory.DataLayer.DataLayerContext.GetItemWareHouse(String companyCode, String productCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DataLayerContext.cs:line 65
+ 
+
+09/21/2016 12:44:38
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ One or more errors occurred.
+ Database
+ 
+ Error
+    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at DenodoAdapter.DenodoContext.GetData[T](String viewUri)
+   at ProductInventory.DataLayer.DataLayerContext.GetItemWareHouse(String companyCode, String productCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DataLayerContext.cs:line 65
+ System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: The remote name could not be resolved: 'mum-dev'
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+
+09/21/2016 12:44:40
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ One or more errors occurred.
+ Database
+ 
+ Error
+    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at DenodoAdapter.DenodoContext.GetData[T](String viewUri)
+   at ProductInventory.DataLayer.DataLayerContext.GetStockItemByProductCode(String companyCode, String productCode) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DataLayerContext.cs:line 83
+ System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: The remote name could not be resolved: 'mum-dev'
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+
+09/21/2016 12:44:42
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ One or more errors occurred.
+ Database
+ 
+ Error
+    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at DenodoAdapter.DenodoContext.GetData[T](String viewUri)
+   at ProductInventory.DataLayer.DataLayerContext.GetItemWareHouseByProductCode(String companyCode, String productCode) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DataLayerContext.cs:line 101
+ System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: The remote name could not be resolved: 'mum-dev'
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+
+09/21/2016 12:44:45
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ One or more errors occurred.
+ Database
+ 
+ Error
+    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at DenodoAdapter.DenodoContext.GetData[T](String viewUri)
+   at ProductInventory.DataLayer.DataLayerContext.GetItemWareHouseByLocationId(String companyCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DataLayerContext.cs:line 118
+ System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: The remote name could not be resolved: 'mum-dev'
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+
+09/21/2016 12:44:47
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ One or more errors occurred.
+ Database
+ 
+ Error
+    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at DenodoAdapter.DenodoContext.GetData[T](String viewUri)
+   at ProductInventory.DataLayer.DataLayerContext.GetProductInvetoryByLocationId(String companyCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DataLayerContext.cs:line 155
+ System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: The remote name could not be resolved: 'mum-dev'
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+
+09/21/2016 12:44:49
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ One or more errors occurred.
+ Database
+ 
+ Error
+    at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   at System.Threading.Tasks.Task`1.get_Result()
+   at DenodoAdapter.DenodoContext.SearchData[T](String viewUri, String filter)
+   at ProductInventory.DataLayer.DataLayerContext.GetProductInvetoryByProductName(String companyCode, String productName) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DataLayerContext.cs:line 137
+ System.Net.Http.HttpRequestException: An error occurred while sending the request. ---> System.Net.WebException: The remote name could not be resolved: 'mum-dev'
+   at System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   at System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- End of inner exception stack trace ---
+
+09/21/2016 12:45:10
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:10
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:11
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:11
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:15
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:15
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:52
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:52
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:52
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:53
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:53
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:45:53
+ M2383315 
+ 18208 
+ vstest.executionengine.x86
+ Not Found
+ Database
+ 
+ Error
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" href="/css/platform.css" type="text/css">
+    <title>Page not found</title>
+</head><body>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table align="center" border="0" cellspacing="5" width="410">
+    <tbody><tr>
+        <td>
+            <div align="center">
+                <img src="/images/proof.gif" height="88" width="409">
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td background="/images/1px_red.gif"><div align="center"><img src="/images/1px.gif" height="1" width="1"></div></td>
+    </tr>
+  <tr>
+    <td class="link" align="left" height="20" valign="middle">
+        <div align="center">
+            <h3>The page you requested was not found.</h3>
+        </div>
+    </td>
+  </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+  <tr>
+        <td class="link" align="left" height="20" valign="middle">
+            The page may no longer exist, or you may have typed the URL incorrectly.
+        </td>
+    </tr>
+  <tr>
+      <td background="/images/1px_red.gif"><img src="/images/1px.gif" lowsrc="/images/1px_red.gif" height="1" width="1"></td>
+  </tr>
+</tbody></table>
+
+</body></html>
+
+ 
+
+09/21/2016 12:50:45
+ M2383315 
+ 14524 
+ vstest.executionengine
+ The request does not have an associated configuration object or the provided configuration was null.
+ Database
+ 
+ Error
+    at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value, HttpConfiguration configuration)
+   at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value)
+   at ProductInventory.API.Controllers.ProductInventoryController.GetProductByLocationId(String companyCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\Controllers\ProductInventoryController.cs:line 115
+ 
+
+09/21/2016 12:50:48
+ M2383315 
+ 14524 
+ vstest.executionengine
+ The request does not have an associated configuration object or the provided configuration was null.
+ Database
+ 
+ Error
+    at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value, HttpConfiguration configuration)
+   at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value)
+   at ProductInventory.API.Controllers.ProductInventoryController.GetProduct(String companyCode, String productCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\Controllers\ProductInventoryController.cs:line 145
+ 
+
+09/21/2016 12:50:48
+ M2383315 
+ 14524 
+ vstest.executionengine
+ The request does not have an associated configuration object or the provided configuration was null.
+ Database
+ 
+ Error
+    at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value, HttpConfiguration configuration)
+   at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value)
+   at ProductInventory.API.Controllers.ProductInventoryController.GetProductByDescription(String companyCode, String description) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\Controllers\ProductInventoryController.cs:line 79
+ 
+
+09/21/2016 12:50:48
+ M2383315 
+ 14524 
+ vstest.executionengine
+ The request does not have an associated configuration object or the provided configuration was null.
+ Database
+ 
+ Error
+    at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value, HttpConfiguration configuration)
+   at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value)
+   at ProductInventory.API.Controllers.ProductInventoryController.GetProductById(String companyCode, String productCode) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\Controllers\ProductInventoryController.cs:line 44
+ 
+
