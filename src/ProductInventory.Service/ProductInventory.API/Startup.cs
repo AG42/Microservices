@@ -11,10 +11,11 @@ namespace ProductInventory.API
         {
             // Configure Web API for self-host. 
             HttpConfiguration config = new HttpConfiguration();
-
+            UnityConfig.RegisterComponents(config);
+            config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/",
                 defaults: new { id = RouteParameter.Optional }
             );
 

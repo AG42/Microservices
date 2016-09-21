@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductInventory.BusinessLa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductInventory.DataLayer", "ProductInventory.DataLayer\ProductInventory.DataLayer.csproj", "{E6584FF1-03DB-453A-B947-11178AF1758C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductInventory.DataLayerInterface", "ProductInventory.DataLayerInterface\ProductInventory.DataLayerInterface.csproj", "{2DE340F1-DA1E-42D6-80C6-01535984B777}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductInventory.Model", "ProductInventory.Model\ProductInventory.Model.csproj", "{6D416CB3-F2F0-4B1F-9EC3-F5AC3C6886C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductInventory.UnitTest", "ProductInventory.UnitTest\ProductInventory.UnitTest.csproj", "{F69D2779-B4B3-408B-848B-D986CC9A5038}"
@@ -23,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductInventory.Common", "ProductInventory.Common\ProductInventory.Common.csproj", "{EF401A62-ACD3-47D6-8074-C36694D2EB94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,14 +62,6 @@ Global
 		{E6584FF1-03DB-453A-B947-11178AF1758C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E6584FF1-03DB-453A-B947-11178AF1758C}.Release|x64.ActiveCfg = Release|Any CPU
 		{E6584FF1-03DB-453A-B947-11178AF1758C}.Release|x64.Build.0 = Release|Any CPU
-		{2DE340F1-DA1E-42D6-80C6-01535984B777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DE340F1-DA1E-42D6-80C6-01535984B777}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DE340F1-DA1E-42D6-80C6-01535984B777}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2DE340F1-DA1E-42D6-80C6-01535984B777}.Debug|x64.Build.0 = Debug|Any CPU
-		{2DE340F1-DA1E-42D6-80C6-01535984B777}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DE340F1-DA1E-42D6-80C6-01535984B777}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DE340F1-DA1E-42D6-80C6-01535984B777}.Release|x64.ActiveCfg = Release|Any CPU
-		{2DE340F1-DA1E-42D6-80C6-01535984B777}.Release|x64.Build.0 = Release|Any CPU
 		{6D416CB3-F2F0-4B1F-9EC3-F5AC3C6886C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D416CB3-F2F0-4B1F-9EC3-F5AC3C6886C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D416CB3-F2F0-4B1F-9EC3-F5AC3C6886C1}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -94,8 +86,46 @@ Global
 		{D2C0F6B9-7306-4575-95E6-048CE719A5E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2C0F6B9-7306-4575-95E6-048CE719A5E7}.Release|x64.ActiveCfg = Release|Any CPU
 		{D2C0F6B9-7306-4575-95E6-048CE719A5E7}.Release|x64.Build.0 = Release|Any CPU
+		{EF401A62-ACD3-47D6-8074-C36694D2EB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF401A62-ACD3-47D6-8074-C36694D2EB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF401A62-ACD3-47D6-8074-C36694D2EB94}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EF401A62-ACD3-47D6-8074-C36694D2EB94}.Debug|x64.Build.0 = Debug|Any CPU
+		{EF401A62-ACD3-47D6-8074-C36694D2EB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF401A62-ACD3-47D6-8074-C36694D2EB94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF401A62-ACD3-47D6-8074-C36694D2EB94}.Release|x64.ActiveCfg = Release|x64
+		{EF401A62-ACD3-47D6-8074-C36694D2EB94}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://c-mumsm12.asia.jci.com:8080/tfs/businesssolutions
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ProductInventory\\ProductInventory.sfproj
+		SccProjectName1 = ProductInventory
+		SccLocalPath1 = ProductInventory
+		SccProjectUniqueName2 = ProductInventory.API\\ProductInventory.API.csproj
+		SccProjectName2 = ProductInventory.API
+		SccLocalPath2 = ProductInventory.API
+		SccProjectUniqueName3 = ProductInventory.BusinessLayer\\ProductInventory.BusinessLayer.csproj
+		SccProjectName3 = ProductInventory.BusinessLayer
+		SccLocalPath3 = ProductInventory.BusinessLayer
+		SccProjectUniqueName4 = ProductInventory.DataLayer\\ProductInventory.DataLayer.csproj
+		SccProjectName4 = ProductInventory.DataLayer
+		SccLocalPath4 = ProductInventory.DataLayer
+		SccProjectUniqueName5 = ProductInventory.Model\\ProductInventory.Model.csproj
+		SccProjectName5 = ProductInventory.Model
+		SccLocalPath5 = ProductInventory.Model
+		SccProjectUniqueName6 = ProductInventory.UnitTest\\ProductInventory.UnitTest.csproj
+		SccProjectName6 = ProductInventory.UnitTest
+		SccLocalPath6 = ProductInventory.UnitTest
+		SccProjectUniqueName7 = ProductInventory.LoadTest\\ProductInventory.LoadTest.csproj
+		SccProjectName7 = ProductInventory.LoadTest
+		SccLocalPath7 = ProductInventory.LoadTest
+		SccProjectUniqueName8 = ProductInventory.Common\\ProductInventory.Common.csproj
+		SccProjectName8 = ProductInventory.Common
+		SccLocalPath8 = ProductInventory.Common
 	EndGlobalSection
 EndGlobal

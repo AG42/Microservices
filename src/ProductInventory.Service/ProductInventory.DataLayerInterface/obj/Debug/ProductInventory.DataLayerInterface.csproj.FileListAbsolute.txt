@@ -1,0 +1,5 @@
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayerInterface\bin\Debug\ProductInventory.DataLayerInterface.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayerInterface\bin\Debug\ProductInventory.DataLayerInterface.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayerInterface\obj\Debug\ProductInventory.DataLayerInterface.csprojResolveAssemblyReference.cache
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayerInterface\obj\Debug\ProductInventory.DataLayerInterface.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayerInterface\obj\Debug\ProductInventory.DataLayerInterface.pdb

@@ -1,0 +1,11 @@
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\bin\Debug\ProductInventory.Model.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\bin\Debug\ProductInventory.Model.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\obj\Debug\ProductInventory.Model.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\obj\Debug\ProductInventory.Model.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\bin\Debug\NLog.config
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\bin\Debug\NLog.xsd
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\bin\Debug\ProductInventory.Common.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\bin\Debug\NLog.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\bin\Debug\ProductInventory.Common.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\bin\Debug\NLog.xml
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Model\obj\Debug\ProductInventory.Model.csprojResolveAssemblyReference.cache

@@ -1,0 +1,1 @@
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory\obj\x64\Debug\ProductInventory.sfprojResolveAssemblyReference.cache
