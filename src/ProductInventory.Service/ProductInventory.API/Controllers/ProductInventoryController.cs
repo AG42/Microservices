@@ -20,6 +20,12 @@ namespace ProductInventory.API.Controllers
             _manager = manager;
         }
 
+        [Route("")]
+        public string GetServiceName()
+        {
+            return "Product Inventory Service...";
+        }
+
         /// <summary>
         /// Get product inventory by company code and by product code
         /// </summary>
