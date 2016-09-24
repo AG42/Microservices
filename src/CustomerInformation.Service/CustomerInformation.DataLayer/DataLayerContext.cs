@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.Web.Http;
 using CustomerInformation.Common.Logger;
 using CustomerInformation.DataLayer.Entities;
 using DenodoAdapter;
@@ -7,41 +9,55 @@ using CustomerInformation.DataLayer.Interfaces;
 
 namespace CustomerInformation.DataLayer
 {
-    public class DataLayerContext: IDataLayerContext
+    public interface ITest
+    { string DomainUri { get; set; } }
+    public class DataLayerContext : IDataLayerContext, ITest
     {
         private const string LIKE_OPERATOR = "like";
+        private const string EQUAL_OPERATOR = "=";
         private const string CUSTOMERNAME_FIELD = "sl01002";
-        private const string COMPANYCODE_PLACEHOLDER = "{CompanyCode}";
+        private const string CUSTOMERCODE_FIELD = "sl01001";
         private readonly IDenodoContext _denodoContext;
-        private readonly string _viewUri;
+        private readonly string _denodoUrl;
+        private readonly ConfigReader _configReader;
+        public string DomainUri { get; set; }
 
-        public DataLayerContext()
+        public DataLayerContext(params object[] theObjects)
         {
             try
             {
-                ConfigReader configReader = new ConfigReader(false);
-                _denodoContext = new DenodoContext(configReader.BaseUri, configReader.DenodoUsername, configReader.DenodoPassword);
-                _viewUri = configReader.CustomerInformationViewUri;
+                _configReader = new ConfigReader();
+                _denodoContext = new DenodoContext(_configReader.BaseUri, _configReader.DenodoUsername,
+                    _configReader.DenodoPassword);
+
+                if (theObjects.Length > 0)
+                    _denodoContext = (IDenodoContext)theObjects[0];
+
+                _denodoUrl = _configReader.BaseUri;
             }
             catch (Exception exception)
             {
-                ApplicationLogger.Error(exception.Message,Category.Database, exception.StackTrace, null);
+                ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace,
+                    exception.InnerException);
                 throw;
             }
         }
-
 
         public List<CustomerMaster> GetCustomerByName(string companyCode, string customerName)
         {
             try
             {
-                string companyViewUri = _viewUri.Replace(COMPANYCODE_PLACEHOLDER, companyCode);
-                string filter = $"{CUSTOMERNAME_FIELD} {LIKE_OPERATOR} '%{customerName}%'";
-                return _denodoContext.SearchData<CustomerMaster>(companyViewUri, filter);
+                ApplicationLogger.InfoLogger("DataLayer :: GetCustomerByName :: Reading view uri from config");
+                string companyViewUri = _configReader.GetDenodoViewUri(companyCode);
+                string filter = $"lower({CUSTOMERNAME_FIELD}) {LIKE_OPERATOR} '%{customerName.ToLower()}%'";
+                ApplicationLogger.InfoLogger($"Denodo url: [{_denodoUrl}{companyViewUri}] filter: [{filter}]");
+                var customers = _denodoContext.SearchData<CustomerMaster>(companyViewUri, filter);
+                ApplicationLogger.InfoLogger($"Customers count: {customers.Count}");
+                return customers;
             }
             catch (Exception exception)
             {
-                ApplicationLogger.Error(exception.Message, Category.Database, exception.StackTrace, exception.InnerException.ToString());
+                LogException(exception);
                 throw;
             }
         }
@@ -49,12 +65,16 @@ namespace CustomerInformation.DataLayer
         {
             try
             {
-                string companyViewUri = _viewUri.Replace(COMPANYCODE_PLACEHOLDER, companyCode);
-                return _denodoContext.GetData<CustomerMaster>(companyViewUri);
+                ApplicationLogger.InfoLogger("DataLayer :: GetCustomers :: Reading view uri from config");
+                string companyViewUri = _configReader.GetDenodoViewUri(companyCode);
+                ApplicationLogger.InfoLogger($"Denodo url: [{_denodoUrl}{companyViewUri}]");
+                var customers = _denodoContext.GetData<CustomerMaster>(companyViewUri);
+                ApplicationLogger.InfoLogger($"Customers count: {customers.Count}");
+                return customers;
             }
             catch (Exception exception)
             {
-                ApplicationLogger.Error(exception.Message, Category.Database, exception.StackTrace, exception.InnerException.ToString());
+                LogException(exception);
                 throw;
             }
         }
@@ -62,16 +82,32 @@ namespace CustomerInformation.DataLayer
         {
             try
             {
-                string companyViewUri = _viewUri.Replace(COMPANYCODE_PLACEHOLDER, companyCode);
-                var data = _denodoContext.GetData<CustomerMaster>(companyViewUri, customerCode);
-                return data;
+                ApplicationLogger.InfoLogger("DataLayer :: GetCustomerById :: Reading view uri from config");
+                string finalViewUri = $"{_configReader.GetDenodoViewUri(companyCode)}?{CUSTOMERCODE_FIELD}{EQUAL_OPERATOR}{customerCode}";
+                ApplicationLogger.InfoLogger($"Denodo url: [{_denodoUrl}{finalViewUri}]");
+                var data = _denodoContext.GetData<CustomerMaster>(finalViewUri);
+                return data.FirstOrDefault();
             }
             catch (Exception exception)
             {
-                ApplicationLogger.Error(exception.Message, Category.Database, exception.StackTrace,
-                    exception.InnerException.ToString());
+                LogException(exception);
                 throw;
             }
+        }
+
+        private static void LogException(Exception exception)
+        {
+            if (exception.GetType() == typeof(HttpResponseException))
+            {
+                HttpResponseException responseException = (HttpResponseException)exception;
+                ApplicationLogger.Errorlog(responseException.Response.ReasonPhrase, Category.Database,
+                    responseException.Response.Content.ReadAsStringAsync().Result, responseException.InnerException);
+                ApplicationLogger.InfoLogger(
+                    $"Denodo Adapter exception :: {responseException.Response.ReasonPhrase}");
+                throw responseException;
+            }
+            ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace,
+                exception.InnerException);
         }
     }
 }

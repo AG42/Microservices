@@ -6,3 +6,11 @@ C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\Cu
 C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.LoadTest\obj\Debug\CustomerInformation.LoadTest.csprojResolveAssemblyReference.cache
 C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.LoadTest\obj\Debug\CustomerInformation.LoadTest.dll
 C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\CustomerInformation.Service\CustomerInformation.LoadTest\obj\Debug\CustomerInformation.LoadTest.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.LoadTest\bin\Debug\WebTest1.webtest
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.LoadTest\bin\Debug\CustomerInformation.LoadTest.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.LoadTest\bin\Debug\CustomerInformation.LoadTest.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.LoadTest\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.LoadTest\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.xml
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.LoadTest\obj\Debug\CustomerInformation.LoadTest.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.LoadTest\obj\Debug\CustomerInformation.LoadTest.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.LoadTest\obj\Debug\CustomerInformation.LoadTest.csprojResolveAssemblyReference.cache

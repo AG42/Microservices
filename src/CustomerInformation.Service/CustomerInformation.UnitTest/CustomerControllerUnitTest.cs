@@ -1,14 +1,14 @@
-﻿using CustomerInformation.API.Controllers;
-using CustomerInformation.BusinessLayer.Interface;
-using CustomerInformation.DataLayer.Entities;
-using CustomerInformation.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Rhino.Mocks;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Net.Http;
 using System.Web.Http.Hosting;
+using System.Web.Http;
+using Rhino.Mocks;
 using System.Web.Http.Results;
+using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CustomerInformation.API.Controllers;
+using CustomerInformation.DataLayer.Entities;
+using CustomerInformation.BusinessLayer.Interface;
+using CustomerInformation.Model;
 
 namespace CustomerInformation.UnitTest
 {
@@ -16,13 +16,13 @@ namespace CustomerInformation.UnitTest
     public class CustomerControllerUnitTest
     {
         #region Declarations
-        private ICustomerManager iCustomer;
-        private CustomerController controller = null;
+        private ICustomerManager _iCustomer;
+        private CustomerController _controller;
         string companyCode = "xh";
         string customerCode = "C001";
         string customerName = "Customer 1";
-        List<CustomerInformationModel> customerInformationModelList = new List<CustomerInformationModel>();
-        List<CustomerMaster> customerList = new List<CustomerMaster>();
+        List<CustomerInformationModel> _customerInformationModelList = new List<CustomerInformationModel>();
+        List<CustomerMaster> _customerList = new List<CustomerMaster>();
         #endregion
 
         #region UnitTests
@@ -32,9 +32,8 @@ namespace CustomerInformation.UnitTest
         [TestInitialize]
         public void Initialize()
         {
-            controller = new CustomerController(iCustomer);
-            controller.Request = new HttpRequestMessage();
-            controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            _controller = new CustomerController(_iCustomer) {Request = new HttpRequestMessage()};
+            _controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
         }
 
         /// <summary>
@@ -45,16 +44,16 @@ namespace CustomerInformation.UnitTest
         {
             var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
             SetMockDataForCustomerModels();
-
+            var data = new Model.Response.CustomerSearchByCompanyCodeResponse();
+            data.Customers.AddRange(_customerInformationModelList);
             mockRepository.Stub(x => x.GetCustomers(companyCode))
                             .IgnoreArguments()
-                            .Return(customerInformationModelList);
+                            .Return(data);
 
-            controller = new CustomerController(mockRepository);
+            _controller = new CustomerController(mockRepository);
 
-            var result = controller.GetCustomers(companyCode);
+            var result = _controller.GetCustomers(companyCode);
             Assert.IsNotNull(result);
-            //Assert.IsInstanceOfType(result, typeof(OkResult));
         }
 
         /// <summary>
@@ -66,13 +65,13 @@ namespace CustomerInformation.UnitTest
             var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
             SetMockDataForCustomerModels();
 
-            mockRepository.Stub(x => x.GetCustomerById(companyCode,customerCode))
+            mockRepository.Stub(x => x.GetCustomerById(companyCode, customerCode))
                             .IgnoreArguments()
-                            .Return(new CustomerInformationModel());
+                            .Return(new Model.Response.CustomerSearchByIdResponse());
 
-            controller = new CustomerController(mockRepository);
+            _controller = new CustomerController(mockRepository);
 
-            var result = controller.GetCustomerById(companyCode,customerCode);
+            var result = _controller.GetCustomerById(companyCode, customerCode);
             Assert.IsNotNull(result);
             //Assert.IsInstanceOfType(result, typeof(OkResult));
         }
@@ -85,14 +84,15 @@ namespace CustomerInformation.UnitTest
         {
             var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
             SetMockDataForCustomerModels();
-
+            var data = new Model.Response.CustomerSearchByNameResponse();
+            data.Customers.AddRange(_customerInformationModelList);
             mockRepository.Stub(x => x.GetCustomerByName(companyCode, customerName))
                             .IgnoreArguments()
-                            .Return(customerInformationModelList);
+                            .Return(data);
 
-            controller = new CustomerController(mockRepository);
+            _controller = new CustomerController(mockRepository);
 
-            var result = controller.GetCustomerByName(companyCode, customerName);
+            var result = _controller.GetCustomerByName(companyCode, customerName);
             Assert.IsNotNull(result);
             //Assert.IsInstanceOfType(result, typeof(OkResult));
         }
@@ -104,23 +104,23 @@ namespace CustomerInformation.UnitTest
         public void GetCustomersNegativeTest()
         {
             var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
-
+            var data = new Model.Response.CustomerSearchByCompanyCodeResponse();            
             mockRepository.Stub(x => x.GetCustomers(string.Empty))
                             .IgnoreArguments()
-                            .Return(new List<CustomerInformationModel>());
+                            .Return(data);
 
-            controller = new CustomerController(mockRepository);
-            
+            _controller = new CustomerController(mockRepository);
+
             //Assert for GetCustomers with null companyCode
-            IHttpActionResult resultByCompanyCode = controller.GetCustomers(string.Empty);
+            IHttpActionResult resultByCompanyCode = _controller.GetCustomers(string.Empty);
             Assert.IsInstanceOfType(resultByCompanyCode, typeof(NotFoundResult));
 
             //Assert for GetCustomerById with null companyCode & customerCode
-            IHttpActionResult resultByCompanyCodeAndCustomerCode = controller.GetCustomerById(string.Empty, string.Empty);
+            IHttpActionResult resultByCompanyCodeAndCustomerCode = _controller.GetCustomerById(string.Empty, string.Empty);
             Assert.IsInstanceOfType(resultByCompanyCodeAndCustomerCode, typeof(NotFoundResult));
 
             //Assert for GetCustomerByName with null companyCode & customerName
-            IHttpActionResult resultByCompanyCodeAndCustomerName = controller.GetCustomerByName(string.Empty,string.Empty);
+            IHttpActionResult resultByCompanyCodeAndCustomerName = _controller.GetCustomerByName(string.Empty, string.Empty);
             Assert.IsInstanceOfType(resultByCompanyCodeAndCustomerName, typeof(NotFoundResult));
         }
 
@@ -133,27 +133,17 @@ namespace CustomerInformation.UnitTest
         public void SetMockDataForCustomerModels()
         {
             #region SampleCustomerInformationModelList
-            customerInformationModelList.Add(new CustomerInformationModel()
+            _customerInformationModelList.Add(new CustomerInformationModel()
             {
                 ERP_Customer_Code_c = "C001",
-                AccountName = "Customer 2",
-                AddressLine1 = "Commer Zone",
-                AddressLine2 = "Brad Pitt, Eric Bana, Orlando Bloom",
-                AddressLine3 = "Pune",
-                AddressLine4 = "AddressLine4",
                 BillingCity = "CityPune Code",
                 Phone = "9876543210",
                 CurrencyIsoCode = "INR",
                 BillingPostalCode = "428201"
             });
-            customerInformationModelList.Add(new CustomerInformationModel()
+            _customerInformationModelList.Add(new CustomerInformationModel()
             {
                 ERP_Customer_Code_c = "C002",
-                AccountName = "Customer 1",
-                AddressLine1 = "Commer Zone 21",
-                AddressLine2 = "qwerty Brad Pitt, Eric Bana, Orlando Bloom",
-                AddressLine3 = "Mumbai",
-                AddressLine4 = "AddressLine4 1",
                 BillingCity = "Mumbai",
                 Phone = "9876987210",
                 CurrencyIsoCode = "USD",
@@ -161,7 +151,7 @@ namespace CustomerInformation.UnitTest
             });
             #endregion
             #region SampleDataCustomerMaster
-            customerList.Add(new CustomerMaster()
+            _customerList.Add(new CustomerMaster()
             {
                 sl01001 = "C001",
                 sl01002 = "Customer 2",
@@ -174,7 +164,7 @@ namespace CustomerInformation.UnitTest
                 sl01022 = "INR",
                 sl01083 = "428201"
             });
-            customerList.Add(new CustomerMaster()
+            _customerList.Add(new CustomerMaster()
             {
                 sl01001 = "C002",
                 sl01002 = "Customer 1",
@@ -188,7 +178,7 @@ namespace CustomerInformation.UnitTest
                 sl01083 = "425001"
 
             });
-            customerList.Add(new CustomerMaster()
+            _customerList.Add(new CustomerMaster()
             {
                 sl01001 = "C003",
                 sl01002 = "Customer 4",

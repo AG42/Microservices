@@ -60,7 +60,7 @@ namespace CustomerInformation.API
 
         public Task<string> OpenAsync(CancellationToken cancellationToken)
         {
-            var serviceEndpoint = this.serviceContext.CodePackageActivationContext.GetEndpoint(this.endpointName);
+            var serviceEndpoint = serviceContext.CodePackageActivationContext.GetEndpoint(endpointName);
             int port = serviceEndpoint.Port;
 
             if (this.serviceContext is StatefulServiceContext)
@@ -73,12 +73,12 @@ namespace CustomerInformation.API
                     port,
                     string.IsNullOrWhiteSpace(this.appRoot)
                         ? string.Empty
-                        : this.appRoot.TrimEnd('/') + '/',
+                        : appRoot.TrimEnd('/') + '/',
                     statefulServiceContext.PartitionId,
                     statefulServiceContext.ReplicaId,
                     Guid.NewGuid());
             }
-            else if (this.serviceContext is StatelessServiceContext)
+            else if (serviceContext is StatelessServiceContext)
             {
                 this.listeningAddress = string.Format(
                     CultureInfo.InvariantCulture,

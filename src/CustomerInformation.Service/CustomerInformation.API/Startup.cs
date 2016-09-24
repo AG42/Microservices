@@ -1,7 +1,5 @@
 ﻿using System.Web.Http;
 using Owin;
-using Microsoft.Practices.Unity;
-using CustomerInformation.API.Resolver;
 using CustomerInformation.DataLayer.Interfaces;
 using CustomerInformation.DataLayer;
 using CustomerInformation.BusinessLayer;
@@ -21,21 +19,18 @@ namespace CustomerInformation.API
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/",
                 defaults: new { id = RouteParameter.Optional }
             );
 
             appBuilder.UseWebApi(config);
         }
 
-        public static void Register(HttpConfiguration config)
-        {
-            var container = new UnityContainer();
-            container.RegisterType<ICustomerManager, CustomerManager>(new HierarchicalLifetimeManager());
-            container.RegisterType<IDataLayerContext, DataLayerContext>(new HierarchicalLifetimeManager());
-            config.DependencyResolver = new UnityResolver(container);
+        //public static void Register(HttpConfiguration config)
+        //{
+     
 
-            // Other Web API configuration not shown.
-        }
+        //    // Other Web API configuration not shown.
+        //}
     }
 }

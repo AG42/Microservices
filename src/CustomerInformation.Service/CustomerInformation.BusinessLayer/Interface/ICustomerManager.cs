@@ -1,5 +1,6 @@
 ﻿using CustomerInformation.Model;
 using CustomerInformation.Model.Requests;
+using CustomerInformation.Model.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace CustomerInformation.BusinessLayer.Interface
 {
     public interface ICustomerManager
     {
-        List<CustomerInformationModel> GetCustomers(string companyCode);
-        CustomerInformationModel GetCustomerById(string companyCode, string customerCode);
-        List<CustomerInformationModel> GetCustomerByName(string companyCode, string customerName);
+        CustomerSearchByCompanyCodeResponse GetCustomers(string companyCode);
+        CustomerSearchByIdResponse GetCustomerById(string companyCode, string customerCode);
+        CustomerSearchByNameResponse GetCustomerByName(string companyCode, string customerName);
     }
 }

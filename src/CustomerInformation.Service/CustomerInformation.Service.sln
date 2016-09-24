@@ -98,4 +98,34 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://c-mumsm12.asia.jci.com:8080/tfs/businesssolutions
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CustomerInformation\\CustomerInformation.sfproj
+		SccProjectName1 = CustomerInformation
+		SccLocalPath1 = CustomerInformation
+		SccProjectUniqueName2 = CustomerInformation.API\\CustomerInformation.API.csproj
+		SccProjectName2 = CustomerInformation.API
+		SccLocalPath2 = CustomerInformation.API
+		SccProjectUniqueName3 = CustomerInformation.BusinessLayer\\CustomerInformation.BusinessLayer.csproj
+		SccProjectName3 = CustomerInformation.BusinessLayer
+		SccLocalPath3 = CustomerInformation.BusinessLayer
+		SccProjectUniqueName4 = CustomerInformation.DataLayer\\CustomerInformation.DataLayer.csproj
+		SccProjectName4 = CustomerInformation.DataLayer
+		SccLocalPath4 = CustomerInformation.DataLayer
+		SccProjectUniqueName5 = CustomerInformation.Model\\CustomerInformation.Model.csproj
+		SccProjectName5 = CustomerInformation.Model
+		SccLocalPath5 = CustomerInformation.Model
+		SccProjectUniqueName6 = CustomerInformation.UnitTest\\CustomerInformation.UnitTest.csproj
+		SccProjectName6 = CustomerInformation.UnitTest
+		SccLocalPath6 = CustomerInformation.UnitTest
+		SccProjectUniqueName7 = CustomerInformation.LoadTest\\CustomerInformation.LoadTest.csproj
+		SccProjectName7 = CustomerInformation.LoadTest
+		SccLocalPath7 = CustomerInformation.LoadTest
+		SccProjectUniqueName8 = CustomerInformation.Common\\CustomerInformation.Common.csproj
+		SccProjectName8 = CustomerInformation.Common
+		SccLocalPath8 = CustomerInformation.Common
+	EndGlobalSection
 EndGlobal

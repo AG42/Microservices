@@ -1,4 +1,3 @@
-using CustomerInformation.API.Resolver;
 using CustomerInformation.BusinessLayer;
 using CustomerInformation.BusinessLayer.Interface;
 using CustomerInformation.DataLayer;
@@ -18,14 +17,10 @@ namespace CustomerInformation.API
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
-            // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<ICustomerManager, CustomerManager>();
-            container.RegisterType<IDataLayerContext, DataLayerContext>();
+            container.RegisterType<ICustomerManager, CustomerManager>(new HierarchicalLifetimeManager());
+            container.RegisterType<IDataLayerContext, DataLayerContext>(new HierarchicalLifetimeManager());
 
-            // config.DependencyResolver = new UnityDependencyResolver(container);
-            config.DependencyResolver = new UnityResolver(container);
-
-
+            config.DependencyResolver = new UnityDependencyResolver(container);
         }
     }
 }

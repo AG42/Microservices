@@ -8,41 +8,32 @@ namespace CustomerInformation.Common
 {
    public class Configuration
     {
-        readonly SqlConnection _connection;
+       private readonly string _connectionString;
         public Configuration(string connectionString)
         {
-            _connection = new SqlConnection(
-                connectionString);
-
+            _connectionString = connectionString;
         }
-        public Dictionary<string, string> GetConfiguration(string serviceName, string enviroment)
+
+       public Dictionary<string, string> GetConfiguration(string serviceName, string environment)
         {
-            Dictionary<string, string> env = new Dictionary<string, string>();
-            SqlDataReader rdr = null;
+            var configDictionary = new Dictionary<string, string>();
             try
             {
-                _connection.Open();
-
-                SqlCommand cmd = new SqlCommand("SP_Configuration", _connection)
+                var parameterCollection = new List<SqlParameter>
+               {
+                   new SqlParameter("@ServiceName", serviceName),
+                   new SqlParameter("@Environment", environment)
+               };
+                var dataSet = GetDataFromStoredProcedure("GetConfigDetails", parameterCollection);
+                if (dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
                 {
-                    CommandType = CommandType.StoredProcedure
-                };
-
-
-                cmd.Parameters.Add(
-                    new SqlParameter("@serviceName", serviceName));
-
-                cmd.Parameters.Add(
-                    new SqlParameter("@enviroment", enviroment));
-
-                rdr = cmd.ExecuteReader();
-
-
-                while (rdr.Read())
-                {
-                    env.Add(rdr.GetString(0), rdr.GetString(1));
+                    foreach (DataRow row in dataSet.Tables[0].Rows)
+                    {
+                        configDictionary.Add(row["APIKey"].ToString(), row["APIValue"].ToString());
+                    }
+                    return configDictionary;
                 }
-                return env;
+                throw new Exception($"Record not found for Service:[{serviceName}] Environment:[{environment}]");
             }
             catch (Exception ex)
             {
@@ -50,23 +41,49 @@ namespace CustomerInformation.Common
                 while (innerException != null && innerException.InnerException != null)
                     innerException = innerException.InnerException;
 
-                ApplicationLogger.Debug(innerException.Message, Category.Database, innerException.StackTrace, innerException.ToString());
+                ApplicationLogger.Errorlog(innerException.Message, Category.Database, innerException.StackTrace, innerException);
                 throw;
             }
-            finally
-            {
-                // close the reader
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-
-                // 5. Close the connection
-                if (_connection != null)
-                {
-                    _connection.Close();
-                }
-            }
         }
+
+       public string GetDenodoViewUri(string serviceName, string environment, string companyCode, string denodoViewName)
+       {    
+           try
+           {
+               var parameterCollection = new List<SqlParameter>
+               {
+                   new SqlParameter("@ServiceName", serviceName),
+                   new SqlParameter("@Environment", environment),
+                   new SqlParameter("@CompanyCode", companyCode),
+                   new SqlParameter("@DenodoViewName", denodoViewName)
+               };
+               var dataSet = GetDataFromStoredProcedure("GetCompanyCodeDenodoViewMapping", parameterCollection);
+                if (dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
+                    return dataSet.Tables[0].Rows[0]["DenodoViewUri"].ToString();
+                throw new Exception(
+                    $"Record not found for Service:[{serviceName}] Environment:[{environment}] CompanyCode:[{companyCode}] DenodoViewName:[{denodoViewName}]");
+           }
+           catch (Exception exception)
+           {
+               ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace, exception.InnerException);
+               throw;
+           }
+       }
+
+       private DataSet GetDataFromStoredProcedure(string storedProcedureName, List<SqlParameter> parameterCollection)
+       {
+           using (var connection = new SqlConnection(_connectionString))
+           {
+               var command = connection.CreateCommand();
+               command.CommandType = CommandType.StoredProcedure;
+               command.CommandText = storedProcedureName;
+               command.Parameters.AddRange(parameterCollection.ToArray());
+
+               var dataAdapter = new SqlDataAdapter(command);
+               var dataSet = new DataSet();
+               dataAdapter.Fill(dataSet);
+               return dataSet;
+           }
+       }
     }
 }

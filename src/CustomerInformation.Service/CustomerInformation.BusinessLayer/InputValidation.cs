@@ -1,5 +1,6 @@
 ﻿using CustomerInformation.Common;
 using CustomerInformation.Common.Error;
+using CustomerInformation.Model.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,33 +12,33 @@ namespace CustomerInformation.BusinessLayer
 {
     public static class InputValidation
     {
-        public static bool ValidateCompanyCode(string companyCode)
+        public static bool ValidateCompanyCode(string companyCode, BaseResponse response)
         {
             if (string.IsNullOrWhiteSpace(companyCode))
             {
-                Error.AddError(Constants.CompanyCodeRequired, HttpStatusCode.Ambiguous);
+                response.ErrorInfo.Add(new ErrorInfo(Constants.CompanyCodeRequiredMessage ));
             }            
 
-            return Error.Errors.Any();
+            return response.ErrorInfo.Any();
         }
-        public static bool ValidateCustomerName(string customerName)
+        public static bool ValidateCustomerName(string customerName, BaseResponse response)
         {
             if (customerName.Length > 35)
             {
-                Error.AddError(Constants.CustomerNameLengthError, HttpStatusCode.Ambiguous);
+                response.ErrorInfo.Add(new ErrorInfo(Constants.CustomerNameLengthErrorMessage));
             }
 
-            return Error.Errors.Any();
+            return response.ErrorInfo.Any();
         }
 
-        public static bool ValidateCustomerCode(string customerCode)
+        public static bool ValidateCustomerCode(string customerCode, BaseResponse response)
         {
             if (string.IsNullOrWhiteSpace(customerCode))
             {
-                Error.AddError(Constants.CusotmerCodeIsRequired, HttpStatusCode.Ambiguous);
+                response.ErrorInfo.Add(new ErrorInfo(Constants.CusotmerCodeIsRequiredMessage));
             }
 
-            return Error.Errors.Any();
+            return response.ErrorInfo.Any();
         }
     }
 }
