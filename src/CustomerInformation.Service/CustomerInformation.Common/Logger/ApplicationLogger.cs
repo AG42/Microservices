@@ -6,7 +6,7 @@ namespace CustomerInformation.Common.Logger
     public static class ApplicationLogger
     {
         private static readonly Logging _logger = new Logging();
-        private static BooleanSwitch boolSwitch = new BooleanSwitch("BoolSwitch",
+        private static readonly BooleanSwitch _boolSwitch = new BooleanSwitch("BoolSwitch",
      "Switch in config file");
 
         //public static void Debug(string message, Category category, string stackTrace ,string innerException) {
@@ -26,7 +26,7 @@ namespace CustomerInformation.Common.Logger
         /// <param name="input">The input.</param>
         public static void InfoLogger(string input)
         {
-            if (boolSwitch.Enabled)
+            if (_boolSwitch.Enabled)
             {
                 _logger.InfoLogger(input);
             }

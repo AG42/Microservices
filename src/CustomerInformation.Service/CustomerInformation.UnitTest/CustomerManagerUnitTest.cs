@@ -3,7 +3,7 @@ using Rhino.Mocks;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CustomerInformation.BusinessLayer;
-using CustomerInformation.DataLayer.Entities;
+using CustomerInformation.DataLayer.Entities.Datalake;
 using CustomerInformation.DataLayer.Interfaces;
 
 namespace CustomerInformation.UnitTest
@@ -12,13 +12,13 @@ namespace CustomerInformation.UnitTest
     public class CustomerManagerUnitTest
     {
         #region Declarations
-        private IDataLayerContext iDataLayer;
+        private IDatabaseContext _iDatabase;
         private CustomerManager _customerManager;
-        string companyCode = "xh";
-        string customerCode = "C002";
-        string customerName = "Customer 1";
-        CustomerMaster _customerMaster = new CustomerMaster();
-        public List<CustomerMaster> customerList = new List<CustomerMaster>();
+        private const string COMPANY_CODE = "xh";
+        private const string CUSTOMER_CODE = "C002";
+        private const string CUSTOMER_NAME = "Customer 1";
+        Sl01 _sl01 = new Sl01();
+        public List<Sl01> CustomerList = new List<Sl01>();
         #endregion 
 
         #region UnitTests
@@ -28,7 +28,7 @@ namespace CustomerInformation.UnitTest
         [TestInitialize]
         public void Initialize()
         {
-            _customerManager = new CustomerManager(iDataLayer);
+            _customerManager = new CustomerManager(_iDatabase);
         }
 
         /// <summary>
@@ -37,29 +37,29 @@ namespace CustomerInformation.UnitTest
         [TestMethod]
         public void GetCustomersByCompanyCodeTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForCustomerModels();
 
-            mockRepository.Stub(x => x.GetCustomers(companyCode))
+            mockRepository.Stub(x => x.GetCustomers(COMPANY_CODE))
                             .IgnoreArguments()
-                            .Return(customerList);
+                            .Return(CustomerList);
 
             _customerManager = new CustomerManager(mockRepository);
 
-            var result = _customerManager.GetCustomers(companyCode);
+            var result = _customerManager.GetCustomers(COMPANY_CODE);
             Assert.IsNotNull(result.Customers);
 
             //Assert to check the BillingStreet Validation Rules
-            Assert.AreEqual(result.Customers[0].BillingStreet, String.Format(customerList[0].sl01003 + "{0}" + customerList[0].sl01004 + "{0}" + customerList[0].sl01005 + "{0}" + customerList[0].sl01099 + "{0}" +
-                                customerList[0].sl0194 + "{0}" + customerList[0].sl01195 + "{0}" + customerList[0].sl01196, Environment.NewLine));
+            Assert.AreEqual(result.Customers[0].BillingStreet, String.Format(CustomerList[0].sl01003 + "{0}" + CustomerList[0].sl01004 + "{0}" + CustomerList[0].sl01005 + "{0}" + CustomerList[0].sl01099 + "{0}" +
+                                CustomerList[0].sl01194 + "{0}" + CustomerList[0].sl01195 + "{0}" + CustomerList[0].sl01196, Environment.NewLine));
             //Assert to check the length of currecyIsoCode Validation Rule
             Assert.AreEqual(result.Customers[0].CurrencyIsoCode.Length, 3);
 
             //Assert to check the ERP Key Validation Rule
-            Assert.AreEqual(result.Customers[0].ERP_Key, "I" + companyCode + customerList[0].sl01001);
+            Assert.AreEqual(result.Customers[0].ERP_Key, "I" + COMPANY_CODE + CustomerList[0].sl01001);
 
             //Assert to check the Payment_Terms_Code__c Validation Rule
-            Assert.AreEqual(result.Customers[0].Payment_Terms_Code__c, customerList[0].sl01024.Substring(0, 2));
+            Assert.AreEqual(result.Customers[0].Payment_Terms_Code__c, CustomerList[0].sl01024.Substring(0, 2));
         }
 
         /// <summary>
@@ -68,29 +68,29 @@ namespace CustomerInformation.UnitTest
         [TestMethod]
         public void GetCustomerByIdTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForCustomerModels();
 
-            mockRepository.Stub(x => x.GetCustomerById(companyCode, customerCode))
+            mockRepository.Stub(x => x.GetCustomerById(COMPANY_CODE, CUSTOMER_CODE))
                             .IgnoreArguments()
-                            .Return(_customerMaster);
+                            .Return(_sl01);
 
             _customerManager = new CustomerManager(mockRepository);
 
-            var result = _customerManager.GetCustomerById(companyCode, customerCode);
+            var result = _customerManager.GetCustomerById(COMPANY_CODE, CUSTOMER_CODE);
             Assert.IsNotNull(result);
 
             //Assert to check the BillingStreet Validation Rule
-            Assert.AreEqual(result.CustomerInformationModel.BillingStreet, String.Format(_customerMaster.sl01003 + "{0}" + _customerMaster.sl01004 + "{0}" + _customerMaster.sl01005 + "{0}" + _customerMaster.sl01099 + "{0}" +
-                                _customerMaster.sl0194 + "{0}" + _customerMaster.sl01195 + "{0}" + _customerMaster.sl01196, Environment.NewLine));
+            Assert.AreEqual(result.CustomerInformationModel.BillingStreet, String.Format(_sl01.sl01003 + "{0}" + _sl01.sl01004 + "{0}" + _sl01.sl01005 + "{0}" + _sl01.sl01099 + "{0}" +
+                                _sl01.sl01194 + "{0}" + _sl01.sl01195 + "{0}" + _sl01.sl01196, Environment.NewLine));
             //Assert to check the length of currecyIsoCode Validation Rule
             Assert.AreEqual(result.CustomerInformationModel.CurrencyIsoCode.Length, 3);
 
             //Assert to check the ERP Key Validation Rule
-            Assert.AreEqual(result.CustomerInformationModel.ERP_Key, "I" + companyCode + _customerMaster.sl01001);
+            Assert.AreEqual(result.CustomerInformationModel.ERP_Key, "I" + COMPANY_CODE + _sl01.sl01001);
 
             //Assert to check the Payment_Terms_Code__c Validation Rule
-            Assert.AreEqual(result.CustomerInformationModel.Payment_Terms_Code__c, _customerMaster.sl01024.Substring(0, 2));
+            Assert.AreEqual(result.CustomerInformationModel.Payment_Terms_Code__c, _sl01.sl01024.Substring(0, 2));
         }
 
         /// <summary>
@@ -99,29 +99,29 @@ namespace CustomerInformation.UnitTest
         [TestMethod]
         public void GetCustomerByNameTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForCustomerModels();
 
-            mockRepository.Stub(x => x.GetCustomerByName(companyCode, customerCode))
+            mockRepository.Stub(x => x.GetCustomerByName(COMPANY_CODE, CUSTOMER_CODE))
                             .IgnoreArguments()
-                            .Return(customerList);
+                            .Return(CustomerList);
             _customerManager = new CustomerManager(mockRepository);
 
-            var result = _customerManager.GetCustomerByName(companyCode, customerName);
+            var result = _customerManager.GetCustomerByName(COMPANY_CODE, CUSTOMER_NAME);
             Assert.IsNotNull(result);
 
             //Assert to check the BillingStreet Validation Rule
-            Assert.AreEqual(result.Customers[0].BillingStreet, String.Format(customerList[0].sl01003 + "{0}" + customerList[0].sl01004 + "{0}" + customerList[0].sl01005 + "{0}" + customerList[0].sl01099 + "{0}" +
-                                customerList[0].sl0194 + "{0}" + customerList[0].sl01195 + "{0}" + customerList[0].sl01196, Environment.NewLine));
+            Assert.AreEqual(result.Customers[0].BillingStreet, String.Format(CustomerList[0].sl01003 + "{0}" + CustomerList[0].sl01004 + "{0}" + CustomerList[0].sl01005 + "{0}" + CustomerList[0].sl01099 + "{0}" +
+                                CustomerList[0].sl01194 + "{0}" + CustomerList[0].sl01195 + "{0}" + CustomerList[0].sl01196, Environment.NewLine));
 
             //Assert to check the length of currecyIsoCode Validation Rule
             Assert.AreEqual(result.Customers[0].CurrencyIsoCode.Length, 3);
 
             //Assert to check the ERP Key Validation Rule
-            Assert.AreEqual(result.Customers[0].ERP_Key, "I"+companyCode+customerList[0].sl01001);
+            Assert.AreEqual(result.Customers[0].ERP_Key, "I"+COMPANY_CODE+CustomerList[0].sl01001);
 
             //Assert to check the Payment_Terms_Code__c Validation Rule
-            Assert.AreEqual(result.Customers[0].Payment_Terms_Code__c, customerList[0].sl01024.Substring(0, 2));
+            Assert.AreEqual(result.Customers[0].Payment_Terms_Code__c, CustomerList[0].sl01024.Substring(0, 2));
         }
 
         /// <summary>
@@ -130,27 +130,53 @@ namespace CustomerInformation.UnitTest
         [TestMethod]
         public void GetCustomersNegativeTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             mockRepository.Stub(x => x.GetCustomers(string.Empty))
                             .IgnoreArguments()
-                            .Return(customerList);
+                            .Return(CustomerList);
 
             _customerManager = new CustomerManager(mockRepository);
 
             //Assert for GetCustomers with null companyCode
             var resultByCompanyCode = _customerManager.GetCustomers(string.Empty);
-            Assert.IsNull(resultByCompanyCode);
+            Assert.AreEqual(resultByCompanyCode.Customers.Count,0);
 
             //Assert for GetCustomerById with null companyCode & customerCode
             var resultByCompanyCodeAndCustomerCode = _customerManager.GetCustomerById(string.Empty, string.Empty);
-            Assert.IsNull(resultByCompanyCode);
+            Assert.IsNotNull(resultByCompanyCodeAndCustomerCode.ErrorInfo);
 
             //Assert for GetCustomerByName with null companyCode & customerName
             var resultByCompanyCodeAndCustomerName = _customerManager.GetCustomerByName(string.Empty, string.Empty);
-            Assert.IsNull(resultByCompanyCode);
+            Assert.IsNotNull(resultByCompanyCodeAndCustomerName.ErrorInfo);
         }
 
+        /// <summary>
+        /// Unit Test for GetCustomer with null request Object.
+        /// </summary>
+        [TestMethod]
+        public void GetCustomersNullResultTest()
+        {
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+
+            mockRepository.Stub(x => x.GetCustomers(string.Empty))
+                            .IgnoreArguments()
+                            .Return(null);
+
+            _customerManager = new CustomerManager(mockRepository);
+
+            //Assert for GetCustomers with null companyCode
+            var resultByCompanyCode = _customerManager.GetCustomers("EX");
+            Assert.AreEqual(resultByCompanyCode.Customers.Count, 0);
+
+            //Assert for GetCustomerById with null companyCode & customerCode
+            var resultByCompanyCodeAndCustomerCode = _customerManager.GetCustomerById("EX", "EX");
+            Assert.IsNotNull(resultByCompanyCodeAndCustomerCode.ErrorInfo);
+
+            //Assert for GetCustomerByName with null companyCode & customerName
+            var resultByCompanyCodeAndCustomerName = _customerManager.GetCustomerByName("EX", "EX");
+            Assert.IsNotNull(resultByCompanyCodeAndCustomerName.ErrorInfo);
+        }
         #endregion
 
         #region MockData Methods
@@ -160,7 +186,7 @@ namespace CustomerInformation.UnitTest
         public void SetMockDataForCustomerModels()
         {
             #region SampleDataCustomerMaster
-            _customerMaster = new CustomerMaster
+            _sl01 = new Sl01
             {
                 sl01001 = "C002",
                 sl01002 = "Customer Test2",
@@ -172,14 +198,14 @@ namespace CustomerInformation.UnitTest
                 sl01011 = "9876543210",
                 sl01022 = "INR",
                 sl01083 = "428201",
-                sl0194 = "Address Line 5",
+                sl01194 = "Address Line 5",
                 sl01195 = "Address Line 6",
                 sl01196 = "Address Line 7",
                 sl01060 = "1",
                 sl01024 = "11"
             };
 
-            customerList.Add(new CustomerMaster()
+            CustomerList.Add(new Sl01()
             {
                 sl01001 = "C006",
                 sl01002 = "Customer 2",
@@ -191,7 +217,7 @@ namespace CustomerInformation.UnitTest
                 sl01011 = "9876543210",
                 sl01022 = "INR",
                 sl01083 = "428201",
-                sl0194 = "Address Line 5",
+                sl01194 = "Address Line 5",
                 sl01195 = "Address Line 6",
                 sl01196 = "Address Line 7",
                 sl01060 = "0",
@@ -200,7 +226,7 @@ namespace CustomerInformation.UnitTest
                 //String.Format(customerMaster.sl01003 + "{0}" + customerMaster.sl01004 + "{0}" + customerMaster.sl01005 + "{0}" + customerMaster.sl01099 + "{0}" +
                 //                customerMaster.sl0194 + "{0}" + customerMaster.sl01195 + "{0}" + customerMaster.sl01196, Environment.NewLine),
             });
-            customerList.Add(new CustomerMaster()
+            CustomerList.Add(new Sl01()
             {
                 sl01001 = "C009",
                 sl01002 = "Customer 1",
@@ -212,13 +238,13 @@ namespace CustomerInformation.UnitTest
                 sl01011 = "9876543210",
                 sl01022 = "INR",
                 sl01083 = "425001",
-                sl0194 = "Address Line 5",
+                sl01194 = "Address Line 5",
                 sl01195 = "Address Line 6",
                 sl01196 = "Address Line 7",
                 sl01060 = "1",
                 sl01024 = "10"
             });
-            customerList.Add(new CustomerMaster()
+            CustomerList.Add(new Sl01()
             {
                 sl01001 = "C004",
                 sl01002 = "Customer 1",
@@ -230,7 +256,7 @@ namespace CustomerInformation.UnitTest
                 sl01011 = "9898543210",
                 sl01022 = "USD",
                 sl01083 = "405201",
-                sl0194 = "Address Line 5",
+                sl01194 = "Address Line 5",
                 sl01195 = "Address Line 6",
                 sl01196 = "Address Line 7",
                 sl01060 = "",

@@ -69,6 +69,28 @@ namespace CustomerInformation.Common
                throw;
            }
        }
+        public string GetDatalakeTableName(string serviceName, string environment, string companyCode)
+       {    
+           try
+           {
+               var parameterCollection = new List<SqlParameter>
+               {
+                   new SqlParameter("@ServiceName", serviceName),
+                   new SqlParameter("@Environment", environment),
+                   new SqlParameter("@CompanyCode", companyCode)
+               };
+               var dataSet = GetDataFromStoredProcedure("GetDatalakeTableMapping", parameterCollection);
+                if (dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
+                    return $"{dataSet.Tables[0].Rows[0]["DenodoViewUri"]}.{dataSet.Tables[0].Rows[1]["DenodoViewUri"]}";
+                throw new Exception(
+                    $"Record not found for Service:[{serviceName}] Environment:[{environment}] CompanyCode:[{companyCode}]");
+           }
+           catch (Exception exception)
+           {
+               ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace, exception.InnerException);
+               throw;
+           }
+       }
 
        private DataSet GetDataFromStoredProcedure(string storedProcedureName, List<SqlParameter> parameterCollection)
        {

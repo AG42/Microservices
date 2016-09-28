@@ -4,9 +4,9 @@
     {
         public ErrorInfo(string message)
         {
-            Message = message;
+            ErrorMessage = message;
         }
 
-        public string Message { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

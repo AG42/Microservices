@@ -1,11 +1,4 @@
-﻿using CustomerInformation.Model;
-using CustomerInformation.Model.Requests;
-using CustomerInformation.Model.Response;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CustomerInformation.Model.Response;
 
 namespace CustomerInformation.BusinessLayer.Interface
 {

@@ -1,4 +1,5 @@
-﻿using CustomerInformation.BusinessLayer.Interface;
+﻿using System.Linq;
+using CustomerInformation.BusinessLayer.Interface;
 using CustomerInformation.DataLayer.Interfaces;
 using CustomerInformation.Model.Response;
 using CustomerInformation.Common.Error;
@@ -9,12 +10,12 @@ namespace CustomerInformation.BusinessLayer
 {
     public class CustomerManager : ICustomerManager
     {
-        private readonly IDataLayerContext _dataLayerContext;
+        private readonly IDatabaseContext _databaseContext;
 
-        public CustomerManager(IDataLayerContext dataLayerContext)
+        public CustomerManager(IDatabaseContext databaseContext)
         {
             // create ICustomer instance -Data Layer
-            _dataLayerContext = dataLayerContext;
+            _databaseContext = databaseContext;
         }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace CustomerInformation.BusinessLayer
             if (!InputValidation.ValidateCompanyCode(companyCode, response))
             {
                 ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode Status: Success");
-                var result = _dataLayerContext.GetCustomers(companyCode);
+                var result = _databaseContext.GetCustomers(companyCode);
                 if (result == null)
                 {
                     ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
@@ -37,9 +38,9 @@ namespace CustomerInformation.BusinessLayer
                     return response;
                 }
 
-                ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count}]");
+                ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count()}]");
                 response.Customers.AddRange(Converter.Convert(result, companyCode));
-                ApplicationLogger.InfoLogger($"Data to Business Model conversion successfull");
+                ApplicationLogger.InfoLogger("Data to Business Model conversion successfull");
             }
 
             ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode Status: Failed");
@@ -59,7 +60,7 @@ namespace CustomerInformation.BusinessLayer
             if (!InputValidation.ValidateCompanyCode(companyCode, response) && !InputValidation.ValidateCustomerCode(customerCode, response))
             {
                 ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode and CustomerCode Status: Success");
-                var result = _dataLayerContext.GetCustomerById(companyCode, customerCode);
+                var result = _databaseContext.GetCustomerById(companyCode, customerCode);
                 if (result == null)
                 {
                     ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
@@ -68,7 +69,7 @@ namespace CustomerInformation.BusinessLayer
                 }
                                 
                 response.CustomerInformationModel = Converter.Convert(result,companyCode);
-                ApplicationLogger.InfoLogger($"Data to Business Model conversion successfull");
+                ApplicationLogger.InfoLogger("Data to Business Model conversion successfull");
             }
 
             ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode and CustomerCode Status: Failed");
@@ -81,7 +82,7 @@ namespace CustomerInformation.BusinessLayer
             var response = new CustomerSearchByNameResponse();
             if (!InputValidation.ValidateCompanyCode(companyCode, response) && !InputValidation.ValidateCustomerName(customerName, response))
             {
-                var result = _dataLayerContext.GetCustomerByName(companyCode, customerName);
+                var result = _databaseContext.GetCustomerByName(companyCode, customerName);
                 if (result == null)
                 {
                     ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
@@ -89,10 +90,10 @@ namespace CustomerInformation.BusinessLayer
                     return response;
                 }
 
-                ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count}]");
+                ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count()}]");
                 response.Customers.AddRange(Converter.Convert(result, companyCode));
                 
-                ApplicationLogger.InfoLogger($"Data to Business Model conversion successfull");
+                ApplicationLogger.InfoLogger("Data to Business Model conversion successfull");
             }
 
             return response;

@@ -1,8 +1,6 @@
 ﻿using NLog;
 using System;
-using System.Diagnostics; 
 using System.IO;
-using CustomerInformation.Common;
 
 
 namespace CustomerInformation.Common.Logger
@@ -67,34 +65,32 @@ namespace CustomerInformation.Common.Logger
         //  logger.Log(LogLevel.Info, "Sample informational message, k={0}, l={1}", k, l);
         public void InfoLogger(string input)
         {
-
             string path = AppDomain.CurrentDomain.BaseDirectory;
-            var datetime = string.Format("{0:yyyy-MM-dd}", DateTime.Now);
+            var datetime = $"{DateTime.Now:yyyy-MM-dd}";
 
-            path = $"{path}\\[{datetime}";
-
-
+            path = $"{path}\\{datetime}";
 
             if ((!Directory.Exists(path)))
             {
                 Directory.CreateDirectory(path);
+            }
 
-                Trace.Listeners.Add(new TextWriterTraceListener($"{path}\\{Constants.InfoLoggerFileName}"));
-                Trace.AutoFlush = true;
-                Trace.WriteLine("\n");
-                Trace.WriteLine(input);
+            if (!File.Exists($"{path}\\{Constants.InfoLoggerFileName}"))
+            {
 
-                Trace.Flush();
+                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName}", Environment.NewLine);
+
+                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName}", input);
 
             }
+
             else
             {
-                Trace.Listeners.Add(new TextWriterTraceListener($"{path}\\{Constants.InfoLoggerFileName}"));
-                Trace.AutoFlush = true;
-                Trace.WriteLine("\n");
-                Trace.WriteLine(input);
-                Trace.Flush();
+                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName}", Environment.NewLine);
+
+                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName}", input);
             }
+
         }
     }
 }

@@ -57,7 +57,8 @@ namespace CustomerInformation.API.Controllers
             catch (Exception ex)
             {
                 ApplicationLogger.InfoLogger("Exception: BaseException");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
+                ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace, ex.InnerException);
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.NotFound, Constants.NoDataFoundMessage));
             }
         }
 
@@ -84,15 +85,17 @@ namespace CustomerInformation.API.Controllers
                 ApplicationLogger.InfoLogger("Response Status: Failure");
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.NotFound, response.ErrorInfo));
             }
-            catch (HttpResponseException exception)
+            catch (HttpResponseException ex)
             {
                 ApplicationLogger.InfoLogger("Exception: HttpResponseException");
-                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
+                ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace, ex.InnerException);
+                return ResponseMessage(Request.CreateResponse(ex.Response.StatusCode, Constants.NoDataFoundMessage));
             }
             catch (Exception ex)
             {
                 ApplicationLogger.InfoLogger("Exception: BaseException");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
+                ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace, ex.InnerException);
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.NotFound, Constants.NoDataFoundMessage));
             }
         }
 
@@ -128,7 +131,8 @@ namespace CustomerInformation.API.Controllers
             catch (Exception ex)
             {
                 ApplicationLogger.InfoLogger("Exception: BaseException");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message));
+                ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace, ex.InnerException);
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.NotFound, Constants.NoDataFoundMessage));
             }
         }
     }

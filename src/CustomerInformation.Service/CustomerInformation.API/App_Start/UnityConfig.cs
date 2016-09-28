@@ -1,6 +1,8 @@
 using CustomerInformation.BusinessLayer;
 using CustomerInformation.BusinessLayer.Interface;
 using CustomerInformation.DataLayer;
+using CustomerInformation.DataLayer.Adapters;
+using CustomerInformation.DataLayer.Entities.Datalake;
 using CustomerInformation.DataLayer.Interfaces;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
@@ -12,13 +14,15 @@ namespace CustomerInformation.API
     {
         public static void RegisterComponents(HttpConfiguration config)
         {
-			var container = new UnityContainer();
+            var container = new UnityContainer();
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
             container.RegisterType<ICustomerManager, CustomerManager>(new HierarchicalLifetimeManager());
-            container.RegisterType<IDataLayerContext, DataLayerContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<IDatabaseContext, DatabaseContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<IDatalakeEntities, DatalakeEntities>(new HierarchicalLifetimeManager());
+            container.RegisterType<IDatalakeAdapter, DatalakeAdapter>(new HierarchicalLifetimeManager());
 
             config.DependencyResolver = new UnityDependencyResolver(container);
         }

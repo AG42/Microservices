@@ -54,8 +54,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DenodoAdapter, Version=1.0.3.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DenodoAdapter.1.0.3.2\lib\net452\DenodoAdapter.dll</HintPath>
+    <Reference Include="DenodoAdapter, Version=1.0.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DenodoAdapter.1.0.4.1\lib\net452\DenodoAdapter.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
@@ -97,10 +97,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\DatalakeAdapter.cs" />
+    <Compile Include="Adapters\Helper.cs" />
     <Compile Include="ConfigReader.cs" />
-    <Compile Include="DataLayerContext.cs" />
-    <Compile Include="Entities\CustomerMaster.cs" />
-    <Compile Include="Interfaces\IDataLayerContext.cs" />
+    <Compile Include="DatabaseContext.cs" />
+    <Compile Include="Entities\Datalake\DatalakeEntities.cs" />
+    <Compile Include="Entities\Datalake\Sl01.cs" />
+    <Compile Include="Interfaces\IDatabaseContext.cs" />
+    <Compile Include="Interfaces\IDatalakeAdapter.cs" />
+    <Compile Include="Interfaces\IDatalakeEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +118,7 @@
       <Name>CustomerInformation.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

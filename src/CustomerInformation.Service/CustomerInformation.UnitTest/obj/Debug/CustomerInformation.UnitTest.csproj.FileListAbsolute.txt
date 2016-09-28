@@ -69,7 +69,6 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\CustomerInformation.DataLayer.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\CustomerInformation.Model.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\DenodoAdapter.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\Rhino.Mocks.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\System.Net.Http.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\System.Net.Http.Extensions.dll
@@ -99,7 +98,6 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\System.Net.Http.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\System.Net.Http.WebRequest.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\System.Web.Http.xml
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\NLog.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\Microsoft.ServiceFabric.Services.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\System.Fabric.xml
@@ -117,3 +115,5 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\Microsoft.Practices.Unity.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\Newtonsoft.Json.xml
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.UnitTest\bin\Debug\System.Net.Http.Formatting.xml
