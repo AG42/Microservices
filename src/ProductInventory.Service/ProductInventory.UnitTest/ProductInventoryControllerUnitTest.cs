@@ -822,7 +822,7 @@ namespace ProductInventory.UnitTest
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void GetLocationwiseProductAvailableQuantityTest()
         {
             var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
