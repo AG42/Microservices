@@ -27,16 +27,6 @@ namespace ProductInventory.BusinessLayer
             return response.ErrorInfo.Any();
         }
 
-        public static bool ValidateCustomerCode(string locationcode, BaseResponse response)
-        {
-            if (string.IsNullOrWhiteSpace(locationcode))
-            {
-                response.ErrorInfo.Add(new ErrorInfo(Constants.CustomerCodeIsRequiredMessage));
-            }
-
-            return response.ErrorInfo.Any();
-        }
-
         public static bool ValidateDescription(string description, BaseResponse response)
         {
             if (string.IsNullOrWhiteSpace(description))

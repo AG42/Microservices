@@ -7,6 +7,9 @@ using ProductInventory.Model;
 using System.Net.Http;
 using DenodoAdapter;
 using ProductInventory.DataLayer;
+using ProductInventory.DataLayer.Entities.Datalake;
+using ProductInventory.DataLayer.Interfaces;
+using ProductInventory.DataLayer.Adapters;
 
 namespace ProductInventory.UnitTest
 {
@@ -22,34 +25,30 @@ namespace ProductInventory.UnitTest
         readonly List<StockItemMaster> _stockItemMasterList = new List<StockItemMaster>();
         readonly List<ProductWarehouseModel> _productWarehouseModelList = new List<ProductWarehouseModel>();
         readonly List<ItemWarehouse> _stockItemsEntitiesList = new List<ItemWarehouse>();
+        IDatalakeEntities datalakeEntities;
+        IDatalakeAdapter datalakeAdapter;
         #endregion
 
         #region TestMethods
         [TestInitialize]
         public void Initialize()
         {
-            HttpClient _client = new HttpClient { BaseAddress = new Uri("http://localhost:5001/") };
-
             // Arrange
             var client = MockRepository.GenerateMock<HttpClient>();
-            var spec = MockRepository.GenerateMock<IDenodoContext>();
+            datalakeEntities = MockRepository.GenerateMock<IDatalakeEntities>();
+            datalakeAdapter = MockRepository.GenerateMock<IDatalakeAdapter>();
         }
 
         [TestMethod]
         public void GetItemWareHouseTest()
         {
-            //string BASE_URI = "http://c201mf92:9090/server/poc/";
-            string viewUri = "{CompanyCode}_sc01/views/sc01";
-            string companycodePlaceholder = "{CompanyCode}";
-            string companyViewUri = viewUri.Replace(companycodePlaceholder, _companyCode);
-            SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
+            SetMockDataForProductModels();           
 
-            mocks.Stub(x => x.GetData<ItemWarehouse>(companyViewUri))
+            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "condition"))
                  .IgnoreArguments()
                  .Return(_stockItemsEntitiesList);
 
-            var dataLayer = new DataLayerContext {DenodoContext = mocks};
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetItemWareHouse("bh","007","70");
             Assert.IsNotNull(result);
         }
@@ -57,18 +56,13 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetStockItemByProductCodeTest()
         {
-            //string BASE_URI = "http://c201mf92:9090/server/poc/";
-            string viewUri = "{CompanyCode}_sc01/views/sc01";
-            string companycodePlaceholder = "{CompanyCode}";
-            string companyViewUri = viewUri.Replace(companycodePlaceholder, _companyCode);
-            SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
+            SetMockDataForProductModels();           
 
-            mocks.Stub(x => x.GetData<StockItemMaster>(companyViewUri))
+            datalakeEntities.Stub(x => x.Where<StockItemMaster>("tableName", "condition"))
                  .IgnoreArguments()
                  .Return(_stockItemMasterList);
 
-            var dataLayer = new DataLayerContext { DenodoContext = mocks };
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetStockItemByProductCode("bh", "007");
             Assert.IsNotNull(result);
         }
@@ -76,18 +70,13 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetItemWareHouseByProductCodeTest()
         {
-            //string BASE_URI = "http://c201mf92:9090/server/poc/";
-            string viewUri = "{CompanyCode}_sc01/views/sc01";
-            string companycodePlaceholder = "{CompanyCode}";
-            string companyViewUri = viewUri.Replace(companycodePlaceholder, _companyCode);
             SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
 
-            mocks.Stub(x => x.GetData<ItemWarehouse>(companyViewUri))
-                 .IgnoreArguments()
+            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "condition"))
+                  .IgnoreArguments()
                 .Return(_stockItemsEntitiesList);
 
-            var dataLayer = new DataLayerContext { DenodoContext = mocks };
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetItemWareHouseByProductCode("bh", "007");
             Assert.IsNotNull(result);
         }
@@ -95,18 +84,13 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetItemWareHouseByLocationIdTest()
         {
-            //string BASE_URI = "http://c201mf92:9090/server/poc/";
-            string viewUri = "{CompanyCode}_sc01/views/sc01";
-            string companycodePlaceholder = "{CompanyCode}";
-            string companyViewUri = viewUri.Replace(companycodePlaceholder, _companyCode);
             SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
 
-            mocks.Stub(x => x.GetData<ItemWarehouse>(companyViewUri))
-                 .IgnoreArguments()
+            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "condition"))
+                  .IgnoreArguments()
                 .Return(_stockItemsEntitiesList);
 
-            var dataLayer = new DataLayerContext { DenodoContext = mocks };
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetItemWareHouseByLocationId("bh", "01");
             Assert.IsNotNull(result);
         }
@@ -114,132 +98,124 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductInvetoryByLocationIdTest()
         {
-            //string BASE_URI = "http://c201mf92:9090/server/poc/";
-            string viewUri = "{CompanyCode}_sc01/views/sc01";
-            string companycodePlaceholder = "{CompanyCode}";
-            string companyViewUri = viewUri.Replace(companycodePlaceholder, _companyCode);
-            SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
+            SetMockDataForProductModels();           
 
-            mocks.Stub(x => x.GetData<ProductInventoryEntity>(companyViewUri))
+           datalakeEntities.Stub(x => x.Get<ProductInventoryEntity>("tableName"))
                  .IgnoreArguments()
                 .Return(_productInventoryEntityList);
 
-            var dataLayer = new DataLayerContext { DenodoContext = mocks };
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetProductInvetoryByLocationId("bh", "01");
             Assert.IsNotNull(result);
         }
 
+        //[TestMethod]
+        //public void GetProductInvetoryByProductNameTest()
+        //{
+        //    //string BASE_URI = "http://c201mf92:9090/server/poc/";
+        //    string viewUri = "{CompanyCode}_sc01/views/sc01";
+        //    string companycodePlaceholder = "{CompanyCode}";
+        //    string filter = "lower(SC01001) LiKE \'%tube%\'";
+        //    string companyViewUri = viewUri.Replace(companycodePlaceholder, _companyCode);
+        //    SetMockDataForProductModels();
+            
+
+        //   datalakeEntities.Stub(x => x.SearchData<ProductInventoryEntity>(companyViewUri,filter))
+        //         .IgnoreArguments()
+        //        .Return(_productInventoryEntityList);
+
+        //    var dataLayer = new DatabaseContext(datalakeEntities);
+        //    var result = dataLayer.GetProductInvetoryByProductName("bh", "tube");
+        //    Assert.IsNotNull(result);
+        //}
+
         [TestMethod]
-        public void GetProductInvetoryByProductNameTest()
-        {
-            //string BASE_URI = "http://c201mf92:9090/server/poc/";
-            string viewUri = "{CompanyCode}_sc01/views/sc01";
-            string companycodePlaceholder = "{CompanyCode}";
-            string filter = "lower(SC01001) LiKE \'%tube%\'";
-            string companyViewUri = viewUri.Replace(companycodePlaceholder, _companyCode);
-            SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
-
-            mocks.Stub(x => x.SearchData<ProductInventoryEntity>(companyViewUri,filter))
-                 .IgnoreArguments()
-                .Return(_productInventoryEntityList);
-
-            var dataLayer = new DataLayerContext { DenodoContext = mocks };
-            var result = dataLayer.GetProductInvetoryByProductName("bh", "tube");
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(System.Web.Http.HttpResponseException))]
+        [ExpectedException(typeof(Exception))]
         public void GetItemWareHouseExceptionTest()
         {
-            SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
+            SetMockDataForProductModels();            
 
-            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+           datalakeEntities.Stub(x => x.Where<ItemWarehouse>("", ""))
                  .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DataLayerContext();
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetItemWareHouse(string.Empty, string.Empty, string.Empty);
             Assert.IsNotNull(result);
 
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Web.Http.HttpResponseException))]
+        [ExpectedException(typeof(Exception))]
         public void GetStockItemByProductCodeExceptionTest()
         {
-            SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
+            SetMockDataForProductModels();            
 
-            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+           datalakeEntities.Stub(x => x.Where<StockItemMaster>("", ""))
                 .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DataLayerContext();
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetStockItemByProductCode(string.Empty, string.Empty);
             Assert.IsNotNull(result);
-
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Web.Http.HttpResponseException))]
+        [ExpectedException(typeof(System.Exception))]
         public void GetItemWareHouseByProductCodeExceptionTest()
         {
             SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
+            
 
-            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+           datalakeEntities.Stub(x => x.Where<ItemWarehouse>("",""))
                 .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DataLayerContext();
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetItemWareHouseByProductCode(string.Empty, string.Empty);
             Assert.IsNotNull(result);
 
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Web.Http.HttpResponseException))]
+        [ExpectedException(typeof(System.Exception))]
         public void GetItemWareHouseByLocationIdExceptionTest()
         {
             SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
+            
 
-            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+           datalakeEntities.Stub(x => x.Where<ItemWarehouse>("",""))
                 .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DataLayerContext();
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetItemWareHouseByLocationId(string.Empty, string.Empty);
             Assert.IsNotNull(result);
 
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(System.Web.Http.HttpResponseException))]
+        //[TestMethod]
+        [ExpectedException(typeof(Exception))]
         public void GetProductInvetoryByLocationIdExceptionTest()
         {
             SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
+            
 
-            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+           datalakeEntities.Stub(x => x.Get<ItemWarehouse>(""))
                 .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DataLayerContext();
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetProductInvetoryByLocationId(string.Empty, string.Empty);
             Assert.IsNotNull(result);
 
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(System.Web.Http.HttpResponseException))]
+        //[TestMethod]
+        [ExpectedException(typeof(Exception))]
         public void GetProductInvetoryByProductNameExceptionTest()
         {
             SetMockDataForProductModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
-            mocks.Stub(x => x.GetData<ItemWarehouse>(""))
+            
+           datalakeEntities.Stub(x => x.Get<ItemWarehouse>(""))
                 .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DataLayerContext();
+            var dataLayer = new DatabaseContext(datalakeEntities);
             var result = dataLayer.GetProductInvetoryByProductName(string.Empty, string.Empty);
             Assert.IsNotNull(result);
         }

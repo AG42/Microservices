@@ -53,6 +53,6 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\Pr
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\bin\x64\Debug\NLog.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\bin\x64\Debug\ProductInventory.Model.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\bin\x64\Debug\ProductInventory.DataLayer.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\bin\x64\Debug\DenodoAdapter.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\bin\x64\Debug\ProductInventory.Model.pdb
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\bin\x64\Debug\ProductInventory.DataLayer.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\bin\x64\Debug\DenodoAdapter.dll

@@ -111,7 +111,7 @@ namespace ProductInventory.API
 
                 this.StopWebServer();
 
-                throw;  
+                throw;
             }
         }
 

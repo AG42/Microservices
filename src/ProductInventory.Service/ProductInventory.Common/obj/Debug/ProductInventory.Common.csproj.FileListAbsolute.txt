@@ -6,4 +6,3 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\Pr
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\obj\Debug\ProductInventory.Common.pdb
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\bin\Debug\NLog.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\bin\Debug\NLog.xml
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\obj\Debug\ProductInventory.Common.csprojResolveAssemblyReference.cache

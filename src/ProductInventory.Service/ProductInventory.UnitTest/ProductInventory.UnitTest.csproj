@@ -110,6 +110,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DataLakeEntityUnitTest.cs" />
     <Compile Include="DataLayerContextUnitTest.cs" />
     <Compile Include="ProductInventoryControllerUnitTest.cs" />
     <Compile Include="ProductInventoryManagerUnitTest.cs" />

@@ -3,6 +3,7 @@ using ProductInventory.DataLayer.Entities;
 using ProductInventory.Model;
 using System.Linq;
 using System.Security.AccessControl;
+using ProductInventory.DataLayer.Entities.Datalake;
 using sys = System;
 
 namespace ProductInventory.BusinessLayer
@@ -39,7 +40,7 @@ namespace ProductInventory.BusinessLayer
         /// <param name="itemWarehouses">list of Itemwarehouse entities</param>
         /// <param name="companyCode">company code</param>
         /// <returns>List of Itemware House</returns>
-        public static List<ProductWarehouseModel> Convert(List<ItemWarehouse> itemWarehouses, string companyCode)
+        public static List<ProductWarehouseModel> Convert(IEnumerable<ItemWarehouse> itemWarehouses, string companyCode)
         {
             var productWarehouseModels = new List<ProductWarehouseModel>();
             foreach (var itemWareHouse in itemWarehouses)
@@ -78,7 +79,6 @@ namespace ProductInventory.BusinessLayer
         /// <returns>Collection of Products</returns>
         public static List<ProductInventoryModel> ConvertProductEntity(List<ProductInventoryEntity> productsEntity, string companyCode)
         {
-            ProductInventoryModel productInventoryModel = new ProductInventoryModel();
             List<ProductInventoryModel> productInventoryModelList = new List<ProductInventoryModel>();
 
             var products = productsEntity.GroupBy(item => new { item.sc01001, item.sc01002, item.sc01003, item.sc01037, item.sc01066, item.sc01106, item.sc01120, item.sc01135 },
@@ -97,7 +97,7 @@ namespace ProductInventory.BusinessLayer
 
             foreach (var product in products)
             {
-                productInventoryModel = new ProductInventoryModel();
+                var productInventoryModel = new ProductInventoryModel();
                 var itemWarehouseList = new List<ProductWarehouseModel>();
                 var masterModel = new ProductMasterModel
                 {

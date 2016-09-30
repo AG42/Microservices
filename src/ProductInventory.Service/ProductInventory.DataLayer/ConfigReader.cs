@@ -3,18 +3,14 @@ using Configuration = ProductInventory.Common.Configuration;
 
 namespace ProductInventory.DataLayer
 {
-    public class ConfigReader
+    class ConfigReader
     {
         private readonly bool _readFromDatabase;
-        private const string BASEURI_KEY = "BaseUri";
-        private const string DENODO_USERNAME_KEY = "DenodoUsername";
-        private const string DENODO_PASSWORD_KEY = "DenodoPassword";
+        private const string DATALAKE_CONNECTIONSTRING_KEY = "DatalakeConnectionString";
         private string ServiceName { get; }
         private string Environment { get; }
         public string ConfigurationDbConnectionString { get; set; }
-        public string BaseUri { get; set; }
-        public string DenodoUsername { get; private set; }
-        public string DenodoPassword { get; private set; }
+        public string DatalakeConnectionString { get; private set; }
         public ConfigReader()
         {
             _readFromDatabase = bool.Parse(ReadConfig("ReadConfigFromDatabase"));
@@ -26,35 +22,30 @@ namespace ProductInventory.DataLayer
             else
                 InitializeFromConfig();
         }
-
+        private string ReadConfig(string key)
+        {
+            return ConfigurationManager.AppSettings[key];
+        }
         private void InitializeFromConfig()
         {
-            BaseUri = ReadConfig(BASEURI_KEY);
-            DenodoUsername = ReadConfig(DENODO_USERNAME_KEY);
-            DenodoPassword = ReadConfig(DENODO_PASSWORD_KEY);
+            DatalakeConnectionString = ReadConfig(DATALAKE_CONNECTIONSTRING_KEY);
         }
         private void InitializeFromDatabase()
         {
             string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
             var configuration = new Configuration(configurationDbConnectionString);
             var configurationDictionary = configuration.GetConfiguration(ServiceName, Environment);
-            BaseUri = configurationDictionary[BASEURI_KEY];
-            DenodoUsername = configurationDictionary[DENODO_USERNAME_KEY];
-            DenodoPassword = configurationDictionary[DENODO_PASSWORD_KEY];
+            DatalakeConnectionString = configurationDictionary[DATALAKE_CONNECTIONSTRING_KEY];
         }
-
-        private string ReadConfig(string key)
-        {
-            return ConfigurationManager.AppSettings[key];
-        }
-        public string GetDenodoViewUri(string companyCode, string viewUriKey)
+        
+        public string GetDatalakeTableName(string companyCode, string datalakeTableNameKey)
         {
             if (!_readFromDatabase)
-                return ReadConfig($"{viewUriKey}_{companyCode.ToLower()}");
+                return ReadConfig($"{datalakeTableNameKey}_{companyCode.ToLower()}");
 
             string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
             var configuration = new Configuration(configurationDbConnectionString);
-            return configuration.GetDenodoViewUri(ServiceName, Environment, companyCode, viewUriKey);
+            return configuration.GetDatalakeTableName(ServiceName, Environment, companyCode);
         }
     }
 }

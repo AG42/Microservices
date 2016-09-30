@@ -96,12 +96,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\DatalakeAdapter.cs" />
+    <Compile Include="Adapters\Helper.cs" />
     <Compile Include="ConfigReader.cs" />
-    <Compile Include="DataLayerContext.cs" />
-    <Compile Include="Entities\ItemWarehouse.cs" />
+    <Compile Include="DatabaseContext.cs" />
+    <Compile Include="Entities\Datalake\DatalakeEntities.cs" />
+    <Compile Include="Entities\Datalake\ItemWarehouse.cs" />
     <Compile Include="Entities\ProductInventoryEntity.cs" />
-    <Compile Include="Entities\StockItemMaster.cs" />
-    <Compile Include="Interfaces\IDataLayerContext.cs" />
+    <Compile Include="Entities\Datalake\StockItemMaster.cs" />
+    <Compile Include="Interfaces\IDatabaseContext.cs" />
+    <Compile Include="Interfaces\IDatalakeAdapter.cs" />
+    <Compile Include="Interfaces\IDatalakeEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +119,7 @@
       <Name>ProductInventory.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

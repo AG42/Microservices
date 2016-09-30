@@ -11,6 +11,7 @@ using ProductInventory.Model;
 using ProductInventory.Common.Error;
 using System.Web.Http.Routing;
 using System.Web.Http.Controllers;
+using ProductInventory.DataLayer.Entities.Datalake;
 
 namespace ProductInventory.UnitTest
 {

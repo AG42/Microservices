@@ -1,0 +1,225 @@
+09/30/2016 07:18:29
+ M2383315 
+ 10752 
+ vstest.executionengine.x86
+ Value cannot be null.
+Parameter name: source
+ Database
+ 
+ Error
+    at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at ProductInventory.DataLayer.DatabaseContext.GetItemWareHouse(String companyCode, String productCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 66
+ 
+
+09/30/2016 07:18:30
+ M2383315 
+ 10752 
+ vstest.executionengine.x86
+ Value cannot be null.
+Parameter name: source
+ Database
+ 
+ Error
+    at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at ProductInventory.DataLayer.DatabaseContext.GetItemWareHouse(String companyCode, String productCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 66
+ 
+
+09/30/2016 07:18:30
+ M2383315 
+ 10752 
+ vstest.executionengine.x86
+ Exception of type 'System.Exception' was thrown.
+ Database
+ 
+ Error
+    at Rhino.Mocks.Expectations.AbstractExpectation.ReturnOrThrow(IInvocation invocation, Object[] args)
+   at Rhino.Mocks.Impl.ReplayDynamicMockState.DoMethodCall(IInvocation invocation, MethodInfo method, Object[] args)
+   at Rhino.Mocks.Impl.ReplayMockState.MethodCall(IInvocation invocation, MethodInfo method, Object[] args)
+   at Rhino.Mocks.MockRepository.MethodCall(IInvocation invocation, Object proxy, MethodInfo method, Object[] args)
+   at Rhino.Mocks.Impl.Invocation.Actions.RegularInvocation.PerformAgainst(IInvocation invocation)
+   at Rhino.Mocks.Impl.RhinoInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.IDatalakeEntitiesProxy591ed98b38904399803d44d2264497a9.IDatalakeEntities.Where[T](String tableName, String condition, Boolean isTransactionalDataRequire)
+   at ProductInventory.DataLayer.DatabaseContext.GetStockItemByProductCode(String companyCode, String productCode) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 86
+ 
+
+09/30/2016 07:18:30
+ M2383315 
+ 10752 
+ vstest.executionengine.x86
+ Exception of type 'System.Exception' was thrown.
+ Database
+ 
+ Error
+    at Rhino.Mocks.Expectations.AbstractExpectation.ReturnOrThrow(IInvocation invocation, Object[] args)
+   at Rhino.Mocks.Impl.ReplayDynamicMockState.DoMethodCall(IInvocation invocation, MethodInfo method, Object[] args)
+   at Rhino.Mocks.Impl.ReplayMockState.MethodCall(IInvocation invocation, MethodInfo method, Object[] args)
+   at Rhino.Mocks.MockRepository.MethodCall(IInvocation invocation, Object proxy, MethodInfo method, Object[] args)
+   at Rhino.Mocks.Impl.Invocation.Actions.RegularInvocation.PerformAgainst(IInvocation invocation)
+   at Rhino.Mocks.Impl.RhinoInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.IDatalakeEntitiesProxy591ed98b38904399803d44d2264497a9.IDatalakeEntities.Where[T](String tableName, String condition, Boolean isTransactionalDataRequire)
+   at ProductInventory.DataLayer.DatabaseContext.GetItemWareHouseByProductCode(String companyCode, String productCode) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 107
+ 
+
+09/30/2016 07:18:30
+ M2383315 
+ 10752 
+ vstest.executionengine.x86
+ Exception of type 'System.Exception' was thrown.
+ Database
+ 
+ Error
+    at Rhino.Mocks.Expectations.AbstractExpectation.ReturnOrThrow(IInvocation invocation, Object[] args)
+   at Rhino.Mocks.Impl.ReplayDynamicMockState.DoMethodCall(IInvocation invocation, MethodInfo method, Object[] args)
+   at Rhino.Mocks.Impl.ReplayMockState.MethodCall(IInvocation invocation, MethodInfo method, Object[] args)
+   at Rhino.Mocks.MockRepository.MethodCall(IInvocation invocation, Object proxy, MethodInfo method, Object[] args)
+   at Rhino.Mocks.Impl.Invocation.Actions.RegularInvocation.PerformAgainst(IInvocation invocation)
+   at Rhino.Mocks.Impl.RhinoInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.IDatalakeEntitiesProxy591ed98b38904399803d44d2264497a9.IDatalakeEntities.Where[T](String tableName, String condition, Boolean isTransactionalDataRequire)
+   at ProductInventory.DataLayer.DatabaseContext.GetItemWareHouseByLocationId(String companyCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 124
+ 
+
+09/30/2016 07:19:27
+ M2383315 
+ 12852 
+ vstest.executionengine
+ Value cannot be null.
+Parameter name: source
+ Database
+ 
+ Error
+    at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at ProductInventory.DataLayer.DatabaseContext.GetItemWareHouse(String companyCode, String productCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 66
+ 
+
+09/30/2016 07:19:28
+ M2383315 
+ 12852 
+ vstest.executionengine
+ Value cannot be null.
+Parameter name: source
+ Database
+ 
+ Error
+    at System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   at ProductInventory.DataLayer.DatabaseContext.GetItemWareHouse(String companyCode, String productCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 66
+ 
+
+09/30/2016 07:19:28
+ M2383315 
+ 12852 
+ vstest.executionengine
+ Exception of type 'System.Exception' was thrown.
+ Database
+ 
+ Error
+    at Rhino.Mocks.Expectations.AbstractExpectation.ReturnOrThrow(IInvocation invocation, Object[] args)
+   at Rhino.Mocks.Impl.Invocation.Actions.RegularInvocation.PerformAgainst(IInvocation invocation)
+   at Rhino.Mocks.Impl.RhinoInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.IDatalakeEntitiesProxy02a6ecd0af9844a8be13b73f5ab6c7f2.IDatalakeEntities.Where[T](String tableName, String condition, Boolean isTransactionalDataRequire)
+   at ProductInventory.DataLayer.DatabaseContext.GetStockItemByProductCode(String companyCode, String productCode) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 86
+ 
+
+09/30/2016 07:19:28
+ M2383315 
+ 12852 
+ vstest.executionengine
+ Exception of type 'System.Exception' was thrown.
+ Database
+ 
+ Error
+    at Rhino.Mocks.Expectations.AbstractExpectation.ReturnOrThrow(IInvocation invocation, Object[] args)
+   at Rhino.Mocks.Impl.Invocation.Actions.RegularInvocation.PerformAgainst(IInvocation invocation)
+   at Rhino.Mocks.Impl.RhinoInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.IDatalakeEntitiesProxy02a6ecd0af9844a8be13b73f5ab6c7f2.IDatalakeEntities.Where[T](String tableName, String condition, Boolean isTransactionalDataRequire)
+   at ProductInventory.DataLayer.DatabaseContext.GetItemWareHouseByProductCode(String companyCode, String productCode) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 107
+ 
+
+09/30/2016 07:19:28
+ M2383315 
+ 12852 
+ vstest.executionengine
+ Exception of type 'System.Exception' was thrown.
+ Database
+ 
+ Error
+    at Rhino.Mocks.Expectations.AbstractExpectation.ReturnOrThrow(IInvocation invocation, Object[] args)
+   at Rhino.Mocks.Impl.Invocation.Actions.RegularInvocation.PerformAgainst(IInvocation invocation)
+   at Rhino.Mocks.Impl.RhinoInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.IDatalakeEntitiesProxy02a6ecd0af9844a8be13b73f5ab6c7f2.IDatalakeEntities.Where[T](String tableName, String condition, Boolean isTransactionalDataRequire)
+   at ProductInventory.DataLayer.DatabaseContext.GetItemWareHouseByLocationId(String companyCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 124
+ 
+
+09/30/2016 07:19:29
+ M2383315 
+ 12852 
+ vstest.executionengine
+ The request does not have an associated configuration object or the provided configuration was null.
+ Database
+ 
+ Error
+    at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value, HttpConfiguration configuration)
+   at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value)
+   at ProductInventory.API.Controllers.ProductInventoryController.GetProductById(String companyCode, String productCode) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\Controllers\ProductInventoryController.cs:line 50
+ 
+
+09/30/2016 07:19:29
+ M2383315 
+ 12852 
+ vstest.executionengine
+ The request does not have an associated configuration object or the provided configuration was null.
+ Database
+ 
+ Error
+    at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value, HttpConfiguration configuration)
+   at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value)
+   at ProductInventory.API.Controllers.ProductInventoryController.GetProduct(String companyCode, String productCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\Controllers\ProductInventoryController.cs:line 151
+ 
+
+09/30/2016 07:19:29
+ M2383315 
+ 12852 
+ vstest.executionengine
+ The request does not have an associated configuration object or the provided configuration was null.
+ Database
+ 
+ Error
+    at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value, HttpConfiguration configuration)
+   at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value)
+   at ProductInventory.API.Controllers.ProductInventoryController.GetProductByDescription(String companyCode, String description) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\Controllers\ProductInventoryController.cs:line 85
+ 
+
+09/30/2016 07:19:29
+ M2383315 
+ 12852 
+ vstest.executionengine
+ The request does not have an associated configuration object or the provided configuration was null.
+ Database
+ 
+ Error
+    at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value, HttpConfiguration configuration)
+   at System.Net.Http.HttpRequestMessageExtensions.CreateResponse[T](HttpRequestMessage request, HttpStatusCode statusCode, T value)
+   at ProductInventory.API.Controllers.ProductInventoryController.GetProductByLocationId(String companyCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.API\Controllers\ProductInventoryController.cs:line 121
+ 
+
+09/30/2016 07:22:01
+ M2383315 
+ 13096 
+ vstest.executionengine
+ Exception of type 'System.Exception' was thrown.
+ Database
+ 
+ Error
+    at Rhino.Mocks.Expectations.AbstractExpectation.ReturnOrThrow(IInvocation invocation, Object[] args)
+   at Rhino.Mocks.Impl.Invocation.Actions.RegularInvocation.PerformAgainst(IInvocation invocation)
+   at Rhino.Mocks.Impl.RhinoInterceptor.Intercept(IInvocation invocation)
+   at Castle.DynamicProxy.AbstractInvocation.Proceed()
+   at Castle.Proxies.IDatalakeEntitiesProxy4b50c378fe2447329b1e40142ef52628.IDatalakeEntities.Where[T](String tableName, String condition, Boolean isTransactionalDataRequire)
+   at ProductInventory.DataLayer.DatabaseContext.GetItemWareHouse(String companyCode, String productCode, String locationId) in C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.DataLayer\DatabaseContext.cs:line 65
+ 
+

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ProductInventory.BusinessLayer.Interfaces;
 using ProductInventory.Common;
 using ProductInventory.Common.Error;
 using ProductInventory.Common.Logger;
 using ProductInventory.DataLayer.Entities;
+using ProductInventory.DataLayer.Entities.Datalake;
 using ProductInventory.DataLayer.Interfaces;
 using ProductInventory.Model;
 using ProductInventory.Model.Response;
@@ -14,12 +16,12 @@ namespace ProductInventory.BusinessLayer
 {
     public class ProductInventoryManager : IProductInventoryManager
     {
-        private readonly IDataLayerContext _dataLayerContext;
+        private readonly IDatabaseContext _databaseContext;
 
-        public ProductInventoryManager(IDataLayerContext dataLayerContext)
+        public ProductInventoryManager(IDatabaseContext databaseContext)
         {
             // create ICustomer instance -Data Layer
-            _dataLayerContext = dataLayerContext;
+            _databaseContext = databaseContext;
         }
 
         public ProductSearchByIdResponse GetProductById(string companyCode, string productCode)
@@ -35,7 +37,7 @@ namespace ProductInventory.BusinessLayer
                 // Get Item from Master
                 try
                 {
-                    var stockItem = _dataLayerContext.GetStockItemByProductCode(companyCode, productCode);
+                    var stockItem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
                     if (stockItem != null)
                     {
                         response.ProductInventory = new ProductInventoryModel
@@ -44,7 +46,7 @@ namespace ProductInventory.BusinessLayer
                         };
 
                         // Get all the items from warehouse of that product code
-                        var wareHouse = _dataLayerContext.GetItemWareHouseByProductCode(companyCode, productCode);
+                        var wareHouse = _databaseContext.GetItemWareHouseByProductCode(companyCode, productCode);
                         if (wareHouse.Any())
                         {
                             response.ProductInventory.StockItemWarehouse.AddRange(Converter.Convert(wareHouse, companyCode));
@@ -83,7 +85,7 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and Description Status: Success");
                 try
                 {
-                    var products = _dataLayerContext.GetProductInvetoryByProductName(companyCode, description);
+                    var products = _databaseContext.GetProductInvetoryByProductName(companyCode, description);
 
                     if (products.Any())
                     {
@@ -122,7 +124,7 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and LocationId Status: Success");
                 try
                 {
-                    var products = _dataLayerContext.GetProductInvetoryByLocationId(companyCode, locationId);
+                    var products = _databaseContext.GetProductInvetoryByLocationId(companyCode, locationId);
 
                     if (products.Any())
                     {
@@ -161,7 +163,7 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode, productCode and LocationId Status: Success");
                 try
                 {
-                    var stockItem = _dataLayerContext.GetStockItemByProductCode(companyCode, productCode);
+                    var stockItem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
                     if (stockItem != null)
                     {
                         response.ProductInventory = new ProductInventoryModel
@@ -169,7 +171,7 @@ namespace ProductInventory.BusinessLayer
                             ProductMasterDetails = Converter.Convert(stockItem, companyCode)
                         };
 
-                        var wareHouse = _dataLayerContext.GetItemWareHouse(companyCode, productCode, locationId);
+                        var wareHouse = _databaseContext.GetItemWareHouse(companyCode, productCode, locationId);
                         if (wareHouse.Any())
                         {                           
                             response.ProductInventory.StockItemWarehouse.AddRange(Converter.Convert(wareHouse, companyCode));
@@ -208,7 +210,7 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode and locationId Status: Success");
                 try
                 {
-                    var wareHouseList = _dataLayerContext.GetItemWareHouse(companyCode, productCode, locationId);
+                    var wareHouseList = _databaseContext.GetItemWareHouse(companyCode, productCode, locationId);
                     if (wareHouseList.Any())
                     {
                         // Get first StockBalance Quantity for locationid and productcode 
@@ -221,7 +223,7 @@ namespace ProductInventory.BusinessLayer
                             response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                         }
 
-                        ApplicationLogger.InfoLogger($"Item warehouse data length: {wareHouseList.Count}");
+                        ApplicationLogger.InfoLogger($"Item warehouse data length: {wareHouseList.Count()}");
                     }
                     else
                     {
@@ -255,17 +257,18 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode and locationId Status: Success");
                 try
                 {
-                    var wareHouse = _dataLayerContext.GetItemWareHouseByProductCode(companyCode, productCode);
-                    if (wareHouse.Any())
+                    var wareHouse = _databaseContext.GetItemWareHouseByProductCode(companyCode, productCode);
+                    var itemWarehouses = wareHouse as List<ItemWarehouse> ?? wareHouse.ToList();
+                    if (itemWarehouses.Any())
                     {
-                        wareHouse.ForEach(
+                        itemWarehouses.ForEach(
                             x =>
                                 response.LocationList.Add(new ProductLocationModel
                                 {
                                     LocationId = x.sc03002,
                                     ProductQuantity = string.IsNullOrWhiteSpace(x.sc03003) ? 0 : Convert.ToDouble(x.sc03003)
                                 }));
-                        ApplicationLogger.InfoLogger($"Item warehouse data length: {wareHouse.Count}");
+                        ApplicationLogger.InfoLogger($"Item warehouse data length: {itemWarehouses.Count}");
                     }
                     else
                     {
@@ -296,11 +299,12 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode and locationId Status: Success");
                 try
                 {
-                    var wareHouse = _dataLayerContext.GetItemWareHouseByLocationId(companyCode, locationId);
-                    if (wareHouse.Any())
+                    var wareHouse = _databaseContext.GetItemWareHouseByLocationId(companyCode, locationId);
+                    var itemWarehouses = wareHouse as List<ItemWarehouse> ?? wareHouse.ToList();
+                    if (itemWarehouses.Any())
                     {
-                        wareHouse.ForEach(x => response.ProductList.Add(new LocationWiseProductQuantityModel { ProductCode = x.sc03001, ProductQuantity = string.IsNullOrWhiteSpace(x.sc03003) ? 0 : Convert.ToDouble(x.sc03003) }));
-                        ApplicationLogger.InfoLogger($"Item warehouse data length: {wareHouse.Count}");
+                        itemWarehouses.ForEach(x => response.ProductList.Add(new LocationWiseProductQuantityModel { ProductCode = x.sc03001, ProductQuantity = string.IsNullOrWhiteSpace(x.sc03003) ? 0 : Convert.ToDouble(x.sc03003) }));
+                        ApplicationLogger.InfoLogger($"Item warehouse data length: {itemWarehouses.Count}");
                     }
                     else
                     {
@@ -337,14 +341,14 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and productCode  Status: Success");
                 try
                 {
-                    var wareHouse = _dataLayerContext.GetItemWareHouse(companyCode, productCode, locationId);
+                    var wareHouse = _databaseContext.GetItemWareHouse(companyCode, productCode, locationId);
                     if (wareHouse.Any())
                     {
                         var firstOrDefault = wareHouse.FirstOrDefault();
                         if (firstOrDefault != null)
                             response.AvailableQuantity = Converter.GetAvailableQuantity(firstOrDefault.sc03003, firstOrDefault.sc03004, firstOrDefault.sc03005);
 
-                        ApplicationLogger.InfoLogger($"Item warehouse data length: {wareHouse.Count}");
+                        ApplicationLogger.InfoLogger($"Item warehouse data length: {wareHouse.Count()}");
                     }                    
 
                     return response;
@@ -373,17 +377,18 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and productCode  Status: Success");
                 try
                 {
-                    var wareHouse = _dataLayerContext.GetItemWareHouseByProductCode(companyCode, productCode);
-                    if (wareHouse.Any())
+                    var wareHouse = _databaseContext.GetItemWareHouseByProductCode(companyCode, productCode);
+                    var itemWarehouses = wareHouse as List<ItemWarehouse> ?? wareHouse.ToList();
+                    if (itemWarehouses.Any())
                     {
-                        wareHouse.ForEach(
+                        itemWarehouses.ForEach(
                             x =>
                                 response.ProductList.Add(new ProductAvailableQuantity
                                 {
                                     LocationId = x.sc03002,
                                     AvailableQuantity = Converter.GetAvailableQuantity(x.sc03003,x.sc03004,x.sc03005)
                                 }));
-                        ApplicationLogger.InfoLogger($"Item warehouse data length: {wareHouse.Count}");
+                        ApplicationLogger.InfoLogger($"Item warehouse data length: {itemWarehouses.Count}");
                     }
 
                     return response;
@@ -412,11 +417,12 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode and locationId Status: Success");
                 try
                 {
-                    var wareHouse = _dataLayerContext.GetItemWareHouseByLocationId(companyCode, locationId);
-                    if (wareHouse.Any())
+                    var wareHouse = _databaseContext.GetItemWareHouseByLocationId(companyCode, locationId);
+                    var itemWarehouses = wareHouse as List<ItemWarehouse> ?? wareHouse.ToList();
+                    if (itemWarehouses.Any())
                     {
-                        wareHouse.ForEach(x => response.ProductList.Add(new LocationWiseProductAvailableQuantityModel { ProductCode = x.sc03001, AvailableQuantity = Converter.GetAvailableQuantity(x.sc03003, x.sc03004, x.sc03005) }));
-                        ApplicationLogger.InfoLogger($"Item warehouse data length: {wareHouse.Count}");
+                        itemWarehouses.ForEach(x => response.ProductList.Add(new LocationWiseProductAvailableQuantityModel { ProductCode = x.sc03001, AvailableQuantity = Converter.GetAvailableQuantity(x.sc03003, x.sc03004, x.sc03005) }));
+                        ApplicationLogger.InfoLogger($"Item warehouse data length: {itemWarehouses.Count}");
                     }
 
                     return response;
@@ -448,7 +454,7 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode  Status: Success");
                 try
                 {
-                    StockItemMaster stockitem = _dataLayerContext.GetStockItemByProductCode(companyCode, productCode);
+                    StockItemMaster stockitem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
 
                     response.FamilyType = Converter.GetProductFamily(stockitem.sc01037);
 
@@ -481,7 +487,7 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and productCode  Status: Success");
                 try
                 {
-                    StockItemMaster stockitem = _dataLayerContext.GetStockItemByProductCode(companyCode, productCode);
+                    StockItemMaster stockitem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
                     response.LineType = Converter.GetProductLineMapping(stockitem.sc01037);
                     ApplicationLogger.InfoLogger($"ProductLineType  data : {stockitem.sc01037}");
                 }
@@ -509,7 +515,7 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode  Status: Success");
                 try
                 {
-                    StockItemMaster stockitem = _dataLayerContext.GetStockItemByProductCode(companyCode, productCode);
+                    StockItemMaster stockitem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
 
                     response.IsActive = Converter.CheckActiveProduct(string.IsNullOrWhiteSpace(stockitem.sc01120) ? 0 : Convert.ToDouble(stockitem.sc01120));
 
@@ -538,7 +544,7 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode  Status: Success");
                 try
                 {
-                    StockItemMaster stockitem = _dataLayerContext.GetStockItemByProductCode(companyCode, productCode);
+                    StockItemMaster stockitem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
 
                     response.Stockable = Converter.GetStockable(Convert.ToInt32(stockitem.sc01066), stockitem.sc01001);
 

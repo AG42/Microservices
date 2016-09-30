@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProductInventory.BusinessLayer;
 using ProductInventory.DataLayer.Entities;
+using ProductInventory.DataLayer.Entities.Datalake;
 using ProductInventory.DataLayer.Interfaces;
 using ProductInventory.Model;
+using System.Linq;
 
 namespace ProductInventory.UnitTest
 {
@@ -12,7 +14,7 @@ namespace ProductInventory.UnitTest
     public class ProductInventoryManagerUnitTest
     {
         #region Declarations
-        private IDataLayerContext _iDataLayer;
+        private IDatabaseContext _iDatabase;
         private ProductInventoryManager _inventoryManager;
         private const string COMPANY_CODE = "bh";
         //string productCode = "C002";
@@ -32,13 +34,13 @@ namespace ProductInventory.UnitTest
         [TestInitialize]
         public void Initialize()
         {
-            _inventoryManager = new ProductInventoryManager(_iDataLayer);
+            _inventoryManager = new ProductInventoryManager(_iDatabase);
         }
 
         [TestMethod]
         public void GetProductByIdTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             var data = new Model.Response.ProductSearchByIdResponse { ProductInventory = _inventoryModel };
@@ -57,6 +59,20 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
             Assert.IsNotNull(result);
 
+            result = _inventoryManager.GetProductById("K1", "001");
+            Assert.IsNotNull(result);
+            result = _inventoryManager.GetProductById("KS", "001");
+            Assert.IsNotNull(result);
+            result = _inventoryManager.GetProductById("N1", "001");
+            Assert.IsNotNull(result);
+            result = _inventoryManager.GetProductById("KK", "001");
+            Assert.IsNotNull(result);
+            result = _inventoryManager.GetProductById("KU", "001");
+            Assert.IsNotNull(result);
+            result = _inventoryManager.GetProductById("NU", "001");
+            Assert.IsNotNull(result);
+
+
             ////Assert to check the BillingStreet Validation Rules
             //Assert.AreEqual(result.Customers[0].BillingStreet, String.Format(customerList[0].sl01003 + "{0}" + customerList[0].sl01004 + "{0}" + customerList[0].sl01005 + "{0}" + customerList[0].sl01099 + "{0}" +
             //                    customerList[0].sl0194 + "{0}" + customerList[0].sl01195 + "{0}" + customerList[0].sl01196, Environment.NewLine));
@@ -72,7 +88,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByIdNegTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             var data = new Model.Response.ProductSearchByIdResponse { ProductInventory = _inventoryModel };
@@ -96,7 +112,7 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
             Assert.IsNotNull(result);
 
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
                             .IgnoreArguments()
@@ -111,7 +127,7 @@ namespace ProductInventory.UnitTest
             result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
             Assert.IsNotNull(result);
 
-            var mockExcepRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExcepRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             mockExcepRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
                             .IgnoreArguments()
@@ -132,7 +148,7 @@ namespace ProductInventory.UnitTest
         {
             var data = new Model.Response.ProductSearchByIdResponse { ProductInventory = _inventoryModel };
 
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
                             .IgnoreArguments()
@@ -153,7 +169,7 @@ namespace ProductInventory.UnitTest
         {
             var data = new Model.Response.ProductSearchByIdResponse { ProductInventory = _inventoryModel };
 
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProductById(string.Empty, "001");
@@ -163,7 +179,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByDescriptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductSearchByDescriptionResponse();
@@ -193,7 +209,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByDescriptionwithEmptyProductsListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetProductInvetoryByProductName("bh", "007"))
@@ -205,10 +221,54 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetProductByDescription(COMPANY_CODE, "001");
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void GetProductByDescriptionwithProductInventoryEntityListTest()
+        {
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+            SetMockDataForProductModels();
+
+            mockRepository.Stub(x => x.GetProductInvetoryByProductName("bh", "007"))
+              .IgnoreArguments()
+              .Return(GetProductCodeEntityList());
+
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+
+            var result = _inventoryManager.GetProductByDescription(COMPANY_CODE, "001");
+            Assert.IsNotNull(result);
+        }
+
+        private List<ProductInventoryEntity> GetProductCodeEntityList()
+        {
+            _productInventoryEntityList = new List<ProductInventoryEntity>
+            {
+                new ProductInventoryEntity
+                {
+                    sc01001 = "01001",
+                    sc01002 = "COOLER TUBES-",
+                    sc01003 = "",
+                    sc01037 = "GAS",
+                      // sc01066 ="sc01066",
+                      sc01106 ="01106",
+                }
+            };
+
+            return _productInventoryEntityList;
+        }
+        [TestMethod]
+        public void GetProductByDescriptionwithEmptyDescriptionTest()
+        {
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+
+            var result = _inventoryManager.GetProductByDescription(COMPANY_CODE, "");
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ErrorInfo.Any());
+        }
         [TestMethod]
         public void GetProductByDescriptionExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _productInventoryEntityList = new List<ProductInventoryEntity>
             {
@@ -232,7 +292,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByDescriptionInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProductByDescription(string.Empty, "001");
@@ -242,7 +302,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByLocationIdTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductSearchByDescriptionResponse();
@@ -272,7 +332,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByLocationIdwithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetProductInvetoryByLocationId("bh", "007"))
@@ -287,7 +347,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByLocationIdExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _productInventoryEntityList = new List<ProductInventoryEntity>
             {
@@ -311,7 +371,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByLocationIdInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProductByLocationId(string.Empty, string.Empty);
@@ -321,7 +381,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockBalanceQuantityTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -351,7 +411,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockBalanceQuantitywithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetItemWareHouse("bh", "007", "70"))
@@ -363,10 +423,44 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetProductStockBalanceQuantity(COMPANY_CODE, "001", "70");
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void GetProductStockBalanceQuantitywithNullWarehouseListTest()
+        {
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+            SetMockDataForProductModels();
+
+            mockRepository.Stub(x => x.GetItemWareHouse("bh", "007", "70"))
+              .IgnoreArguments()
+              .Return(new List<ItemWarehouse> { null });
+
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+
+            var result = _inventoryManager.GetProductStockBalanceQuantity(COMPANY_CODE, "001", "70");
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ErrorInfo.Any());
+        }
+
+        [TestMethod]
+        public void GetProductStockBalanceQuantitywithZeroItemTest()
+        {
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+            SetMockDataForProductModels();
+
+            mockRepository.Stub(x => x.GetItemWareHouse("bh", "007", "70"))
+              .IgnoreArguments()
+              .Return(new List<ItemWarehouse>());
+
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+
+            var result = _inventoryManager.GetProductStockBalanceQuantity(COMPANY_CODE, "001", "70");
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ErrorInfo.Any());
+        }
         [TestMethod]
         public void GetProductStockBalanceQuantityExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _stockItemsEnttiesList = new List<ItemWarehouse>
             {
@@ -391,7 +485,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockBalanceQuantityInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProductStockBalanceQuantity(string.Empty, "001", string.Empty);
@@ -401,7 +495,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockBalanceQuantityForAllLocationTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -431,7 +525,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockBalanceQuantityForAllLocationwithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", "007"))
@@ -446,7 +540,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockBalanceQuantityForAllLocationExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _stockItemsEnttiesList = new List<ItemWarehouse>
             {
@@ -471,7 +565,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockBalanceQuantityForAllLocationInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProductStockBalanceQuantityForAllLocation(string.Empty, "001");
@@ -481,7 +575,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetLocationwiseProductStockBalanceQuantityTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -511,7 +605,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetLocationwiseProductStockBalanceQuantitywithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetItemWareHouseByLocationId("bh", "70"))
@@ -526,7 +620,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetLocationwiseProductStockBalanceQuantityExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _stockItemsEnttiesList = new List<ItemWarehouse>
             {
@@ -551,7 +645,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetLocationwiseProductStockBalanceQuantityInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetLocationwiseProductStockBalanceQuantity(string.Empty, string.Empty);
@@ -561,7 +655,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductAvailableQuantityTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -591,7 +685,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductAvailableQuantitywithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetItemWareHouse("bh", "70", "001"))
@@ -603,10 +697,23 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetProductAvailableQuantity(COMPANY_CODE, "007-001", "70");
             Assert.IsNotNull(result);
         }
+
+
+        [TestMethod]
+        public void GetProductAvailableQuantitywithEmptyLocationIdTest()
+        {
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+
+            var result = _inventoryManager.GetProductAvailableQuantity(COMPANY_CODE, "007-001", "");
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ErrorInfo.Any());
+        }
+
         [TestMethod]
         public void GetProductAvailableQuantityExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _stockItemsEnttiesList = new List<ItemWarehouse>
             {
@@ -631,7 +738,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductAvailableQuantityInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProductAvailableQuantity(string.Empty, "007-001", "70");
@@ -641,7 +748,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductAvailableQuantityForAllLocationTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -671,7 +778,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductAvailableQuantityForAllLocationwithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", "70"))
@@ -686,7 +793,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductAvailableQuantityForAllLocationExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _stockItemsEnttiesList = new List<ItemWarehouse>
             {
@@ -711,7 +818,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductAvailableQuantityForAllLocationInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProductAvailableQuantityForAllLocation(string.Empty, "007-001");
@@ -721,7 +828,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetLocationwiseProductAvailableQuantityTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -751,7 +858,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetLocationwiseProductAvailableQuantitywithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetItemWareHouseByLocationId("bh", "70"))
@@ -766,7 +873,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetLocationwiseProductAvailableQuantityExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             mockExceptionRepository.Stub(x => x.GetItemWareHouseByLocationId("bh", "70"))
               .IgnoreArguments()
@@ -780,7 +887,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetLocationwiseProductAvailableQuantityInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetLocationwiseProductAvailableQuantity(string.Empty, "01");
@@ -790,7 +897,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductFamilyTypeTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -820,7 +927,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductFamilyTypewithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
@@ -832,10 +939,21 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetProductFamilyType(COMPANY_CODE, "01");
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void GetProductFamilyTypewithEmptyProductCodeTest()
+        {
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+
+            var result = _inventoryManager.GetProductFamilyType(COMPANY_CODE, "");
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ErrorInfo.Any());
+        }
         [TestMethod]
         public void GetProductFamilyTypeExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
               .IgnoreArguments()
@@ -849,7 +967,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductFamilyTypeInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProductFamilyType(string.Empty, "01");
@@ -859,7 +977,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductLineTypeTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -890,7 +1008,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductLineTypewithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
@@ -905,7 +1023,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductLineTypeExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
               .IgnoreArguments()
@@ -919,7 +1037,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductLineTypeInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProductLineType(string.Empty, "01");
@@ -929,7 +1047,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void IsProductActiveTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -959,7 +1077,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void IsProductActivewithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
@@ -974,7 +1092,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void IsProductActiveExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
               .IgnoreArguments()
@@ -988,7 +1106,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void IsProductActiveInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.IsProductActive(string.Empty, "01");
@@ -998,7 +1116,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void IsProductStockableTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -1028,7 +1146,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void IsProductStockablewithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
@@ -1043,7 +1161,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void IsProductStockableExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
               .IgnoreArguments()
@@ -1057,7 +1175,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void IsProductStockableInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.IsProductStockable(string.Empty, "01");
@@ -1067,7 +1185,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             //var data = new Model.Response.ProductStockBalanceQuantityResponse();
@@ -1101,7 +1219,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductwithEmptyListTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
@@ -1116,7 +1234,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductExceptionTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
 
             StockItemMaster stockItm = new StockItemMaster
@@ -1140,7 +1258,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductInputValidationTest()
         {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
             _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
             var result = _inventoryManager.GetProduct(string.Empty, string.Empty, string.Empty);
