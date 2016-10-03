@@ -77,7 +77,7 @@ namespace ProductInventory.BusinessLayer
         /// <param name="productsEntity">List of Products with stock details</param>
         /// <param name="companyCode">Company Code</param>
         /// <returns>Collection of Products</returns>
-        public static List<ProductInventoryModel> ConvertProductEntity(List<ProductInventoryEntity> productsEntity, string companyCode)
+        public static List<ProductInventoryModel> ConvertProductEntity(IEnumerable<ProductInventoryEntity> productsEntity, string companyCode)
         {
             List<ProductInventoryModel> productInventoryModelList = new List<ProductInventoryModel>();
 

@@ -40,13 +40,13 @@ namespace ProductInventory.DataLayer.Interfaces
         /// <param name="companyCode">The company code.</param>
         /// <param name="productName">Name of the product.</param>
         /// <returns>List of product inventory which is join of stock item master and item warehouse</returns>
-        List<ProductInventoryEntity> GetProductInvetoryByProductName(string companyCode, string productName);
+        IEnumerable<ProductInventoryEntity> GetProductInvetoryByProductName(string companyCode, string productName);
         /// <summary>
         /// Gets product details from join of stock item master and item warehouse by location identifier.
         /// </summary>
         /// <param name="companyCode">The company code.</param>
         /// <param name="locationId">The location id.</param>
         /// <returns>List of product inventory which is join of stock item master and item warehouse</returns>
-        List<ProductInventoryEntity> GetProductInvetoryByLocationId(string companyCode, string locationId);
+        IEnumerable<ProductInventoryEntity> GetProductInvetoryByLocationId(string companyCode, string locationId);
     }   
 }

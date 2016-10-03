@@ -20,7 +20,7 @@ namespace ProductInventory.DataLayer.Adapters
             using (var connection = new OdbcConnection(ConnectionString))
             {
                 var dataAdapter = new OdbcDataAdapter(query, connection);
-
+                dataAdapter.SelectCommand.CommandTimeout = 300;
                 var ds = new DataSet();
 
                 dataAdapter.Fill(ds);

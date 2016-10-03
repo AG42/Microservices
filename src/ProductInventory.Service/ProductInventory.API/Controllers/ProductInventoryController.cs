@@ -104,7 +104,7 @@ namespace ProductInventory.API.Controllers
         /// <param name="locationId"></param>
         /// <returns></returns>
         [Route("companyCode/{companyCode}/locationId/{locationId}")]
-        public IHttpActionResult GetProductByLocationId(string companyCode, string locationId)
+        public HttpResponseMessage GetProductByLocationId(string companyCode, string locationId)
         {
             try
             {
@@ -114,22 +114,26 @@ namespace ProductInventory.API.Controllers
                 if (response.Status == ResponseStatus.Success)
                 {
                     ApplicationLogger.InfoLogger("Response Status: Success");
-                    return Ok(response.ProductInventoryList);
+//                    return Ok(response.ProductInventoryList);
+                    return Request.CreateResponse(HttpStatusCode.OK, response.ProductInventoryList);
                 }
 
                 ApplicationLogger.InfoLogger("Response Status: Failure");
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo));
+//                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo));
+                return Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo);
             }
             catch (HttpResponseException exception)
             {
                 ApplicationLogger.InfoLogger($"Exception: HttpResponseException: [{exception.Message}]");
-                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
+//                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
+                return Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage);
             }
             catch (Exception ex)
             {
                 ApplicationLogger.InfoLogger($"Exception: BaseException: [{ex.Message}]");
                 ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace, ex.InnerException);
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, Constants.InternalServerError));
+//                return ResponseMessage(Request.CreateResponse(HttpStatusCode.InternalServerError, Constants.InternalServerError));
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, Constants.InternalServerError);
             }
         }
 

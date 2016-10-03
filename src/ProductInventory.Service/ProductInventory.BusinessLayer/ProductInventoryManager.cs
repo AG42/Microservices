@@ -129,7 +129,7 @@ namespace ProductInventory.BusinessLayer
                     if (products.Any())
                     {
                         response.ProductInventoryList.AddRange(Converter.ConvertProductEntity(products, companyCode));
-                        ApplicationLogger.InfoLogger($"ProductInventoryList data length: {products.Count}");
+                        ApplicationLogger.InfoLogger($"ProductInventoryList data length: {products.Count()}");
                     }
                     else
                     {

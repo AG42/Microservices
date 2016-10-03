@@ -16,7 +16,8 @@ namespace ProductInventory.DataLayer
         private const string EQUAL_OPERATOR = "=";
         private const string AND_OPERATOR = "&";
         private const string STOCKITEM_PRODUCTCODE_FIELD = "sc01001";
-        private const string STOCKITEM_PRODUCTNAME_FIELD = "sc01002003";
+        private const string STOCKITEM_DESCRIPTION1_FIELD = "sc01002";
+        private const string STOCKITEM_DESCRIPTION2_FIELD = "sc01003";
         private const string ITEMWAREHOUSE_PRODUCTCODE_FIELD = "sc03001";
         private const string ITEMWAREHOUSE_LOCATIONID_FIELD = "sc03002";
         private const string DATALAKE_STOCKMASTER_TABLE_NAME_KEY = "DatalakeStockMasterTableName";
@@ -132,13 +133,18 @@ namespace ProductInventory.DataLayer
             }
         }
 
-        public List<ProductInventoryEntity> GetProductInvetoryByProductName(string companyCode, string productName)
+        public IEnumerable<ProductInventoryEntity> GetProductInvetoryByProductName(string companyCode, string productName)
         {
             try
             {
-                ApplicationLogger.InfoLogger("DataLayer :: GetProductInvetoryByProductName :: Reading view uri from config");
-                string filter = $"lower({STOCKITEM_PRODUCTNAME_FIELD}) {LIKE_OPERATOR} '%{productName.ToLower()}%'";
-                return new List<ProductInventoryEntity>(); //productInventory;
+                ApplicationLogger.InfoLogger("DataLayer :: GetProductInvetoryByProductName : Reading datalake table name from config");
+                string stockMasterTableName = _configReader.GetDatalakeTableName(companyCode, DATALAKE_STOCKMASTER_TABLE_NAME_KEY);
+                string itemWarehouseTableName = _configReader.GetDatalakeTableName(companyCode, DATALAKE_ITEMWAREHOUSE_TABLE_NAME_KEY);
+                string joinCondition = $" sc01 JOIN {itemWarehouseTableName} sc03 ON sc01.{STOCKITEM_PRODUCTCODE_FIELD} = sc03.{ITEMWAREHOUSE_PRODUCTCODE_FIELD}";
+                string whereCondition = $"lower(CONCAT(sc01.{STOCKITEM_DESCRIPTION1_FIELD}, ' ', sc01.{STOCKITEM_DESCRIPTION2_FIELD})) {LIKE_OPERATOR} '%{productName.ToLower().Trim()}%'";
+                var productInventory = _datalakeEntitieses.WhereJoin<ProductInventoryEntity>(stockMasterTableName, joinCondition, whereCondition);
+                //string filter = $"lower({STOCKITEM_PRODUCTNAME_FIELD}) {LIKE_OPERATOR} '%{productName.ToLower()}%'";
+                return productInventory;
             }
             catch (Exception exception)
             {
@@ -147,16 +153,21 @@ namespace ProductInventory.DataLayer
             }
         }
 
-        public List<ProductInventoryEntity> GetProductInvetoryByLocationId(string companyCode, string locationId)
+        public IEnumerable<ProductInventoryEntity> GetProductInvetoryByLocationId(string companyCode, string locationId)
         {
             try
             {
-                ApplicationLogger.InfoLogger("DataLayer :: GetProductInvetoryByLocationId :: Reading view uri from config");
+                ApplicationLogger.InfoLogger("DataLayer :: GetProductInvetoryByLocationId : Reading datalake table name from config");
                 //                string finalViewUri = $"{_configReader.GetDenodoViewUri(companyCode, PRODUCTINVENTORY_VIEWURI_KEY)}?{ITEMWAREHOUSE_LOCATIONID_FIELD}{EQUAL_OPERATOR}{locationId}";
                 //                ApplicationLogger.InfoLogger($"Denodo url: [{_denodoUrl}{finalViewUri}]");
                 //                var productInventory = DenodoContext.GetData<ProductInventoryEntity>(finalViewUri);
                 //                ApplicationLogger.InfoLogger($"ProductInventory count: {productInventory.Count}");
-                return new List<ProductInventoryEntity>(); //productInventory;
+                string stockMasterTableName = _configReader.GetDatalakeTableName(companyCode, DATALAKE_STOCKMASTER_TABLE_NAME_KEY);
+                string itemWarehouseTableName = _configReader.GetDatalakeTableName(companyCode, DATALAKE_ITEMWAREHOUSE_TABLE_NAME_KEY);
+                string joinCondition = $" sc01 JOIN {itemWarehouseTableName} sc03 ON sc01.{STOCKITEM_PRODUCTCODE_FIELD} = sc03.{ITEMWAREHOUSE_PRODUCTCODE_FIELD}";
+                string whereCondition = $"trim(lower(sc03.{ITEMWAREHOUSE_LOCATIONID_FIELD})) {EQUAL_OPERATOR} '{locationId.ToLower().Trim()}'";
+                var productInventory = _datalakeEntitieses.WhereJoin<ProductInventoryEntity>(stockMasterTableName, joinCondition, whereCondition);
+                return productInventory;
             }
             catch (Exception exception)
             {

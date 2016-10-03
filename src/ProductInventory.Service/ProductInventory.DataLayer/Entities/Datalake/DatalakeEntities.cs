@@ -38,6 +38,17 @@ namespace ProductInventory.DataLayer.Entities.Datalake
             return _datalakeAdapter.Get<T>($"Select {GetColumns(new T())} from {tableName} WHERE {condition}");
         }
 
+        public IEnumerable<T> GetJoinData<T>(string primaryTableName, string JoinConditions, bool isTransactionalDataRequire = false) where T : class, new()
+        {
+            return _datalakeAdapter.Get<T>($"Select {GetColumns(new T())} from {primaryTableName} {JoinConditions}");
+        }
+
+        public IEnumerable<T> WhereJoin<T>(string primaryTableName, string JoinConditions, string whereCondition,
+            bool isTransactionalDataRequire = false) where T : class, new()
+        {
+            return _datalakeAdapter.Get<T>($"Select {GetColumns(new T())} from {primaryTableName} {JoinConditions} WHERE {whereCondition}");
+        }
+
         private string GetColumns<T>(T t)
         {
             string columns = string.Empty;

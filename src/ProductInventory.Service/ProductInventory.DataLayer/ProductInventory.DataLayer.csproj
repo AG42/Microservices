@@ -102,7 +102,7 @@
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="Entities\Datalake\DatalakeEntities.cs" />
     <Compile Include="Entities\Datalake\ItemWarehouse.cs" />
-    <Compile Include="Entities\ProductInventoryEntity.cs" />
+    <Compile Include="Entities\Datalake\ProductInventoryEntity.cs" />
     <Compile Include="Entities\Datalake\StockItemMaster.cs" />
     <Compile Include="Interfaces\IDatabaseContext.cs" />
     <Compile Include="Interfaces\IDatalakeAdapter.cs" />
