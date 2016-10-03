@@ -598,7 +598,7 @@ namespace ProductInventory.UnitTest
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
+        // [TestMethod]
         public void GetLocationwiseProductAvailableQuantityTest()
         {
             
