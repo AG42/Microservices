@@ -29,7 +29,7 @@ namespace CustomerInformation.DataLayer.Adapters
                         try
                         {
                             PropertyInfo propertyInfo = obj.GetType().GetProperty(prop.Name);
-                            propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
+                            propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name].ToString().Trim(), propertyInfo.PropertyType), null);
                         }
                         catch
                         {

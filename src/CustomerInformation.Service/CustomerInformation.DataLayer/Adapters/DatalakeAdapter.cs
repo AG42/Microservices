@@ -2,33 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Odbc;
-using System;
 
 namespace CustomerInformation.DataLayer.Adapters
 {
     public class DatalakeAdapter : IDatalakeAdapter
     {
-        private string _connectionString;
-
-        public DatalakeAdapter()
-        { }
-        //public DatalakeAdapter(string connectionString)
-        //{
-        //    _connectionString = connectionString;
-        //}
-
-        public string ConnectionString
-        {
-            get
-            {
-                return _connectionString;
-            }
-
-            set
-            {
-                _connectionString = value;
-            }
-        }
+        public string ConnectionString { get; set; }
 
         public IEnumerable<T> Get<T>(string query) where T:class, new()
         {
@@ -38,7 +17,7 @@ namespace CustomerInformation.DataLayer.Adapters
 
         private DataSet Execute(string query)
         {
-            using (var connection = new OdbcConnection(_connectionString))
+            using (var connection = new OdbcConnection(ConnectionString))
             {
                 var dataAdapter = new OdbcDataAdapter(query, connection);
 

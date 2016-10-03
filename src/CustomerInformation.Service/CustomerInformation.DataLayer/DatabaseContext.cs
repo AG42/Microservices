@@ -17,12 +17,12 @@ namespace CustomerInformation.DataLayer
         public IDenodoContext DenodoContext { get; set; }
         private readonly ConfigReader _configReader;
         private readonly IDatalakeEntities _datalakeEntities;
-        public DatabaseContext(IDatalakeEntities _DatalakeEntities)
+        public DatabaseContext(IDatalakeEntities datalakeEntities)
         {
             try
             {
                 _configReader = new ConfigReader();
-                _datalakeEntities = _DatalakeEntities;
+                _datalakeEntities = datalakeEntities;
                 _datalakeEntities.ConnectionString = _configReader.DatalakeConnectionString;
             }
             catch (Exception exception)

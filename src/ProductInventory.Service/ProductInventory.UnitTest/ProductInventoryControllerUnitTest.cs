@@ -19,7 +19,7 @@ namespace ProductInventory.UnitTest
     public class ProductInventoryControllerUnitTest
     {
         #region Declarations
-        private IProductInventoryManager _iProductInventory;
+        private IProductInventoryManager mockProductInventoryManager;
         private ProductInventoryController _controller;
         private const string COMPANY_CODE = "bh";
 
@@ -38,7 +38,8 @@ namespace ProductInventory.UnitTest
         [TestInitialize]
         public void Initialize()
         {
-            _controller = new ProductInventoryController(_iProductInventory) { Request = new HttpRequestMessage() };
+            mockProductInventoryManager = MockRepository.GenerateMock<IProductInventoryManager>();
+            _controller = new ProductInventoryController(mockProductInventoryManager) { Request = new HttpRequestMessage() };
             _controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
             _controller.Request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:51083/?param1=someValue&param2=anotherValue");
         }
@@ -49,20 +50,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByIdTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductSearchByIdResponse {ProductInventory = _productInventoryModel};
-            mockRepository.Stub(x => x.GetProductById(COMPANY_CODE, "000"))
+            mockProductInventoryManager.Stub(x => x.GetProductById(COMPANY_CODE, "000"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
 
             var result = _controller.GetProductById(COMPANY_CODE, "123");
             Assert.IsNotNull(result);
@@ -75,7 +68,7 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductByIdTestException()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductSearchByIdResponse {ProductInventory = _productInventoryModel};
 
@@ -83,24 +76,13 @@ namespace ProductInventory.UnitTest
             data.ErrorInfo.AddRange(_errorsList);
 
             //data.ErrorInfo = new List<Common.Error.ErrorInfo>({ });
-            mockRepository.Stub(x => x.GetProductById(COMPANY_CODE, "000"))
+            mockProductInventoryManager.Stub(x => x.GetProductById(COMPANY_CODE, "000"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
-
             var result = _controller.GetProductById(COMPANY_CODE, "123");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             result = _controller.GetProductById(COMPANY_CODE, "123");
 
@@ -114,20 +96,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductResponse { ProductInventory = _productInventoryModel };
-            mockRepository.Stub(x => x.GetProduct(COMPANY_CODE, "000","70"))
+            mockProductInventoryManager.Stub(x => x.GetProduct(COMPANY_CODE, "000","70"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
 
             var result = _controller.GetProduct(COMPANY_CODE, "123","70");
             Assert.IsNotNull(result);
@@ -140,7 +114,7 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductTestException()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductResponse { ProductInventory = _productInventoryModel };
 
@@ -148,24 +122,16 @@ namespace ProductInventory.UnitTest
             data.ErrorInfo.AddRange(_errorsList);
 
             //data.ErrorInfo = new List<Common.Error.ErrorInfo>({ });
-            mockRepository.Stub(x => x.GetProduct(COMPANY_CODE, "000","70"))
+            mockProductInventoryManager.Stub(x => x.GetProduct(COMPANY_CODE, "000","70"))
                             .IgnoreArguments()
                             .Return(data);
 
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
+             
 
             var result = _controller.GetProduct(COMPANY_CODE, "123","70");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             result = _controller.GetProduct(COMPANY_CODE, "123","70");
 
@@ -179,7 +145,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByDescriptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
             var data = new Model.Response.ProductSearchByDescriptionResponse();
@@ -189,16 +155,9 @@ namespace ProductInventory.UnitTest
             //data.ErrorInfo.AddRange(errorsList);
 
 
-            mockRepository.Stub(x => x.GetProductByDescription(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductByDescription(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             var result = _controller.GetProductByDescription(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
@@ -212,7 +171,7 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductByDescriptionExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductSearchByDescriptionResponse();
             data.ProductList.AddRange(_productInventoryModelList);
@@ -220,25 +179,16 @@ namespace ProductInventory.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProductByDescription(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductByDescription(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
+            
+            
 
             var result = _controller.GetProductByDescription(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             result = _controller.GetProductByDescription(COMPANY_CODE, "TUBE");
 
             Assert.IsNotNull(result);
@@ -250,20 +200,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductByLocationIdTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
-            mockRepository.Stub(x => x.GetProductByLocationId(COMPANY_CODE,  "1"))
+            mockProductInventoryManager.Stub(x => x.GetProductByLocationId(COMPANY_CODE,  "1"))
                             .IgnoreArguments()
                             .Return(new Model.Response.ProductSearchByLocationIdResponse());
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             var result = _controller.GetProductByLocationId(COMPANY_CODE,  "1");
             Assert.IsNotNull(result);
         }
@@ -275,7 +217,7 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductByLocationIdExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductSearchByLocationIdResponse();
             //data.ProductInventoryModel = new ProductInventoryModel();
@@ -284,25 +226,16 @@ namespace ProductInventory.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProductByLocationId(COMPANY_CODE, "1"))
+            mockProductInventoryManager.Stub(x => x.GetProductByLocationId(COMPANY_CODE, "1"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
+            
+            
 
             var result = _controller.GetProductByLocationId(COMPANY_CODE, "1");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             result = _controller.GetProductByLocationId(COMPANY_CODE, "1");
 
             Assert.IsNotNull(result);
@@ -311,20 +244,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockBalanceQuantityTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
-            mockRepository.Stub(x => x.GetProductStockBalanceQuantity(COMPANY_CODE, "TUBE", "1"))
+            mockProductInventoryManager.Stub(x => x.GetProductStockBalanceQuantity(COMPANY_CODE, "TUBE", "1"))
                             .IgnoreArguments()
                             .Return(new Model.Response.ProductStockBalanceQuantityResponse());
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             var result = _controller.GetProductStockBalanceQuantity(COMPANY_CODE, "TUBE", "1");
             Assert.IsNotNull(result);
         }
@@ -333,31 +258,22 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductStockBalanceQuantityExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductStockBalanceQuantityResponse {StockBalanceQuantity = 0};
 
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProductStockBalanceQuantity(COMPANY_CODE, "TUBE", "1"))
+            mockProductInventoryManager.Stub(x => x.GetProductStockBalanceQuantity(COMPANY_CODE, "TUBE", "1"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
+            
 
             var result = _controller.GetProductStockBalanceQuantity(COMPANY_CODE, "TUBE", "1");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             result = _controller.GetProductStockBalanceQuantity(COMPANY_CODE, "TUBE", "1");
 
@@ -367,20 +283,12 @@ namespace ProductInventory.UnitTest
 
         [TestMethod]
         public void GetAvailableQuantityTest()
-        {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+        {            
             SetMockDataForProductModels();
-
-            mockRepository.Stub(x => x.GetProductAvailableQuantity(COMPANY_CODE, "TUBE","1"))
+            var resp = new Model.Response.ProductAvailableQuantityResponse();
+            mockProductInventoryManager.Stub(x => x.GetProductAvailableQuantity(COMPANY_CODE, "TUBE","1"))
                             .IgnoreArguments()
-                            .Return(new Model.Response.ProductAvailableQuantityResponse());
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
+                            .Return(resp);
 
             var result = _controller.GetProductAvailableQuantity(COMPANY_CODE, "TUBE","1");
             Assert.IsNotNull(result);
@@ -390,32 +298,22 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetAvailableQuantityExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductAvailableQuantityResponse {AvailableQuantity = 0};
 
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProductAvailableQuantity(COMPANY_CODE, "TUBE","1"))
+            mockProductInventoryManager.Stub(x => x.GetProductAvailableQuantity(COMPANY_CODE, "TUBE","1"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
+            
 
             var result = _controller.GetProductAvailableQuantity(COMPANY_CODE, "TUBE","1");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             result = _controller.GetProductAvailableQuantity(COMPANY_CODE, "TUBE","1");
 
             Assert.IsNotNull(result);
@@ -424,19 +322,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductFamilyTypeTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
-            mockRepository.Stub(x => x.GetProductFamilyType(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductFamilyType(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(new Model.Response.ProductFamilyTypeResponse());
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             var result = _controller.GetProductFamilyType(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
@@ -446,31 +337,22 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductFamilyTypeExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductFamilyTypeResponse {FamilyType = "Spare Parts"};
 
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProductFamilyType(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductFamilyType(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
+            
 
             var result = _controller.GetProductFamilyType(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             result = _controller.GetProductFamilyType(COMPANY_CODE, "TUBE");
 
@@ -480,20 +362,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductLineTypeTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
-            mockRepository.Stub(x => x.GetProductLineType(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductLineType(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(new Model.Response.ProductLineTypeResponse());
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             var result = _controller.GetProductLineType(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
         }
@@ -502,31 +376,22 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductLineTypeExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductLineTypeResponse {LineType = "xyz"};
 
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProductLineType(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductLineType(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
+            
 
             var result = _controller.GetProductLineType(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             result = _controller.GetProductLineType(COMPANY_CODE, "TUBE");
 
@@ -536,7 +401,7 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockStatusTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
             var data = new Model.Response.ProductStockStatusResponse {Stockable = 1};
@@ -544,16 +409,9 @@ namespace ProductInventory.UnitTest
             //errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             //data.ErrorInfo.AddRange(errorsList);
 
-            mockRepository.Stub(x => x.IsProductStockable(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.IsProductStockable(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             var result = _controller.GetProductStockStatus(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
@@ -563,7 +421,7 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductStockStatusExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
             var data = new Model.Response.ProductStockStatusResponse {Stockable = 1};
@@ -571,25 +429,15 @@ namespace ProductInventory.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.IsProductStockable(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.IsProductStockable(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
+            
 
             var result = _controller.GetProductStockStatus(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             result = _controller.GetProductStockStatus(COMPANY_CODE, "TUBE");
 
             Assert.IsNotNull(result);
@@ -598,20 +446,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductActiveStatusTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
-            mockRepository.Stub(x => x.IsProductActive(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.IsProductActive(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(new Model.Response.ProductStatusResponse());
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             var result = _controller.GetProductActiveStatus(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
         }
@@ -620,31 +460,22 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductActiveStatusExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductStatusResponse {IsActive = true};
 
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.IsProductActive(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.IsProductActive(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
+            
 
             var result = _controller.GetProductActiveStatus(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             result = _controller.GetProductActiveStatus(COMPANY_CODE, "TUBE");
 
@@ -654,19 +485,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductAvailableQuantityForAllLocationTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
-            mockRepository.Stub(x => x.GetProductAvailableQuantityForAllLocation(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductAvailableQuantityForAllLocation(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(new Model.Response.ProductAvailableQuantityForAllLocationResponse());
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             var result = _controller.GetProductAvailableQuantityForAllLocation(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
@@ -676,7 +500,7 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductAvailableQuantityForAllLocationExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductAvailableQuantityForAllLocationResponse();
             data.ProductList.AddRange(new List<ProductAvailableQuantity> ());
@@ -684,25 +508,14 @@ namespace ProductInventory.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProductAvailableQuantityForAllLocation(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductAvailableQuantityForAllLocation(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
 
             var result = _controller.GetProductAvailableQuantityForAllLocation(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             result = _controller.GetProductAvailableQuantityForAllLocation(COMPANY_CODE, "TUBE");
 
             Assert.IsNotNull(result);
@@ -711,20 +524,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductStockBalanceQuantityForAllLocationTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
-            mockRepository.Stub(x => x.GetProductStockBalanceQuantityForAllLocation(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductStockBalanceQuantityForAllLocation(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(new Model.Response.ProductStockBalanceQuantityForAllLocationResponse());
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             var result = _controller.GetProductStockBalanceQuantityForAllLocation(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
         }
@@ -733,7 +538,7 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetProductStockBalanceQuantityForAllLocationExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.ProductStockBalanceQuantityForAllLocationResponse();
             data.LocationList.AddRange(new List<ProductLocationModel>());
@@ -741,25 +546,13 @@ namespace ProductInventory.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetProductStockBalanceQuantityForAllLocation(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetProductStockBalanceQuantityForAllLocation(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
-
             var result = _controller.GetProductStockBalanceQuantityForAllLocation(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             result = _controller.GetProductStockBalanceQuantityForAllLocation(COMPANY_CODE, "TUBE");
 
             Assert.IsNotNull(result);
@@ -768,19 +561,12 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetLocationwiseProductStockBalanceQuantityTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
 
-            mockRepository.Stub(x => x.GetLocationwiseProductStockBalanceQuantity(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetLocationwiseProductStockBalanceQuantity(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(new Model.Response.LocationwiseProductStockBalanceQuantityResponse());
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             var result = _controller.GetLocationwiseProductStockBalanceQuantity(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
@@ -790,7 +576,7 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetLocationwiseProductStockBalanceQuantityExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.LocationwiseProductStockBalanceQuantityResponse();
             data.ProductList.AddRange(new List<LocationWiseProductQuantityModel>());
@@ -798,59 +584,41 @@ namespace ProductInventory.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetLocationwiseProductStockBalanceQuantity(COMPANY_CODE, "TUBE"))
+            mockProductInventoryManager.Stub(x => x.GetLocationwiseProductStockBalanceQuantity(COMPANY_CODE, "TUBE"))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
 
             var result = _controller.GetLocationwiseProductStockBalanceQuantity(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
 
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             result = _controller.GetLocationwiseProductStockBalanceQuantity(COMPANY_CODE, "TUBE");
 
             Assert.IsNotNull(result);
         }
 
-        ////[TestMethod]
-        //public void GetLocationwiseProductAvailableQuantityTest()
-        //{
-        //    var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
-        //    SetMockDataForProductModels();
+        //[TestMethod]
+        public void GetLocationwiseProductAvailableQuantityTest()
+        {
+            
+            SetMockDataForProductModels();
 
-        //    var data = new Model.Response.LocationwiseProductAvailableQuantityResponse();
-        //    data.ProductList.AddRange(new List<LocationWiseProductAvailableQuantityModel>());
+            var data = new Model.Response.LocationwiseProductAvailableQuantityResponse();
+            data.ProductList.AddRange(new List<LocationWiseProductAvailableQuantityModel>());
 
-        //    mockRepository.Stub(x => x.GetLocationwiseProductAvailableQuantity("bh", "01"))
-        //                    .IgnoreArguments()
-        //                    .Return(data);
-
-        //    _controller = new ProductInventoryController(mockRepository)
-        //    {
-        //        Request =
-        //            new HttpRequestMessage(HttpMethod.Get,
-        //                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-        //    };
-
-        //    var result = _controller.GetLocationwiseProductAvailableQuantity(COMPANY_CODE, "1");
-        //    Assert.IsNotNull(result);
-        //}
+            mockProductInventoryManager.Stub(x => x.GetLocationwiseProductAvailableQuantity("bh", "01"))
+                            .IgnoreArguments()
+                            .Return(data);
+            var result = _controller.GetLocationwiseProductAvailableQuantity(COMPANY_CODE, "1");
+            Assert.IsNotNull(result);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(System.InvalidOperationException))]
         public void GetLocationwiseProductAvailableQuantityExceptionTest()
         {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+            
             SetMockDataForProductModels();
             var data = new Model.Response.LocationwiseProductAvailableQuantityResponse();
             data.ProductList.AddRange(new List<LocationWiseProductAvailableQuantityModel>());
@@ -858,24 +626,13 @@ namespace ProductInventory.UnitTest
             _errorsList.Add(new ErrorInfo("errorMessage") { Message = "Error Message" });
             data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetLocationwiseProductAvailableQuantity("bh", "01"))
+            mockProductInventoryManager.Stub(x => x.GetLocationwiseProductAvailableQuantity("bh", "01"))
                             .IgnoreArguments()
                             .Return(data);
-            _controller = new ProductInventoryController(mockRepository);
-            MockControllerRequest();
-
             var result = _controller.GetLocationwiseProductAvailableQuantity(COMPANY_CODE, "TUBE");
             Assert.IsNotNull(result);
 
             var responses = new HttpResponseException(System.Net.HttpStatusCode.InternalServerError);
-
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             result = _controller.GetLocationwiseProductAvailableQuantity(COMPANY_CODE, "TUBE");
 
             Assert.IsNotNull(result);

@@ -115,7 +115,7 @@ namespace ProductInventory.API.Controllers
                 {
                     ApplicationLogger.InfoLogger("Response Status: Success");
 //                    return Ok(response.ProductInventoryList);
-                    return Request.CreateResponse(HttpStatusCode.OK, response.ProductInventoryList);
+                    return this.Request.CreateResponse(HttpStatusCode.OK, response.ProductInventoryList);
                 }
 
                 ApplicationLogger.InfoLogger("Response Status: Failure");

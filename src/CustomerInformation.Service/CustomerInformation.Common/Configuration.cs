@@ -81,7 +81,7 @@ namespace CustomerInformation.Common
                };
                var dataSet = GetDataFromStoredProcedure("GetDatalakeTableMapping", parameterCollection);
                 if (dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
-                    return $"{dataSet.Tables[0].Rows[0]["DenodoViewUri"]}.{dataSet.Tables[0].Rows[1]["DenodoViewUri"]}";
+                    return $"{dataSet.Tables[0].Rows[0]["DatabaseName"]}.{dataSet.Tables[0].Rows[1]["TableName"]}";
                 throw new Exception(
                     $"Record not found for Service:[{serviceName}] Environment:[{environment}] CompanyCode:[{companyCode}]");
            }

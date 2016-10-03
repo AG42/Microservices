@@ -39,16 +39,6 @@ namespace CustomerInformation.DataLayer
             var configurationDictionary = configuration.GetConfiguration(ServiceName, Environment);
             DatalakeConnectionString = configurationDictionary[DATALAKE_CONNECTIONSTRING_KEY];
         }
-        public string GetDenodoViewUri(string companyCode)
-        {
-            if (!_readFromDatabase)
-                return ReadConfig($"{CUSTOMERINFORMATION_VIEWURI_KEY}_{companyCode.ToLower()}");
-
-            string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
-            var configuration = new Configuration(configurationDbConnectionString);
-            return configuration.GetDenodoViewUri(ServiceName, Environment, companyCode, CUSTOMERINFORMATION_VIEWURI_KEY);
-        }
-
         public string GetDatalakeTableName(string companyCode)
         {
             if (!_readFromDatabase)

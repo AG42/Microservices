@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CustomerInformation.DataLayer.Adapters;
+﻿using System.Collections.Generic;
 using CustomerInformation.DataLayer.Interfaces;
 
 namespace CustomerInformation.DataLayer.Entities.Datalake
@@ -13,15 +11,11 @@ namespace CustomerInformation.DataLayer.Entities.Datalake
         public DatalakeEntities(IDatalakeAdapter iDatalakeAdapter)
         {
             _datalakeAdapter = iDatalakeAdapter;
-            // _datalakeAdapter.ConnectionString = ConnectionString;
         }
 
         public string ConnectionString
         {
-            get
-            {
-                return _connectionString;
-            }
+            get { return _connectionString; }
 
             set
             {
