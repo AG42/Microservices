@@ -41,6 +41,7 @@ namespace ProductInventory.UnitTest
             mockProductInventoryManager = MockRepository.GenerateMock<IProductInventoryManager>();
             _controller = new ProductInventoryController(mockProductInventoryManager) { Request = new HttpRequestMessage() };
             _controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            _controller.Configuration = new HttpConfiguration();
             _controller.Request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:51083/?param1=someValue&param2=anotherValue");
         }
 
@@ -65,7 +66,7 @@ namespace ProductInventory.UnitTest
         /// Unit Test 
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductByIdTestException()
         {
             
@@ -111,7 +112,7 @@ namespace ProductInventory.UnitTest
         /// Unit Test 
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductTestException()
         {
             
@@ -168,7 +169,7 @@ namespace ProductInventory.UnitTest
         /// Unit Test 
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductByDescriptionExceptionTest()
         {
             
@@ -199,8 +200,7 @@ namespace ProductInventory.UnitTest
         /// </summary>
         [TestMethod]
         public void GetProductByLocationIdTest()
-        {
-            
+        {            
             SetMockDataForProductModels();
 
             mockProductInventoryManager.Stub(x => x.GetProductByLocationId(COMPANY_CODE,  "1"))
@@ -214,7 +214,7 @@ namespace ProductInventory.UnitTest
         /// Unit Test 
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductByLocationIdExceptionTest()
         {
             
@@ -255,7 +255,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductStockBalanceQuantityExceptionTest()
         {
             
@@ -295,7 +295,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetAvailableQuantityExceptionTest()
         {
             
@@ -334,7 +334,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductFamilyTypeExceptionTest()
         {
             
@@ -373,7 +373,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductLineTypeExceptionTest()
         {
             
@@ -418,7 +418,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductStockStatusExceptionTest()
         {
             
@@ -457,7 +457,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductActiveStatusExceptionTest()
         {
             
@@ -497,7 +497,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductAvailableQuantityForAllLocationExceptionTest()
         {
             
@@ -535,7 +535,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetProductStockBalanceQuantityForAllLocationExceptionTest()
         {
             
@@ -573,7 +573,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetLocationwiseProductStockBalanceQuantityExceptionTest()
         {
             
@@ -598,7 +598,7 @@ namespace ProductInventory.UnitTest
             Assert.IsNotNull(result);
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void GetLocationwiseProductAvailableQuantityTest()
         {
             
@@ -615,7 +615,7 @@ namespace ProductInventory.UnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
+        //[ExpectedException(typeof(System.Exception))]
         public void GetLocationwiseProductAvailableQuantityExceptionTest()
         {
             

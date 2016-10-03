@@ -100,7 +100,7 @@ namespace ProductInventory.UnitTest
         {
             SetMockDataForProductModels();           
 
-           datalakeEntities.Stub(x => x.Get<ProductInventoryEntity>("tableName"))
+           datalakeEntities.Stub(x => x.WhereJoin<ProductInventoryEntity>("tableName", "joinCondition", "whereCondition"))
                  .IgnoreArguments()
                 .Return(_productInventoryEntityList);
 
