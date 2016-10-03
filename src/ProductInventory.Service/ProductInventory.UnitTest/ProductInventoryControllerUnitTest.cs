@@ -822,29 +822,29 @@ namespace ProductInventory.UnitTest
             Assert.IsNotNull(result);
         }
 
-        //[TestMethod]
-        public void GetLocationwiseProductAvailableQuantityTest()
-        {
-            var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
-            SetMockDataForProductModels();
+        ////[TestMethod]
+        //public void GetLocationwiseProductAvailableQuantityTest()
+        //{
+        //    var mockRepository = MockRepository.GenerateMock<IProductInventoryManager>();
+        //    SetMockDataForProductModels();
 
-            var data = new Model.Response.LocationwiseProductAvailableQuantityResponse();
-            data.ProductList.AddRange(new List<LocationWiseProductAvailableQuantityModel>());
+        //    var data = new Model.Response.LocationwiseProductAvailableQuantityResponse();
+        //    data.ProductList.AddRange(new List<LocationWiseProductAvailableQuantityModel>());
 
-            mockRepository.Stub(x => x.GetLocationwiseProductAvailableQuantity("bh", "01"))
-                            .IgnoreArguments()
-                            .Return(data);
+        //    mockRepository.Stub(x => x.GetLocationwiseProductAvailableQuantity("bh", "01"))
+        //                    .IgnoreArguments()
+        //                    .Return(data);
 
-            _controller = new ProductInventoryController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                        "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
+        //    _controller = new ProductInventoryController(mockRepository)
+        //    {
+        //        Request =
+        //            new HttpRequestMessage(HttpMethod.Get,
+        //                "http://localhost:51083/?param1=someValue&param2=anotherValue")
+        //    };
 
-            var result = _controller.GetLocationwiseProductAvailableQuantity(COMPANY_CODE, "1");
-            Assert.IsNotNull(result);
-        }
+        //    var result = _controller.GetLocationwiseProductAvailableQuantity(COMPANY_CODE, "1");
+        //    Assert.IsNotNull(result);
+        //}
 
         [TestMethod]
         [ExpectedException(typeof(System.InvalidOperationException))]
