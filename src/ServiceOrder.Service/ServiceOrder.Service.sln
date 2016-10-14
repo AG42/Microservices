@@ -1,0 +1,126 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "ServiceOrder", "ServiceOrder\ServiceOrder.sfproj", "{263C79D7-4075-4D82-A267-4AB26459DA57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceOrder.API", "ServiceOrder.API\ServiceOrder.API.csproj", "{A14BB159-4310-418B-BAC3-67F04F8E4AB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceOrder.BusinessLayer", "ServiceOrder.BusinessLayer\ServiceOrder.BusinessLayer.csproj", "{C5EC5FFF-ACFD-49C9-950D-35BA13CB1E92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceOrder.Common", "ServiceOrder.Common\ServiceOrder.Common.csproj", "{4CAD1E9C-1EA5-4ED5-B992-FC472D43355F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceOrder.DataLayer", "ServiceOrder.DataLayer\ServiceOrder.DataLayer.csproj", "{AA0D8E5A-AB25-45B9-9707-89720870A3FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceOrder.LoadTest", "ServiceOrder.LoadTest\ServiceOrder.LoadTest.csproj", "{71202F5D-7C8C-4239-A4A2-1894A2416B98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceOrder.Model", "ServiceOrder.Model\ServiceOrder.Model.csproj", "{CF45F2D1-03BC-4688-A96D-7DC255F4DB7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceOrder.UnitTest", "ServiceOrder.UnitTest\ServiceOrder.UnitTest.csproj", "{EEFE88FD-DA49-4EFE-BB16-90F73F068CDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{263C79D7-4075-4D82-A267-4AB26459DA57}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{263C79D7-4075-4D82-A267-4AB26459DA57}.Debug|x64.ActiveCfg = Debug|x64
+		{263C79D7-4075-4D82-A267-4AB26459DA57}.Debug|x64.Build.0 = Debug|x64
+		{263C79D7-4075-4D82-A267-4AB26459DA57}.Debug|x64.Deploy.0 = Debug|x64
+		{263C79D7-4075-4D82-A267-4AB26459DA57}.Release|Any CPU.ActiveCfg = Release|x64
+		{263C79D7-4075-4D82-A267-4AB26459DA57}.Release|x64.ActiveCfg = Release|x64
+		{263C79D7-4075-4D82-A267-4AB26459DA57}.Release|x64.Build.0 = Release|x64
+		{263C79D7-4075-4D82-A267-4AB26459DA57}.Release|x64.Deploy.0 = Release|x64
+		{A14BB159-4310-418B-BAC3-67F04F8E4AB2}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A14BB159-4310-418B-BAC3-67F04F8E4AB2}.Debug|x64.ActiveCfg = Debug|x64
+		{A14BB159-4310-418B-BAC3-67F04F8E4AB2}.Debug|x64.Build.0 = Debug|x64
+		{A14BB159-4310-418B-BAC3-67F04F8E4AB2}.Release|Any CPU.ActiveCfg = Release|x64
+		{A14BB159-4310-418B-BAC3-67F04F8E4AB2}.Release|x64.ActiveCfg = Release|x64
+		{A14BB159-4310-418B-BAC3-67F04F8E4AB2}.Release|x64.Build.0 = Release|x64
+		{C5EC5FFF-ACFD-49C9-950D-35BA13CB1E92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5EC5FFF-ACFD-49C9-950D-35BA13CB1E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5EC5FFF-ACFD-49C9-950D-35BA13CB1E92}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C5EC5FFF-ACFD-49C9-950D-35BA13CB1E92}.Debug|x64.Build.0 = Debug|Any CPU
+		{C5EC5FFF-ACFD-49C9-950D-35BA13CB1E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5EC5FFF-ACFD-49C9-950D-35BA13CB1E92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5EC5FFF-ACFD-49C9-950D-35BA13CB1E92}.Release|x64.ActiveCfg = Release|Any CPU
+		{C5EC5FFF-ACFD-49C9-950D-35BA13CB1E92}.Release|x64.Build.0 = Release|Any CPU
+		{4CAD1E9C-1EA5-4ED5-B992-FC472D43355F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CAD1E9C-1EA5-4ED5-B992-FC472D43355F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CAD1E9C-1EA5-4ED5-B992-FC472D43355F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4CAD1E9C-1EA5-4ED5-B992-FC472D43355F}.Debug|x64.Build.0 = Debug|Any CPU
+		{4CAD1E9C-1EA5-4ED5-B992-FC472D43355F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CAD1E9C-1EA5-4ED5-B992-FC472D43355F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CAD1E9C-1EA5-4ED5-B992-FC472D43355F}.Release|x64.ActiveCfg = Release|Any CPU
+		{4CAD1E9C-1EA5-4ED5-B992-FC472D43355F}.Release|x64.Build.0 = Release|Any CPU
+		{AA0D8E5A-AB25-45B9-9707-89720870A3FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA0D8E5A-AB25-45B9-9707-89720870A3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA0D8E5A-AB25-45B9-9707-89720870A3FC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AA0D8E5A-AB25-45B9-9707-89720870A3FC}.Debug|x64.Build.0 = Debug|Any CPU
+		{AA0D8E5A-AB25-45B9-9707-89720870A3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA0D8E5A-AB25-45B9-9707-89720870A3FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA0D8E5A-AB25-45B9-9707-89720870A3FC}.Release|x64.ActiveCfg = Release|Any CPU
+		{AA0D8E5A-AB25-45B9-9707-89720870A3FC}.Release|x64.Build.0 = Release|Any CPU
+		{71202F5D-7C8C-4239-A4A2-1894A2416B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71202F5D-7C8C-4239-A4A2-1894A2416B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71202F5D-7C8C-4239-A4A2-1894A2416B98}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{71202F5D-7C8C-4239-A4A2-1894A2416B98}.Debug|x64.Build.0 = Debug|Any CPU
+		{71202F5D-7C8C-4239-A4A2-1894A2416B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71202F5D-7C8C-4239-A4A2-1894A2416B98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71202F5D-7C8C-4239-A4A2-1894A2416B98}.Release|x64.ActiveCfg = Release|Any CPU
+		{71202F5D-7C8C-4239-A4A2-1894A2416B98}.Release|x64.Build.0 = Release|Any CPU
+		{CF45F2D1-03BC-4688-A96D-7DC255F4DB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF45F2D1-03BC-4688-A96D-7DC255F4DB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF45F2D1-03BC-4688-A96D-7DC255F4DB7D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CF45F2D1-03BC-4688-A96D-7DC255F4DB7D}.Debug|x64.Build.0 = Debug|Any CPU
+		{CF45F2D1-03BC-4688-A96D-7DC255F4DB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF45F2D1-03BC-4688-A96D-7DC255F4DB7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF45F2D1-03BC-4688-A96D-7DC255F4DB7D}.Release|x64.ActiveCfg = Release|Any CPU
+		{CF45F2D1-03BC-4688-A96D-7DC255F4DB7D}.Release|x64.Build.0 = Release|Any CPU
+		{EEFE88FD-DA49-4EFE-BB16-90F73F068CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEFE88FD-DA49-4EFE-BB16-90F73F068CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEFE88FD-DA49-4EFE-BB16-90F73F068CDE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EEFE88FD-DA49-4EFE-BB16-90F73F068CDE}.Debug|x64.Build.0 = Debug|Any CPU
+		{EEFE88FD-DA49-4EFE-BB16-90F73F068CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEFE88FD-DA49-4EFE-BB16-90F73F068CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEFE88FD-DA49-4EFE-BB16-90F73F068CDE}.Release|x64.ActiveCfg = Release|Any CPU
+		{EEFE88FD-DA49-4EFE-BB16-90F73F068CDE}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://c-mumsm12.asia.jci.com:8080/tfs/businesssolutions
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ServiceOrder.API\\ServiceOrder.API.csproj
+		SccProjectName1 = ServiceOrder.API
+		SccLocalPath1 = ServiceOrder.API
+		SccProjectUniqueName2 = ServiceOrder.BusinessLayer\\ServiceOrder.BusinessLayer.csproj
+		SccProjectName2 = ServiceOrder.BusinessLayer
+		SccLocalPath2 = ServiceOrder.BusinessLayer
+		SccProjectUniqueName3 = ServiceOrder.Common\\ServiceOrder.Common.csproj
+		SccProjectName3 = ServiceOrder.Common
+		SccLocalPath3 = ServiceOrder.Common
+		SccProjectUniqueName4 = ServiceOrder.DataLayer\\ServiceOrder.DataLayer.csproj
+		SccProjectName4 = ServiceOrder.DataLayer
+		SccLocalPath4 = ServiceOrder.DataLayer
+		SccProjectUniqueName5 = ServiceOrder.LoadTest\\ServiceOrder.LoadTest.csproj
+		SccProjectName5 = ServiceOrder.LoadTest
+		SccLocalPath5 = ServiceOrder.LoadTest
+		SccProjectUniqueName6 = ServiceOrder.Model\\ServiceOrder.Model.csproj
+		SccProjectName6 = ServiceOrder.Model
+		SccLocalPath6 = ServiceOrder.Model
+		SccProjectUniqueName7 = ServiceOrder.UnitTest\\ServiceOrder.UnitTest.csproj
+		SccProjectName7 = ServiceOrder.UnitTest
+		SccLocalPath7 = ServiceOrder.UnitTest
+		SccProjectUniqueName8 = ServiceOrder\\ServiceOrder.sfproj
+		SccProjectName8 = ServiceOrder
+		SccLocalPath8 = ServiceOrder
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,5 @@
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.LoadTest\bin\Debug\ServiceOrder.LoadTest.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.LoadTest\bin\Debug\ServiceOrder.LoadTest.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.LoadTest\obj\Debug\ServiceOrder.LoadTest.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.LoadTest\obj\Debug\ServiceOrder.LoadTest.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.LoadTest\obj\Debug\ServiceOrder.LoadTest.csprojResolveAssemblyReference.cache

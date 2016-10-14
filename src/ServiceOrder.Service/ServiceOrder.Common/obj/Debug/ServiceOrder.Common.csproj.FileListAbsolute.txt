@@ -1,0 +1,8 @@
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.Common\bin\Debug\ServiceOrder.Common.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.Common\bin\Debug\ServiceOrder.Common.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.Common\obj\Debug\ServiceOrder.Common.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.Common\obj\Debug\ServiceOrder.Common.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.Common\bin\Debug\NLog.config
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.Common\bin\Debug\NLog.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.Common\bin\Debug\NLog.xml
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder.Common\obj\Debug\ServiceOrder.Common.csprojResolveAssemblyReference.cache
