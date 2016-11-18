@@ -31,8 +31,7 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode Status: Success");
 
                 // Get Item from Master
-                try
-                {
+               
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByNumber(companyCode, projectNumber);
                     if (customerProjectOrderHeader != null)
                     {
@@ -46,20 +45,10 @@ namespace CustomerProjectOrder.BusinessLayer
                     }
 
                     return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
-                return response;
             }
 
             ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode and ProductCode Status: Failed");
             return response;
-
         }
 
         public CustomerProjectOrdersResponse GetProjectByName(string companyCode, string projectName)
@@ -74,8 +63,6 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProjectName Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByName(companyCode, projectName);
                     if (customerProjectOrderHeader.Any())
                     {
@@ -86,16 +73,6 @@ namespace CustomerProjectOrder.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No item warehouse data found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
                 return response;
             }
 
@@ -116,8 +93,6 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and StartDate and EndDate Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByDuration(companyCode, startDate, endDate);
                     if (customerProjectOrderHeader.Any())
                     {
@@ -128,16 +103,6 @@ namespace CustomerProjectOrder.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No item warehouse data found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
                 return response;
             }
 
@@ -156,8 +121,6 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and CustomerPoNo Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByCustomerPONo(companyCode, customerPONo);
                     if (customerProjectOrderHeader != null)
                     {
@@ -169,16 +132,6 @@ namespace CustomerProjectOrder.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No item warehouse data found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
                 return response;
             }
 
@@ -198,8 +151,6 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and Account Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByAccount(companyCode, account);
                     if (customerProjectOrderHeader != null)
                     {
@@ -213,15 +164,6 @@ namespace CustomerProjectOrder.BusinessLayer
                     }
 
                     return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
-                return response;
             }
 
             ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode and Account Status: Failed");
@@ -240,8 +182,6 @@ namespace CustomerProjectOrder.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and StartDate and EndDate Status: Success");
 
                 // Get Item from Master
-                try
-                {
                     var customerProjectOrderHeader = _dataLayerContext.GetProjectByCompanyCode(companyCode);
                     if (customerProjectOrderHeader.Any())
                     {
@@ -252,16 +192,6 @@ namespace CustomerProjectOrder.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No item warehouse data found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-
-                    return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
                 return response;
             }
 

@@ -36,8 +36,8 @@ namespace CustomerProjectOrder.Common
         public const string InContollerText = "In Controller";
         public const string InfoLoggerFileName = "InfoLog_";
         public const string TraceLoggerFileName = "Trace_";
-        public const string InfoLoggerPath = "D:/Logs/InfoLog/";
-        public const string TraceLoggerPath = "D:/Logs/Trace/";
+        public const string InfoLoggerPath = "C:/Logs/InfoLog/";
+        public const string TraceLoggerPath = "C:/Logs/Trace/";
 
 
         public const string SvmxcStatus = "Available";
@@ -58,5 +58,18 @@ namespace CustomerProjectOrder.Common
         public const string VersionParamName = "version";
 
         #endregion
+
+        #region  Database
+
+        public const string DATABASE_CONNECTIONSTRING_KEY = "DatabaseConnectionString";
+        public const string DATABASE_TABLE_NAME_KEY = "DatabaseTableName";
+        public const string DATABASE_COLUMN_NAME_KEY = "DatabaseColumnName";
+        public const string DATASOURCE_LIBRARY_PATH_KEY = "DatasourceLibraryPath";
+        public const string ServiceNameKey = "ServiceName";
+        public const string EnvironmentKey = "Environment";
+        public const string CONFIGURATION_DB_CONNECTIONSTRING_KEY = "ConfigurationDbConnectionString";
+        public const string READ_CONFIG_FROM_DATABASE = "ReadConfigFromDatabase";
+
+        #endregion................
     }
 }

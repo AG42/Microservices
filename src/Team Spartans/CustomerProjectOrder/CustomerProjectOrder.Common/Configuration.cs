@@ -17,8 +17,7 @@ namespace CustomerProjectOrder.Common
         public Dictionary<string, string> GetConfiguration(string serviceName, string environment)
         {
             var configDictionary = new Dictionary<string, string>();
-            try
-            {
+            
                 var parameterCollection = new List<SqlParameter>
                {
                    new SqlParameter("@ServiceName", serviceName),
@@ -34,42 +33,10 @@ namespace CustomerProjectOrder.Common
                     return configDictionary;
                 }
                 throw new Exception($"Record not found for Service:[{serviceName}] Environment:[{environment}]");
-            }
-            catch (Exception ex)
-            {
-                Exception innerException = ex;
-                while (innerException != null && innerException.InnerException != null)
-                    innerException = innerException.InnerException;
-
-                ApplicationLogger.Errorlog(innerException.Message, Category.Database, innerException.StackTrace, innerException);
-                throw;
-            }
+           
         }
 
-        public string GetDenodoViewUri(string serviceName, string environment, string companyCode, string denodoViewName)
-        {
-            try
-            {
-                var parameterCollection = new List<SqlParameter>
-               {
-                   new SqlParameter("@ServiceName", serviceName),
-                   new SqlParameter("@Environment", environment),
-                   new SqlParameter("@CompanyCode", companyCode),
-                   new SqlParameter("@DenodoViewName", denodoViewName)
-               };
-                var dataSet = GetDataFromStoredProcedure("GetCompanyCodeDenodoViewMapping", parameterCollection);
-                if (dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
-                    return dataSet.Tables[0].Rows[0]["DenodoViewUri"].ToString();
-                throw new Exception(
-                    $"Record not found for Service:[{serviceName}] Environment:[{environment}] CompanyCode:[{companyCode}] DenodoViewName:[{denodoViewName}]");
-            }
-            catch (Exception exception)
-            {
-                ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace, exception.InnerException);
-                throw;
-            }
-        }
-
+       
         private DataSet GetDataFromStoredProcedure(string storedProcedureName, List<SqlParameter> parameterCollection)
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -86,27 +53,29 @@ namespace CustomerProjectOrder.Common
             }
         }
 
-        public string GetDatalakeTableName(string serviceName, string environment, string companyCode)
+        public Dictionary<string, string> GetDatabaseTableName(string serviceName, string environment, string companyCode, string parentCompanyCode)
         {
-            try
-            {
+           
+                var returnCollection = new Dictionary<string, string>();
                 var parameterCollection = new List<SqlParameter>
-               {
-                   new SqlParameter("@ServiceName", serviceName),
-                   new SqlParameter("@Environment", environment),
-                   new SqlParameter("@CompanyCode", companyCode)
-               };
+                {
+                    new SqlParameter("@ServiceName", serviceName),
+                    new SqlParameter("@Environment", environment),
+                    new SqlParameter("@CompanyCode", companyCode),
+                    new SqlParameter("@TableNameKey", ""),
+                   new SqlParameter("@ParentCompanyCode", parentCompanyCode)
+                };
                 var dataSet = GetDataFromStoredProcedure("GetDatalakeTableMapping", parameterCollection);
                 if (dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
-                    return $"{dataSet.Tables[0].Rows[0]["DatabaseName"]}.{dataSet.Tables[0].Rows[0]["TableName"]}";
+                {
+                    returnCollection.Add(Constants.DATABASE_TABLE_NAME_KEY, $"{dataSet.Tables[0].Rows[0]["DatabaseName"]}.{dataSet.Tables[0].Rows[0]["TableName"]}");
+                    returnCollection.Add(Constants.DATABASE_COLUMN_NAME_KEY, $"{dataSet.Tables[0].Rows[0]["ColumnName"]}");
+                    return returnCollection;
+                }
                 throw new Exception(
                     $"Record not found for Service:[{serviceName}] Environment:[{environment}] CompanyCode:[{companyCode}]");
-            }
-            catch (Exception exception)
-            {
-                ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace, exception.InnerException);
-                throw;
-            }
+           
         }
-     }
+
+    }
 }

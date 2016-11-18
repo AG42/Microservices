@@ -7,6 +7,8 @@ using Rhino.Mocks;
 using System.Web.Http;
 using CustomerProjectOrder.DataLayer.Entities.Datalake;
 using CustomerProjectOrder.DataLayer.Interfaces;
+using Microservices.Common.Interface;
+using CustomerProjectOrder.Common;
 
 namespace CustomerProjectOrder.UnitTest
 {
@@ -25,10 +27,12 @@ namespace CustomerProjectOrder.UnitTest
         private const string ProjectendField = "pr01069";
         private const string CustomerPONumber = "pr01106";
         private const string CustomerAccountNumber = "pr01003";
-        private readonly string _companyCode = "j4";
+        private readonly string _companyCode = "j1";
+        private readonly string parentCompanyCode = "";
         private readonly List<Pr01> _pr01EntitiesList = new List<Pr01>();
         private ConfigReader _configReader;
-        private IDatalakeEntities _mocksDatalakeEntities;
+        private IDatabase _mocksDatabaseEntities;
+        private DataLayerContext _dataLayerContext;
         #endregion
 
         #region "Initialization"
@@ -38,8 +42,9 @@ namespace CustomerProjectOrder.UnitTest
         [TestInitialize]
         public void Initialize()
         {
-            _mocksDatalakeEntities = MockRepository.GenerateMock<IDatalakeEntities>();
+            _mocksDatabaseEntities = MockRepository.GenerateMock<IDatabase>();
             _configReader = new ConfigReader();
+            _dataLayerContext = new DataLayerContext() { Database = _mocksDatabaseEntities };
         }
         #endregion
 
@@ -51,14 +56,15 @@ namespace CustomerProjectOrder.UnitTest
         public void GetProjectOrdersByCompanyCodeTest()
         {
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
 
-            _mocksDatalakeEntities.Stub(x => x.Get<Pr01>(_configReader.GetDatalakeTableName(tableName)))
+            _mocksDatabaseEntities.Stub(x => x.Get<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY]))
                 .IgnoreArguments()
                 .Return(_pr01EntitiesList);
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByCompanyCode(_companyCode);
+            
+            var result = _dataLayerContext.GetProjectByCompanyCode(_companyCode);
             Assert.IsNotNull(result);
         }
 
@@ -70,14 +76,15 @@ namespace CustomerProjectOrder.UnitTest
         public void GetProjectOrdersByCompanyCodeTestException()
         {
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
 
-            _mocksDatalakeEntities.Stub(x => x.Get<Pr01>(_configReader.GetDatalakeTableName(tableName)))
+            _mocksDatabaseEntities.Stub(x => x.Get<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY]))
                 .IgnoreArguments()
                 .Throw(new NullReferenceException());
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByCompanyCode(_companyCode);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByCompanyCode(_companyCode);
         }
 
         /// <summary>
@@ -88,13 +95,15 @@ namespace CustomerProjectOrder.UnitTest
         {
             string projectNumber = "M100030010";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({ProjectnumberField})){EqualOperator}'{projectNumber.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName,filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Return(_pr01EntitiesList);
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
+            var datalayer = new DataLayerContext();
             var result = datalayer.GetProjectByNumber(_companyCode, projectNumber);
             Assert.IsNotNull(result);
         }
@@ -108,14 +117,16 @@ namespace CustomerProjectOrder.UnitTest
         {
             string projectNumber = "M100030010";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({ProjectnumberField})){EqualOperator}'{projectNumber.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Throw(new NullReferenceException());
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByNumber(_companyCode, projectNumber);
+           // var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByNumber(_companyCode, projectNumber);
         }
 
         /// <summary>
@@ -126,14 +137,16 @@ namespace CustomerProjectOrder.UnitTest
         {
             string projectName = "INTE";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({ProjectnameField})){LikeOperator}'{projectName.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Return(_pr01EntitiesList);
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByName(_companyCode, projectName);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByName(_companyCode, projectName);
             Assert.IsNotNull(result);
         }
 
@@ -146,14 +159,16 @@ namespace CustomerProjectOrder.UnitTest
         {
             string projectName = "INTE";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({ProjectnameField})){LikeOperator}'{projectName.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Throw(new NullReferenceException());
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByName(_companyCode, projectName);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByName(_companyCode, projectName);
         }
 
         /// <summary>
@@ -164,14 +179,16 @@ namespace CustomerProjectOrder.UnitTest
         {
             string account = "PL001";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({CustomerAccountNumber})){EqualOperator}'{account.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Return(_pr01EntitiesList);
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByAccount(_companyCode, account);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByAccount(_companyCode, account);
             Assert.IsNotNull(result);
         }
 
@@ -184,14 +201,16 @@ namespace CustomerProjectOrder.UnitTest
         {
             string account = "PL001";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({CustomerAccountNumber})){EqualOperator}'{account.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Throw(new NullReferenceException());
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByAccount(_companyCode, account);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByAccount(_companyCode, account);
         }
 
         /// <summary>
@@ -202,14 +221,16 @@ namespace CustomerProjectOrder.UnitTest
         {
             string customerPONo = "TH618000199004";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({CustomerPONumber})){EqualOperator}'{customerPONo.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Return(_pr01EntitiesList);
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByCustomerPONo(_companyCode, customerPONo);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByCustomerPONo(_companyCode, customerPONo);
             Assert.IsNotNull(result);
         }
 
@@ -222,14 +243,16 @@ namespace CustomerProjectOrder.UnitTest
         {
             string customerPONo = "TH618000199004";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({CustomerPONumber})){EqualOperator}'{customerPONo.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Throw(new NullReferenceException());
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByCustomerPONo(_companyCode, customerPONo);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByCustomerPONo(_companyCode, customerPONo);
         }
 
         /// <summary>
@@ -241,14 +264,16 @@ namespace CustomerProjectOrder.UnitTest
             string startDate = "2010-12-14";
             string endDate = "2011-02-28";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({ProjectstartField})){GreaterThanEqualOperator}'{startDate.ToLower().Trim()}' {AndOperator} trim(lower({ProjectendField})){LessThanEqualOperator}'{endDate.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Return(_pr01EntitiesList);
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByDuration(_companyCode, startDate,endDate);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByDuration(_companyCode, startDate,endDate);
             Assert.IsNotNull(result);
         }
 
@@ -262,21 +287,23 @@ namespace CustomerProjectOrder.UnitTest
             string startDate = "2010-12-14";
             string endDate = "2011-02-28";
             SetMockDataForCustomerProjectOrderHeaders();
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({ProjectstartField})){GreaterThanEqualOperator}'{startDate.ToLower().Trim()}' {AndOperator} trim(lower({ProjectendField})){LessThanEqualOperator}'{endDate.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Throw(new NullReferenceException());
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByDuration(_companyCode, startDate, endDate);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByDuration(_companyCode, startDate, endDate);
         }
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
         public void DataLayerConstrutorTestException()
         {
-            var datalayer = new DataLayerContext(null);
+            var datalayer = new DataLayerContext();
         }
 
         /// <summary>
@@ -291,14 +318,16 @@ namespace CustomerProjectOrder.UnitTest
             SetMockDataForCustomerProjectOrderHeaders();
             HttpResponseMessage response = new HttpResponseMessage();
             response.Content = new ByteArrayContent(new byte[0]);
-            string tableName = _configReader.GetDatalakeTableName(_companyCode);
+            var tableName = new Dictionary<string, string>();
+            tableName = _configReader.GetDatabaseDetails(_companyCode, parentCompanyCode);
+
             string filter = $"trim(lower({ProjectstartField})){GreaterThanEqualOperator}'{startDate.ToLower().Trim()}' {AndOperator} trim(lower({ProjectendField})){LessThanEqualOperator}'{endDate.ToLower().Trim()}'";
-            _mocksDatalakeEntities.Stub(x => x.Where<Pr01>(tableName, filter))
+            _mocksDatabaseEntities.Stub(x => x.Where<Pr01>(tableName[Constants.DATABASE_TABLE_NAME_KEY], tableName[Constants.DATABASE_COLUMN_NAME_KEY], filter))
                 .IgnoreArguments()
                 .Throw(new HttpResponseException(response));
 
-            var datalayer = new DataLayerContext(_mocksDatalakeEntities);
-            var result = datalayer.GetProjectByDuration(_companyCode, startDate, endDate);
+            //var datalayer = new DataLayerContext();
+            var result = _dataLayerContext.GetProjectByDuration(_companyCode, startDate, endDate);
         }
 
         #endregion

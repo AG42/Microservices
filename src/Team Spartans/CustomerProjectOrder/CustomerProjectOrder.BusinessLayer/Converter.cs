@@ -56,7 +56,7 @@ namespace CustomerProjectOrder.BusinessLayer
                 Status = DefaultStatus,
                 Origin = DefaultOrigin,
                 RecordType = DefaultRecordType,
-                ERP_Project_Key__c = erpProjectKey
+                ERP_Project_Key__c = erpProjectKey?.ToUpper()
             };
         }
 

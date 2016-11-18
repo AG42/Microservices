@@ -3,7 +3,6 @@ using CustomerProjectOrder.BusinessLayer;
 using CustomerProjectOrder.BusinessLayer.Interface;
 using CustomerProjectOrder.DataLayer;
 using CustomerProjectOrder.DataLayer.Interfaces;
-using CustomerProjectOrder.DataLayer.Adapters;
 using CustomerProjectOrder.DataLayer.Entities.Datalake;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
@@ -22,16 +21,7 @@ namespace CustomerProjectOrder.API
 
             container.RegisterType<ICustomerProjectOrderManager, CustomerProjectOrderManager>();
             container.RegisterType<IDataLayerContext, DataLayerContext>();
-
-            container.RegisterType<IDatalakeAdapter, DatalakeAdapter>();
-
-            container.RegisterType<IDatalakeEntities, DatalakeEntities>();
-
-            /* config.DependencyResolver = new UnityDependencyResolver(container); */
-
             config.DependencyResolver = new UnityResolver(container);
-
-
         }
     }
 }
