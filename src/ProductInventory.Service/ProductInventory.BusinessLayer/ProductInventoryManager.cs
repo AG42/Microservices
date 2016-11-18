@@ -35,8 +35,7 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and productCode Status: Success");
 
                 // Get Item from Master
-                try
-                {
+
                     var stockItem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
                     if (stockItem != null)
                     {
@@ -60,15 +59,7 @@ namespace ProductInventory.BusinessLayer
                     }
 
                     return response;
-                }
-                catch (Exception ex)
-                {                    
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-                    
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
-
-                return response;
+               
             }
 
             ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode and ValidateProductCode Status: Failed");
@@ -83,8 +74,7 @@ namespace ProductInventory.BusinessLayer
                 !InputValidation.ValidateDescription(description, response))
             {
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and Description Status: Success");
-                try
-                {
+               
                     var products = _databaseContext.GetProductInvetoryByProductName(companyCode, description);
 
                     if (products.Any())
@@ -99,12 +89,7 @@ namespace ProductInventory.BusinessLayer
                     }
 
                     return response;
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
+               
             }
             else
             {
@@ -122,8 +107,7 @@ namespace ProductInventory.BusinessLayer
                 !InputValidation.ValidateLocationId(locationId, response))
             {
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and LocationId Status: Success");
-                try
-                {
+               
                     var products = _databaseContext.GetProductInvetoryByLocationId(companyCode, locationId);
 
                     if (products.Any())
@@ -136,12 +120,7 @@ namespace ProductInventory.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No product found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
+
             }
             else
             {
@@ -161,8 +140,7 @@ namespace ProductInventory.BusinessLayer
                 !InputValidation.ValidateLocationId(locationId, response))
             {
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode, productCode and LocationId Status: Success");
-                try
-                {
+
                     var stockItem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
                     if (stockItem != null)
                     {
@@ -183,12 +161,7 @@ namespace ProductInventory.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No product found in stock master");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                }
+               
             }
             else
             {
@@ -208,8 +181,7 @@ namespace ProductInventory.BusinessLayer
                 !InputValidation.ValidateLocationId(locationId, response))
             {
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode and locationId Status: Success");
-                try
-                {
+
                     var wareHouseList = _databaseContext.GetItemWareHouse(companyCode, productCode, locationId);
                     if (wareHouseList.Any())
                     {
@@ -230,15 +202,8 @@ namespace ProductInventory.BusinessLayer
                         ApplicationLogger.InfoLogger("Error: No item warehouse data found");
                         response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
                     }
-                    return response;
-
-                }
-                catch (Exception ex)
-                {
-                    ApplicationLogger.InfoLogger("Error: Exception occured at conversion.");
-                    response.ErrorInfo.Add(new ErrorInfo(ex.Message));
-                    return response;
-                }
+                    return response;                
+              
 
             }
 

@@ -7,6 +7,8 @@ using ProductInventory.DataLayer.Adapters;
 using ProductInventory.DataLayer.Entities.Datalake;
 using ProductInventory.DataLayer.Interfaces;
 using Unity.WebApi;
+using System.Web.Http.ExceptionHandling;
+using ProductInventory.API.Controllers;
 
 namespace ProductInventory.API
 {
@@ -21,10 +23,8 @@ namespace ProductInventory.API
             
             container.RegisterType<IProductInventoryManager, ProductInventoryManager>(new HierarchicalLifetimeManager());
             container.RegisterType<IDatabaseContext, DatabaseContext>(new HierarchicalLifetimeManager());
-            container.RegisterType<IDatalakeEntities, DatalakeEntities>(new HierarchicalLifetimeManager());
-            container.RegisterType<IDatalakeAdapter, DatalakeAdapter>(new HierarchicalLifetimeManager());
-
             config.DependencyResolver = new UnityDependencyResolver(container);
+            config.Services.Add(typeof(IExceptionLogger), new Filters.ExceptionLogger()); config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
         }
     }
 }

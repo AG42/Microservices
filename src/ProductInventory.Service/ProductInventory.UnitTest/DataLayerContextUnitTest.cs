@@ -10,6 +10,7 @@ using ProductInventory.DataLayer;
 using ProductInventory.DataLayer.Entities.Datalake;
 using ProductInventory.DataLayer.Interfaces;
 using ProductInventory.DataLayer.Adapters;
+using Microservices.Common.Interface;
 
 namespace ProductInventory.UnitTest
 {
@@ -25,8 +26,8 @@ namespace ProductInventory.UnitTest
         readonly List<StockItemMaster> _stockItemMasterList = new List<StockItemMaster>();
         readonly List<ProductWarehouseModel> _productWarehouseModelList = new List<ProductWarehouseModel>();
         readonly List<ItemWarehouse> _stockItemsEntitiesList = new List<ItemWarehouse>();
-        IDatalakeEntities datalakeEntities;
-        IDatalakeAdapter datalakeAdapter;
+        IDatabase datalakeEntities;
+        // IDatalakeAdapter datalakeAdapter;
         #endregion
 
         #region TestMethods
@@ -35,34 +36,33 @@ namespace ProductInventory.UnitTest
         {
             // Arrange
             var client = MockRepository.GenerateMock<HttpClient>();
-            datalakeEntities = MockRepository.GenerateMock<IDatalakeEntities>();
-            datalakeAdapter = MockRepository.GenerateMock<IDatalakeAdapter>();
+            datalakeEntities = MockRepository.GenerateMock<IDatabase>();
         }
 
         [TestMethod]
         public void GetItemWareHouseTest()
         {
-            SetMockDataForProductModels();           
+            SetMockDataForProductModels();
 
-            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "condition"))
+            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "columnName", "condition"))
                  .IgnoreArguments()
                  .Return(_stockItemsEntitiesList);
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
-            var result = dataLayer.GetItemWareHouse("bh","007","70");
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
+            var result = dataLayer.GetItemWareHouse("bh", "007", "70");
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
         public void GetStockItemByProductCodeTest()
         {
-            SetMockDataForProductModels();           
+            SetMockDataForProductModels();
 
-            datalakeEntities.Stub(x => x.Where<StockItemMaster>("tableName", "condition"))
+            datalakeEntities.Stub(x => x.Where<StockItemMaster>("tableName", "columnName", "condition"))
                  .IgnoreArguments()
                  .Return(_stockItemMasterList);
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetStockItemByProductCode("bh", "007");
             Assert.IsNotNull(result);
         }
@@ -72,11 +72,11 @@ namespace ProductInventory.UnitTest
         {
             SetMockDataForProductModels();
 
-            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "condition"))
+            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "columnName", "condition"))
                   .IgnoreArguments()
                 .Return(_stockItemsEntitiesList);
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetItemWareHouseByProductCode("bh", "007");
             Assert.IsNotNull(result);
         }
@@ -86,11 +86,11 @@ namespace ProductInventory.UnitTest
         {
             SetMockDataForProductModels();
 
-            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "condition"))
+            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "columnName", "condition"))
                   .IgnoreArguments()
                 .Return(_stockItemsEntitiesList);
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetItemWareHouseByLocationId("bh", "01");
             Assert.IsNotNull(result);
         }
@@ -98,13 +98,13 @@ namespace ProductInventory.UnitTest
         [TestMethod]
         public void GetProductInvetoryByLocationIdTest()
         {
-            SetMockDataForProductModels();           
+            SetMockDataForProductModels();
 
-           datalakeEntities.Stub(x => x.WhereJoin<ProductInventoryEntity>("tableName", "joinCondition", "whereCondition"))
-                 .IgnoreArguments()
-                .Return(_productInventoryEntityList);
+            datalakeEntities.Stub(x => x.WhereJoin<ProductInventoryEntity>("tableName", "columnName", "joinCondition", "whereCondition"))
+                  .IgnoreArguments()
+                 .Return(_productInventoryEntityList);
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetProductInvetoryByLocationId("bh", "01");
             Assert.IsNotNull(result);
         }
@@ -118,7 +118,7 @@ namespace ProductInventory.UnitTest
         //    string filter = "lower(SC01001) LiKE \'%tube%\'";
         //    string companyViewUri = viewUri.Replace(companycodePlaceholder, _companyCode);
         //    SetMockDataForProductModels();
-            
+
 
         //   datalakeEntities.Stub(x => x.SearchData<ProductInventoryEntity>(companyViewUri,filter))
         //         .IgnoreArguments()
@@ -133,12 +133,12 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(Exception))]
         public void GetItemWareHouseExceptionTest()
         {
-            SetMockDataForProductModels();            
+            SetMockDataForProductModels();
 
-           datalakeEntities.Stub(x => x.Where<ItemWarehouse>("", ""))
-                 .IgnoreArguments().Throw(new Exception());
+            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "columnName", "condition"))
+                  .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetItemWareHouse(string.Empty, string.Empty, string.Empty);
             Assert.IsNotNull(result);
 
@@ -148,12 +148,12 @@ namespace ProductInventory.UnitTest
         [ExpectedException(typeof(Exception))]
         public void GetStockItemByProductCodeExceptionTest()
         {
-            SetMockDataForProductModels();            
+            SetMockDataForProductModels();
 
-           datalakeEntities.Stub(x => x.Where<StockItemMaster>("", ""))
-                .IgnoreArguments().Throw(new Exception());
+            datalakeEntities.Stub(x => x.Where<StockItemMaster>("tableName", "columnName", "condition"))
+                 .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetStockItemByProductCode(string.Empty, string.Empty);
             Assert.IsNotNull(result);
         }
@@ -163,12 +163,12 @@ namespace ProductInventory.UnitTest
         public void GetItemWareHouseByProductCodeExceptionTest()
         {
             SetMockDataForProductModels();
-            
 
-           datalakeEntities.Stub(x => x.Where<ItemWarehouse>("",""))
-                .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "columnName", "condition"))
+                 .IgnoreArguments().Throw(new Exception());
+
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetItemWareHouseByProductCode(string.Empty, string.Empty);
             Assert.IsNotNull(result);
 
@@ -179,12 +179,12 @@ namespace ProductInventory.UnitTest
         public void GetItemWareHouseByLocationIdExceptionTest()
         {
             SetMockDataForProductModels();
-            
 
-           datalakeEntities.Stub(x => x.Where<ItemWarehouse>("",""))
-                .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            datalakeEntities.Stub(x => x.Where<ItemWarehouse>("tableName", "columnName", "condition"))
+                 .IgnoreArguments().Throw(new Exception());
+
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetItemWareHouseByLocationId(string.Empty, string.Empty);
             Assert.IsNotNull(result);
 
@@ -195,12 +195,12 @@ namespace ProductInventory.UnitTest
         public void GetProductInvetoryByLocationIdExceptionTest()
         {
             SetMockDataForProductModels();
-            
 
-           datalakeEntities.Stub(x => x.Get<ItemWarehouse>(""))
-                .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            datalakeEntities.Stub(x => x.Get<ItemWarehouse>("tableName", "columnName"))
+                 .IgnoreArguments().Throw(new Exception());
+
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetProductInvetoryByLocationId(string.Empty, string.Empty);
             Assert.IsNotNull(result);
 
@@ -211,11 +211,11 @@ namespace ProductInventory.UnitTest
         public void GetProductInvetoryByProductNameExceptionTest()
         {
             SetMockDataForProductModels();
-            
-           datalakeEntities.Stub(x => x.Get<ItemWarehouse>(""))
-                .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DatabaseContext(datalakeEntities);
+            datalakeEntities.Stub(x => x.Get<ItemWarehouse>("tableName", "columnName"))
+                 .IgnoreArguments().Throw(new Exception());
+
+            var dataLayer = new DatabaseContext() { objDb = datalakeEntities };
             var result = dataLayer.GetProductInvetoryByProductName(string.Empty, string.Empty);
             Assert.IsNotNull(result);
         }

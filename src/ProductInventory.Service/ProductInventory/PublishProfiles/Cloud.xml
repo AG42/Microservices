@@ -20,6 +20,12 @@
                                     AzureActiveDirectory="true"
                                     ServerCertThumbprint="0123456789012345678901234567890123456789" />
   -->
-  <ClusterConnectionParameters ConnectionEndpoint="msqa.southeastasia.cloudapp.azure.com:19000" />
+  <ClusterConnectionParameters ConnectionEndpoint="msqas.southeastasia.cloudapp.azure.com:19000" 
+                                X509Credential="true" 
+                                ServerCertThumbprint="6DC3F6FD248250CBCC6A8850F16AF5A1AF6423DD" 
+                                FindType="FindByThumbprint" 
+                                FindValue="6DC3F6FD248250CBCC6A8850F16AF5A1AF6423DD" 
+                                StoreLocation="CurrentUser" 
+                                StoreName="My" />
   <ApplicationParameterFile Path="..\ApplicationParameters\Cloud.xml" />
 </PublishProfile>

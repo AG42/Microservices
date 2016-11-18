@@ -56,6 +56,66 @@ namespace ProductInventory.UnitTest
 
             _inventoryManager = new ProductInventoryManager(mockRepository);
 
+            // "DEV" family
+            _stockItemMasterEntity.sc01037 = "DEV";
+            mockRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+                            .IgnoreArguments()
+                            .Return(_stockItemMasterEntity);
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+            var dev = _inventoryManager.GetProductById("K1", "001");
+            Assert.IsNotNull(dev);
+            // "SYS"
+            _stockItemMasterEntity.sc01037 = "SYS";
+            mockRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+                            .IgnoreArguments()
+                            .Return(_stockItemMasterEntity);
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+            var sys = _inventoryManager.GetProductById("K1", "001");
+            Assert.IsNotNull(sys);
+            // "AREF"
+            _stockItemMasterEntity.sc01037 = "AREF";
+            mockRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+                            .IgnoreArguments()
+                            .Return(_stockItemMasterEntity);
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+            var aref = _inventoryManager.GetProductById("K1", "001");
+            Assert.IsNotNull(aref);
+
+            // "ESUR"
+            _stockItemMasterEntity.sc01037 = "ESUR";
+            mockRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+                            .IgnoreArguments()
+                            .Return(_stockItemMasterEntity);
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+            var esur = _inventoryManager.GetProductById("K1", "001");
+            Assert.IsNotNull(esur);
+
+            // "SEC"
+            _stockItemMasterEntity.sc01037 = "SEC";
+            mockRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+                            .IgnoreArguments()
+                            .Return(_stockItemMasterEntity);
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+            var sec = _inventoryManager.GetProductById("K1", "001");
+            Assert.IsNotNull(sec);
+
+            // "CNTL"
+            _stockItemMasterEntity.sc01037 = "CNTL";
+            mockRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+                            .IgnoreArguments()
+                            .Return(_stockItemMasterEntity);
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+            var cntl = _inventoryManager.GetProductById("K1", "001");
+            Assert.IsNotNull(cntl);
+
+            // ""
+            _stockItemMasterEntity.sc01037 = "";
+            mockRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+                            .IgnoreArguments()
+                            .Return(_stockItemMasterEntity);
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+
+            
             var result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
             Assert.IsNotNull(result);
 
@@ -85,85 +145,86 @@ namespace ProductInventory.UnitTest
             ////Assert to check the Payment_Terms_Code__c Validation Rule
             //Assert.AreEqual(result.Customers[0].Payment_Terms_Code__c, customerList[0].sl01024.Substring(0, 2));
         }
-        [TestMethod]
-        public void GetProductByIdNegTest()
-        {
-            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
-            SetMockDataForProductModels();
+        //[TestMethod]
+        //public void GetProductByIdNegTest()
+        //{
+        //    var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+        //    SetMockDataForProductModels();
 
-            var data = new Model.Response.ProductSearchByIdResponse { ProductInventory = _inventoryModel };
+        //    var data = new Model.Response.ProductSearchByIdResponse { ProductInventory = _inventoryModel };
 
-            StockItemMaster productMasterModelTest = new StockItemMaster
-            {
-                sc01001 = ""
-            };
+        //    StockItemMaster productMasterModelTest = new StockItemMaster
+        //    {
+        //        sc01001 = ""
+        //    };
 
-            mockRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
-                            .IgnoreArguments()
-                            .Return(new StockItemMaster());
+        //    mockRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+        //                    .IgnoreArguments()
+        //                    .Return(new StockItemMaster());
 
-            mockRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", ""))
-                .IgnoreArguments()
-                .Return(new List<ItemWarehouse>());
+        //    mockRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", ""))
+        //        .IgnoreArguments()
+        //        .Return(new List<ItemWarehouse>());
 
 
-            _inventoryManager = new ProductInventoryManager(mockRepository);
+        //    _inventoryManager = new ProductInventoryManager(mockRepository);
 
-            var result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
-            Assert.IsNotNull(result);
+        //    var result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
+        //    Assert.IsNotNull(result);
 
-            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
+        //    var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
-            mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
-                            .IgnoreArguments()
-                            .Return(productMasterModelTest);
+        //    mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+        //                    .IgnoreArguments()
+        //                    .Return(productMasterModelTest);
 
-            mockExceptionRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", ""))
-               .IgnoreArguments()
-               .Return(_stockItemsEnttiesList);
+        //    mockExceptionRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", ""))
+        //       .IgnoreArguments()
+        //       .Return(_stockItemsEnttiesList);
 
-            _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
+        //    _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
 
-            result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
-            Assert.IsNotNull(result);
+        //    result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
+        //    Assert.IsNotNull(result);
 
-            var mockExcepRepository = MockRepository.GenerateMock<IDatabaseContext>();
+        //    var mockExcepRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
-            mockExcepRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
-                            .IgnoreArguments()
-                            .Return(null);
+        //    mockExcepRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+        //                    .IgnoreArguments()
+        //                    .Return(null);
 
-            mockExcepRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", ""))
-               .IgnoreArguments()
-               .Return(null);
+        //    mockExcepRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", ""))
+        //       .IgnoreArguments()
+        //       .Return(null);
 
-            _inventoryManager = new ProductInventoryManager(mockExcepRepository);
+        //    _inventoryManager = new ProductInventoryManager(mockExcepRepository);
 
-            result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
-            Assert.AreEqual(result.ErrorInfo.Count, 1);
+        //    result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
+        //    Assert.AreEqual(result.ErrorInfo.Count, 1);
 
-        }
-        [TestMethod]
-        public void GetProductByIdExceptionTest()
-        {
-            var data = new Model.Response.ProductSearchByIdResponse { ProductInventory = _inventoryModel };
+        //}
+        //[TestMethod]
+        //public void GetProductByIdExceptionTest()
+        //{
+        //    var data = new Model.Response.ProductSearchByIdResponse { ProductInventory = _inventoryModel };
 
-            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
+        //    var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
-            mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
-                            .IgnoreArguments()
-                            .Return(new StockItemMaster());
+        //    mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", ""))
+        //                    .IgnoreArguments()
+        //                    .Return(new StockItemMaster());
 
-            mockExceptionRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", ""))
-               .IgnoreArguments()
-               .Return(new List<ItemWarehouse>());
+        //    mockExceptionRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", ""))
+        //       .IgnoreArguments()
+        //       .Return(new List<ItemWarehouse>());
 
-            _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
+        //    _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
 
-            var result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
-            Assert.IsNotNull(result);
+        //    var result = _inventoryManager.GetProductById(COMPANY_CODE, "001");
+        //    Assert.IsNotNull(result);
 
-        }
+        //}
+
         [TestMethod]
         public void GetProductByIdInputValidationTest()
         {
@@ -265,30 +326,30 @@ namespace ProductInventory.UnitTest
             Assert.IsNotNull(result);
             Assert.IsTrue(result.ErrorInfo.Any());
         }
-        [TestMethod]
-        public void GetProductByDescriptionExceptionTest()
-        {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
+        //[TestMethod]
+        //public void GetProductByDescriptionExceptionTest()
+        //{
+        //    var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
-            _productInventoryEntityList = new List<ProductInventoryEntity>
-            {
-                new ProductInventoryEntity
-                {
-                    sc01001 = "",
-                    sc01002 = "COOLER TUBES-",
-                    sc01003 = "",
-                    sc01037 = "GAS"
-                }
-            };
-            mockExceptionRepository.Stub(x => x.GetProductInvetoryByProductName("bh", "007"))
-              .IgnoreArguments()
-              .Return(_productInventoryEntityList);
+        //    _productInventoryEntityList = new List<ProductInventoryEntity>
+        //    {
+        //        new ProductInventoryEntity
+        //        {
+        //            sc01001 = "",
+        //            sc01002 = "COOLER TUBES-",
+        //            sc01003 = "",
+        //            sc01037 = "GAS"
+        //        }
+        //    };
+        //    mockExceptionRepository.Stub(x => x.GetProductInvetoryByProductName("bh", "007"))
+        //      .IgnoreArguments()
+        //      .Return(_productInventoryEntityList);
 
-            _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
+        //    _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
 
-            var result = _inventoryManager.GetProductByDescription(COMPANY_CODE, "001");
-            Assert.IsNotNull(result);
-        }
+        //    var result = _inventoryManager.GetProductByDescription(COMPANY_CODE, "001");
+        //    Assert.IsNotNull(result);
+        //}
         [TestMethod]
         public void GetProductByDescriptionInputValidationTest()
         {
@@ -344,30 +405,30 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetProductByLocationId(COMPANY_CODE, "70");
             Assert.IsNotNull(result);
         }
-        [TestMethod]
-        public void GetProductByLocationIdExceptionTest()
-        {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
+        //[TestMethod]
+        //public void GetProductByLocationIdExceptionTest()
+        //{
+        //    var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
-            _productInventoryEntityList = new List<ProductInventoryEntity>
-            {
-                new ProductInventoryEntity
-                {
-                    sc01001 = "",
-                    sc01002 = "COOLER TUBES-",
-                    sc01003 = "",
-                    sc01037 = "GAS"
-                }
-            };
-            mockExceptionRepository.Stub(x => x.GetProductInvetoryByLocationId("bh", "007"))
-              .IgnoreArguments()
-              .Return(_productInventoryEntityList);
+        //    _productInventoryEntityList = new List<ProductInventoryEntity>
+        //    {
+        //        new ProductInventoryEntity
+        //        {
+        //            sc01001 = "",
+        //            sc01002 = "COOLER TUBES-",
+        //            sc01003 = "",
+        //            sc01037 = "GAS"
+        //        }
+        //    };
+        //    mockExceptionRepository.Stub(x => x.GetProductInvetoryByLocationId("bh", "007"))
+        //      .IgnoreArguments()
+        //      .Return(_productInventoryEntityList);
 
-            _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
+        //    _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
 
-            var result = _inventoryManager.GetProductByLocationId(COMPANY_CODE, "70");
-            Assert.IsNotNull(result);
-        }
+        //    var result = _inventoryManager.GetProductByLocationId(COMPANY_CODE, "70");
+        //    Assert.IsNotNull(result);
+        //}
         [TestMethod]
         public void GetProductByLocationIdInputValidationTest()
         {
@@ -408,21 +469,38 @@ namespace ProductInventory.UnitTest
             ////Assert to check the Payment_Terms_Code__c Validation Rule
             //Assert.AreEqual(result.Customers[0].Payment_Terms_Code__c, customerList[0].sl01024.Substring(0, 2));
         }
+        //[TestMethod]
+        //public void GetProductStockBalanceQuantitywithEmptyListTest()
+        //{
+        //    var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+        //    SetMockDataForProductModels();
+
+        //    mockRepository.Stub(x => x.GetItemWareHouse("bh", "007", "70"))
+        //      .IgnoreArguments()
+        //      .Return(null);
+
+        //    _inventoryManager = new ProductInventoryManager(mockRepository);
+
+        //    var result = _inventoryManager.GetProductStockBalanceQuantity(COMPANY_CODE, "001", "70");
+        //    Assert.IsNotNull(result);
+        //}
+
         [TestMethod]
-        public void GetProductStockBalanceQuantitywithEmptyListTest()
+        public void GetProductStockBalanceQuantitywithListTest()
         {
             var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
             SetMockDataForProductModels();
 
             mockRepository.Stub(x => x.GetItemWareHouse("bh", "007", "70"))
               .IgnoreArguments()
-              .Return(null);
+              .Return(new List<ItemWarehouse> { new ItemWarehouse { sc03001 = "ProductCode", sc03002 = "343" } });
 
             _inventoryManager = new ProductInventoryManager(mockRepository);
 
             var result = _inventoryManager.GetProductStockBalanceQuantity(COMPANY_CODE, "001", "70");
             Assert.IsNotNull(result);
         }
+
 
         [TestMethod]
         public void GetProductStockBalanceQuantitywithNullWarehouseListTest()
@@ -457,31 +535,31 @@ namespace ProductInventory.UnitTest
             Assert.IsNotNull(result);
             Assert.IsTrue(result.ErrorInfo.Any());
         }
-        [TestMethod]
-        public void GetProductStockBalanceQuantityExceptionTest()
-        {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
+        //[TestMethod]
+        //public void GetProductStockBalanceQuantityExceptionTest()
+        //{
+        //    var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
-            _stockItemsEnttiesList = new List<ItemWarehouse>
-            {
-                new ItemWarehouse
-                {
-                    sc03001 = "007-08831-000",
-                    sc03002 = "01",
-                    sc03003 = "0.00000",
-                    sc03004 = "0.00000",
-                    sc03005 = "0.00000"
-                }
-            };
-            mockExceptionRepository.Stub(x => x.GetItemWareHouse("bh", "007", "70"))
-              .IgnoreArguments()
-              .Return(null);
+        //    _stockItemsEnttiesList = new List<ItemWarehouse>
+        //    {
+        //        new ItemWarehouse
+        //        {
+        //            sc03001 = "007-08831-000",
+        //            sc03002 = "01",
+        //            sc03003 = "0.00000",
+        //            sc03004 = "0.00000",
+        //            sc03005 = "0.00000"
+        //        }
+        //    };
+        //    mockExceptionRepository.Stub(x => x.GetItemWareHouse("bh", "007", "70"))
+        //      .IgnoreArguments()
+        //      .Return(null);
 
-            _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
+        //    _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
 
-            var result = _inventoryManager.GetProductStockBalanceQuantity(COMPANY_CODE, "001", "70");
-            Assert.IsNotNull(result);
-        }
+        //    var result = _inventoryManager.GetProductStockBalanceQuantity(COMPANY_CODE, "001", "70");
+        //    Assert.IsNotNull(result);
+        //}
         [TestMethod]
         public void GetProductStockBalanceQuantityInputValidationTest()
         {
@@ -537,6 +615,23 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetProductStockBalanceQuantityForAllLocation(COMPANY_CODE, "001");
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void GetProductStockBalanceQuantityForAllLocationwithListTest()
+        {
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+            SetMockDataForProductModels();
+
+            mockRepository.Stub(x => x.GetItemWareHouseByProductCode("bh", "007"))
+              .IgnoreArguments()
+              .Return(new List<ItemWarehouse>() { new ItemWarehouse {  sc03001 = "productCode", sc03002 = "324"} });
+
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+
+            var result = _inventoryManager.GetProductStockBalanceQuantityForAllLocation(COMPANY_CODE, "001");
+            Assert.IsNotNull(result);
+        }
+
         [TestMethod]
         public void GetProductStockBalanceQuantityForAllLocationExceptionTest()
         {
@@ -870,6 +965,23 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetLocationwiseProductAvailableQuantity(COMPANY_CODE, "01");
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void GetLocationwiseProductAvailableQuantitywithyListTest()
+        {
+            var mockRepository = MockRepository.GenerateMock<IDatabaseContext>();
+            SetMockDataForProductModels();
+
+            mockRepository.Stub(x => x.GetItemWareHouseByLocationId("bh", "70"))
+              .IgnoreArguments()
+              .Return(new List<ItemWarehouse>() { new ItemWarehouse { sc03001 = "ProductCode", sc03002 = "", sc03003 = "45454", sc03004 = "", sc03005 = "" } });
+
+            _inventoryManager = new ProductInventoryManager(mockRepository);
+
+            var result = _inventoryManager.GetLocationwiseProductAvailableQuantity(COMPANY_CODE, "01");
+            Assert.IsNotNull(result);
+        }
+
         [TestMethod]
         public void GetLocationwiseProductAvailableQuantityExceptionTest()
         {
@@ -1231,30 +1343,30 @@ namespace ProductInventory.UnitTest
             var result = _inventoryManager.GetProduct(COMPANY_CODE, "01", "70");
             Assert.IsNotNull(result);
         }
-        [TestMethod]
-        public void GetProductExceptionTest()
-        {
-            var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
+        //[TestMethod]
+        //public void GetProductExceptionTest()
+        //{
+        //    var mockExceptionRepository = MockRepository.GenerateMock<IDatabaseContext>();
 
 
-            StockItemMaster stockItm = new StockItemMaster
-            {
-                sc01001 = "",
-                sc01002 = "COOLER TUBES-",
-                sc01003 = "",
-                sc01037 = "GAS"
+        //    StockItemMaster stockItm = new StockItemMaster
+        //    {
+        //        sc01001 = "",
+        //        sc01002 = "COOLER TUBES-",
+        //        sc01003 = "",
+        //        sc01037 = "GAS"
 
-            };
+        //    };
 
-            mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
-              .IgnoreArguments()
-              .Return(stockItm);
+        //    mockExceptionRepository.Stub(x => x.GetStockItemByProductCode("bh", "70"))
+        //      .IgnoreArguments()
+        //      .Return(stockItm);
 
-            _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
+        //    _inventoryManager = new ProductInventoryManager(mockExceptionRepository);
 
-            var result = _inventoryManager.GetProduct(COMPANY_CODE, "01", "70");
-            Assert.IsNotNull(result);
-        }
+        //    var result = _inventoryManager.GetProduct(COMPANY_CODE, "01", "70");
+        //    Assert.IsNotNull(result);
+        //}
         [TestMethod]
         public void GetProductInputValidationTest()
         {

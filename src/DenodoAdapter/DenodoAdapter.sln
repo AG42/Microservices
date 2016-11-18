@@ -19,4 +19,13 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://c-mumsm12.asia.jci.com:8080/tfs/businesssolutions
+		SccProjectUniqueName0 = DenodoAdapter\\DenodoAdapter.csproj
+		SccProjectName0 = DenodoAdapter
+		SccLocalPath0 = DenodoAdapter
+		SccLocalPath1 = .
+	EndGlobalSection
 EndGlobal

@@ -6,12 +6,10 @@ namespace ServiceOrder.DataLayer.Entities.IScala
 {
     public class IScalaEntities:IiScalaEntities
     {
-        private string _connectionString;
         private readonly ISqlAdapter _sqlAdapter;
         public string ConnectionString {
             set
             {
-                _connectionString = value;
                 _sqlAdapter.ConnectionString = value;
             }
         }

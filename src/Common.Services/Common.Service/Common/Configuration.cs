@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Data;
+using NLog;
+using Common.Service.Logger;
 
 namespace Common.Service
 {
@@ -20,6 +22,7 @@ namespace Common.Service
         }
         public Dictionary<string, string> GetConfiguration(string serviceName, string enviroment)
         {
+
             Dictionary<string, string> env = new Dictionary<string, string>();
             SqlDataReader rdr = null;
             try
@@ -38,15 +41,23 @@ namespace Common.Service
 
                 rdr = cmd.ExecuteReader();
 
-                
+
                 while (rdr.Read())
                 {
                     env.Add(rdr.GetString(0), rdr.GetString(1));
                 }
                 return env;
             }
-
-
+            catch (Exception ex)
+            {
+                //Exception innerException = null;
+                //while (ex.InnerException != null)
+                //{
+                //    innerException = ex.InnerException;
+                //}
+                ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace,ex.InnerException);
+                throw;
+            }
             finally
             {
                 // close the reader

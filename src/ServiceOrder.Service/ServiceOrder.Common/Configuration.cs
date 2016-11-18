@@ -71,6 +71,7 @@ namespace ServiceOrder.Common
                 throw;
             }
         }
+
         public string GetDatalakeTableName(string serviceName, string environment, string companyCode, string tableNameKey)
         {
             try
@@ -94,6 +95,7 @@ namespace ServiceOrder.Common
                 throw;
             }
         }
+
         private DataSet GetDataFromStoredProcedure(string storedProcedureName, List<SqlParameter> parameterCollection)
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -109,5 +111,35 @@ namespace ServiceOrder.Common
                 return dataSet;
             }
         }
+
+        public Dictionary<string, string> GetDatabaseTableName(string serviceName, string environment, string companyCode, string tableNameKey)
+        {
+            try
+            {
+                var returnCollection = new Dictionary<string, string>();
+                var parameterCollection = new List<SqlParameter>
+                {
+                    new SqlParameter("@ServiceName", serviceName),
+                    new SqlParameter("@Environment", environment),
+                    new SqlParameter("@CompanyCode", companyCode),
+                    new SqlParameter("@TableNameKey", tableNameKey)
+                };
+                var dataSet = GetDataFromStoredProcedure("GetDatalakeTableMapping", parameterCollection);
+                if (dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
+                {
+                    returnCollection.Add(Constants.DATABASE_TABLE_NAME_KEY, $"{dataSet.Tables[0].Rows[0]["DatabaseName"]}.{dataSet.Tables[0].Rows[0]["TableName"]}");
+                    returnCollection.Add(Constants.DATABASE_COLUMN_NAME_KEY, $"{dataSet.Tables[0].Rows[0]["ColumnName"]}");
+                    return returnCollection;
+                }
+                throw new Exception(
+                    $"Record not found for Service:{serviceName} Environment:{environment} CompanyCode:{companyCode}");
+            }
+            catch (Exception exception)
+            {
+                ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace, exception.InnerException);
+                throw;
+            }
+        }
+
     }
 }

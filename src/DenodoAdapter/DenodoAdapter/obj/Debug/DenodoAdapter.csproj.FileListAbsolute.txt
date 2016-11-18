@@ -1,0 +1,15 @@
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\obj\Debug\DenodoAdapter.csprojResolveAssemblyReference.cache
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\DenodoAdapter.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\DenodoAdapter.pdb
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\System.Net.Http.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\System.Net.Http.Extensions.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\System.Net.Http.Formatting.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\System.Net.Http.Primitives.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\System.Net.Http.WebRequest.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\System.Web.Http.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\Newtonsoft.Json.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\System.Net.Http.xml
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\System.Net.Http.WebRequest.xml
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\bin\Debug\System.Web.Http.xml
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\obj\Debug\DenodoAdapter.dll
+C:\Vinod\Project\Git_Enterprise\MICROSERVICES\src\DenodoAdapter\DenodoAdapter\obj\Debug\DenodoAdapter.pdb

@@ -2,6 +2,6 @@
 {
     public class ServiceOrderStatusByServiceOrderNoResponse : BaseResponse
     {
-        public string OrderStatus { get; set; }
+        public string ERP_WO_Status__c { get; set; }
     }
 }

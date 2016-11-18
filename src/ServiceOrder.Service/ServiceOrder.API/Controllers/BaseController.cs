@@ -3,12 +3,9 @@ using ServiceOrder.Common.Enum;
 using ServiceOrder.Common.Logger;
 using ServiceOrder.Model.Responses;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace ServiceOrder.API.Controllers
@@ -18,7 +15,9 @@ namespace ServiceOrder.API.Controllers
         [NonAction]
         protected HttpResponseMessage GetErrorJsonResponse(BaseResponse response, Category category)
         {
-            ApplicationLogger.Errorlog(response.ErrorInfo.FirstOrDefault().ErrorMessage, category, null);
+            var firstOrDefault = response.ErrorInfo.FirstOrDefault();
+            if (firstOrDefault != null)
+                ApplicationLogger.Errorlog(firstOrDefault.ErrorMessage, category, null);
 
             return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, Constants.NoDataFoundMessage);
         }

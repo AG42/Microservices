@@ -149,6 +149,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\ProductInventoryV1Controller.cs" />
+    <Compile Include="Controllers\VersionControllerSelector.cs" />
+    <Compile Include="Filters\ExceptionLogger.cs" />
+    <Compile Include="Filters\GlobalExceptionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ProductInventoryController.cs" />
     <Compile Include="OwinCommunicationListener.cs" />

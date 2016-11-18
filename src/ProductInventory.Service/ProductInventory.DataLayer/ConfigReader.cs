@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using ProductInventory.Common;
+using System.Collections.Generic;
+using System.Configuration;
 using Configuration = ProductInventory.Common.Configuration;
 
 namespace ProductInventory.DataLayer
@@ -22,7 +24,7 @@ namespace ProductInventory.DataLayer
             else
                 InitializeFromConfig();
         }
-        private string ReadConfig(string key)
+        public string ReadConfig(string key)
         {
             return ConfigurationManager.AppSettings[key];
         }
@@ -38,14 +40,18 @@ namespace ProductInventory.DataLayer
             DatalakeConnectionString = configurationDictionary[DATALAKE_CONNECTIONSTRING_KEY];
         }
         
-        public string GetDatalakeTableName(string companyCode, string datalakeTableNameKey)
+        public Dictionary<string,string> GetDatabaseTableName(string companyCode, string databaseTableNameKey,string columnNameKey)
         {
             if (!_readFromDatabase)
-                return ReadConfig($"{datalakeTableNameKey}_{companyCode.ToLower()}");
-
+            {
+                var dicTableName = new Dictionary<string, string>();
+                dicTableName.Add(Constants.TableNameKey, ReadConfig($"{databaseTableNameKey}_{companyCode.ToLower()}"));
+                dicTableName.Add(Constants.ColumnNameKey, ReadConfig($"{columnNameKey}_{companyCode.ToLower()}"));
+                return dicTableName;
+            }
             string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
             var configuration = new Configuration(configurationDbConnectionString);
-            return configuration.GetDatalakeTableName(ServiceName, Environment, companyCode);
+            return configuration.GetDatabaseTableName(ServiceName, Environment, companyCode, databaseTableNameKey);
         }
     }
 }

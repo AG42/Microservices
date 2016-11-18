@@ -57,11 +57,15 @@
       <HintPath>..\packages\DenodoAdapter.1.0.4.1\lib\net452\DenodoAdapter.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microservices.Common">
+      <HintPath>..\..\Binref\Microservices.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -96,17 +100,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\DatalakeAdapter.cs" />
     <Compile Include="Adapters\Helper.cs" />
     <Compile Include="ConfigReader.cs" />
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Entities\Datalake\DatalakeEntities.cs" />
     <Compile Include="Entities\Datalake\ItemWarehouse.cs" />
     <Compile Include="Entities\Datalake\ProductInventoryEntity.cs" />
     <Compile Include="Entities\Datalake\StockItemMaster.cs" />
     <Compile Include="Interfaces\IDatabaseContext.cs" />
-    <Compile Include="Interfaces\IDatalakeAdapter.cs" />
-    <Compile Include="Interfaces\IDatalakeEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

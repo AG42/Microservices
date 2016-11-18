@@ -1,24 +1,30 @@
-﻿using System.Configuration;
+﻿using ServiceOrder.Common;
+using System.Collections.Generic;
+using System.Configuration;
 using Configuration = ServiceOrder.Common.Configuration;
 
 namespace ServiceOrder.DataLayer
 {
     class ConfigReader
     {
+        #region Variables/Constants
+
         private readonly bool _readFromDatabase;
-        private const string DATALAKE_CONNECTIONSTRING_KEY = "DatalakeConnectionString";
-        private const string ISCALA_CONNECTIONSTRING_KEY = "iScalaConnectionString";
+       
+        #endregion
+
         private string ServiceName { get; }
         private string Environment { get; }
         public string ConfigurationDbConnectionString { get; set; }
-        public string DatalakeConnectionString { get; private set; }
-        public string IScalaConnectionString { get; private set; }
+        public string DatabaseConnectionString { get; private set; }
+        public string DatasourceLibraryPath { get; private set; }
+
         public ConfigReader()
         {
-            _readFromDatabase = bool.Parse(ReadConfig("ReadConfigFromDatabase"));
-            ServiceName = ReadConfig("ServiceName");
-            Environment = ReadConfig("Environment");
-
+            _readFromDatabase = bool.Parse(ReadConfig(Constants.READ_CONFIG_FROM_DATABASE_KEY));
+            ServiceName = ReadConfig(Constants.SERVICE_NAME_KEY);
+            Environment = ReadConfig(Constants.ENVIRONMENT_KEY);
+            DatasourceLibraryPath = ReadConfig(Constants.DATASOURCE_LIBRARYPATH_KEY);
             if (_readFromDatabase)
                 InitializeFromDatabase();
             else
@@ -28,28 +34,35 @@ namespace ServiceOrder.DataLayer
         {
             return ConfigurationManager.AppSettings[key];
         }
+
         private void InitializeFromConfig()
         {
-            DatalakeConnectionString = ReadConfig(DATALAKE_CONNECTIONSTRING_KEY);
-            IScalaConnectionString = ReadConfig(ISCALA_CONNECTIONSTRING_KEY);
+            DatabaseConnectionString = ReadConfig(Constants.DATABASE_CONNECTIONSTRING_KEY);
         }
+
         private void InitializeFromDatabase()
         {
             string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
             var configuration = new Configuration(configurationDbConnectionString);
             var configurationDictionary = configuration.GetConfiguration(ServiceName, Environment);
-            DatalakeConnectionString = configurationDictionary[DATALAKE_CONNECTIONSTRING_KEY];
-            IScalaConnectionString = configurationDictionary[ISCALA_CONNECTIONSTRING_KEY];
+            DatabaseConnectionString = configurationDictionary[Constants.DATABASE_CONNECTIONSTRING_KEY];
         }
-        
-        public string GetDatalakeTableName(string companyCode, string datalakeTableNameKey)
+
+        public Dictionary<string, string> GetDatabaseDetails(string companyCode, string databaseTableNameKey, string databaseColumnNameKey)
         {
             if (!_readFromDatabase)
-                return ReadConfig($"{datalakeTableNameKey}_{companyCode.ToLower()}");
+            {
+                var dicTableName = new Dictionary<string, string>
+                {
+                    {databaseTableNameKey, ReadConfig($"{databaseTableNameKey}_{companyCode.ToLower()}")},
+                    {databaseColumnNameKey, ReadConfig($"{databaseColumnNameKey}_{companyCode.ToLower()}")}
+                };
 
-            string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
+                return dicTableName;
+            }
+            string configurationDbConnectionString = ReadConfig(Constants.CONFIGURATION_DB_CONNECTIONSTRING_KEY);
             var configuration = new Configuration(configurationDbConnectionString);
-            return configuration.GetDatalakeTableName(ServiceName, Environment, companyCode,datalakeTableNameKey);
+            return configuration.GetDatabaseTableName(ServiceName, Environment, companyCode, databaseTableNameKey);
         }
     }
 }

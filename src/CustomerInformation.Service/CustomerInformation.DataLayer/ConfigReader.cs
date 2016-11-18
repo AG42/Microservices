@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
+using CustomerInformation.Common;
 using Configuration = CustomerInformation.Common.Configuration;
 
 namespace CustomerInformation.DataLayer
@@ -6,19 +8,17 @@ namespace CustomerInformation.DataLayer
     class ConfigReader
     {
         private readonly bool _readFromDatabase;
-        private const string CUSTOMERINFORMATION_VIEWURI_KEY = "CustomerInformationViewUri";
-        private const string DATALAKE_CONNECTIONSTRING_KEY = "DatalakeConnectionString";
-        private const string DATALAKE_TABLE_NAME_KEY = "DatalakeTableName";
         private string ServiceName { get; }
         private string Environment { get; }
         public string ConfigurationDbConnectionString { get; set; }
-        public string DatalakeConnectionString { get; private set; }
+        public string DatabaseConnectionString { get; private set; }
+        public string DatasourceLibraryPath { get; private set; }
         public ConfigReader()
         {
-            _readFromDatabase = bool.Parse(ReadConfig("ReadConfigFromDatabase"));
-            ServiceName = ReadConfig("ServiceName");
-            Environment = ReadConfig("Environment");
-
+            _readFromDatabase = bool.Parse(ReadConfig(Constants.READ_CONFIG_FROM_DATABASE));
+            ServiceName = ReadConfig(Constants.ServiceNameKey);
+            Environment = ReadConfig(Constants.EnvironmentKey);
+            DatasourceLibraryPath = ReadConfig(Constants.DATASOURCE_LIBRARY_PATH_KEY);
             if (_readFromDatabase)
                 InitializeFromDatabase();
             else
@@ -30,23 +30,31 @@ namespace CustomerInformation.DataLayer
         }
         private void InitializeFromConfig()
         {
-            DatalakeConnectionString = ReadConfig(DATALAKE_CONNECTIONSTRING_KEY);
+            DatabaseConnectionString = ReadConfig(Constants.DATABASE_CONNECTIONSTRING_KEY);
         }
         private void InitializeFromDatabase()
         {
-            string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
+            string configurationDbConnectionString = ReadConfig(Constants.CONFIGURATION_DB_CONNECTIONSTRING_KEY);
             var configuration = new Configuration(configurationDbConnectionString);
             var configurationDictionary = configuration.GetConfiguration(ServiceName, Environment);
-            DatalakeConnectionString = configurationDictionary[DATALAKE_CONNECTIONSTRING_KEY];
+            DatabaseConnectionString = configurationDictionary[Constants.DATABASE_CONNECTIONSTRING_KEY];
         }
-        public string GetDatalakeTableName(string companyCode)
+
+        public Dictionary<string, string> GetDatabaseDetails(string companyCode, string databaseTableNameKey, string databaseColumnNameKey)
         {
             if (!_readFromDatabase)
-                return ReadConfig($"{DATALAKE_TABLE_NAME_KEY}_{companyCode.ToLower()}");
-
-            string configurationDbConnectionString = ReadConfig("ConfigurationDbConnectionString");
+            {
+                var dicTableName = new Dictionary<string, string>
+                {
+                    {databaseTableNameKey, ReadConfig($"{databaseTableNameKey}_{companyCode.ToLower()}")},
+                    {databaseColumnNameKey, ReadConfig($"{databaseColumnNameKey}_{companyCode.ToLower()}")}
+                };
+                return dicTableName;
+            }
+            string configurationDbConnectionString = ReadConfig(Constants.CONFIGURATION_DB_CONNECTIONSTRING_KEY);
             var configuration = new Configuration(configurationDbConnectionString);
-            return configuration.GetDatalakeTableName(ServiceName, Environment, companyCode);
+            return configuration.GetDatabaseTableName(ServiceName, Environment, companyCode);
         }
+
     }
 }

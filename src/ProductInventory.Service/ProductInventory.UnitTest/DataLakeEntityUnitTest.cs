@@ -12,6 +12,7 @@ namespace ProductInventory.UnitTest
     [TestClass]
     public class DataLakeEntityUnitTest
     {
+        /*
         #region Declaration
         IDatalakeAdapter _datalakeAdapter;
         readonly List<ProductInventoryEntity> _productInventoryEntityList = new List<ProductInventoryEntity>();
@@ -257,5 +258,6 @@ namespace ProductInventory.UnitTest
 
         }
         #endregion
+        */
     }
 }

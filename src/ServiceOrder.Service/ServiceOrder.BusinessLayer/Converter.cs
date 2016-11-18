@@ -8,6 +8,7 @@ namespace ServiceOrder.BusinessLayer
 {
     class Converter
     {
+        private const string DEFAULT_DATE = "1900-01-01 00:00:00.0";
         // List<SM03> _sm03, List<SM05> _sm05, List<SM07> _sm07, 
         public static ServiceOrderModel Convert(SM01 sm01, string companyCode)
         {
@@ -37,10 +38,10 @@ namespace ServiceOrder.BusinessLayer
                 ERP_Customer_PO_Number__c = sm01.SM01005,
                 ERP_Invoice_date__c = GetInvoiceDate(sm01.SM01037),
                 ERP_Payment_Terms_Code__c = sm01.SM01036,
-                ERP_Delivery_Blocked__c = System.Convert.ToBoolean(System.Convert.ToInt16(string.IsNullOrEmpty(sm01.SM01205)?"0":sm01.SM01205)),
-                ERP_Credit_Check_Passed__c = System.Convert.ToBoolean(System.Convert.ToInt16(string.IsNullOrEmpty(sm01.SM01209)?"0": sm01.SM01209)),
+                ERP_Delivery_Blocked__c = System.Convert.ToBoolean(string.IsNullOrWhiteSpace(sm01.SM01205) ? 0 : System.Convert.ToInt16(sm01.SM01205)),
+                ERP_Credit_Check_Passed__c = System.Convert.ToBoolean(string.IsNullOrWhiteSpace(sm01.SM01209) ? 0 : System.Convert.ToInt16(sm01.SM01209)),
                 //Clarification required on logic for exchange rate from iscala
-                ERP_CRM_Exchange_Rate___c = System.Convert.ToDouble(string.IsNullOrEmpty(sm01.SM01146)?"0":sm01.SM01146),
+                ERP_CRM_Exchange_Rate___c = string.IsNullOrWhiteSpace(sm01.SM01146) ? 0.0 : System.Convert.ToDouble(sm01.SM01146),
                 ERP_Allocated_Team_code__c = sm01.SM01110,
                 Job_Type__c = GetJobType(sm01.SM01006),
                 ERP_Company_Code__c = companyCode
@@ -142,7 +143,7 @@ namespace ServiceOrder.BusinessLayer
                 ERP_Tax_code__c = _sm05.SM05012,
                 ERP_Resource_Code__c = _sm05.SM05028,
                 SVMXC__Actual_Price2__c = System.Convert.ToDouble(_sm05.SM05040),
-                Line_Cost_per_unit__c = System.Convert.ToDouble(_sm05.SM05009),
+                Line_Cost_per_unit__c = Math.Round(System.Convert.ToDouble(_sm05.SM05009),4),
                 SVMXC__Actual_Quantity2__c = System.Convert.ToDouble(_sm05.SM05024),
                 ERP_Actual_Expense_Date__c = DateTimeOffset.Parse(_sm05.SM05053).UtcDateTime,
                 Invoice_Number__c = _sm05.SM05020,
@@ -150,13 +151,16 @@ namespace ServiceOrder.BusinessLayer
                 SVMXC__Line_Status__c = Constants.Confirmed
             };
         }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="companyCode"></param>
+        /// <param name="externalId"></param>
+        /// <param name="serviceOrderNo"></param>
         /// <returns></returns>
-        #region ServiceOrder Conversions
 
+        #region ServiceOrder Conversions
         public static string GetId(string companyCode, string externalId, string serviceOrderNo)
         {
             if (string.IsNullOrWhiteSpace(externalId))
@@ -170,8 +174,8 @@ namespace ServiceOrder.BusinessLayer
 
         public static DateTimeOffset? GetInvoiceDate(string invoiceDate)
         {
-            DateTime defaultDate = System.Convert.ToDateTime("1900-01-01 00:00:00.0");
-            if (System.Convert.ToDateTime(invoiceDate).Date == defaultDate.Date || string.IsNullOrEmpty(invoiceDate))
+            DateTime defaultDate = System.Convert.ToDateTime(DEFAULT_DATE);
+            if (System.Convert.ToDateTime(invoiceDate).Date == defaultDate.Date || string.IsNullOrWhiteSpace(invoiceDate))
                 return null;
             return DateTimeOffset.Parse(invoiceDate).UtcDateTime;
         }
@@ -204,14 +208,14 @@ namespace ServiceOrder.BusinessLayer
 
         public static double? GetActualPrice(string MOType, string unitPriceOCU)
         {
-            if (MOType.ToLower() == "system warranty" || MOType.ToLower() == "system commissioning" || MOType.ToLower() == "retrofit")
-                return System.Convert.ToDouble(string.IsNullOrEmpty(unitPriceOCU)?"0":unitPriceOCU);
+            if (MOType.ToLower() == "system warranty" || MOType.ToLower() == "system commissioning" || MOType.ToLower() == "Retrofit")
+                return string.IsNullOrWhiteSpace(unitPriceOCU) ? 0.0 : System.Convert.ToDouble(unitPriceOCU);
             return null;
         }
 
         public static double CalculateCost(string qty, string price)
         {
-            double cost = System.Convert.ToDouble(string.IsNullOrEmpty(qty)?"0":qty) * System.Convert.ToDouble(string.IsNullOrEmpty(price)?"0":price);
+            double cost = System.Convert.ToDouble(string.IsNullOrWhiteSpace(qty)?"0":qty) * System.Convert.ToDouble(string.IsNullOrWhiteSpace(price)?"0":price);
             return cost;
         }
 

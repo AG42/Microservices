@@ -13,11 +13,16 @@ namespace DenodoAdapter
         readonly string _denodoBaseUri;
         readonly string _username;
         readonly string _password;
+        public int HttpClientTimeoutSeconds { get; set; }
+        public int HttpClientTimeoutMinutes { get; set; }
+
         public DenodoContext(string denodoBaseUri, string username = null, string password = null)
         {
             _denodoBaseUri = denodoBaseUri;
             _username = username;
             _password = password;
+            HttpClientTimeoutSeconds = 0;
+            HttpClientTimeoutMinutes = 5;
         }
 
         private HttpClient CreateClient()
@@ -33,6 +38,7 @@ namespace DenodoAdapter
             }
             httpClient.BaseAddress = new Uri(_denodoBaseUri);
             httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(MEDIA_TYPE));
+            httpClient.Timeout = new TimeSpan(0,HttpClientTimeoutMinutes,HttpClientTimeoutSeconds);
             return httpClient;
         }
 
@@ -40,7 +46,7 @@ namespace DenodoAdapter
         {
             using (HttpClient httClient = CreateClient())
             {
-                string uri = viewUri + "?$filter=" + filter;
+                string uri = viewUri + "?$filter=" + Uri.EscapeUriString(filter);
                 HttpResponseMessage responseMessage = httClient.GetAsync(uri).Result;
                 if (!responseMessage.IsSuccessStatusCode)
                     throw new HttpResponseException(responseMessage); 
