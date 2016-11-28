@@ -9,7 +9,6 @@ using CustomerInformation.DataLayer.Entities.Datalake;
 using DenodoAdapter;
 using CustomerInformation.DataLayer.Interfaces;
 using Microservices.Common.Interface;
-using System.Diagnostics;
 
 namespace CustomerInformation.DataLayer
 {
@@ -57,24 +56,13 @@ namespace CustomerInformation.DataLayer
         }
         public Sl01 GetCustomerById(string companyCode, string customerCode)
         {
-            //try
-            //{
                 ApplicationLogger.InfoLogger("DataLayer :: GetCustomerById : Reading datalake table name from config");
                 var databaseDetails = _configReader.GetDatabaseDetails(companyCode, Constants.DATABASE_TABLE_NAME_KEY, Constants.DATABASE_COLUMN_NAME_KEY); ;
                 string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
                 string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
                 ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
-                var watch = Stopwatch.StartNew();
                 var data = Database.Where<Sl01>(tableName, columns, $"trim(lower({Constants.CUSTOMERCODE_FIELD})){Constants.EQUAL_OPERATOR}'{customerCode.ToLower().Trim()}'");
-                watch.Stop();
-            ApplicationLogger.InfoLogger($"GetCustomerById Method Time::::=> ElapsedMilliseconds:: {watch.ElapsedMilliseconds}, Elapsed.Milliseconds:: {watch.Elapsed.Milliseconds}");
                 return data.FirstOrDefault();
-            //}
-            //catch (Exception ex)
-            //{
-            //    ApplicationLogger.InfoLogger($"{ex.Message} StackTrace:: {ex.StackTrace}, innerexception:: {ex.InnerException}");
-            //}
-            //return null;
         }
     }
 }
