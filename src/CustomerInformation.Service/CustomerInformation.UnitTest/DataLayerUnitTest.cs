@@ -84,47 +84,47 @@ namespace CustomerInformation.UnitTest
         }
 
         
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void DataLayerConstructorExceptionTest()
-        {
-            SetMockDataForCustomerModels();
+        //[TestMethod]
+        //[ExpectedException(typeof(NullReferenceException))]
+        //public void DataLayerConstructorExceptionTest()
+        //{
+        //    SetMockDataForCustomerModels();
 
-            mocks.Stub(x => x.Get<Sl01>("", "columns"))
-                 .IgnoreArguments().Throw(new Exception());
+        //    mocks.Stub(x => x.Get<Sl01>("", "columns"))
+        //         .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DatabaseContext() {Database = mocks};
-            var result = dataLayer.GetCustomers(null);
-            Assert.IsNotNull(result);
+        //    var dataLayer = new DatabaseContext() {Database = mocks};
+        //    var result = dataLayer.GetCustomers(null);
+        //    Assert.IsNotNull(result);
 
-        }
+        //}
 
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void GetCustomerByIdExceptionTest()
-        {
-            SetMockDataForCustomerModels();
-            var mocks = MockRepository.GenerateMock<IDatabase>();
+        //[TestMethod]
+        //[ExpectedException(typeof(NullReferenceException))]
+        //public void GetCustomerByIdExceptionTest()
+        //{
+        //    SetMockDataForCustomerModels();
+        //    var mocks = MockRepository.GenerateMock<IDatabase>();
 
-            mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "customerCode"))
-                .IgnoreArguments().Throw(new Exception());
+        //    mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "customerCode"))
+        //        .IgnoreArguments().Throw(new Exception());
 
-            var dataLayer = new DatabaseContext() {Database = mocks};
-            var custresult = dataLayer.GetCustomerById(null, "");
-            Assert.IsNotNull(custresult);
-        }
+        //    var dataLayer = new DatabaseContext() {Database = mocks};
+        //    var custresult = dataLayer.GetCustomerById(null, "");
+        //    Assert.IsNotNull(custresult);
+        //}
 
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void GetCustomerByNameExceptionTest()
-        {
-            SetMockDataForCustomerModels();
-            mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "customerCode")).Throw(new Exception());
+        //[TestMethod]
+        //[ExpectedException(typeof(NullReferenceException))]
+        //public void GetCustomerByNameExceptionTest()
+        //{
+        //    SetMockDataForCustomerModels();
+        //    mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "customerCode")).Throw(new Exception());
 
-            var dataLayer = new DatabaseContext() {Database = mocks};
-            var result = dataLayer.GetCustomerByName(null, "");
-            Assert.IsNotNull(result);
-        }
+        //    var dataLayer = new DatabaseContext() {Database = mocks};
+        //    var result = dataLayer.GetCustomerByName(null, "");
+        //    Assert.IsNotNull(result);
+        //}
 
         #endregion
 
