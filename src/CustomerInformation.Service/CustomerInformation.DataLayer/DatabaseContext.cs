@@ -1,68 +1,93 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using CustomerInformation.Common;
 using CustomerInformation.Common.Logger;
 using CustomerInformation.DataLayer.Entities.Datalake;
 using DenodoAdapter;
 using CustomerInformation.DataLayer.Interfaces;
-using Microservices.Common.Interface;
 
 namespace CustomerInformation.DataLayer
 {
     public class DatabaseContext : IDatabaseContext
     {
+        private const string LIKE_OPERATOR = "like";
+        private const string EQUAL_OPERATOR = "=";
+        private const string CUSTOMERNAME_FIELD = "sl01002";
+        private const string CUSTOMERCODE_FIELD = "sl01001";
+        public IDenodoContext DenodoContext { get; set; }
         private readonly ConfigReader _configReader;
-
-        [Import]
-        public IDatabase Database { get; set; }
-
-        public DatabaseContext()
+        private readonly IDatalakeEntities _datalakeEntities;
+        public DatabaseContext(IDatalakeEntities datalakeEntities)
         {
-            _configReader = new ConfigReader();
-            GetContainer();
-            Database.ConnectionString = _configReader.DatabaseConnectionString;
+            try
+            {
+                _configReader = new ConfigReader();
+                _datalakeEntities = datalakeEntities;
+                _datalakeEntities.ConnectionString = _configReader.DatalakeConnectionString;
+            }
+            catch (Exception exception)
+            {
+                ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace,
+                    exception.InnerException);
+                throw;
+            }
         }
 
-        private void GetContainer()
-        {
-            DirectoryCatalog catalog = new DirectoryCatalog(_configReader.DatasourceLibraryPath);
-            CompositionContainer container = new CompositionContainer(catalog);
-            container.ComposeParts(this);
-        }
         public IEnumerable<Sl01> GetCustomerByName(string companyCode, string customerName)
         {
+            try
+            {
                 ApplicationLogger.InfoLogger("DataLayer :: GetCustomerByName : Reading datalake table name from config");
-                var databaseDetails = _configReader.GetDatabaseDetails(companyCode, Constants.DATABASE_TABLE_NAME_KEY, Constants.DATABASE_COLUMN_NAME_KEY); ;
-                string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
-                string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
+                string tableName = _configReader.GetDatalakeTableName(companyCode);
                 ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
-                var customers = Database.Where<Sl01>(tableName, columns, $"lower({Constants.CUSTOMERNAME_FIELD}) {Constants.LIKE_OPERATOR} '%{customerName.ToLower()}%'");
+                var customers = _datalakeEntities.Where<Sl01>(tableName, $"lower({CUSTOMERNAME_FIELD}) {LIKE_OPERATOR} '%{customerName.ToLower()}%'");
                 ApplicationLogger.InfoLogger($"Customers count: {customers.Count()}");
                 return customers;
+            }
+            catch (Exception exception)
+            {
+                LogException(exception);
+                throw;
+            }
         }
         public IEnumerable<Sl01> GetCustomers(string companyCode)
         {
+            try
+            {
                 ApplicationLogger.InfoLogger("DataLayer :: GetCustomers : Reading datalake table name from config");
-                var databaseDetails = _configReader.GetDatabaseDetails(companyCode, Constants.DATABASE_TABLE_NAME_KEY, Constants.DATABASE_COLUMN_NAME_KEY); ;
-                string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
-                string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
+                string tableName = _configReader.GetDatalakeTableName(companyCode);
                 ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
-                var customers = Database.Get<Sl01>(tableName, columns);
+                var customers = _datalakeEntities.Get<Sl01>(tableName);
                 ApplicationLogger.InfoLogger($"Customers count: {customers.Count()}");
                 return customers;
+            }
+            catch (Exception exception)
+            {
+                LogException(exception);
+                throw;
+            }
         }
         public Sl01 GetCustomerById(string companyCode, string customerCode)
         {
+            try
+            {
                 ApplicationLogger.InfoLogger("DataLayer :: GetCustomerById : Reading datalake table name from config");
-                var databaseDetails = _configReader.GetDatabaseDetails(companyCode, Constants.DATABASE_TABLE_NAME_KEY, Constants.DATABASE_COLUMN_NAME_KEY); ;
-                string tableName = databaseDetails[Constants.DATABASE_TABLE_NAME_KEY];
-                string columns = databaseDetails[Constants.DATABASE_COLUMN_NAME_KEY];
+                string tableName = _configReader.GetDatalakeTableName(companyCode);
                 ApplicationLogger.InfoLogger($"Datalake table: [{tableName}]");
-                var data = Database.Where<Sl01>(tableName, columns, $"trim(lower({Constants.CUSTOMERCODE_FIELD})){Constants.EQUAL_OPERATOR}'{customerCode.ToLower().Trim()}'");
+                var data = _datalakeEntities.Where<Sl01>(tableName, $"trim(lower({CUSTOMERCODE_FIELD})){EQUAL_OPERATOR}'{customerCode.ToLower().Trim()}'");
                 return data.FirstOrDefault();
+            }
+            catch (Exception exception)
+            {
+                LogException(exception);
+                throw;
+            }
+        }
+
+        private static void LogException(Exception exception)
+        {
+            ApplicationLogger.Errorlog(exception.Message, Category.Database, exception.StackTrace,
+                exception.InnerException);
         }
     }
 }

@@ -8,8 +8,6 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Owin.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Owin.Host.HttpListener.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Owin.Hosting.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.ServiceLocation.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.Unity.Configuration.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.Unity.dll
@@ -27,7 +25,6 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\System.Web.Http.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\System.Web.Http.Owin.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Unity.WebApi.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microservices.Common.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\CustomerInformation.Common.pdb
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\CustomerInformation.BusinessLayer.pdb
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\CustomerInformation.DataLayer.pdb
@@ -35,8 +32,6 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Owin.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Owin.Host.HttpListener.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Owin.Hosting.xml
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.ServiceLocation.pdb
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\Microsoft.Practices.Unity.xml
@@ -54,3 +49,8 @@ C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\obj\x64\Debug\CustomerInformation.API.csprojResolveAssemblyReference.cache
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\obj\x64\Debug\CustomerInformation.API.exe
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\obj\x64\Debug\CustomerInformation.API.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\DenodoAdapter.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\NLog.config
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\NLog.xsd
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\NLog.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.API\bin\x64\Debug\NLog.xml

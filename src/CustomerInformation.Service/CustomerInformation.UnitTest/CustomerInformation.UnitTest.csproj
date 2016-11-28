@@ -44,9 +44,6 @@
       <HintPath>..\packages\DenodoAdapter.1.0.4.1\lib\net452\DenodoAdapter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microservices.Common">
-      <HintPath>..\..\Binref\Microservices.Common.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -101,6 +98,7 @@
     <Compile Include="CustomerManagerUnitTest.cs" />
     <Compile Include="DataLayerUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataLakeEntityUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomerInformation.Common\CustomerInformation.Common.csproj">

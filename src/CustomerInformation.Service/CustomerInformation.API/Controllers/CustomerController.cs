@@ -3,6 +3,7 @@ using System.Globalization;
 using CustomerInformation.BusinessLayer.Interface;
 using System.Net;
 using System.Web.Http;
+using CustomerInformation.Common;
 using System.Net.Http;
 using CustomerInformation.Common.Enum;
 using CustomerInformation.Common.Logger;
@@ -15,7 +16,7 @@ namespace CustomerInformation.API.Controllers
         readonly ICustomerManager _customerManager;
         public CustomerController(ICustomerManager customerManager)
         {
-            _customerManager = customerManager;
+            _customerManager = customerManager;            
         }
 
         [Route("")]
@@ -31,19 +32,33 @@ namespace CustomerInformation.API.Controllers
         /// <returns></returns>
         [Route("{companyCode}")]
         [Route("companyCode/{companyCode}")]
-        public HttpResponseMessage GetCustomers(string companyCode)
+        public IHttpActionResult GetCustomers(string companyCode)
         {
             ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomers :: Custome Input: [{companyCode}]");
-            var response = _customerManager.GetCustomers(companyCode);
-
-            if (response.Status == ResponseStatus.Success)
+            try
             {
-                ApplicationLogger.InfoLogger($"Response Status: Success :: ItemLegth: [{response.Customers.Count}]");
-                return Request.CreateResponse(HttpStatusCode.OK, response.Customers);
-            }
+                var response = _customerManager.GetCustomers(companyCode);
 
-            ApplicationLogger.InfoLogger("Response Status: Failure");
-            return Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo);
+                if (response.Status == ResponseStatus.Success)
+                {
+                    ApplicationLogger.InfoLogger($"Response Status: Success :: ItemLegth: [{response.Customers.Count}]");
+                    return Ok(response.Customers);
+                }
+
+                ApplicationLogger.InfoLogger("Response Status: Failure");
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, response.ErrorInfo));
+            }
+            catch (HttpResponseException exception)
+            {
+                ApplicationLogger.InfoLogger("Exception: HttpResponseException");
+                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
+            }
+            catch (Exception ex)
+            {
+                ApplicationLogger.InfoLogger("Exception: BaseException");
+                ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace, ex.InnerException);
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.NotFound, Constants.NoDataFoundMessage));
+            }
         }
 
         /// <summary>
@@ -53,19 +68,34 @@ namespace CustomerInformation.API.Controllers
         /// <param name="customerCode"></param>
         /// <returns></returns>
         [Route("companyCode/{companyCode}/customerCode/{customerCode}")]
-        public HttpResponseMessage GetCustomerById(string companyCode, string customerCode)
+        public IHttpActionResult GetCustomerById(string companyCode, string customerCode)
         {
-            ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomerById :: Custome Input: companyCode: [{companyCode}] And customerCode: [{customerCode}]");
-
-            var response = _customerManager.GetCustomerById(companyCode, customerCode);
-            if (response.Status == ResponseStatus.Success)
+            try
             {
-                ApplicationLogger.InfoLogger("Response Status: Success :: And ItemLegth: 1");
-                return Request.CreateResponse(HttpStatusCode.OK, response.CustomerInformationModel);
-            }
+                ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomerById :: Custome Input: companyCode: [{companyCode}] And customerCode: [{customerCode}]");
 
-            ApplicationLogger.InfoLogger("Response Status: Failure");
-            return Request.CreateResponse(HttpStatusCode.NotFound, response.ErrorInfo);
+                var response = _customerManager.GetCustomerById(companyCode, customerCode);
+                if (response.Status == ResponseStatus.Success)
+                {
+                    ApplicationLogger.InfoLogger("Response Status: Success :: And ItemLegth: 1");
+                    return Ok(response.CustomerInformationModel);
+                }
+
+                ApplicationLogger.InfoLogger("Response Status: Failure");
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.NotFound, response.ErrorInfo));
+            }
+            catch (HttpResponseException ex)
+            {
+                ApplicationLogger.InfoLogger("Exception: HttpResponseException");
+                ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace, ex.InnerException);
+                return ResponseMessage(Request.CreateResponse(ex.Response.StatusCode, Constants.NoDataFoundMessage));
+            }
+            catch (Exception ex)
+            {
+                ApplicationLogger.InfoLogger("Exception: BaseException");
+                ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace, ex.InnerException);
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.NotFound, Constants.NoDataFoundMessage));
+            }
         }
 
         /// <summary>
@@ -75,20 +105,34 @@ namespace CustomerInformation.API.Controllers
         /// <param name="customerName"></param>
         /// <returns></returns>
         [Route("companyCode/{companyCode}/customerName/{customerName}")]
-        public HttpResponseMessage GetCustomerByName(string companyCode, string customerName)
+        public IHttpActionResult GetCustomerByName(string companyCode, string customerName)
         {
-            ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomerByName :: Custome Input: companyCode: [{companyCode}] And customerName: [{customerName}]");
-
-            var response = _customerManager.GetCustomerByName(companyCode, customerName);
-
-            if (response.Status == ResponseStatus.Success)
+            try
             {
-                ApplicationLogger.InfoLogger($"Response Status: Success :: And ItemLegth: [{response.Customers.Count}]");
-                return Request.CreateResponse(HttpStatusCode.OK, response.Customers);
-            }
+                ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)}] :: Request Uri: [{ Request.RequestUri}] :: CustomerControllerMethodName: GetCustomerByName :: Custome Input: companyCode: [{companyCode}] And customerName: [{customerName}]");
 
-            ApplicationLogger.InfoLogger("Response Status: Failure");
-            return Request.CreateResponse(HttpStatusCode.NotFound, response.ErrorInfo);
+                var response = _customerManager.GetCustomerByName(companyCode, customerName);
+
+                if (response.Status == ResponseStatus.Success)
+                {
+                    ApplicationLogger.InfoLogger($"Response Status: Success :: And ItemLegth: [{response.Customers.Count}]");
+                    return Ok(response.Customers);
+                }
+
+                ApplicationLogger.InfoLogger("Response Status: Failure");
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.NotFound, response.ErrorInfo));
+            }
+            catch (HttpResponseException exception)
+            {
+                ApplicationLogger.InfoLogger("Exception: HttpResponseException");
+                return ResponseMessage(Request.CreateResponse(exception.Response.StatusCode, Constants.NoDataFoundMessage));
+            }
+            catch (Exception ex)
+            {
+                ApplicationLogger.InfoLogger("Exception: BaseException");
+                ApplicationLogger.Errorlog(ex.Message, Category.Database, ex.StackTrace, ex.InnerException);
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.NotFound, Constants.NoDataFoundMessage));
+            }
         }
     }
 }

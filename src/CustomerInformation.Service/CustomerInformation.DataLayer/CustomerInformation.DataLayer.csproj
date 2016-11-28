@@ -58,15 +58,11 @@
       <HintPath>..\packages\DenodoAdapter.1.0.4.1\lib\net452\DenodoAdapter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microservices.Common">
-      <HintPath>..\..\Binref\Microservices.Common.dll</HintPath>
-    </Reference>
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -101,10 +97,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\DatalakeAdapter.cs" />
+    <Compile Include="Adapters\Helper.cs" />
     <Compile Include="ConfigReader.cs" />
     <Compile Include="DatabaseContext.cs" />
+    <Compile Include="Entities\Datalake\DatalakeEntities.cs" />
     <Compile Include="Entities\Datalake\Sl01.cs" />
     <Compile Include="Interfaces\IDatabaseContext.cs" />
+    <Compile Include="Interfaces\IDatalakeAdapter.cs" />
+    <Compile Include="Interfaces\IDatalakeEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

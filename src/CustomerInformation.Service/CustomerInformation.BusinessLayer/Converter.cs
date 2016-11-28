@@ -17,6 +17,7 @@ namespace CustomerInformation.BusinessLayer
         }
         public static CustomerInformationModel Convert(Sl01 sl01, string companyCode)
         {
+
             return new CustomerInformationModel()
             {
                 Name = sl01.sl01002,
@@ -36,7 +37,7 @@ namespace CustomerInformation.BusinessLayer
                 ERP_Customer_Code_c = sl01.sl01001,
                 Active__c = sl01.sl01060 == "0" ? "Yes" : sl01.sl01060 == "1" || sl01.sl01060 == "2" ? "No" : string.Empty,
                 Credit_Limit__c = sl01.sl01037,
-                Payment_Terms_Code__c = !string.IsNullOrEmpty(sl01.sl01024) ? (sl01.sl01024.Length > 2 ? sl01.sl01024.Substring(0, 2) : sl01.sl01024) : sl01.sl01024,
+                Payment_Terms_Code__c = !string.IsNullOrEmpty(sl01.sl01024) ?(sl01.sl01024.Length > 2 ? sl01.sl01024.Substring(0, 2) : sl01.sl01024) : sl01.sl01024,
                 ERP_Technician_Code__c = sl01.sl01084,
                 Reference1__c = !string.IsNullOrEmpty(sl01.sl01006) ? sl01.sl01006 : null,
                 Reference2__c = !string.IsNullOrEmpty(sl01.sl01007) ? sl01.sl01007 : null,

@@ -1,9 +1,5 @@
-﻿using Microsoft.Practices.EnterpriseLibrary.Logging;
-using System.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
+﻿using NLog;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 
 
@@ -11,80 +7,88 @@ namespace CustomerInformation.Common.Logger
 {
     public class Logging
     {
-        //Error logging with Enterprise library
+        private static readonly NLog.Logger _logger = LogManager.GetCurrentClassLogger();
+        //public void DebugLog(string message, Category category, string stackTrace , string innerException)
+        //{
+        //    var logInfo = new LogEventInfo
+        //    {
+        //        Level = LogLevel.Debug,
+        //        Message = message,
+        //        TimeStamp = DateTime.UtcNow
+        //    };
+
+        //    logInfo.Properties.Add("TimeStamp", DateTime.UtcNow);
+        //    logInfo.Properties.Add("message", message);
+        //    logInfo.Properties.Add("Category", category);
+        //    logInfo.Properties.Add("Level", "Debug");
+        //    logInfo.Properties.Add("stackTrace", stackTrace);
+        //    logInfo.Properties.Add("innerException", innerException);
+
+        //    logger.Log(logInfo);
+        //}
+        //public void TraceLog(string message, Category category, string stackTrace, string innerException)
+        //{
+        //    var logInfo = new LogEventInfo
+        //    {
+        //        Level = LogLevel.Trace,
+        //        Message = message,
+        //        TimeStamp = DateTime.UtcNow
+        //    };
+        //    logInfo.Properties.Add("TimeStamp", DateTime.UtcNow);
+        //    logInfo.Properties.Add("message", message);
+        //    logInfo.Properties.Add("Category", category);
+        //    logInfo.Properties.Add("Level", "Trace");
+        //    logInfo.Properties.Add("stackTrace", stackTrace);
+        //    logInfo.Properties.Add("innerException", innerException);
+        //    logger.Log(logInfo);
+        //}
         public void Errorlog(string message, Category category, string stackTrace, Exception innerException)
         {
-            SetTraceLogPath();
-            Microsoft.Practices.EnterpriseLibrary.Logging.Logger.Reset();
+            var logInfo = new LogEventInfo
+            {
+                Level = LogLevel.Error,
+                Message = message,
+                TimeStamp = DateTime.UtcNow
+            };
 
-            Microsoft.Practices.EnterpriseLibrary.Logging.Logger.SetLogWriter(new LogWriterFactory().Create());
-            LogEntry logEntry = new LogEntry();
 
+            logInfo.Properties.Add("TimeStamp", DateTime.UtcNow);
+            logInfo.Properties.Add("Category", category);
+            logInfo.Properties.Add("message", message);
+            logInfo.Properties.Add("Level", "Error");
+            logInfo.Properties.Add("stackTrace", stackTrace);
+            logInfo.Properties.Add("innerException", innerException);
+            _logger.Log(logInfo);
 
-            string strMessage = string.Empty;
-            strMessage += message + "\r\n" + "StackTrace :";
-            strMessage += stackTrace + "\r\n" + "Inner Exception:";
-            strMessage += Convert.ToString(innerException) + "\r\n";
-
-            logEntry.Message = strMessage;
-            logEntry.Categories.Add(category.ToString() + Environment.NewLine);
-            // logEntry.Message=message + Environment.NewLine;
-            //  logEntry.AddErrorMessage(stackTrace + Environment.NewLine);
-            //  logEntry.Categories.Add(Convert.ToString(innerException));
-
-            Microsoft.Practices.EnterpriseLibrary.Logging.Logger.Write(logEntry);
         }
 
-        public void SetTraceLogPath()
-        {
-            // Log file path.
-            string logFilePath = Constants.TraceLoggerPath + "/" + Constants.DefaultControllerName + "/" + Constants.TraceLoggerFileName + DateTime.Now.ToString("yyyy -MM-dd") + ".log";// Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-            ConfigurationFileMap objConfigPath = new ConfigurationFileMap();
-
-            // App config file path.
-            string appPath = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile;
-            objConfigPath.MachineConfigFilename = appPath;
-
-            System.Configuration.Configuration entLibConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            LoggingSettings loggingSettings = (LoggingSettings)entLibConfig.GetSection(LoggingSettings.SectionName);
-
-            FlatFileTraceListenerData objFlatFileTraceListenerData =
-            loggingSettings.TraceListeners.Get("Flat File Trace Listener") as
-            FlatFileTraceListenerData;
-
-            objFlatFileTraceListenerData.FileName = logFilePath;
-
-            entLibConfig.Save();
-        }
-
+        //  logger.Log(LogLevel.Info, "Sample informational message, k={0}, l={1}", k, l);
         public void InfoLogger(string input)
         {
-            string path = Constants.InfoLoggerPath + "/" + Constants.DefaultControllerName;
-            //  "C://Logs/InfoLog/CustomerProjectOrder/";// AppDomain.CurrentDomain.BaseDirectory;
-            //   var datetime = $"{DateTime.Now:yyyy-MM-dd}";
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            var datetime = $"{DateTime.Now:yyyy-MM-dd}";
 
-            // path = $"{path}\\{datetime}";
+            path = $"{path}\\{datetime}";
 
             if ((!Directory.Exists(path)))
             {
                 Directory.CreateDirectory(path);
             }
 
-            if (!File.Exists($"{path}\\{Constants.InfoLoggerFileName + DateTime.Now.ToString("yyyy -MM-dd") + ".txt"}"))
+            if (!File.Exists($"{path}\\{Constants.InfoLoggerFileName}"))
             {
 
-                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName + DateTime.Now.ToString("yyyy -MM-dd") + ".txt"}", Environment.NewLine);
+                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName}", Environment.NewLine);
 
-                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName + DateTime.Now.ToString("yyyy -MM-dd") + ".txt"}", input);
+                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName}", input);
 
             }
 
             else
             {
-                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName + DateTime.Now.ToString("yyyy -MM-dd") + ".txt"}", Environment.NewLine);
+                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName}", Environment.NewLine);
 
-                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName + DateTime.Now.ToString("yyyy -MM-dd") + ".txt"}", input);
+                File.AppendAllText($"{path}\\{Constants.InfoLoggerFileName}", input);
             }
 
         }

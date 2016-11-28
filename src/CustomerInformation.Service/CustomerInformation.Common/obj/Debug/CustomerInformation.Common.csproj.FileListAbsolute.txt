@@ -1,11 +1,9 @@
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\CustomerInformation.Common.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\CustomerInformation.Common.pdb
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\Newtonsoft.Json.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\obj\Debug\CustomerInformation.Common.dll
 C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\obj\Debug\CustomerInformation.Common.pdb
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\obj\Debug\CustomerInformation.Common.csprojResolveAssemblyReference.cache
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\NLog.config
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\NLog.xsd
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\NLog.dll
+C:\Vinod\Project\TFS\Microservices\SourceControl\src\CustomerInformation.Service\CustomerInformation.Common\bin\Debug\NLog.xml
