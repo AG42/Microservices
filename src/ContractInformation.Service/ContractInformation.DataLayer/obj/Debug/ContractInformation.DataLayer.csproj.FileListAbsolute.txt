@@ -1,0 +1,13 @@
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\ContractInformation.DataLayer.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\ContractInformation.DataLayer.pdb
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\ContractInformation.Common.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\Microservices.Common.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\Newtonsoft.Json.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\ContractInformation.Common.pdb
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\obj\Debug\ContractInformation.DataLayer.csprojResolveAssemblyReference.cache
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\obj\Debug\ContractInformation.DataLayer.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.DataLayer\obj\Debug\ContractInformation.DataLayer.pdb

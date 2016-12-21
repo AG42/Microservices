@@ -1,0 +1,1 @@
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation\obj\x64\Debug\ContractInformation.sfprojResolveAssemblyReference.cache

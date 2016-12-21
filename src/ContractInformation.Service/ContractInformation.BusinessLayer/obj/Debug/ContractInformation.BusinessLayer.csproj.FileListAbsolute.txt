@@ -1,0 +1,17 @@
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\ContractInformation.BusinessLayer.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\ContractInformation.BusinessLayer.pdb
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\ContractInformation.Common.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\ContractInformation.DataLayer.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\ContractInformation.Model.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\Microservices.Common.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\ContractInformation.Common.pdb
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\ContractInformation.DataLayer.pdb
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\ContractInformation.Model.pdb
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\obj\Debug\ContractInformation.BusinessLayer.csprojResolveAssemblyReference.cache
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\obj\Debug\ContractInformation.BusinessLayer.dll
+C:\Microservices\SourceControl\src\ContractInformation.Service\ContractInformation.BusinessLayer\obj\Debug\ContractInformation.BusinessLayer.pdb
