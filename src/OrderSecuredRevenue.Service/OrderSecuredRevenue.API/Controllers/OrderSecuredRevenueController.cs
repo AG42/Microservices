@@ -42,10 +42,12 @@ namespace OrderSecuredRevenue.API.Controllers
         [Route("{companyCode}")]
         [Route("companyCode/{companyCode}/orderNumber/{orderNumber}")]
         public HttpResponseMessage GetOrderSecuredRevenueByOrderNumber(string companyCode, string orderNumber)
+
         {
             ApplicationLogger.InfoLogger($"TimeStamp: {DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)} :: Request Uri: { Request.RequestUri} :: OrderSecuredRevenueControllerMethodName: GetOrderSecuredRevenueByOrderNumber :: Custome Input: companyCode: {companyCode} And orderNumber: [{orderNumber}");
             var response = _orderSecuredRevenueManager.GetOrderSecuredRevenueByOrderNumber(companyCode, orderNumber);
-            return ValidateResponseStatusAndReturnObjectWithValidMessage(response.Status, response.OrderSecuredRevenueModels, response.ErrorInfo);
+            //return ValidateResponseStatusAndReturnObjectWithValidMessage(response.Status, response.OrderSecuredRevenueModels, response.ErrorInfo);
+            return ValidateResponseStatusAndReturnObjectWithValidMessage(response.Status, response.OrderSecuredRevenueDetails, response.ErrorInfo);
         }
 
         /// <summary>
@@ -66,15 +68,20 @@ namespace OrderSecuredRevenue.API.Controllers
 
         #region Private Method
 
-        private HttpResponseMessage ValidateResponseStatusAndReturnObjectWithValidMessage(ResponseStatus status, List<OrderSecuredRevenueModel> orderSecuredRevenueModel, List<ErrorInfo> errorInfo)
+        //private HttpResponseMessage ValidateResponseStatusAndReturnObjectWithValidMessage(ResponseStatus status, List<OrderSecuredRevenueModel> orderSecuredRevenueModel, List<ErrorInfo> errorInfo)
+        private HttpResponseMessage ValidateResponseStatusAndReturnObjectWithValidMessage(ResponseStatus status, OrderSecuredRevenueDetails orderSecuredRevenueDetails, List<ErrorInfo> errorInfo)
         {
             if (status == ResponseStatus.Success)
             {
                 ApplicationLogger.InfoLogger($"Response Status: Success");
 
-                if (orderSecuredRevenueModel.Any())
+                //if (orderSecuredRevenueModel.Any())
+                //{
+                //    return Request.CreateResponse(HttpStatusCode.OK, orderSecuredRevenueModel);
+                //}
+                if (orderSecuredRevenueDetails != null)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, orderSecuredRevenueModel);
+                    return Request.CreateResponse(HttpStatusCode.OK, orderSecuredRevenueDetails);
                 }
 
                 errorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));

@@ -50,6 +50,7 @@ namespace OrderSecuredRevenue.BusinessLayer
         /// <param name="OrderNo"></param>
         /// <returns></returns>
         public OrderSecuredRevenueByOrderNoResponse GetOrderSecuredRevenueByOrderNumber(string companyCode, string orderNo)
+
         {
             ApplicationLogger.InfoLogger($"Business Method Name: GetOrderSecuredRevenueByOrderNo :: OrderSecuredRevenue Input: companyCode: [{companyCode}]");
             var response = new OrderSecuredRevenueByOrderNoResponse();
@@ -62,7 +63,8 @@ namespace OrderSecuredRevenue.BusinessLayer
             }
 
             ApplicationLogger.InfoLogger($"Data Object: {result}");
-            response.OrderSecuredRevenueModels.AddRange(Converter.Convert(result, companyCode, orderNo));
+            //response.OrderSecuredRevenueModels.AddRange(Converter.Convert(result, companyCode, orderNo));
+            response.OrderSecuredRevenueDetails = Converter.Convert(result, companyCode, orderNo);
             ApplicationLogger.InfoLogger("Data to Business Model conversion successfull");
 
             return response;

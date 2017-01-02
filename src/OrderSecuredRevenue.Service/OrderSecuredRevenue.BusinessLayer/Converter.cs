@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using OrderSecuredRevenue.DataLayer.Entities.Datalake;
 using OrderSecuredRevenue.Model;
@@ -8,13 +9,47 @@ namespace OrderSecuredRevenue.BusinessLayer
 {
     class Converter
     {
-        public static List<OrderSecuredRevenueModel> Convert(IEnumerable<OR03> orderRevenues, string companyCode, string orderNo)
+        //public static OrderSecuredRevenueDetails ConvertRevenueDetails(IEnumerable<OR03> orderRevenues, string companyCode, string orderNo)
+        //{
+        //    var orderRevenueDetails = new OrderSecuredRevenueDetails();
+        //    orderRevenueDetails.OrderSecuredRevenueModelCollection.AddRange(Convert(orderRevenues, companyCode, orderNo));
+        //    orderRevenueDetails.Order_Number = orderNo;
+
+        //    var listModels = Convert(orderRevenues, companyCode, orderNo);
+        //    var result1 = from line in listModels
+        //                  group line by line.Revenue into g
+        //                  select new OrderSecuredRevenueDetails
+        //                  {
+        //                      Order_Number = orderNo,
+        //                      Revenue = g.Sum(_ => _.Revenue)
+        //                  };
+
+        //    //orderRevenueDetails.Revenue = 
+        //    return orderRevenueDetails;
+        //}
+
+        // public static List<OrderSecuredRevenueModel> Convert(IEnumerable<OR03> orderRevenues, string companyCode, string orderNo)
+        public static OrderSecuredRevenueDetails Convert(IEnumerable<OR03> orderRevenues, string companyCode, string orderNo)
         {
             var ordersecuredRevenueModels = new List<OrderSecuredRevenueModel>();
+            OrderSecuredRevenueDetails orderDetails = new OrderSecuredRevenueDetails();
             foreach (var orderRevenue in orderRevenues)
                 ordersecuredRevenueModels.Add(Convert(orderRevenue, companyCode,orderNo));
 
-            return ordersecuredRevenueModels;
+            var orderLineRevenue = (from lineitem in ordersecuredRevenueModels
+                          group lineitem by lineitem.Order_Number into g
+                          select new OrderSecuredRevenueDetails
+                          {
+                              Order_Number = orderNo,
+                              Revenue = g.Sum(_ => _.Revenue)
+                          }).FirstOrDefault();
+
+
+            orderDetails.Order_Number = orderNo;
+            orderDetails.Revenue = orderLineRevenue.Revenue;
+            orderDetails.OrderSecuredRevenueModelCollection.AddRange(ordersecuredRevenueModels);
+
+            return orderDetails;
         }
 
         public static OrderSecuredRevenueModel Convert(OR03 or03, string companyCode,string orderNo)

@@ -22,7 +22,8 @@ namespace OrderSecuredRevenue.UnitTest
         private const string OrderNo = "C001";
         private const string InvoiceNumber = "13123123";
         readonly List<OrderSecuredRevenueModel> _orderSecuredRevenueModelList = new List<OrderSecuredRevenueModel>();
-        private readonly List<OR21> _salesOrderList = new List<OR21>();
+        private readonly List<OR03> _salesOrderList = new List<OR03>();
+        readonly List<ErrorInfo> _errorInfoList = new List<ErrorInfo>();
 
         #endregion
 
@@ -47,7 +48,7 @@ namespace OrderSecuredRevenue.UnitTest
         {
             SetMockData();
             var data = new Model.Responses.OrderSecuredRevenueByOrderNoResponse();
-            data.OrderSecuredRevenueModels.AddRange(_orderSecuredRevenueModelList);
+            //data.OrderSecuredRevenueModels.AddRange(_orderSecuredRevenueModelList);
 
             _mockRepository.Stub(x => x.GetOrderSecuredRevenueByOrderNumber(CompanyCode,OrderNo))
                             .IgnoreArguments()
@@ -60,32 +61,54 @@ namespace OrderSecuredRevenue.UnitTest
         /// Unit Test for GetCustomers controller method
         /// </summary>
         [TestMethod]
-        public void GetOrderSecuredRevenueByInvoiceNumberTest()
+        public void GetOrderSecuredRevenueByOrderNumberNegTest()
         {
             SetMockData();
-            var data = new Model.Responses.OrderSecuredRevenueByInvoiceNumberReponse();
-            data.OrderSecuredRevenueModels.AddRange(_orderSecuredRevenueModelList);
+            var data = new Model.Responses.OrderSecuredRevenueByOrderNoResponse();
+            //data.OrderSecuredRevenueModels.AddRange(_orderSecuredRevenueModelList);
+            data.ErrorInfo.AddRange(_errorInfoList);
 
-            _mockRepository.Stub(x => x.GetOrderSecuredRevenueByInvoiceNumber(CompanyCode, OrderNo))
+            _mockRepository.Stub(x => x.GetOrderSecuredRevenueByOrderNumber(CompanyCode, OrderNo))
                             .IgnoreArguments()
                             .Return(data);
 
-            var result = _controller.GetOrderSecuredRevenueByInvoiceNumber(CompanyCode, OrderNo);
+            var result = _controller.GetOrderSecuredRevenueByOrderNumber(CompanyCode, OrderNo);
             Assert.IsNotNull(result);
         }
 
+        /// <summary>
+        /// Unit Test for GetCustomers controller method
+        /// </summary>
+        [TestMethod]
+        public void GetserviceNameTest()
+        {
+            SetMockData();
+            //var data = new Model.Responses.OrderSecuredRevenueByInvoiceNumberReponse();
+            //data.OrderSecuredRevenueModels.AddRange(_orderSecuredRevenueModelList);
+
+            //_mockRepository.Stub(x => x.GetOrderSecuredRevenueByInvoiceNumber(CompanyCode, OrderNo))
+            //                .IgnoreArguments()
+            //                .Return(data);
+
+            var result = _controller.GetServiceName();
+            Assert.IsNotNull(result);
+
+        }
         private void SetMockData()
         {
-            _salesOrderList.Add(new OR21()
+            _salesOrderList.Add(new OR03()
             {
-                or21001 = "4937000001",
-                or21002 = "10",
-                or21004 = "1",
-                or21008 = "6686.4",
-                or21009 = "6686.4",
-                or21011 = "-1",
-                or21065 = "280001"
+                or03001 = "4937000001",
+                or03002 = "10",
+                or03004 = "1",
+                or03008 = "6686.4",
+                or03009 = "6686.4",
+                or03011 = "-1"
             });
+
+            _errorInfoList.Add(new ErrorInfo("Excption") { });
+
+            _orderSecuredRevenueModelList.Add(new OrderSecuredRevenueModel() { Company_Code="bh", Order_Number="0001", Qty_Ordered="10" });
         }
     }
 }
