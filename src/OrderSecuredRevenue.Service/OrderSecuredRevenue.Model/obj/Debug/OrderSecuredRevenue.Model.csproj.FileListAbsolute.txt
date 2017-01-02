@@ -9,3 +9,14 @@ C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecur
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\obj\Debug\OrderSecuredRevenue.Model.csprojResolveAssemblyReference.cache
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\obj\Debug\OrderSecuredRevenue.Model.dll
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\obj\Debug\OrderSecuredRevenue.Model.pdb
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\OrderSecuredRevenue.Model.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\OrderSecuredRevenue.Model.pdb
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\OrderSecuredRevenue.Common.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\OrderSecuredRevenue.Common.pdb
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\obj\Debug\OrderSecuredRevenue.Model.csprojResolveAssemblyReference.cache
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\obj\Debug\OrderSecuredRevenue.Model.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\obj\Debug\OrderSecuredRevenue.Model.pdb

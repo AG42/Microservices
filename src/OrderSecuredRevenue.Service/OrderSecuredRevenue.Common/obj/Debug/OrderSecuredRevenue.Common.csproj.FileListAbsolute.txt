@@ -10,3 +10,16 @@ C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecur
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\obj\Debug\OrderSecuredRevenue.Common.dll
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\obj\Debug\OrderSecuredRevenue.Common.pdb
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\OrderSecuredRevenue.Common.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\OrderSecuredRevenue.Common.pdb
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.xml
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\obj\Debug\OrderSecuredRevenue.Common.csprojResolveAssemblyReference.cache
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\obj\Debug\OrderSecuredRevenue.Common.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Common\obj\Debug\OrderSecuredRevenue.Common.pdb

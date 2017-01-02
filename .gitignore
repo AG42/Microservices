@@ -1,4 +1,7 @@
-**/bin/
-**/obj/
-**Service/packages/
-**service/packages/
+**/bin
+
+**/obj
+
+**/packages/
+
+**/packages/

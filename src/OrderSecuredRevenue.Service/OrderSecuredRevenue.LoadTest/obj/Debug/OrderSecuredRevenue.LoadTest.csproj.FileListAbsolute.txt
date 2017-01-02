@@ -2,3 +2,8 @@ C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecur
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\bin\Debug\OrderSecuredRevenue.LoadTest.pdb
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\obj\Debug\OrderSecuredRevenue.LoadTest.dll
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\obj\Debug\OrderSecuredRevenue.LoadTest.pdb
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\bin\Debug\OrderSecuredRevenue.LoadTest.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\bin\Debug\OrderSecuredRevenue.LoadTest.pdb
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\obj\Debug\OrderSecuredRevenue.LoadTest.csprojResolveAssemblyReference.cache
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\obj\Debug\OrderSecuredRevenue.LoadTest.dll
+C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\obj\Debug\OrderSecuredRevenue.LoadTest.pdb
