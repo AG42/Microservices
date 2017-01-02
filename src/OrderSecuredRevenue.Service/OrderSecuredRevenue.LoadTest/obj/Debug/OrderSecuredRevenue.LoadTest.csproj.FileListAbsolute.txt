@@ -1,0 +1,4 @@
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\bin\Debug\OrderSecuredRevenue.LoadTest.dll
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\bin\Debug\OrderSecuredRevenue.LoadTest.pdb
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\obj\Debug\OrderSecuredRevenue.LoadTest.dll
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.LoadTest\obj\Debug\OrderSecuredRevenue.LoadTest.pdb

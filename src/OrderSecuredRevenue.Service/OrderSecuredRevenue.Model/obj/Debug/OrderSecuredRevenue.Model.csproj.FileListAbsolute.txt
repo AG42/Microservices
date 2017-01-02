@@ -1,0 +1,11 @@
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\OrderSecuredRevenue.Model.dll
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\OrderSecuredRevenue.Model.pdb
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\OrderSecuredRevenue.Common.dll
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\OrderSecuredRevenue.Common.pdb
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\obj\Debug\OrderSecuredRevenue.Model.csprojResolveAssemblyReference.cache
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\obj\Debug\OrderSecuredRevenue.Model.dll
+C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.Model\obj\Debug\OrderSecuredRevenue.Model.pdb
