@@ -1,14 +1,11 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using CreditStatus.BusinessLayer.Interfaces;
 using CreditStatus.API.Filters;
+using CreditStatus.API.ModelBinders;
 using CreditStatus.Common.Enum;
-using CreditStatus.Common.Logger;
-using System;
-using System.Globalization;
-using System.Net.Http;
-using System.Net;
 
 namespace CreditStatus.API.Controllers
 {
@@ -30,7 +27,7 @@ namespace CreditStatus.API.Controllers
 
         [HttpGet]
         [Route("companycode/{companycode}/ledgerflag/{ledgerflag}")]
-        public IHttpActionResult GetCreditStatusByCompanyCode(string companyCode, bool ledgerFlag)
+        public IHttpActionResult GetCreditStatusByCompanyCode(string companyCode, [ModelBinder(typeof(SlashInValueBinder))] bool ledgerFlag)
         {
             var response = _creditStatusManager.GetCreditStatusByCompanyCode(companyCode, ledgerFlag);
 
@@ -43,7 +40,7 @@ namespace CreditStatus.API.Controllers
 
         [HttpGet]
         [Route("companycode/{companycode}/customercode/{customercode}/ledgerflag/{ledgerflag}")]
-        public IHttpActionResult GetCreditStatusByCustomerCode(string companyCode, string customerCode, bool ledgerFlag)
+        public IHttpActionResult GetCreditStatusByCustomerCode(string companyCode, string customerCode, [ModelBinder(typeof(SlashInValueBinder))] bool ledgerFlag)
         {
             var response = _creditStatusManager.GetCreditStatusByCustomerCode(companyCode,customerCode, ledgerFlag);
 
@@ -56,7 +53,7 @@ namespace CreditStatus.API.Controllers
 
         [HttpGet]
         [Route("companycode/{companycode}/customername/{customername}/ledgerflag/{ledgerflag}")]
-        public IHttpActionResult GetCreditStatusByCustomerName(string companyCode, string customerName, bool ledgerFlag)
+        public IHttpActionResult GetCreditStatusByCustomerName(string companyCode, string customerName, [ModelBinder(typeof(SlashInValueBinder))] bool ledgerFlag)
         {
             var response = _creditStatusManager.GetCreditStatusByCustomerName(companyCode, customerName, ledgerFlag);
 

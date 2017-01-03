@@ -40,8 +40,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microservices.Common">
+      <HintPath>..\..\..\Binref\Microservices.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Rhino.Mocks">
-      <HintPath>..\..\ProductInventory.Service\ProductInventory.UnitTest\bin\Debug\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
@@ -62,11 +65,44 @@
     <Compile Include="CreditStatusControllerUnitTest.cs" />
     <Compile Include="CreditStatusManagerUnitTest.cs" />
     <Compile Include="DataLayerContextUnitTest.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CreditStatus.Common\CreditStatus.Common.csproj">
+      <Project>{47BA22AF-E595-4756-BF2A-5EC0D8B29EED}</Project>
+      <Name>CreditStatus.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CreditStatus.DataLayer\CreditStatus.DataLayer.csproj">
+      <Project>{7F596580-67E6-4B10-9092-58F0D8FAAB93}</Project>
+      <Name>CreditStatus.DataLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CreditStatus.API\CreditStatus.API.csproj">
+      <Project>{22e90c09-0ef7-4c9b-847e-2da2f11d1b7d}</Project>
+      <Name>CreditStatus.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CreditStatus.BusinessLayer\CreditStatus.BusinessLayer.csproj">
+      <Project>{7e340811-d099-41a2-832a-fd13cb633f4b}</Project>
+      <Name>CreditStatus.BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CreditStatus.Common\CreditStatus.Common.csproj">
+      <Project>{47ba22af-e595-4756-bf2a-5ec0d8b29eed}</Project>
+      <Name>CreditStatus.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CreditStatus.DataLayer\CreditStatus.DataLayer.csproj">
+      <Project>{7f596580-67e6-4b10-9092-58f0d8faab93}</Project>
+      <Name>CreditStatus.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CreditStatus.Model\CreditStatus.Model.csproj">
+      <Project>{224a7e79-7e9f-4450-b0df-26afc22e93ab}</Project>
+      <Name>CreditStatus.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

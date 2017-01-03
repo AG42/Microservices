@@ -2,9 +2,6 @@
 using CreditStatus.Model.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.InteropServices;
 
 
 namespace CreditStatus.BusinessLayer
@@ -38,21 +35,23 @@ namespace CreditStatus.BusinessLayer
     {
         return new CreditStatusModel()
         {
-            CustomerCode = creditsSl01.Sl01001,
-            CustomerName = creditsSl01.Sl01002,
+            CustomerCode = creditsSl01.Sl01001?.Trim(),
+            CustomerName = creditsSl01.Sl01002?.Trim(),
             Status = GetCreditStatus(creditsSl01, ledgerFlag)
         };
     }
     private static bool GetCreditStatus(Sl01 creditSl01, bool ledgerFlag)
     {
-        double customerBalance = 0.0;
-        double unpaidInvoices = 0.0;
-        double orderedNotShipped = 0.0;
-        double shippedNotInvoiced = 0.0;
-        double.TryParse(creditSl01.Sl01038.Trim(), out unpaidInvoices);
-        double.TryParse(creditSl01.Sl01057.Trim(), out orderedNotShipped);
-        double.TryParse(creditSl01.Sl01058.Trim(), out shippedNotInvoiced);
-            bool creditStatusFlag = false;
+        double customerBalance;
+        double unpaidInvoices;
+        double orderedNotShipped;
+        double shippedNotInvoiced;
+        double creditLimit;
+        double.TryParse(creditSl01.Sl01038?.Trim(), out unpaidInvoices);
+        double.TryParse(creditSl01.Sl01057?.Trim(), out orderedNotShipped);
+        double.TryParse(creditSl01.Sl01058?.Trim(), out shippedNotInvoiced);
+        double.TryParse(creditSl01.Sl01037?.Trim(), out creditLimit);
+        bool creditStatusFlag = false;
         // If Input Flag is True then Customer Balance is calculated as
         //Unpaid Invoices (SL01038) + Ordered Not Shipped (SL01057) + Shipped Not Invoiced (SL01058)
         if (ledgerFlag)
@@ -68,12 +67,10 @@ namespace CreditStatus.BusinessLayer
         //The Customer Balance is compared with the customer's Credit Limit (SL01037) and
         //if it is greater, the credit check fails for this customer.
        
-        if (Convert.ToDouble(creditSl01.Sl01037.Trim()) >= customerBalance)
+        if (creditLimit >= customerBalance)
         {
             creditStatusFlag = true;
-            // return creditStatusFlag;
         }
-        
         return creditStatusFlag;
     }
 

@@ -8,7 +8,6 @@ using CreditStatus.DataLayer.Interfaces;
 using Microservices.Common.Interface;
 using CreditStatus.Common;
 using CreditStatus.Common.Logger;
-using System.Linq;
 
 namespace CreditStatus.DataLayer
 {

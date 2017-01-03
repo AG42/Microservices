@@ -1,4 +1,3 @@
-C:\CreditStatus\CreditStatus.Service\CreditStatus.Model\bin\Debug\CreditStatus.Model.dll.config
 C:\CreditStatus\CreditStatus.Service\CreditStatus.Model\bin\Debug\CreditStatus.Model.dll
 C:\CreditStatus\CreditStatus.Service\CreditStatus.Model\bin\Debug\CreditStatus.Model.pdb
 C:\CreditStatus\CreditStatus.Service\CreditStatus.Model\bin\Debug\CreditStatus.Common.dll

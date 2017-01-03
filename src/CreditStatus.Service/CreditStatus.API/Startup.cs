@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
-using CreditStatus.API.App_Start;
 using CreditStatus.API.Filters;
 using Owin;
 

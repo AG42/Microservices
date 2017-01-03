@@ -4,8 +4,6 @@ using CreditStatus.Common.Error;
 using CreditStatus.DataLayer.Interfaces;
 using CreditStatus.Model.Response;
 using System.Linq;
-using CreditStatus.Common;
-using CreditStatus.Common.Error;
 
 namespace CreditStatus.BusinessLayer
 {

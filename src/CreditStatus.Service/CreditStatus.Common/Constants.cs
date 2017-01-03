@@ -29,7 +29,7 @@
 
         public const string DefaultControllerName = "CreditStatus";
         public const string VersionConcator = "V";
-        public const string MSSubRoutes = "MS_SubRoutes";
+        public const string MsSubRoutes = "MS_SubRoutes";
         public const string JsonMediaType = "application/json";
         public const string VersionParamName = "version";
 

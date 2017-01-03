@@ -1,4 +1,3 @@
-C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\obj\Debug\CreditStatus.BusinessLayer.csprojResolveAssemblyReference.cache
 C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\bin\Debug\CreditStatus.BusinessLayer.dll
 C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\bin\Debug\CreditStatus.BusinessLayer.pdb
 C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\bin\Debug\CreditStatus.Common.dll
@@ -13,5 +12,6 @@ C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\bin\Debug\Credit
 C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\bin\Debug\CreditStatus.Model.pdb
 C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
 C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\obj\Debug\CreditStatus.BusinessLayer.csprojResolveAssemblyReference.cache
 C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\obj\Debug\CreditStatus.BusinessLayer.dll
 C:\CreditStatus\CreditStatus.Service\CreditStatus.BusinessLayer\obj\Debug\CreditStatus.BusinessLayer.pdb

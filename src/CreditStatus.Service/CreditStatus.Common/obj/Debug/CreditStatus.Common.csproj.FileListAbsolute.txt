@@ -11,6 +11,6 @@ C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Pra
 C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Newtonsoft.Json.dll
 C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
 C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
-C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\obj\Debug\CreditStatus.Common.csprojResolveAssemblyReference.cache
 C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\obj\Debug\CreditStatus.Common.dll
 C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\obj\Debug\CreditStatus.Common.pdb
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\obj\Debug\CreditStatus.Common.csprojResolveAssemblyReference.cache
