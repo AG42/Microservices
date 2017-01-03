@@ -10,15 +10,3 @@ C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecur
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\obj\Debug\OrderSecuredRevenue.DataLayer.dll
 C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\obj\Debug\OrderSecuredRevenue.DataLayer.pdb
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\OrderSecuredRevenue.DataLayer.dll
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\OrderSecuredRevenue.DataLayer.pdb
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\Microservices.Common.dll
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\OrderSecuredRevenue.Common.dll
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\OrderSecuredRevenue.Common.pdb
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\obj\Debug\OrderSecuredRevenue.DataLayer.csprojResolveAssemblyReference.cache
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\obj\Debug\OrderSecuredRevenue.DataLayer.dll
-C:\ws\Git\Public\Microservices\src\OrderSecuredRevenue.Service\OrderSecuredRevenue.DataLayer\obj\Debug\OrderSecuredRevenue.DataLayer.pdb
