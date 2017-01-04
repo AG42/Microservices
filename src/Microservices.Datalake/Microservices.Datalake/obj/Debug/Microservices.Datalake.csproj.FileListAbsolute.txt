@@ -1,5 +1,0 @@
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\Microservices.Datalake\Microservices.Datalake\bin\Debug\Microservices.Datalake.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\Microservices.Datalake\Microservices.Datalake\bin\Debug\Microservices.Datalake.pdb
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\Microservices.Datalake\Microservices.Datalake\bin\Debug\Microservices.Common.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\Microservices.Datalake\Microservices.Datalake\obj\Debug\Microservices.Datalake.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\Microservices.Datalake\Microservices.Datalake\obj\Debug\Microservices.Datalake.pdb

@@ -1,2 +1,0 @@
-C:\Vinod\Project\TFS\Microservices\SourceControl\POC\ServiceFabric\HelloWorld\HelloWorld\obj\x64\Debug\HelloWorld.sfprojResolveAssemblyReference.cache
-C:\Vinod\Project\GIT\Microservices\POC\ServiceFabric\HelloWorld\HelloWorld\obj\x64\Debug\HelloWorld.sfprojResolveAssemblyReference.cache

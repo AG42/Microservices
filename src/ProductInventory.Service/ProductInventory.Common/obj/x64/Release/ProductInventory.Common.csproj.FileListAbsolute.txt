@@ -1,9 +1,0 @@
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\bin\x64\Release\NLog.config
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\bin\x64\Release\NLog.xsd
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\bin\x64\Release\ProductInventory.Common.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\bin\x64\Release\ProductInventory.Common.pdb
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\bin\x64\Release\NLog.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\bin\x64\Release\NLog.xml
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\obj\x64\Release\ProductInventory.Common.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\obj\x64\Release\ProductInventory.Common.pdb
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.Common\obj\x64\Release\ProductInventory.Common.csprojResolveAssemblyReference.cache
