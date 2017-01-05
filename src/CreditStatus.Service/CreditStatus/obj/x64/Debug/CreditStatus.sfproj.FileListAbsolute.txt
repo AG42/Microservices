@@ -1,1 +1,0 @@
-C:\CreditStatus\CreditStatus.Service\CreditStatus\obj\x64\Debug\CreditStatus.sfprojResolveAssemblyReference.cache
