@@ -1,0 +1,15 @@
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\CreditStatus.Common.dll.config
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\CreditStatus.Common.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\CreditStatus.Common.pdb
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Newtonsoft.Json.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\obj\Debug\CreditStatus.Common.dll
+C:\CreditStatus\CreditStatus.Service\CreditStatus.Common\obj\Debug\CreditStatus.Common.pdb
