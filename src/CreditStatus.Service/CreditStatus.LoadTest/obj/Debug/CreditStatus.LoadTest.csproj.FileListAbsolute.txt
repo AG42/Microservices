@@ -4,3 +4,4 @@ C:\CreditStatus\CreditStatus.Service\CreditStatus.LoadTest\bin\Debug\Microsoft.V
 C:\CreditStatus\CreditStatus.Service\CreditStatus.LoadTest\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.xml
 C:\CreditStatus\CreditStatus.Service\CreditStatus.LoadTest\obj\Debug\CreditStatus.LoadTest.dll
 C:\CreditStatus\CreditStatus.Service\CreditStatus.LoadTest\obj\Debug\CreditStatus.LoadTest.pdb
+C:\CreditStatus\CreditStatus.Service\CreditStatus.LoadTest\obj\Debug\CreditStatus.LoadTest.csprojResolveAssemblyReference.cache
