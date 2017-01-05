@@ -53,7 +53,7 @@ namespace OrderSecuredRevenue.DataLayer
             }
             string configurationDbConnectionString = ReadConfig(Constants.CONFIGURATION_DB_CONNECTIONSTRING_KEY);
             var configuration = new Configuration(configurationDbConnectionString);
-            return configuration.GetDatabaseTableName(ServiceName, Environment, companyCode);
+            return configuration.GetDatabaseTableName(ServiceName, Environment, companyCode,databaseTableNameKey,databaseColumnNameKey);
         }
 
     }

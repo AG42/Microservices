@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ConfigReader.cs" />
     <Compile Include="DatabaseContext.cs" />
+    <Compile Include="Entities\Datalake\OR01.cs" />
     <Compile Include="Entities\Datalake\OR03.cs" />
     <Compile Include="Interfaces\IDatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -108,7 +108,7 @@ namespace OrderSecuredRevenue.UnitTest
 
             _errorInfoList.Add(new ErrorInfo("Excption") { });
 
-            _orderSecuredRevenueModelList.Add(new OrderSecuredRevenueModel() { Company_Code="bh", Order_Number="0001", Qty_Ordered="10" });
+           // _orderSecuredRevenueModelList.Add(new OrderSecuredRevenueModel() { Company_Code="bh", Order_Number="0001", Qty_Ordered="10" });
         }
     }
 }

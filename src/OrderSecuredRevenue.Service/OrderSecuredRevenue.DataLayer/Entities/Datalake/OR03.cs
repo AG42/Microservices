@@ -1,7 +1,7 @@
 ﻿namespace OrderSecuredRevenue.DataLayer.Entities.Datalake
 {
     /// <summary>
-    /// Sales Order Lines History
+    /// Sales Order Lines
     /// </summary>
     public class OR03
     {

@@ -44,11 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderRevenueDetailsModel.cs" />
     <Compile Include="OrderSecuredRevenueModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\BaseResponse.cs" />
+    <Compile Include="Responses\OrderDeliveryDateByOrderNoResponse.cs" />
+    <Compile Include="Responses\OrderRevenueDetailsByOrderNoResponse.cs" />
     <Compile Include="Responses\OrderSecuredRevenueByInvoiceNumberReponse.cs" />
     <Compile Include="Responses\OrderSecuredRevenueByOrderNoResponse.cs" />
+    <Compile Include="Responses\OrderStatusByOrderNoResponse.cs" />
+    <Compile Include="Responses\OrderTypeByOrderNoResponse.cs" />
+    <Compile Include="SalesOrderDetailsLineModel.cs" />
+    <Compile Include="SalesOrderHeadModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Request\" />

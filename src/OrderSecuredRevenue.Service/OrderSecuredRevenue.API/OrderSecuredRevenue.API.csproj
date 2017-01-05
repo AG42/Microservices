@@ -127,7 +127,7 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Attributes\InputValidatorAttribute.cs" />
-    <Compile Include="Controllers\BaseContoller.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\OrderSecuredRevenueController.cs" />
     <Compile Include="Filters\ExceptionLogger.cs" />
     <Compile Include="Filters\GlobalExceptionHandler.cs" />

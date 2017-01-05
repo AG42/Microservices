@@ -33,20 +33,21 @@ namespace OrderSecuredRevenue.Common
             throw new Exception($"Record not found for Service:[{serviceName}] Environment:[{environment}]");
         }
 
-        public Dictionary<string, string> GetDatabaseTableName(string serviceName, string environment, string companyCode)
+        public Dictionary<string, string> GetDatabaseTableName(string serviceName, string environment, string companyCode, string tableNameKey, string columnNameKey)
         {
             var returnCollection = new Dictionary<string, string>();
             var parameterCollection = new List<SqlParameter>
                 {
                     new SqlParameter("@ServiceName", serviceName),
                     new SqlParameter("@Environment", environment),
-                    new SqlParameter("@CompanyCode", companyCode)
+                    new SqlParameter("@CompanyCode", companyCode),
+                    new SqlParameter("@TableNameKey", tableNameKey)
                 };
             var dataSet = GetDataFromStoredProcedure("GetDatalakeTableMapping", parameterCollection);
             if (dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
             {
-                returnCollection.Add(Constants.DATABASE_TABLE_NAME_KEY, $"{dataSet.Tables[0].Rows[0]["DatabaseName"]}.{dataSet.Tables[0].Rows[0]["TableName"]}");
-                returnCollection.Add(Constants.DATABASE_COLUMN_NAME_KEY, $"{dataSet.Tables[0].Rows[0]["ColumnName"]}");
+                returnCollection.Add(tableNameKey, $"{dataSet.Tables[0].Rows[0]["DatabaseName"]}.{dataSet.Tables[0].Rows[0]["TableName"]}");
+                returnCollection.Add(columnNameKey, $"{dataSet.Tables[0].Rows[0]["ColumnName"]}");
                 return returnCollection;
             }
             throw new Exception(

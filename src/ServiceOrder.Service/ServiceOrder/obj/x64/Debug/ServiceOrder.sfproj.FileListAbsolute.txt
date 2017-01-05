@@ -1,1 +1,0 @@
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ServiceOrder.Service\ServiceOrder\obj\x64\Debug\ServiceOrder.sfprojResolveAssemblyReference.cache

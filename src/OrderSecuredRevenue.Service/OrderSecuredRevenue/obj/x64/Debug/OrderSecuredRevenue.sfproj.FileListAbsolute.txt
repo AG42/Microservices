@@ -1,1 +1,0 @@
-C:\ws\TFS\Microservices\SourceControl\src\OrderSecuredRevenue.Service\OrderSecuredRevenue\obj\x64\Debug\OrderSecuredRevenue.sfprojResolveAssemblyReference.cache

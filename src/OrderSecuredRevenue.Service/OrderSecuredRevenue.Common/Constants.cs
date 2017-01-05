@@ -16,6 +16,18 @@
         public const string NonStockItemLine = "Non Stock Item Line";
         public const string NormalOrderLine = "Normal Order Line";
 
+        #region SalesOrderType
+        public const string Quotation = "Quotation";
+        public const string NormalOrder = "Normal Order";
+        public const string InvoiceOrder = "Invoice Order";
+        public const string DirectOrder = "Direct Order";
+        public const string BackOrder = "Back Order";
+        public const string RepeatOrder = "Repeat Order";
+        public const string WorkOrder = "Work Order";
+        public const string DirectCreditOrder = "Direct Credit Order";
+        public const string CreditOrder = "Credit Order";
+        public const string ReinvoiceOrder = "Re-invoice Order";
+        #endregion
 
         #region Logger Text/strings
 
@@ -45,8 +57,10 @@
         public const string SERVICE_NAME_KEY = "ServiceName";
         public const string ENVIRONMENT_KEY = "Environment";
         public const string READ_CONFIG_FROM_DATABASE_KEY = "ReadConfigFromDatabase";
-        public const string DATABASE_TABLE_NAME_KEY = "DatabaseTableName";
-        public const string DATABASE_COLUMN_NAME_KEY = "DatabaseColumnName";
+        public const string DATABASE_SALES_ORDER_MASTER_TABLE_NAME_KEY = "DatabaseSalesOrderMasterTableName";
+        public const string DATABASE_SALES_ORDER_LINE_MASTER_TABLE_NAME_KEY = "DatabaseSalesOrderLineMasterTableName";
+        public const string DATABASE_SALES_ORDER_MASTER_COLUMN_NAME_KEY = "DatabaseSalesOrderMasterColumnName";
+        public const string DATABASE_SALES_ORDER_LINE_MASTER_COLUMN_NAME_KEY = "DatabaseSalesOrderLineMasterColumnName";
         public const string CONFIGURATION_DB_CONNECTIONSTRING_KEY = "ConfigurationDbConnectionString";
 
         #endregion
@@ -54,7 +68,8 @@
         #region DatabaseContext
 
         public const string EQUAL_OPERATOR = "=";
-        public const string ORDER_NUMBER_FIELD = "or03001";
+        public const string SALES_ORDER_MASTER_TABLE_ORDER_NUMBER_FIELD = "or01001";
+        public const string SALES_ORDER_LINE_MASTER_TABLE_ORDER_NUMBER_FIELD = "or03001";
         //public const string INVOICE_NUMBER_FIELD = "or21065";
 
 
