@@ -36,7 +36,7 @@ namespace CreditStatus.BusinessLayer
         public CreditResponse GetCreditStatusByCustomerCode(string companyCode, string customerCode, bool ledgerFlag)
         {
             var response = new CreditResponse();
-            if (!InputValidation.ValidateCompanyCode(companyCode, response))
+            if (!InputValidation.ValidateCompanyCode(companyCode, response) && (!InputValidation.ValidateCustomerCode(customerCode,response)))
             {
                 var contracts = _dataLayerContext.GetCreditStatusByCustomerCode(companyCode, customerCode);
                 if (contracts != null)

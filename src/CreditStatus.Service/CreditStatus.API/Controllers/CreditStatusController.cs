@@ -39,8 +39,8 @@ namespace CreditStatus.API.Controllers
         }
 
         [HttpGet]
-        [Route("companycode/{companycode}/customercode/{customercode}/ledgerflag/{ledgerflag}")]
-        public IHttpActionResult GetCreditStatusByCustomerCode(string companyCode, string customerCode, [ModelBinder(typeof(SlashInValueBinder))] bool ledgerFlag)
+        [Route("companycode/{companycode}/ledgerflag/{ledgerflag}/customercode/{*customercode}")]
+        public IHttpActionResult GetCreditStatusByCustomerCode(string companyCode, [ModelBinder(typeof(SlashInValueBinder))] string customerCode, bool ledgerFlag)
         {
             var response = _creditStatusManager.GetCreditStatusByCustomerCode(companyCode,customerCode, ledgerFlag);
 
@@ -52,8 +52,8 @@ namespace CreditStatus.API.Controllers
         }
 
         [HttpGet]
-        [Route("companycode/{companycode}/customername/{customername}/ledgerflag/{ledgerflag}")]
-        public IHttpActionResult GetCreditStatusByCustomerName(string companyCode, string customerName, [ModelBinder(typeof(SlashInValueBinder))] bool ledgerFlag)
+        [Route("companycode/{companycode}/ledgerflag/{ledgerflag}/customername/{*customername}")]
+        public IHttpActionResult GetCreditStatusByCustomerName(string companyCode, [ModelBinder(typeof(SlashInValueBinder))] string customerName, bool ledgerFlag )
         {
             var response = _creditStatusManager.GetCreditStatusByCustomerName(companyCode, customerName, ledgerFlag);
 

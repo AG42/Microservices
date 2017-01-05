@@ -22,6 +22,10 @@ namespace CreditStatus.API.ModelBinders
             {
                 bindingContext.Model = Convert.ToBoolean(value.RawValue.ToString().TrimEnd('/'));
             }
+            else
+            {
+                bindingContext.Model = value.RawValue.ToString().TrimEnd('/');
+            }
             return true;
         }
     }

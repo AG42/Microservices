@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Rhino.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CreditStatus.BusinessLayer;
@@ -7,7 +6,6 @@ using CreditStatus.DataLayer.Interfaces;
 using CreditStatus.DataLayer.Entities.Datalake;
 using CreditStatus.Common.Enum;
 using CreditStatus.DataLayer;
-using CreditStatus.Model.Models;
 
 namespace CreditStatus.UnitTest
 {
@@ -20,8 +18,8 @@ namespace CreditStatus.UnitTest
         private IDataLayerContext _iDataLayer;
         private CreditStatusManager _creditStatusManager;
         private string _companyCode = "na";
-        private string _customerCode = "";
-        private string _customerName = "";
+        private string _customerCode = "4629";
+        private string _customerName = "ARGON PROPERTIES WLL";
         private bool _ledgerFlag = true;
 
         public Sl01 CreditStatus = new Sl01();
@@ -58,6 +56,12 @@ namespace CreditStatus.UnitTest
             var result = _creditStatusManager.GetCreditStatusByCompanyCode(_companyCode, _ledgerFlag);
             Assert.IsNotNull(result);
 
+            //...Positive unit test case with leger flag false
+            mockRepository.Stub(x => x.GetCreditStatusByCompanyCode(_companyCode))
+                            .IgnoreArguments()
+                            .Return(CreditStatusList);
+            _creditStatusManager = new CreditStatusManager(mockRepository);
+            result = _creditStatusManager.GetCreditStatusByCompanyCode(_companyCode, false);
 
             //...Negative unit test case : CompanyCode empty
             mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
@@ -91,20 +95,20 @@ namespace CreditStatus.UnitTest
         {
 
             var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
-            SetMockDataForCreditStatusModelList();
+            SetMockDataForCreditStatusModel();
 
             //...Positive unit test case 
-            mockRepository.Stub(x => x.GetCreditStatusByCustomerCode(_companyCode, _customerName))
+            mockRepository.Stub(x => x.GetCreditStatusByCustomerCode(_companyCode, _customerCode))
                             .IgnoreArguments()
                             .Return(CreditStatus);
             _creditStatusManager = new CreditStatusManager(mockRepository);
-            var result = _creditStatusManager.GetCreditStatusByCustomerCode(_companyCode, _customerName, _ledgerFlag);
+            var result = _creditStatusManager.GetCreditStatusByCustomerCode(_companyCode, _customerCode, _ledgerFlag);
             Assert.IsNotNull(result);
 
 
             //...Negative unit test case : CompanyCode empty
             mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
-            result = _creditStatusManager.GetCreditStatusByCustomerCode(string.Empty, _customerName, _ledgerFlag);
+            result = _creditStatusManager.GetCreditStatusByCustomerCode(string.Empty, _customerCode, _ledgerFlag);
             Assert.IsTrue(result.Status == ResponseStatus.Failure);
 
             //...Negative unit test case : CustomerName empty
@@ -121,21 +125,13 @@ namespace CreditStatus.UnitTest
             //...Negative unit test case : Output list is null
             CreditStatusList.Clear();
             mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
-            mockRepository.Stub(x => x.GetCreditStatusByCustomerCode(_companyCode, _customerName))
+            mockRepository.Stub(x => x.GetCreditStatusByCustomerCode(_companyCode, _customerCode))
                          .IgnoreArguments()
-                         .Return(CreditStatus);
+                         .Return(null);
             _creditStatusManager = new CreditStatusManager(mockRepository);
-            result = _creditStatusManager.GetCreditStatusByCustomerCode(_companyCode, _customerName, _ledgerFlag);
+            result = _creditStatusManager.GetCreditStatusByCustomerCode(_companyCode, _customerCode, _ledgerFlag);
             Assert.IsTrue(result.ErrorInfo.Count > 0);
 
-            //...Negative unit test case : Output is null
-            mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
-            mockRepository.Stub(x => x.GetCreditStatusByCustomerCode(_companyCode, _customerName))
-                          .IgnoreArguments()
-                          .Return(null);
-            _creditStatusManager = new CreditStatusManager(mockRepository);
-            result = _creditStatusManager.GetCreditStatusByCustomerCode(_companyCode, _customerName, _ledgerFlag);
-            Assert.IsTrue(result.Credit == null);
         }
 
         [TestMethod]
@@ -194,8 +190,7 @@ namespace CreditStatus.UnitTest
         #endregion
 
         #region MockData Methods
-
-        public void SetMockDataForCreditStatusModelList()
+        public void SetMockDataForCreditStatusModel()
         {
             #region SampleCreditStatusModel
             CreditStatus = new Sl01()
@@ -213,10 +208,12 @@ namespace CreditStatus.UnitTest
                 //Credit Limit
                 Sl01037 = "10010"
             };
-
-
             #endregion
+        }
 
+
+        public void SetMockDataForCreditStatusModelList()
+        {
             #region SampleCreditStatusModelList
             CreditStatusList.Add(new Sl01()
             {
@@ -249,9 +246,25 @@ namespace CreditStatus.UnitTest
                 Sl01037 = "9000"
             });
 
+            CreditStatusList.Add(new Sl01()
+            {
+                //Customer Code
+                Sl01001 = null,
+                //Customer Name
+                Sl01002 = null,
+                //Unpaid Invoices
+                Sl01038 = null,
+                //Ordered Not Shipped
+                Sl01057 = null,
+                //Shipped Not Invoiced
+                Sl01058 = null,
+                //Credit Limit
+                Sl01037 = null
+            });
+
             #endregion
         }
+        #endregion
     }
-    #endregion
 
 }

@@ -46,6 +46,9 @@ namespace CreditStatus.UnitTest
                 .Return(_sl01EntitiesList);
             var result = _dataLayerContext.GetCreditStatusByCompanyCode(_companyCode);
             Assert.IsNotNull(result);
+
+            result = _dataLayerContext.GetCreditStatusByCompanyCode(string.Empty);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
@@ -59,6 +62,9 @@ namespace CreditStatus.UnitTest
                 .Return(_sl01EntitiesList);
             var result = _dataLayerContext.GetCreditStatusByCustomerCode(_companyCode, _customerCode);
             Assert.IsNotNull(result);
+
+            result = _dataLayerContext.GetCreditStatusByCustomerCode(string.Empty, _customerCode);
+            Assert.IsNull(result);
         }
         [TestMethod]
         public void GetCreditStatusByCustomerNameTest()
@@ -71,6 +77,9 @@ namespace CreditStatus.UnitTest
                 .Return(_sl01EntitiesList);
             var result = _dataLayerContext.GetCreditStatusByCustomerName(_companyCode,_customerName);
             Assert.IsNotNull(result);
+
+            result = _dataLayerContext.GetCreditStatusByCustomerName(string.Empty, _customerName);
+            Assert.IsNull(result);
         }
         #endregion
 
