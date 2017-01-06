@@ -1,8 +1,0 @@
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.LoadTest\bin\Release\WebTest1.webtest
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.LoadTest\bin\Release\ProductInventory.LoadTest.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.LoadTest\bin\Release\ProductInventory.LoadTest.pdb
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.LoadTest\bin\Release\Microsoft.VisualStudio.QualityTools.WebTestFramework.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.LoadTest\bin\Release\Microsoft.VisualStudio.QualityTools.WebTestFramework.xml
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.LoadTest\obj\Release\ProductInventory.LoadTest.csprojResolveAssemblyReference.cache
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.LoadTest\obj\Release\ProductInventory.LoadTest.dll
-C:\Vinod\Project\TFS\Microservices\SourceControl\src\ProductInventory.Service\ProductInventory.LoadTest\obj\Release\ProductInventory.LoadTest.pdb

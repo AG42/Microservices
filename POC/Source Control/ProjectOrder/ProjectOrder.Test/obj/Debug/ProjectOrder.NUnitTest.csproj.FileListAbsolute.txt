@@ -1,7 +1,0 @@
-C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Test\bin\Debug\ProjectOrder.Test.dll
-C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Test\bin\Debug\ProjectOrder.Test.pdb
-C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
-C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Test\obj\Debug\ProjectOrder.NUnitTest.csprojResolveAssemblyReference.cache
-C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Test\obj\Debug\ProjectOrder.Test.dll
-C:\Users\ckshirsu\Documents\Visual Studio 2015\Projects\ProjectOrder\ProjectOrder.Test\obj\Debug\ProjectOrder.Test.pdb
