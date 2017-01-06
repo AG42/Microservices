@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="87782db7-53bd-494f-8e5b-de1fc2ef826d" activeEnvironment="Default environment" name="AntDemo" lastOpened="2016-12-15T12:59:55.639+05:30" resourceRoot="" soapui-version="6.0.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="72facbb4-0e3a-4645-acf8-9cbf544e0099" wadlVersion="http://wadl.dev.java.net/2009/02" name="REST Service 1" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints/><con:resource name="/api/customer/companycode/MK/alternateName/ADAM" path="/api/customer/companycode/MK/alternateName/ADAM" id="c82b2c16-2b01-45a1-8e02-ac6ba7d20e09"><con:settings/><con:parameters/><con:method name="GET" id="e6bf98a1-072f-42c2-8b57-3a61dab34576" method="GET"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:request name="GET Request" id="7861c78f-5bfb-446c-9167-a7cbbc65d1ea" mediaType="application/json"><con:settings/><con:endpoint>http://10.71.16.100:5002</con:endpoint><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="4e99bff8-46c2-4934-9f96-5bd14fe4bc7f" name="TestSuite 1"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:runType>SEQUENTIAL</con:runType><con:testCase id="656154f1-97c9-4aa4-b824-794a90a8ec6b" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="TestCase 1" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="restrequest" name="REST Request" id="4ed5d8fb-dda9-4a35-98c7-331b78c70c10"><con:settings/><con:config service="REST Service 1" resourcePath="/api/customer/companycode/MK/alternateName/ADAM" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="7861c78f-5bfb-446c-9167-a7cbbc65d1ea" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://10.71.16.100:5002</con:endpoint><con:request/><con:originalUri>http://10.71.16.100/api/customer/companycode/MK/alternateName/ADAM</con:originalUri><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="b6400fec-7fce-4ec9-ab05-1f94578ba28f"><con:settings/><con:config><script>import groovy.json.JsonSlurper
+import static com.jayway.jsonpath.JsonPath.parse
+import jxl.*
+import jxl.write.*
+
+def getResponce = testRunner.testCase.getTestStepByName("REST Request").getPropertyValue("Response")
+log.info getResponce
+
+log.info getResponce
+
+if(getResponce != null)
+{
+		log.info "TC pass"
+     	log.info ERP_SO_Key__c
+     	testRunner.testCase.testSteps["Send Mail"].disabled = true
+		}
+		else 
+		{
+		log.error "TC Failed"
+		testRunner.fail("TC Failed")
+		testRunner.gotoStepByName("Send Mail")
+		testRunner.testCase.testSteps["Send Mail"].disabled = false
+
+		}</script></con:config></con:testStep><con:testStep type="sendmailteststep" name="Send Mail" id="6f297664-7e58-4369-8724-c363ff1e9af4"><con:settings/><con:config><subject>test mail</subject><message>test mail</message><server>webmail.jci.com</server><port>25</port><login>ckhan83</login><password>Reshma@234</password><mailTo>mohammad.nashim.khan-ext@jci.com</mailTo><mailFrom>mohammad.nashim.khan-ext@jci.com</mailFrom><timeout>0</timeout><timeout_measure>0</timeout_measure></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:savedRecentRuns>1</con:savedRecentRuns><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:reporting><con:reportTemplates/><con:xmlTemplates/><con:xmlTemplates/><con:parameters/><con:parameters/></con:reporting><con:reporting/><con:authRepository/><con:tags/></con:soapui-project>
