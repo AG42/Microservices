@@ -22,7 +22,7 @@ namespace CustomerInformation.API.Attributes
             ValidateStringField(actionContext, Constants.CustomerName, errorInfo, Constants.CustomerNameIsRequiredMessage);
             ValidateStringField(actionContext, Constants.EmailId, errorInfo, Constants.CustomerEmailIsRequiredMessage);
             ValidateStringField(actionContext, Constants.AlternateCustomerName, errorInfo, Constants.CustomerAlternateNameIsRequiredMessage);
-            ValidateStringField(actionContext, Constants.TelephoneNumber, errorInfo, Constants.CustomerTelephoneNumberIsRequiredMessage);
+            ValidateStringField(actionContext, Constants.PhoneNumber, errorInfo, Constants.CustomerPhoneNumberIsRequiredMessage);
             ValidateStringField(actionContext, Constants.Category, errorInfo, Constants.CustomerCategoryIsRequiredMessage);
             ValidateStringField(actionContext, Constants.CountryCode, errorInfo, Constants.CustomerCountryCodeIsRequiredMessage);
             

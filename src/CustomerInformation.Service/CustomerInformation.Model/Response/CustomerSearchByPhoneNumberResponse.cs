@@ -2,7 +2,7 @@
 
 namespace CustomerInformation.Model.Response
 {
-    public class CustomerSearchByTelephoneNumberResponse : BaseResponse
+    public class CustomerSearchByPhoneNumberResponse : BaseResponse
     {
         public List<CustomerInformationModel> Customers { get; } = new List<CustomerInformationModel>();
     }
