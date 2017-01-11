@@ -1,14 +1,11 @@
-﻿using System;
-using Rhino.Mocks;
+﻿using Rhino.Mocks;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CustomerInformation.DataLayer;
 using CustomerInformation.Model;
 using System.Net.Http;
 using CustomerInformation.DataLayer.Entities.Datalake;
-using DenodoAdapter;
-using CustomerInformation.DataLayer.Interfaces;
-using System.Linq;
+using Microservices.Common.Interface;
 
 namespace CustomerInformation.UnitTest
 {
@@ -17,9 +14,14 @@ namespace CustomerInformation.UnitTest
     {
         #region Declarations
 
-        private const string COMPANY_CODE = "bh";
-        private const string CUSTOMER_CODE = "C002";
-        private const string CUSTOMER_NAME = "Customer";
+        private const string CompanyCode = "bh";
+        private const string CustomerCode = "C002";
+        private const string CustomerName = "Customer";
+        private const string CustomerAlternateName = "ARGON PROPERTIES WLL";
+        private const string CustomerEmailId = "simonkynostan@meritas.bh";
+        private const string CountryCode = "bh";
+        private const string CustomerPhoneNumber = "00973 1 758 7271";
+        private const string Category = "DSL";
 
         /*
                 CustomerInformationModel _customerInformationModel =
@@ -28,9 +30,8 @@ namespace CustomerInformation.UnitTest
         Sl01 _sl01 = new Sl01();
         public List<CustomerInformationModel> CustomerInformationModelList = new List<CustomerInformationModel>();
         public List<Sl01> CustomerList = new List<Sl01>();
-        IDatalakeEntities _datalakeEntities;
-        IDenodoContext mocks;
-        DatabaseContext denodoContext;
+        IDatabase _mocks;
+        DatabaseContext _databaseContext;
         #endregion
 
         #region UnitTest
@@ -41,9 +42,8 @@ namespace CustomerInformation.UnitTest
 
             // Arrange
             var client = MockRepository.GenerateMock<HttpClient>();
-            mocks = MockRepository.GenerateMock<IDenodoContext>();
-            _datalakeEntities = MockRepository.GenerateMock<IDatalakeEntities>();
-            denodoContext = new DatabaseContext(_datalakeEntities) { DenodoContext = mocks };
+            _mocks = MockRepository.GenerateMock<IDatabase>();
+            _databaseContext = new DatabaseContext() { Database = _mocks };
         }
 
 
@@ -51,11 +51,10 @@ namespace CustomerInformation.UnitTest
         public void GetCustomersTest()
         {
             SetMockDataForCustomerModels();
-
-            _datalakeEntities.Stub(x => x.Get<Sl01>("tableName"))
+            _mocks.Stub(x => x.Get<Sl01>("tableName","columns"))
                  .IgnoreArguments()
                  .Return(CustomerList);
-            var result = denodoContext.GetCustomers("xj");
+            var result = _databaseContext.GetCustomers("xj");
             Assert.IsNotNull(result);
         }
 
@@ -64,11 +63,11 @@ namespace CustomerInformation.UnitTest
         {
             SetMockDataForCustomerModels();
 
-            _datalakeEntities.Stub(x => x.Where<Sl01>("tableName", "customerCode"))
+            _mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "customerCode"))
                  .IgnoreArguments()
                  .Return(CustomerList);
            
-            var result = denodoContext.GetCustomerById(COMPANY_CODE, CUSTOMER_CODE);
+            var result = _databaseContext.GetCustomerById(CompanyCode, CustomerCode);
             Assert.IsNotNull(result);
         }
 
@@ -77,56 +76,123 @@ namespace CustomerInformation.UnitTest
         {
             SetMockDataForCustomerModels();
 
-            _datalakeEntities.Stub(x => x.Where<Sl01>("tableName", "customerCode"))
+            _mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "customerCode"))
                  .IgnoreArguments()
                  .Return(CustomerList);
 
-            var result = denodoContext.GetCustomerByName(COMPANY_CODE, CUSTOMER_NAME);
+            var result = _databaseContext.GetCustomerByName(CompanyCode, CustomerName);
             Assert.IsNotNull(result);
         }
 
-        
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void DataLayerConstructorExceptionTest()
+        public void GetCustomerByAlternateNameTest()
         {
             SetMockDataForCustomerModels();
 
-            _datalakeEntities.Stub(x => x.Get<Sl01>(""))
-                 .IgnoreArguments().Throw(new Exception());
+            _mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "condition"))
+                .IgnoreArguments()
+                .Return(CustomerList);
 
-            var dataLayer = new DatabaseContext(_datalakeEntities);
-            var result = dataLayer.GetCustomers(null);
-            Assert.IsNotNull(result);
-
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void GetCustomerByIdExceptionTest()
-        {
-            SetMockDataForCustomerModels();
-            var mocks = MockRepository.GenerateMock<IDenodoContext>();
-
-            _datalakeEntities.Stub(x => x.Where<Sl01>("tableName", "customerCode"))
-                .IgnoreArguments().Throw(new Exception());
-
-            var dataLayer = new DatabaseContext(_datalakeEntities);
-            var custresult = dataLayer.GetCustomerById(null, "");
-            Assert.IsNotNull(custresult);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void GetCustomerByNameExceptionTest()
-        {
-            SetMockDataForCustomerModels();
-            _datalakeEntities.Stub(x => x.Where<Sl01>("tableName", "customerCode")).Throw(new Exception());
-
-            var dataLayer = new DatabaseContext(_datalakeEntities);
-            var result = dataLayer.GetCustomerByName(null, "");
+            var result = _databaseContext.GetCustomerByAlternateName(CompanyCode, CustomerAlternateName);
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void GetCustomerByEmailIdTest()
+        {
+            SetMockDataForCustomerModels();
+
+            _mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "condition"))
+                 .IgnoreArguments()
+                 .Return(CustomerList);
+
+            var result = _databaseContext.GetCustomerByEmailId(CompanyCode, CustomerEmailId);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetCustomerByCountryCodeTest()
+        {
+            SetMockDataForCustomerModels();
+
+            _mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "condition"))
+                 .IgnoreArguments()
+                 .Return(CustomerList);
+
+            var result = _databaseContext.GetCustomerByCountryCode(CompanyCode, CountryCode);
+            Assert.IsNotNull(result);
+        }
+
+
+        [TestMethod]
+        public void GetCustomerByTelephoneNumberTest()
+        {
+            SetMockDataForCustomerModels();
+
+            _mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "condition"))
+                 .IgnoreArguments()
+                 .Return(CustomerList);
+
+            var result = _databaseContext.GetCustomerByPhoneNumber(CompanyCode, CustomerPhoneNumber);
+            Assert.IsNotNull(result);
+        }
+
+
+        [TestMethod]
+        public void GetCustomerByCategoryTest()
+        {
+            SetMockDataForCustomerModels();
+
+            _mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "condition"))
+                 .IgnoreArguments()
+                 .Return(CustomerList);
+
+            var result = _databaseContext.GetCustomerByCategory(CompanyCode, Category);
+            Assert.IsNotNull(result);
+        }
+
+
+        //[TestMethod]
+        //[ExpectedException(typeof(NullReferenceException))]
+        //public void DataLayerConstructorExceptionTest()
+        //{
+        //    SetMockDataForCustomerModels();
+
+        //    mocks.Stub(x => x.Get<Sl01>("", "columns"))
+        //         .IgnoreArguments().Throw(new Exception());
+
+        //    var dataLayer = new DatabaseContext() {Database = mocks};
+        //    var result = dataLayer.GetCustomers(null);
+        //    Assert.IsNotNull(result);
+
+        //}
+
+        //[TestMethod]
+        //[ExpectedException(typeof(NullReferenceException))]
+        //public void GetCustomerByIdExceptionTest()
+        //{
+        //    SetMockDataForCustomerModels();
+        //    var mocks = MockRepository.GenerateMock<IDatabase>();
+
+        //    mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "customerCode"))
+        //        .IgnoreArguments().Throw(new Exception());
+
+        //    var dataLayer = new DatabaseContext() {Database = mocks};
+        //    var custresult = dataLayer.GetCustomerById(null, "");
+        //    Assert.IsNotNull(custresult);
+        //}
+
+        //[TestMethod]
+        //[ExpectedException(typeof(NullReferenceException))]
+        //public void GetCustomerByNameExceptionTest()
+        //{
+        //    SetMockDataForCustomerModels();
+        //    mocks.Stub(x => x.Where<Sl01>("tableName", "columns", "customerCode")).Throw(new Exception());
+
+        //    var dataLayer = new DatabaseContext() {Database = mocks};
+        //    var result = dataLayer.GetCustomerByName(null, "");
+        //    Assert.IsNotNull(result);
+        //}
 
         #endregion
 

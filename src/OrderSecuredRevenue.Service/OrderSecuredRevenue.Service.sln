@@ -82,38 +82,33 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://c-mumsm12:8080/tfs/businesssolutions
 		SccProjectUniqueName0 = OrderSecuredRevenue.BusinessLayer\\OrderSecuredRevenue.BusinessLayer.csproj
 		SccProjectName0 = OrderSecuredRevenue.BusinessLayer
-		SccAuxPath0 = http://c-mumsm12:8080/tfs/businesssolutions
 		SccLocalPath0 = OrderSecuredRevenue.BusinessLayer
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName1 = OrderSecuredRevenue.Common\\OrderSecuredRevenue.Common.csproj
 		SccProjectName1 = OrderSecuredRevenue.Common
-		SccAuxPath1 = http://c-mumsm12:8080/tfs/businesssolutions
 		SccLocalPath1 = OrderSecuredRevenue.Common
-		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName2 = OrderSecuredRevenue.DataLayer\\OrderSecuredRevenue.DataLayer.csproj
 		SccProjectName2 = OrderSecuredRevenue.DataLayer
-		SccAuxPath2 = http://c-mumsm12:8080/tfs/businesssolutions
 		SccLocalPath2 = OrderSecuredRevenue.DataLayer
-		SccProvider2 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName3 = OrderSecuredRevenue.LoadTest\\OrderSecuredRevenue.LoadTest.csproj
 		SccProjectName3 = OrderSecuredRevenue.LoadTest
-		SccAuxPath3 = http://c-mumsm12:8080/tfs/businesssolutions
 		SccLocalPath3 = OrderSecuredRevenue.LoadTest
-		SccProvider3 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName4 = OrderSecuredRevenue.Model\\OrderSecuredRevenue.Model.csproj
 		SccProjectName4 = OrderSecuredRevenue.Model
-		SccAuxPath4 = http://c-mumsm12:8080/tfs/businesssolutions
 		SccLocalPath4 = OrderSecuredRevenue.Model
-		SccProvider4 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccProjectUniqueName5 = OrderSecuredRevenue.UnitTest\\OrderSecuredRevenue.UnitTest.csproj
 		SccProjectName5 = OrderSecuredRevenue.UnitTest
-		SccAuxPath5 = http://c-mumsm12:8080/tfs/businesssolutions
 		SccLocalPath5 = OrderSecuredRevenue.UnitTest
-		SccProvider5 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccLocalPath6 = .
+		SccProjectUniqueName7 = OrderSecuredRevenue.API\\OrderSecuredRevenue.API.csproj
+		SccProjectName7 = OrderSecuredRevenue.API
+		SccLocalPath7 = OrderSecuredRevenue.API
+		SccProjectUniqueName8 = OrderSecuredRevenue\\OrderSecuredRevenue.sfproj
+		SccProjectName8 = OrderSecuredRevenue
+		SccLocalPath8 = OrderSecuredRevenue
 	EndGlobalSection
 EndGlobal

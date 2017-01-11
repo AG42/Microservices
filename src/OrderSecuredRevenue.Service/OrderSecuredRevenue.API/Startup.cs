@@ -2,7 +2,6 @@
 using Owin;
 using OrderSecuredRevenue.API.Filters;
 using System.Web.Http.ExceptionHandling;
-using OrderSecuredRevenue.API;
 
 namespace OrderSecuredRevenue.API
 {
@@ -23,8 +22,10 @@ namespace OrderSecuredRevenue.API
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
+            config.Services.Add(typeof(IExceptionLogger), new Filters.ExceptionLogger());
+
             appBuilder.UseWebApi(config);
-            config.Services.Add(typeof(IExceptionLogger), new OrderSecuredRevenue.API.Filters.ExceptionLogger()); config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
         }
     }
 }

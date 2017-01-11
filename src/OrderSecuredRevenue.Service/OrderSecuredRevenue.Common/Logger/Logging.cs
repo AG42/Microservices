@@ -2,8 +2,6 @@
 using System.Configuration;
 using Microsoft.Practices.EnterpriseLibrary.Logging.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using OrderSecuredRevenue.Common.Enum;
 
@@ -27,7 +25,7 @@ namespace OrderSecuredRevenue.Common.Logger
             strMessage += Convert.ToString(innerException) + "\r\n";
 
             logEntry.Message = strMessage;
-            logEntry.Categories.Add(category.ToString() + Environment.NewLine);
+            logEntry.Categories.Add(category + Environment.NewLine);
             // logEntry.Message=message + Environment.NewLine;
             //  logEntry.AddErrorMessage(stackTrace + Environment.NewLine);
             //  logEntry.Categories.Add(Convert.ToString(innerException));

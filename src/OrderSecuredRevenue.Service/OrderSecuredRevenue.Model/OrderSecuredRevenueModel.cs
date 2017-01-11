@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace OrderSecuredRevenue.Model
+﻿namespace OrderSecuredRevenue.Model
 {
     //public class OrderSecuredRevenueDetails {
     //    public string Order_Number { get; set; }

@@ -1,5 +1,4 @@
-﻿using OrderSecuredRevenue.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 
 namespace OrderSecuredRevenue.Model.Responses

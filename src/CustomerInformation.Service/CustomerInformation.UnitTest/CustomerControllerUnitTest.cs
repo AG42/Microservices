@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using System.Web.Http.Hosting;
 using System.Web.Http;
 using Rhino.Mocks;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using CustomerInformation.BusinessLayer.Interface;
 using CustomerInformation.DataLayer.Entities.Datalake;
 using CustomerInformation.Model;
 using CustomerInformation.Common.Error;
+using CustomerInformation.Common;
 
 namespace CustomerInformation.UnitTest
 {
@@ -16,14 +16,18 @@ namespace CustomerInformation.UnitTest
     public class CustomerControllerUnitTest
     {
         #region Declarations
-        private ICustomerManager _iCustomer;
+        private ICustomerManager _mockRepository;
         private CustomerController _controller;
         private const string COMPANY_CODE = "xh";
         private const string CUSTOMER_CODE = "C001";
         private const string CUSTOMER_NAME = "Customer 1";
+        private const string CUSTOMER_CATEGORY = "DSE";
+        private const string CUSTOMER_PHONENO = "13123123";
+        private const string CUSTOMER_EMAILID = "TEST@TEST.COM";
+        private const string CUSTOMER_COUNTRYCODE = "BH";
         readonly List<CustomerInformationModel> _customerInformationModelList = new List<CustomerInformationModel>();
         private readonly List<Sl01> _customerList = new List<Sl01>();
-        readonly List<ErrorInfo> _errorsList = new List<ErrorInfo>();
+
         #endregion
 
         #region UnitTests
@@ -33,10 +37,10 @@ namespace CustomerInformation.UnitTest
         [TestInitialize]
         public void Initialize()
         {
-            //_controller = new CustomerController(_iCustomer) {Request = new HttpRequestMessage()};
-            ////_controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
-            _controller = new CustomerController(_iCustomer) { Request = new HttpRequestMessage() };
-            _controller.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey, new HttpConfiguration());
+            _mockRepository = MockRepository.GenerateMock<ICustomerManager>();
+            _controller = new CustomerController(_mockRepository) { Request = new HttpRequestMessage() };
+            _controller.Request = new HttpRequestMessage();
+            _controller.Request.SetConfiguration(new HttpConfiguration());
             _controller.Request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:51083/?param1=someValue&param2=anotherValue");
         }
 
@@ -46,158 +50,114 @@ namespace CustomerInformation.UnitTest
         [TestMethod]
         public void GetCustomersByCompanyCodeTest()
         {
-            var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
             SetMockDataForCustomerModels();
             var data = new Model.Response.CustomerSearchByCompanyCodeResponse();
             data.Customers.AddRange(_customerInformationModelList);
 
-            mockRepository.Stub(x => x.GetCustomers(COMPANY_CODE))
+            _mockRepository.Stub(x => x.GetCustomers(COMPANY_CODE))
                             .IgnoreArguments()
                             .Return(data);
-
-            _controller = new CustomerController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
 
             var result = _controller.GetCustomers(COMPANY_CODE);
             Assert.IsNotNull(result);
         }
 
         /// <summary>
-        /// Unit Test 
+        /// Unit Test for GetCustomers controller method
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
-        public void GetCustomersTestException()
+        public void GetCustomersByCompanyCodeWithFailureResponseTest()
         {
-            var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
             SetMockDataForCustomerModels();
             var data = new Model.Response.CustomerSearchByCompanyCodeResponse();
-            _errorsList.Add(new ErrorInfo("errorMessage") { ErrorMessage = "Error Message" });
-            data.ErrorInfo.AddRange(_errorsList);
+            data.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+            data.Customers.AddRange(_customerInformationModelList);
 
-            mockRepository.Stub(x => x.GetCustomers(COMPANY_CODE))
+            _mockRepository.Stub(x => x.GetCustomers(COMPANY_CODE))
                             .IgnoreArguments()
                             .Return(data);
 
-            _controller = new CustomerController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
             var result = _controller.GetCustomers(COMPANY_CODE);
             Assert.IsNotNull(result);
         }
-
-        /// <summary>
-        /// Unit Test 
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
-        public void GetCustomersTestHttpResponseException()
-        {
-            var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
-            SetMockDataForCustomerModels();
-            var data = new Model.Response.CustomerSearchByCompanyCodeResponse();
-            _errorsList.Add(new ErrorInfo("errorMessage") { ErrorMessage = "Error Message" });
-            data.ErrorInfo.AddRange(_errorsList);
-
-            mockRepository.Stub(x => x.GetCustomers(COMPANY_CODE))
-                            .IgnoreArguments()
-                            .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
-
-            _controller = new CustomerController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-            var result = _controller.GetCustomers(COMPANY_CODE);
-            Assert.IsNotNull(result);
-        }
-
+             
         /// <summary>
         /// Unit Test for GetCustomerByID Controller Method 
         /// </summary>
         [TestMethod]
         public void GetCustomerByIdTest()
         {
-            var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
             SetMockDataForCustomerModels();
 
-            mockRepository.Stub(x => x.GetCustomerById(COMPANY_CODE, CUSTOMER_CODE))
+            _mockRepository.Stub(x => x.GetCustomerById(COMPANY_CODE, CUSTOMER_CODE))
                             .IgnoreArguments()
                             .Return(new Model.Response.CustomerSearchByIdResponse());
 
-            _controller = new CustomerController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
+            var result = _controller.GetCustomerById(COMPANY_CODE, CUSTOMER_CODE);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetCustomersByIdWithFailureResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByIdResponse();
+            data.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+
+            _mockRepository.Stub(x => x.GetCustomerById(COMPANY_CODE, CUSTOMER_CODE))
+                           .IgnoreArguments()
+                           .Return(data);
 
             var result = _controller.GetCustomerById(COMPANY_CODE, CUSTOMER_CODE);
             Assert.IsNotNull(result);
-            //Assert.IsInstanceOfType(result, typeof(OkResult));
+        }
+
+        [TestMethod]
+        public void GetServiceName()
+        {
+            var result = _controller.GetServiceName();
+            Assert.IsTrue(result.Equals("Customer Information Service..."));
         }
 
         /// <summary>
         /// Unit Test 
         /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
-        public void GetCustomerByIdTestException()
-        {
-            var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
-            SetMockDataForCustomerModels();
-            var data = new Model.Response.CustomerSearchByIdResponse();
-            _errorsList.Add(new ErrorInfo("errorMessage") { ErrorMessage = "Error Message" });
-            data.ErrorInfo.AddRange(_errorsList);
+        //[TestMethod]
+        //[ExpectedException(typeof(System.InvalidOperationException))]
+        //public void GetCustomerByIdTestException()
+        //{
+        //    SetMockDataForCustomerModels();
+        //    var data = new Model.Response.CustomerSearchByIdResponse();
+        //    _errorsList.Add(new ErrorInfo("errorMessage") { ErrorMessage = "Error Message" });
+        //    data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetCustomerById(COMPANY_CODE,"C001"))
-                            .IgnoreArguments()
-                            .Return(data);
+        //    mockRepository.Stub(x => x.GetCustomerById(COMPANY_CODE,"C001"))
+        //                    .IgnoreArguments()
+        //                    .Return(data);
 
-            _controller = new CustomerController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-            var result = _controller.GetCustomerById(COMPANY_CODE,"C001");
-            Assert.IsNotNull(result);
-        }
+        //    var result = _controller.GetCustomerById(COMPANY_CODE,"C001");
+        //    Assert.IsNotNull(result);
+        //}
 
-        /// <summary>
-        /// Unit Test 
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
-        public void GetCustomersByIdTestHttpResponseException()
-        {
-            var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
-            SetMockDataForCustomerModels();
-            var data = new Model.Response.CustomerSearchByCompanyCodeResponse();
-            _errorsList.Add(new ErrorInfo("errorMessage") { ErrorMessage = "Error Message" });
-            data.ErrorInfo.AddRange(_errorsList);
+        ///// <summary>
+        ///// Unit Test 
+        ///// </summary>
+        //[TestMethod]
+        //[ExpectedException(typeof(System.InvalidOperationException))]
+        //public void GetCustomersByIdTestHttpResponseException()
+        //{
+        //    SetMockDataForCustomerModels();
+        //    var data = new Model.Response.CustomerSearchByCompanyCodeResponse();
+        //    _errorsList.Add(new ErrorInfo("errorMessage") { ErrorMessage = "Error Message" });
+        //    data.ErrorInfo.AddRange(_errorsList);
 
-            mockRepository.Stub(x => x.GetCustomerById(COMPANY_CODE,""))
-                            .IgnoreArguments()
-                            .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
+        //    mockRepository.Stub(x => x.GetCustomerById(COMPANY_CODE,""))
+        //                    .IgnoreArguments()
+        //                    .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
 
-            _controller = new CustomerController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-            var result = _controller.GetCustomerById(COMPANY_CODE,"");
-            Assert.IsNotNull(result);
-        }
+        //    var result = _controller.GetCustomerById(COMPANY_CODE,"");
+        //    Assert.IsNotNull(result);
+        //}
 
         /// <summary>
         /// Unit Test for GetCustomerByName Controller Method 
@@ -205,106 +165,176 @@ namespace CustomerInformation.UnitTest
         [TestMethod]
         public void GetCustomerByNameTest()
         {
-            var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
             SetMockDataForCustomerModels();
             var data = new Model.Response.CustomerSearchByNameResponse();
             data.Customers.AddRange(_customerInformationModelList);
-            mockRepository.Stub(x => x.GetCustomerByName(COMPANY_CODE, CUSTOMER_NAME))
+            _mockRepository.Stub(x => x.GetCustomerByName(COMPANY_CODE, CUSTOMER_NAME))
                             .IgnoreArguments()
                             .Return(data);
 
-            _controller = new CustomerController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-
             var result = _controller.GetCustomerByName(COMPANY_CODE, CUSTOMER_NAME);
             Assert.IsNotNull(result);
-            //Assert.IsInstanceOfType(result, typeof(OkResult));
         }
-        /// <summary>
-        /// Unit Test 
-        /// </summary>
+
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
-        public void GetCustomerNameTestException()
+        public void GetCustomersByNameWithFailureResponseTest()
         {
-            var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
             SetMockDataForCustomerModels();
             var data = new Model.Response.CustomerSearchByNameResponse();
-            _errorsList.Add(new ErrorInfo("errorMessage") { ErrorMessage = "Error Message" });
-            data.ErrorInfo.AddRange(_errorsList);
+            data.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
 
-            mockRepository.Stub(x => x.GetCustomerByName(COMPANY_CODE, CUSTOMER_NAME))
-                            .IgnoreArguments()
-                            .Return(data);
+            _mockRepository.Stub(x => x.GetCustomerByName(COMPANY_CODE, CUSTOMER_NAME))
+                           .IgnoreArguments()
+                           .Return(data);
 
-            _controller = new CustomerController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
             var result = _controller.GetCustomerByName(COMPANY_CODE, CUSTOMER_NAME);
             Assert.IsNotNull(result);
         }
 
-        /// <summary>
-        /// Unit Test 
-        /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
-        public void GetCustomersByNameTestHttpResponseException()
+        public void GetCustomersByAlternateNameWithResponseTest()
         {
-            var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
             SetMockDataForCustomerModels();
-            var data = new Model.Response.CustomerSearchByCompanyCodeResponse();
-            _errorsList.Add(new ErrorInfo("errorMessage") { ErrorMessage = "Error Message" });
-            data.ErrorInfo.AddRange(_errorsList);
+            var data = new Model.Response.CustomerSearchByCustomerAlternateNameResponse();
 
-            mockRepository.Stub(x => x.GetCustomerByName(COMPANY_CODE,"Test"))
-                            .IgnoreArguments()
-                            .Throw(new HttpResponseException(System.Net.HttpStatusCode.InternalServerError));
+            _mockRepository.Stub(x => x.GetCustomerByCustomerAlternateName(COMPANY_CODE, CUSTOMER_NAME))
+                           .IgnoreArguments()
+                           .Return(data);
 
-            _controller = new CustomerController(mockRepository)
-            {
-                Request =
-                    new HttpRequestMessage(HttpMethod.Get,
-                                "http://localhost:51083/?param1=someValue&param2=anotherValue")
-            };
-            var result = _controller.GetCustomerByName(COMPANY_CODE,"Test");
+            var result = _controller.GetCustomerByAlternateName(COMPANY_CODE, CUSTOMER_NAME);
             Assert.IsNotNull(result);
         }
 
-        /// <summary>
-        /// Unit Test for GetCustomer with null request Object.
-        /// </summary>
-        //[TestMethod]
-        //public void GetCustomersNegativeTest()
-        //{
-        //    var mockRepository = MockRepository.GenerateMock<ICustomerManager>();
-        //    var data = new Model.Response.CustomerSearchByCompanyCodeResponse();
-        //    mockRepository.Stub(x => x.GetCustomers(string.Empty))
-        //                    .IgnoreArguments()
-        //                    .Return(data);
+        [TestMethod]
+        public void GetCustomersByAlternateNameWithFailureResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByCustomerAlternateNameResponse();
+            data.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
 
-        //    _controller = new CustomerController(mockRepository);
+            _mockRepository.Stub(x => x.GetCustomerByCustomerAlternateName(COMPANY_CODE, CUSTOMER_NAME))
+                           .IgnoreArguments()
+                           .Return(data);
 
-        //    //Assert for GetCustomers with null companyCode
-        //    IHttpActionResult resultByCompanyCode = _controller.GetCustomers(string.Empty);
-        //    Assert.IsInstanceOfType(resultByCompanyCode, typeof(NotFoundResult));
+            var result = _controller.GetCustomerByAlternateName(COMPANY_CODE, CUSTOMER_NAME);
+            Assert.IsNotNull(result);
+        }
 
-        //    //Assert for GetCustomerById with null companyCode & customerCode
-        //    IHttpActionResult resultByCompanyCodeAndCustomerCode = _controller.GetCustomerById(string.Empty, string.Empty);
-        //    Assert.IsInstanceOfType(resultByCompanyCodeAndCustomerCode, typeof(NotFoundResult));
+        [TestMethod]
+        public void GetCustomersByCategoryWithResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByCategoryResponse();
 
-        //    //Assert for GetCustomerByName with null companyCode & customerName
-        //    IHttpActionResult resultByCompanyCodeAndCustomerName = _controller.GetCustomerByName(string.Empty, string.Empty);
-        //    Assert.IsInstanceOfType(resultByCompanyCodeAndCustomerName, typeof(NotFoundResult));
-        //}
+            _mockRepository.Stub(x => x.GetCustomerByCategory(COMPANY_CODE, CUSTOMER_CATEGORY))
+                           .IgnoreArguments()
+                           .Return(data);
 
+            var result = _controller.GetCustomerByCategory(COMPANY_CODE, CUSTOMER_CATEGORY);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetCustomersByCategoryWithFailureResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByCategoryResponse();
+            data.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+
+            _mockRepository.Stub(x => x.GetCustomerByCategory(COMPANY_CODE, CUSTOMER_CATEGORY))
+                           .IgnoreArguments()
+                           .Return(data);
+
+            var result = _controller.GetCustomerByCategory(COMPANY_CODE, CUSTOMER_CATEGORY);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetCustomersByEmailWithResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByEmailIdResponse();
+
+            _mockRepository.Stub(x => x.GetCustomerByEmailId(COMPANY_CODE, CUSTOMER_EMAILID))
+                           .IgnoreArguments()
+                           .Return(data);
+
+            var result = _controller.GetCustomerByEmailId(COMPANY_CODE, CUSTOMER_EMAILID);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetCustomersByEmailWithFailureResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByEmailIdResponse();
+            data.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+
+            _mockRepository.Stub(x => x.GetCustomerByEmailId(COMPANY_CODE, CUSTOMER_CATEGORY))
+                           .IgnoreArguments()
+                           .Return(data);
+
+            var result = _controller.GetCustomerByEmailId(COMPANY_CODE, CUSTOMER_CATEGORY);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetCustomersByTelephoneNumberWithResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByPhoneNumberResponse();
+
+            _mockRepository.Stub(x => x.GetCustomerByPhoneNumber(COMPANY_CODE, CUSTOMER_PHONENO))
+                           .IgnoreArguments()
+                           .Return(data);
+
+            var result = _controller.GetCustomerByPhoneNumber(COMPANY_CODE, CUSTOMER_PHONENO);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetCustomersByTelephoneNumberWithFailureResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByPhoneNumberResponse();
+            data.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+
+            _mockRepository.Stub(x => x.GetCustomerByPhoneNumber(COMPANY_CODE, CUSTOMER_PHONENO))
+                           .IgnoreArguments()
+                           .Return(data);
+
+            var result = _controller.GetCustomerByPhoneNumber(COMPANY_CODE, CUSTOMER_PHONENO);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetCustomersByCountryCodeWithResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByCountryCodeResponse();
+
+            _mockRepository.Stub(x => x.GetCustomerByCountryCode(COMPANY_CODE, CUSTOMER_COUNTRYCODE))
+                           .IgnoreArguments()
+                           .Return(data);
+
+            var result = _controller.GetCustomerByCountryCode(COMPANY_CODE, CUSTOMER_COUNTRYCODE);
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetCustomersByCountryCodeWithFailureResponseTest()
+        {
+            SetMockDataForCustomerModels();
+            var data = new Model.Response.CustomerSearchByCountryCodeResponse();
+            data.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+
+            _mockRepository.Stub(x => x.GetCustomerByCountryCode(COMPANY_CODE, CUSTOMER_COUNTRYCODE))
+                           .IgnoreArguments()
+                           .Return(data);
+
+            var result = _controller.GetCustomerByCountryCode(COMPANY_CODE, CUSTOMER_COUNTRYCODE);
+            Assert.IsNotNull(result);
+        }
         #endregion
 
         #region MockData Methods
@@ -318,7 +348,7 @@ namespace CustomerInformation.UnitTest
             {
                 ERP_Customer_Code_c = "C001",
                 BillingCity = "CityPune Code",
-                Phone = "9876543210",
+                PhoneNumber = "9876543210",
                 CurrencyIsoCode = "INR",
                 BillingPostalCode = "428201"
             });
@@ -326,11 +356,13 @@ namespace CustomerInformation.UnitTest
             {
                 ERP_Customer_Code_c = "C002",
                 BillingCity = "Mumbai",
-                Phone = "9876987210",
+                PhoneNumber = "9876987210",
                 CurrencyIsoCode = "USD",
                 BillingPostalCode = "426201"
             });
+
             #endregion
+
             #region SampleDataCustomerMaster
             _customerList.Add(new Sl01()
             {
@@ -377,6 +409,4 @@ namespace CustomerInformation.UnitTest
         }
         #endregion
     }
-
-
 }

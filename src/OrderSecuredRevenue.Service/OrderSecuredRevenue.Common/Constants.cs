@@ -44,7 +44,7 @@
 
         public const string DefaultControllerName = "OrderSecuredRevenue";
         public const string VersionConcator = "V";
-        public const string MSSubRoutes = "MS_SubRoutes";
+        public const string MsSubRoutes = "MS_SubRoutes";
         public const string JsonMediaType = "application/json";
         public const string VersionParamName = "version";
 
@@ -72,6 +72,17 @@
         public const string SALES_ORDER_LINE_MASTER_TABLE_ORDER_NUMBER_FIELD = "or03001";
         //public const string INVOICE_NUMBER_FIELD = "or21065";
 
+
+        #endregion
+
+        #region Mail
+
+        public const string MailServerKey = "Server";
+        public const string MailFromKey = "From";
+        public const string MailToKey = "To";
+        public const string MailCcKey = "CC";
+        public const string MailBodyStart = "<html><body>Hi,<br/><br/>";
+        public const string MailBodyEnd = "<br/><br/>Thanks,<br/>Microservices development team<br/><br/>You are receiving this mail because you are part of Microservices team.<br/>Please do not reply to this mail.</body></html>";
 
         #endregion
     }

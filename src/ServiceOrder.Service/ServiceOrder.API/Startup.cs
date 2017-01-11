@@ -3,7 +3,7 @@ using Owin;
 using System.Web.Http.Dispatcher;
 using ServiceOrder.API.Controllers;
 using System.Web.Http.ExceptionHandling;
-using ProductInventory.API.Filters;
+using ServiceOrder.API.Filters;
 
 namespace ServiceOrder.API
 {
@@ -25,9 +25,10 @@ namespace ServiceOrder.API
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
+            config.Services.Add(typeof(IExceptionLogger), new ServiceOrder.API.Filters.ExceptionLogger());
             //added to support runtime controller selection
             appBuilder.UseWebApi(config);
-            config.Services.Add(typeof(IExceptionLogger), new ProductInventory.API.Filters.ExceptionLogger()); config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
         }
     }
 }

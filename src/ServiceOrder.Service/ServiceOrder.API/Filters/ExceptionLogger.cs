@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.ExceptionHandling;
 
-namespace ProductInventory.API.Filters
+namespace ServiceOrder.API.Filters
 {
     public class ExceptionLogger : IExceptionLogger
     {

@@ -12,7 +12,6 @@
         public string Reference2__c { get; set; }
         public string Reference3__c { get; set; }
         public string Reference4__c { get; set; }
-        public string Phone { get; set; }
         public string Fax { get; set; }
         public string Intercompany__c { get; set; }
         public string Organisational_Code__c { get; set; }
@@ -43,6 +42,15 @@
         public string AnnualRevenue { get; set; }
         public string SVMXC__Preferred_Technician__c { get; set; }
         public string ERP_Company_Code__c { get; set; }
+
+        public string Category { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+
+        public string AlternateName { get; set; }
+
+        public string EmailId { get; set; }
+        public string PhoneNumber { get; set; }
 
     }
 }

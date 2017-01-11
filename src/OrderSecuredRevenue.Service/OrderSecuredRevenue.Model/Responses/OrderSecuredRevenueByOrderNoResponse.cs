@@ -1,7 +1,4 @@
-﻿using OrderSecuredRevenue.Model;
-using System.Collections.Generic;
-
-namespace OrderSecuredRevenue.Model.Responses
+﻿namespace OrderSecuredRevenue.Model.Responses
 {
     public class OrderSecuredRevenueByOrderNoResponse : BaseResponse
     {

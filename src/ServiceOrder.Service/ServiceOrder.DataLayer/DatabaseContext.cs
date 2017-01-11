@@ -14,6 +14,7 @@ using Microservices.Common.Interface;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using ServiceOrder.Common;
+using System.Diagnostics;
 
 namespace ServiceOrder.DataLayer
 {
@@ -22,11 +23,14 @@ namespace ServiceOrder.DataLayer
         [Import]
         public IDatabase Database { get; set; }       
         private readonly ConfigReader _configReader;
+        private readonly Stopwatch _stopwatch;
+
         public DatabaseContext()
         {
             _configReader = new ConfigReader();
             GetContainer();
             Database.ConnectionString = _configReader.DatabaseConnectionString;
+            _stopwatch = new Stopwatch();
         }
 
         public void GetContainer()
@@ -48,7 +52,11 @@ namespace ServiceOrder.DataLayer
                 var serviceOrderMasterTableName = serviceOrderDbDetails[Constants.DATABASE_SERVICE_ORDER_MASTER_TABLE_NAME_KEY];
                 var serviceOrderMasterColumnName = serviceOrderDbDetails[Constants.DATABASE_SERVICE_ORDER_MASTER_COLUMN_NAME_KEY];
                 ApplicationLogger.InfoLogger($"Datalake tables: [{serviceOrderMasterTableName}]");
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderDetails = Database.Get<SM01>(serviceOrderMasterTableName, serviceOrderMasterColumnName);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderDetails.Count()}");
                 return serviceOrderDetails;
             });
@@ -63,7 +71,11 @@ namespace ServiceOrder.DataLayer
                 var customerFileTableName = customerFileDbDetails[Constants.DATABASE_CUSTOMERFILE_TABLE_NAME_KEY];
                 var customerFileColumnName = customerFileDbDetails[Constants.DATABASE_CUSTOMERFILE_COLUMN_NAME_KEY];
                 ApplicationLogger.InfoLogger($"Datalake table: [{customerFileTableName}]");
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var customerDetails = Database.Where<SL01>(customerFileTableName, customerFileColumnName, $"trim(lower({Constants.CUSTOMERFILE_CUSTOMERCODE_FIELD}))='{customerCode.ToLower().Trim()}'");
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");                
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {customerDetails.Count()}");
                 return customerDetails.FirstOrDefault();
             });
@@ -81,7 +93,11 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake tables: {serviceOrderMasterTableName}");
                 string whereCondition = $"trim({Constants.SERVICEORDER_MASTER_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderDetails = Database.Where<SM01>(serviceOrderMasterTableName, serviceOrderMasterColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");                
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderDetails.Count()}");
                 return serviceOrderDetails;
             });
@@ -192,7 +208,13 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderActivityLinesTableName}]");
                 string whereCondition = $"trim({Constants.SERVICEORDER_ACTIVITYLINES_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderActivityLines = Database.Where<SM03>(serviceOrderActivityLinesTableName, serviceOrderActivityLinesColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
+
+                
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderActivityLines.Count()}");
                 return serviceOrderActivityLines;
             });
@@ -212,7 +234,12 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderCostlineTableName}]");
                 string whereCondition = $"trim({Constants.SERVICEORDER_COSTLINES_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}'";
+
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderCostLines = Database.Where<SM05>(serviceOrderCostlineTableName, serviceOrderCostlineColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");                
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderCostLines.Count()}");
                 return serviceOrderCostLines;
             });
@@ -231,7 +258,11 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderMaterialLineTableName}]");
                 string whereCondition = $"trim({Constants.SERVICEORDER_MATERIALLINES_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderMaterialLines = Database.Where<SM07>(serviceOrderMaterialLineTableName, serviceOrderMaterialLineColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderMaterialLines.Count()}");
                 return serviceOrderMaterialLines;
             });
@@ -248,7 +279,11 @@ namespace ServiceOrder.DataLayer
                 var serviceOrderMasterColumnName = serviceOrderDbDetails[Constants.DATABASE_SERVICE_ORDER_MASTER_COLUMN_NAME_KEY];
 
                 string whereCondition = $"trim(lower({Constants.SERVICEORDER_MASTER_CUSTOMERCODE_FIELD}))='{invoiceCustomerCode.ToLower().Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderDetails = Database.Where<SM01>(serviceOrderMasterTableName, serviceOrderMasterColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderDetails.Count()}");
                 return serviceOrderDetails;
             });
@@ -266,7 +301,11 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderActivityLinesTableName}]");
                 string whereCondition = $"trim({Constants.SERVICEORDER_ACTIVITYLINES_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}' AND trim(lower({Constants.SERVICEORDER_ACTIVITYLINES_CUSTOMERCODE_FIELD}))='{invoiceCustomerCode.ToLower().Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderActivityLines = Database.Where<SM03>(serviceOrderActivityLinesTableName, serviceOrderActivityLinesColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderActivityLines.Count()}");
                 return serviceOrderActivityLines;
             });
@@ -284,7 +323,13 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderCostlineTableName}]");
                 string whereCondition = $"trim({Constants.SERVICEORDER_COSTLINES_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}' AND trim(lower({Constants.SERVICEORDER_COSTLINES_CUSTOMERCODE_FIELD}))='{invoiceCustomerCode.ToLower().Trim()}'";
+
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderCostLines = Database.Where<SM05>(serviceOrderCostlineTableName, serviceOrderCostlineColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
+
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderCostLines.Count()}");
                 return serviceOrderCostLines;
             });
@@ -302,7 +347,11 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderMaterialLineTableName}]");
                 string whereCondition = $"trim({Constants.SERVICEORDER_MATERIALLINES_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}' AND trim(lower({Constants.SERVICEORDER_MATERIALLINES_CUSTOMERCODE_FIELD}))='{invoiceCustomerCode.ToLower().Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderMaterialLines = Database.Where<SM07>(serviceOrderMaterialLineTableName, serviceOrderMaterialLineColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderMaterialLines.Count()}");
                 return serviceOrderMaterialLines;
             });
@@ -319,7 +368,11 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderMasterTableName}]");
                 string whereCondition = $"trim(lower({Constants.SERVICEORDER_MASTER_INVOICENUMBER_FIELD}))='{invoiceNumber.ToLower().Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderDetails = Database.Where<SM01>(serviceOrderMasterTableName, serviceOrderMasterColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderDetails.Count()}");
                 return serviceOrderDetails;
 
@@ -336,7 +389,11 @@ namespace ServiceOrder.DataLayer
                 var serviceOrderActivityLinesColumnName = serviceOrderDbDetails[Constants.DATABASE_SERVICE_ORDER_ACTIVITYLINES_COLUMN_NAME_KEY];
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderActivityLinesTableName}]");
                 string whereCondition = $"trim({Constants.SERVICEORDER_ACTIVITYLINES_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}' AND trim(lower({Constants.SERVICEORDER_ACTIVITYLINES_INVOICENUMBER_FIELD}))='{invoiceNumber.ToLower().Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderActivityLines = Database.Where<SM03>(serviceOrderActivityLinesTableName, serviceOrderActivityLinesColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderActivityLines.Count()}");
                 return serviceOrderActivityLines;
             });
@@ -354,7 +411,11 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderCostlineTableName}]");
                 string whereCondition = $"trim({Constants.SERVICEORDER_COSTLINES_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}' AND trim(lower({Constants.SERVICEORDER_COSTLINES_INVOICENUMBER_FIELD}))='{invoiceNumber.ToLower().Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderCostLines = Database.Where<SM05>(serviceOrderCostlineTableName, serviceOrderCostlineColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderCostLines.Count()}");
                 return serviceOrderCostLines;
             });
@@ -372,7 +433,11 @@ namespace ServiceOrder.DataLayer
 
                 ApplicationLogger.InfoLogger($"Datalake table: [{serviceOrderMaterialLineTableName}]");
                 string whereCondition = $"trim({Constants.SERVICEORDER_MATERIALLINES_SERVICEORDERNO_FIELD})='{serviceOrderNo.Trim()}' AND trim({Constants.SERVICEORDER_MATERIALLINES_INVOICENUMBER_FIELD})='{invoiceNumber.Trim()}'";
+                _stopwatch.Reset();
+                _stopwatch.Start();
                 var serviceOrderMaterialLines = Database.Where<SM07>(serviceOrderMaterialLineTableName, serviceOrderMaterialLineColumnName, whereCondition);
+                _stopwatch.Stop();
+                ApplicationLogger.InfoLogger($"Query Time: {_stopwatch.ElapsedMilliseconds}");
                 ApplicationLogger.InfoLogger($"ServiceOrder count: {serviceOrderMaterialLines.Count()}");
                 return serviceOrderMaterialLines;
 

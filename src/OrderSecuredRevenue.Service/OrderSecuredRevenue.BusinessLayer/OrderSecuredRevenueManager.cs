@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using OrderSecuredRevenue.BusinessLayer.Interface;
 using OrderSecuredRevenue.DataLayer.Interfaces;
-using OrderSecuredRevenue.DataLayer.Entities.Datalake;
 using OrderSecuredRevenue.Model.Responses;
 using OrderSecuredRevenue.Common.Error;
 using OrderSecuredRevenue.Common;
@@ -19,11 +18,11 @@ namespace OrderSecuredRevenue.BusinessLayer
             _databaseContext = databaseContext;
         }
 
-        /// <summary>
-        /// Get revenue by invoice number
-        /// </summary>
-        /// <param name="companyCode"></param>
-        /// <returns></returns>
+        ///// <summary>
+        ///// Get revenue by invoice number
+        ///// </summary>
+        ///// <param name="companyCode"></param>
+        ///// <returns></returns>
         //public OrderSecuredRevenueByInvoiceNumberReponse GetOrderSecuredRevenueByInvoiceNumber(string companyCode, string invoiceNumber)
         //{
         //    ApplicationLogger.InfoLogger($"Business Method Name: GetOrderSecuredRevenueByInvoiceNumber :: OrderSecuredRevenue Input: companyCode: [{companyCode}]");
@@ -47,7 +46,7 @@ namespace OrderSecuredRevenue.BusinessLayer
         /// Get Revenue by Order number
         /// </summary>
         /// <param name="companyCode"></param>
-        /// <param name="OrderNo"></param>
+        /// <param name="orderNo"></param>
         /// <returns></returns>
         public OrderSecuredRevenueByOrderNoResponse GetOrderSecuredRevenueByOrderNumber(string companyCode, string orderNo)
         {

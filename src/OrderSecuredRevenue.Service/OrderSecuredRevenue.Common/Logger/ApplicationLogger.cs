@@ -6,12 +6,12 @@ namespace OrderSecuredRevenue.Common.Logger
 {
     public static class ApplicationLogger
     {
-        private static readonly Logging _logger = new Logging();
+        private static readonly Logging Logger = new Logging();
         private static readonly BooleanSwitch _boolSwitch = new BooleanSwitch("BoolSwitch", "Switch in config file");
 
         public static void Errorlog(string message, Category category, string stackTrace, Exception innerException = null)
         {
-            _logger.Errorlog(message, category, stackTrace, innerException);
+            Logger.Errorlog(message, category, stackTrace, innerException);
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace OrderSecuredRevenue.Common.Logger
         {
             if (_boolSwitch.Enabled)
             {
-                _logger.InfoLogger(input);
+                Logger.InfoLogger(input);
             }
         }
     }

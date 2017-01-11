@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderSecuredRevenue.Model
 {
@@ -68,10 +65,10 @@ namespace OrderSecuredRevenue.Model
         //public string OwnerCode { get; set; }
         //OR01097 DueDate
         //
-        public DateTime DueDate { get; set; }
+        public string DueDate { get; set; }
 
         //OR01099 SuborderNo
-        public string SuborderNo { get; set; }
+        //public string SuborderNo { get; set; }
         ////OR01137 ProjectNumber
         //public string ProjectNumber { get; set; }
         ////OR01138 SiteCode
@@ -84,7 +81,7 @@ namespace OrderSecuredRevenue.Model
         //public string CancellationCode { get; set; }
 
         //OR01168 InvoiceIssuer
-        public string InvoiceIssuer { get; set; }
+        //public string InvoiceIssuer { get; set; }
         //OR01169 InvCategory
         public string InvoiceCategory { get; set; }
         //OR01170 InvType

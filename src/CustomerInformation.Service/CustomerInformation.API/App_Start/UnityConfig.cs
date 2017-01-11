@@ -1,8 +1,6 @@
 using CustomerInformation.BusinessLayer;
 using CustomerInformation.BusinessLayer.Interface;
 using CustomerInformation.DataLayer;
-using CustomerInformation.DataLayer.Adapters;
-using CustomerInformation.DataLayer.Entities.Datalake;
 using CustomerInformation.DataLayer.Interfaces;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
@@ -21,8 +19,6 @@ namespace CustomerInformation.API
 
             container.RegisterType<ICustomerManager, CustomerManager>(new HierarchicalLifetimeManager());
             container.RegisterType<IDatabaseContext, DatabaseContext>(new HierarchicalLifetimeManager());
-            container.RegisterType<IDatalakeEntities, DatalakeEntities>(new HierarchicalLifetimeManager());
-            container.RegisterType<IDatalakeAdapter, DatalakeAdapter>(new HierarchicalLifetimeManager());
 
             config.DependencyResolver = new UnityDependencyResolver(container);
         }

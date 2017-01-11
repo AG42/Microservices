@@ -4,6 +4,10 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>cea59690-c239-45fc-b559-d43989c5d741</ProjectGuid>
     <ProjectVersion>1.3</ProjectVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
