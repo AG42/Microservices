@@ -419,11 +419,18 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode  Status: Success");
                 try
                 {
-                    StockItemMaster stockitem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
+                    StockItemMaster stockItem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
+                    if (stockItem != null)
+                    {
+                        response.FamilyType = Converter.GetProductFamily(stockItem.sc01037);
 
-                    response.FamilyType = Converter.GetProductFamily(stockitem.sc01037);
-
-                    ApplicationLogger.InfoLogger($"ProductFamilyType  data : {stockitem.sc01037}");
+                        ApplicationLogger.InfoLogger($"ProductFamilyType  data : {stockItem.sc01037}");
+                    }
+                    else
+                    {
+                        ApplicationLogger.InfoLogger("Error: No item warehouse data found");
+                        response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                    }
 
                     return response;
 
@@ -509,11 +516,19 @@ namespace ProductInventory.BusinessLayer
                 ApplicationLogger.InfoLogger("InputValidation.Validate CompanyCode and ProductCode  Status: Success");
                 try
                 {
-                    StockItemMaster stockitem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
+                    StockItemMaster stockItem = _databaseContext.GetStockItemByProductCode(companyCode, productCode);
+                    if (stockItem != null)
+                    {
+                        response.Stockable = Converter.GetStockable(Convert.ToInt32(stockItem.sc01066),
+                            stockItem.sc01001);
 
-                    response.Stockable = Converter.GetStockable(Convert.ToInt32(stockitem.sc01066), stockitem.sc01001);
-
-                    ApplicationLogger.InfoLogger($"ArtiStatus  data : {stockitem.sc01066}");
+                        ApplicationLogger.InfoLogger($"ArtiStatus  data : {stockItem.sc01066}");
+                    }
+                    else
+                    {
+                        ApplicationLogger.InfoLogger("Error: No item warehouse data found");
+                        response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                    }
                 }
                 catch (Exception ex)
                 {
