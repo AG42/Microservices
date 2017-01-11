@@ -1,12 +1,12 @@
-﻿using CreditStatus.BusinessLayer;
+﻿using System.Web.Http;
+using CreditStatus.BusinessLayer;
+using CreditStatus.BusinessLayer.Interfaces;
 using CreditStatus.DataLayer;
 using CreditStatus.DataLayer.Interfaces;
 using Microsoft.Practices.Unity;
-using System.Web.Http;
-using CreditStatus.BusinessLayer.Interfaces;
 using Unity.WebApi;
 
-namespace CreditStatus.API.App_Start
+namespace CreditStatus.API
 {
     public static class UnityConfig
     {

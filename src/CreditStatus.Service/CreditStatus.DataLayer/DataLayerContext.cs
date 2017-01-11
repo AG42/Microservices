@@ -8,7 +8,6 @@ using CreditStatus.DataLayer.Interfaces;
 using Microservices.Common.Interface;
 using CreditStatus.Common;
 using CreditStatus.Common.Logger;
-using System.Linq;
 
 namespace CreditStatus.DataLayer
 {
@@ -61,7 +60,7 @@ namespace CreditStatus.DataLayer
             string query = $"trim(lower({CustomerCode})) = '{customerCode.ToLower().Trim()}'";
             var lstOfSl01 = dicTableName[Constants.TableNameKey] != dicTableName[Constants.ColumnNameKey] ? Database.Where<Sl01>(dicTableName[Constants.TableNameKey], dicTableName[Constants.ColumnNameKey], query) : null;
             ApplicationLogger.InfoLogger($"TimeStamp: [{DateTime.UtcNow}] :: DataLayer :: GetCreditStatusByCustomerCode : Success");
-            return lstOfSl01.FirstOrDefault();
+            return lstOfSl01?.FirstOrDefault();
         }
 
         public IEnumerable<Sl01> GetCreditStatusByCustomerName(string companyCode, string customerName)
