@@ -50,6 +50,8 @@ namespace ContractInformation.UnitTest
         [TestMethod]
         public void GetContractsByCompanyCodeTest()
         {
+            _companyCode = "na";
+
             var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
             SetMockDataForContractModel();
 
