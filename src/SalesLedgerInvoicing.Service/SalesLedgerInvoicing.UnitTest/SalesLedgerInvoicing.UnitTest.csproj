@@ -96,6 +96,7 @@
     <Compile Include="DatabaseContextUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesLedgerInvoicingControllerUnitTest.cs" />
+    <Compile Include="SalesLedgerInvoicingManagerUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
