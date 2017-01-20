@@ -11,8 +11,10 @@ namespace OrderSecuredRevenue.API.Filters
 {
     public class GlobalExceptionHandler : IExceptionHandler
     {
+        private readonly ExceptionMail _exceptionMail = new ExceptionMail();
+
         public virtual Task HandleAsync(ExceptionHandlerContext context,
-                                     CancellationToken cancellationToken)
+            CancellationToken cancellationToken)
         {
             if (!ShouldHandle(context))
                 return Task.FromResult(0);
@@ -21,7 +23,7 @@ namespace OrderSecuredRevenue.API.Filters
         }
 
         public virtual Task HandleAsyncCore(ExceptionHandlerContext context,
-                                           CancellationToken cancellationToken)
+            CancellationToken cancellationToken)
         {
             HandleCore(context);
             return Task.FromResult(0);
@@ -38,6 +40,7 @@ namespace OrderSecuredRevenue.API.Filters
             {
                 ApplicationLogger.InfoLogger("Exception: BaseException");
                 context.Request.CreateResponse(HttpStatusCode.InternalServerError, context.Exception.Message);
+                _exceptionMail.SendMail(context);
             }
         }
 

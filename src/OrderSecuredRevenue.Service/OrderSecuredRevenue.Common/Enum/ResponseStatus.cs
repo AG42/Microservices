@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OrderSecuredRevenue.Common.Enum
+﻿namespace OrderSecuredRevenue.Common.Enum
 {
     public enum ResponseStatus
     {

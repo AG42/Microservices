@@ -26,7 +26,7 @@ namespace ProductInventory.DataLayer
         {
             _configReader = new ConfigReader();
             GetContainer();
-            objDb.ConnectionString = _configReader.DatalakeConnectionString;
+            objDb.ConnectionString = _configReader.DatabaseConnectionString;
 
         }
         public void GetContainer()
@@ -48,7 +48,7 @@ namespace ProductInventory.DataLayer
 
             //var dictTableName = new Dictionary<string, string>();
             ApplicationLogger.InfoLogger("DataLayer :: GetItemWareHouse : Reading datalake table name from config");
-            var dictItemWareouseTableNameDetail = _configReader.GetDatabaseTableName(companyCode, Constants.DATALAKE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATALAKE_ITEMWAREHOUSE_Column_NAME_KEY);
+            var dictItemWareouseTableNameDetail = _configReader.GetDatabaseTableName(companyCode, Constants.DATABASE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATABASE_ITEMWAREHOUSE_Column_NAME_KEY);
             string itemWareHouseTableName = dictItemWareouseTableNameDetail[Constants.TableNameKey];
             ApplicationLogger.InfoLogger($"Datalake table: [{itemWareHouseTableName}]");
             //                string finalViewUri = $"{_configReader.GetDenodoViewUri(companyCode, ITEMWAREHOUSE_VIEWURI_KEY)}?{ITEMWAREHOUSE_PRODUCTCODE_FIELD}{EQUAL_OPERATOR}{productCode}{AND_OPERATOR}{ITEMWAREHOUSE_LOCATIONID_FIELD}{EQUAL_OPERATOR}{locationId}";
@@ -64,7 +64,7 @@ namespace ProductInventory.DataLayer
         {
             //var dictTableName = new Dictionary<string, string>();
             ApplicationLogger.InfoLogger("DataLayer :: GetStockItemByProductCode : Reading datalake table name from config");
-            var dictStockMasterTableNameDetail = _configReader.GetDatabaseTableName(companyCode, Constants.DATALAKE_STOCKMASTER_TABLE_NAME_KEY, Constants.DATALAKE_STOCKMASTER_Column_NAME_KEY);
+            var dictStockMasterTableNameDetail = _configReader.GetDatabaseTableName(companyCode, Constants.DATABASE_STOCKMASTER_TABLE_NAME_KEY, Constants.DATABASE_STOCKMASTER_Column_NAME_KEY);
             ApplicationLogger.InfoLogger($"Datalake table: [{dictStockMasterTableNameDetail[Constants.TableNameKey]}]");
             //                string finalViewUri = $"{_configReader.GetDenodoViewUri(companyCode, STOCKITEM_VIEWURI_KEY)}?{STOCKITEM_PRODUCTCODE_FIELD}{EQUAL_OPERATOR}{productCode}";
             //                ApplicationLogger.InfoLogger($"DenodoUrl: [{_denodoUrl}{finalViewUri}]");
@@ -78,7 +78,7 @@ namespace ProductInventory.DataLayer
         public IEnumerable<ItemWarehouse> GetItemWareHouseByProductCode(string companyCode, string productCode)
         {
             ApplicationLogger.InfoLogger("DataLayer :: GetItemWareHouseByProductCode : Reading datalake table name from config");
-            var dictItemWareHosueTableDetail = _configReader.GetDatabaseTableName(companyCode, Constants.DATALAKE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATALAKE_ITEMWAREHOUSE_Column_NAME_KEY);
+            var dictItemWareHosueTableDetail = _configReader.GetDatabaseTableName(companyCode, Constants.DATABASE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATABASE_ITEMWAREHOUSE_Column_NAME_KEY);
             ApplicationLogger.InfoLogger($"Datalake table: [{dictItemWareHosueTableDetail[Constants.TableNameKey]}]");
             //                string finalViewUri = $"{_configReader.GetDenodoViewUri(companyCode, ITEMWAREHOUSE_VIEWURI_KEY)}?{ITEMWAREHOUSE_PRODUCTCODE_FIELD}{EQUAL_OPERATOR}{productCode}";
             //                ApplicationLogger.InfoLogger($"DenodoUrl: [{_denodoUrl}{finalViewUri}]");
@@ -91,7 +91,7 @@ namespace ProductInventory.DataLayer
         public IEnumerable<ItemWarehouse> GetItemWareHouseByLocationId(string companyCode, string locationId)
         {
             ApplicationLogger.InfoLogger("DataLayer :: GetItemWareHouseByLocationId : Reading datalake table name from config");
-            var dictItemWareHouseTableNameDetail = _configReader.GetDatabaseTableName(companyCode, Constants.DATALAKE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATALAKE_ITEMWAREHOUSE_Column_NAME_KEY);
+            var dictItemWareHouseTableNameDetail = _configReader.GetDatabaseTableName(companyCode, Constants.DATABASE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATABASE_ITEMWAREHOUSE_Column_NAME_KEY);
             ApplicationLogger.InfoLogger($"Datalake table: [{dictItemWareHouseTableNameDetail[Constants.TableNameKey]}]");
             var itemWarehouse = objDb.Where<ItemWarehouse>(dictItemWareHouseTableNameDetail[Constants.TableNameKey], dictItemWareHouseTableNameDetail[Constants.ColumnNameKey], $"trim(lower({Constants.ITEMWAREHOUSE_LOCATIONID_FIELD})){Constants.EQUAL_OPERATOR}'{locationId.ToLower().Trim()}'");
             ApplicationLogger.InfoLogger($"ItemWarehouse count: {itemWarehouse.Count()}");
@@ -101,9 +101,9 @@ namespace ProductInventory.DataLayer
         public IEnumerable<ProductInventoryEntity> GetProductInvetoryByProductName(string companyCode, string productName)
         {
             ApplicationLogger.InfoLogger("DataLayer :: GetProductInvetoryByProductName : Reading datalake table name from config");
-            var dictStockMasterTableDetails = _configReader.GetDatabaseTableName(companyCode, Constants.DATALAKE_STOCKMASTER_TABLE_NAME_KEY, Constants.DATALAKE_STOCKMASTER_Column_NAME_KEY);
+            var dictStockMasterTableDetails = _configReader.GetDatabaseTableName(companyCode, Constants.DATABASE_STOCKMASTER_TABLE_NAME_KEY, Constants.DATABASE_STOCKMASTER_Column_NAME_KEY);
             string stockMasterTableName = dictStockMasterTableDetails[Constants.TableNameKey];
-            var dictItemWarehouseTableDetails = _configReader.GetDatabaseTableName(companyCode, Constants.DATALAKE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATALAKE_ITEMWAREHOUSE_Column_NAME_KEY);
+            var dictItemWarehouseTableDetails = _configReader.GetDatabaseTableName(companyCode, Constants.DATABASE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATABASE_ITEMWAREHOUSE_Column_NAME_KEY);
             string itemWarehouseTableName = dictItemWarehouseTableDetails[Constants.TableNameKey];
             ApplicationLogger.InfoLogger($"Datalake tables: [{stockMasterTableName}], [{itemWarehouseTableName}]");
             string joinCondition = $" sc01 JOIN {itemWarehouseTableName} sc03 ON sc01.{Constants.STOCKITEM_PRODUCTCODE_FIELD} = sc03.{Constants.ITEMWAREHOUSE_PRODUCTCODE_FIELD}";
@@ -118,9 +118,9 @@ namespace ProductInventory.DataLayer
         public IEnumerable<ProductInventoryEntity> GetProductInvetoryByLocationId(string companyCode, string locationId)
         {
             ApplicationLogger.InfoLogger("DataLayer :: GetProductInvetoryByLocationId : Reading datalake table name from config");
-            var dictStockMasterTableDetails = _configReader.GetDatabaseTableName(companyCode, Constants.DATALAKE_STOCKMASTER_TABLE_NAME_KEY, Constants.DATALAKE_STOCKMASTER_Column_NAME_KEY);
+            var dictStockMasterTableDetails = _configReader.GetDatabaseTableName(companyCode, Constants.DATABASE_STOCKMASTER_TABLE_NAME_KEY, Constants.DATABASE_STOCKMASTER_Column_NAME_KEY);
             string stockMasterTableName = dictStockMasterTableDetails[Constants.TableNameKey];
-            var dictItemWarehouseTableDetails = _configReader.GetDatabaseTableName(companyCode, Constants.DATALAKE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATALAKE_ITEMWAREHOUSE_Column_NAME_KEY);
+            var dictItemWarehouseTableDetails = _configReader.GetDatabaseTableName(companyCode, Constants.DATABASE_ITEMWAREHOUSE_TABLE_NAME_KEY, Constants.DATABASE_ITEMWAREHOUSE_Column_NAME_KEY);
             string itemWarehouseTableName = dictItemWarehouseTableDetails[Constants.TableNameKey];
             ApplicationLogger.InfoLogger($"Datalake tables: [{stockMasterTableName}], [{itemWarehouseTableName}]");
             string joinCondition = $" sc01 JOIN {itemWarehouseTableName} sc03 ON sc01.{Constants.STOCKITEM_PRODUCTCODE_FIELD} = sc03.{Constants.ITEMWAREHOUSE_PRODUCTCODE_FIELD}";

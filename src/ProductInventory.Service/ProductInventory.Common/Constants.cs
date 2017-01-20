@@ -57,10 +57,10 @@
         public const string STOCKITEM_DESCRIPTION2_FIELD = "sc01003";
         public const string ITEMWAREHOUSE_PRODUCTCODE_FIELD = "sc03001";
         public const string ITEMWAREHOUSE_LOCATIONID_FIELD = "sc03002";
-        public const string DATALAKE_STOCKMASTER_TABLE_NAME_KEY = "DatalakeStockMasterTableName";
-        public const string DATALAKE_STOCKMASTER_Column_NAME_KEY = "DatalakeStockMasterColumnName";
-        public const string DATALAKE_ITEMWAREHOUSE_TABLE_NAME_KEY = "DatalakeItemWarehouseTableName";
-        public const string DATALAKE_ITEMWAREHOUSE_Column_NAME_KEY = "DatalakeItemWarehouseColumnName";
+        public const string DATABASE_STOCKMASTER_TABLE_NAME_KEY = "DatabaseStockMasterTableName";
+        public const string DATABASE_STOCKMASTER_Column_NAME_KEY = "DatabaseStockMasterColumnName";
+        public const string DATABASE_ITEMWAREHOUSE_TABLE_NAME_KEY = "DatabaseItemWarehouseTableName";
+        public const string DATABASE_ITEMWAREHOUSE_Column_NAME_KEY = "DatabaseItemWarehouseColumnName";
 
         public const string DataSourceLibraryPath = "DataSourceLibraryPath";
         public const string DatabaseTableNameKey = "DatabaseTableNameKey";

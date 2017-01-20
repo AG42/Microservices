@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace OrderSecuredRevenue.Model
+﻿namespace OrderSecuredRevenue.Model
 {
     public class SalesOrderDetailsModel
     {
-        public SalesOrderModel SalesOrderDetails { get; set; }
+        public SalesOrderModel SalesOrderDetails { get; set; } = new SalesOrderModel();
         
     }
 }

@@ -70,6 +70,8 @@
     <Compile Include="Error\ErrorMessageInfo.cs" />
     <Compile Include="Logger\ApplicationLogger.cs" />
     <Compile Include="Logger\Logging.cs" />
+    <Compile Include="Mail\MailConfiguration.cs" />
+    <Compile Include="Mail\MailUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

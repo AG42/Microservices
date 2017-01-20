@@ -3,8 +3,6 @@ using ProductInventory.BusinessLayer;
 using ProductInventory.BusinessLayer.Interfaces;
 using System.Web.Http;
 using ProductInventory.DataLayer;
-using ProductInventory.DataLayer.Adapters;
-using ProductInventory.DataLayer.Entities.Datalake;
 using ProductInventory.DataLayer.Interfaces;
 using Unity.WebApi;
 using System.Web.Http.ExceptionHandling;

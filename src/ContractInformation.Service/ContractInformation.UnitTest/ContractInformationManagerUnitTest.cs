@@ -90,19 +90,19 @@ namespace ContractInformation.UnitTest
             Assert.IsTrue(result.Contracts == null);
 
         }
-        [TestMethod]
-        public void GetContractsByCompanyCodeTestException()
-        {
-            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
-            mockRepository.Stub(x => x.GetContractsByCompanyCode(_companyCode))
-                .IgnoreArguments()
-                .Throw(new Exception());
+        //[TestMethod]
+        //public void GetContractsByCompanyCodeTestException()
+        //{
+        //    var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+        //    mockRepository.Stub(x => x.GetContractsByCompanyCode(_companyCode))
+        //        .IgnoreArguments()
+        //        .Throw(new Exception());
 
-            _contractInformationManager = new ContractInformationManager(mockRepository);
+        //    _contractInformationManager = new ContractInformationManager(mockRepository);
 
-            var result = _contractInformationManager.GetContractsByCompanyCode(_companyCode);
-            Assert.IsNotNull(result);
-        }
+        //    var result = _contractInformationManager.GetContractsByCompanyCode(_companyCode);
+        //    Assert.IsNotNull(result);
+        //}
         [TestMethod]
         public void GetContractsByCompanyCodeInputValidation()
         {

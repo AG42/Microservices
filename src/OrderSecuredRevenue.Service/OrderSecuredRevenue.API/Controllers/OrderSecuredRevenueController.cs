@@ -131,6 +131,12 @@ namespace OrderSecuredRevenue.API.Controllers
             return Request.CreateResponse(HttpStatusCode.NotFound, response.ErrorInfo);
         }
 
+        [Route("exception")]
+        public HttpResponseMessage GetException()
+        {
+            throw new Exception("Custom exception has been thrown.");
+        }
+
         #region Private Method
 
         //private HttpResponseMessage ValidateResponseStatusAndReturnObjectWithValidMessage(ResponseStatus status, List<OrderSecuredRevenueModel> orderSecuredRevenueModel, List<ErrorInfo> errorInfo)

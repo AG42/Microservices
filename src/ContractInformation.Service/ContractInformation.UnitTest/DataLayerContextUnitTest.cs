@@ -34,7 +34,7 @@ namespace ContractInformation.UnitTest
             _configReader = new ConfigReader();
             _dataLayerContext = new DataLayerContext() { Database = _mocksDatabaseEntities };
             _cmhEntitiesList = new List<Cmh1Na00>();
-            //SetMockDataForContractInformation();
+            SetMockDataForContractInformation();
         }
 
         #region Unit Test Methods
@@ -59,7 +59,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByCustomerName(_companyCode, CustomerName);
@@ -71,7 +71,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByCustomerPONumber(_companyCode, PONumber);
@@ -84,7 +84,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByRequestNumber(_companyCode, RequestNumber);
@@ -97,7 +97,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByServiceContractNumber(_companyCode, ContractNumber);
@@ -110,7 +110,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByCustomerNameandStatus(_companyCode, CustomerName, Status);
@@ -122,7 +122,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByCustomerReference(_companyCode, Reference);
@@ -134,7 +134,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByCustomerReferenceandStatus(_companyCode, Reference, Status);
@@ -146,7 +146,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByCustomerSearchKey(_companyCode, SearchKey);
@@ -158,7 +158,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByCustomerSearchKeyandStatus(_companyCode, SearchKey, Status);
@@ -170,7 +170,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByDateRange(_companyCode, StartDate, EndDate);
@@ -182,7 +182,7 @@ namespace ContractInformation.UnitTest
             SetMockDataForContractInformation();
             var tableName = new Dictionary<string, string>();
             tableName = _configReader.GetDatabaseTableName(_companyCode, string.Empty);
-            _mocksDatabaseEntities.Stub(x => x.Get<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey]))
+            _mocksDatabaseEntities.Stub(x => x.Where<Cmh1Na00>(tableName[Constants.TableNameKey], tableName[Constants.ColumnNameKey],""))
                 .IgnoreArguments()
                 .Return(_cmhEntitiesList);
             var result = _dataLayerContext.GetContractsByStatus(_companyCode, Status);
@@ -208,7 +208,7 @@ namespace ContractInformation.UnitTest
                 Cmh1040 = "ss",
                 Cmh1068 = "nn",
                 Cmh1091 = "ll",
-                Cmh1093 = "gg",
+                Cmh1093 = "Ankur ltd", //...Customer Name
                 Cmh1096 = "tst",
                 Cmh1123 = "sssaa",
                 Cmh1132 = "ssadfg",

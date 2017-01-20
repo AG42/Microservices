@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
@@ -104,7 +102,7 @@ namespace CustomerInformation.API.Controllers
         //Get a value from the route data, if present.
         private static T GetControllerNameFromRoute<T>(IHttpRouteData routeData, string name)
         {
-            object result = null;
+            object result;
             if (routeData.Values.TryGetValue(name, out result))
             {
                 return (T)result;
@@ -133,8 +131,7 @@ namespace CustomerInformation.API.Controllers
                 if (mime.MediaType == Constants.JsonMediaType)
                 {
                     var value = mime.Parameters
-                                     .Where(v => v.Name.Equals(Constants.VersionParamName, StringComparison.OrdinalIgnoreCase))
-                                     .FirstOrDefault();
+                                     .FirstOrDefault(v => v.Name.Equals(Constants.VersionParamName, StringComparison.OrdinalIgnoreCase));
 
                     return Convert.ToInt16(value.Value);
                 }

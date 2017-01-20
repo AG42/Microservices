@@ -27,23 +27,18 @@ namespace CustomerInformation.BusinessLayer
         {
             ApplicationLogger.InfoLogger($"Business Method Name: GetCustomers :: Custome Input: companyCode: [{companyCode}]");
             var response = new CustomerSearchByCompanyCodeResponse();
-            if (!InputValidation.ValidateCompanyCode(companyCode, response))
+            var result = _databaseContext.GetCustomers(companyCode);
+            if (result == null)
             {
-                ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode Status: Success");
-                var result = _databaseContext.GetCustomers(companyCode);
-                if (result == null)
-                {
-                    ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
-                    response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
-                    return response;
-                }
-
-                ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count()}]");
-                response.Customers.AddRange(Converter.Convert(result, companyCode));
-                ApplicationLogger.InfoLogger("Data to Business Model conversion successfull");
+                ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
+                response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                return response;
             }
 
-            ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode Status: Failed");
+            ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count()}]");
+            response.Customers.AddRange(Converter.Convert(result, companyCode));
+            ApplicationLogger.InfoLogger("Data to Business Model conversion successfull");
+
             return response;
         }
 
@@ -57,22 +52,16 @@ namespace CustomerInformation.BusinessLayer
         {
             ApplicationLogger.InfoLogger($"Business Method Name: GetCustomerById :: Custome Input: companyCode: [{companyCode}] And customerCode: [{customerCode}]");
             var response = new CustomerSearchByIdResponse();
-            if (!InputValidation.ValidateCompanyCode(companyCode, response) && !InputValidation.ValidateCustomerCode(customerCode, response))
+            var result = _databaseContext.GetCustomerById(companyCode, customerCode);
+            if (result == null)
             {
-                ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode and CustomerCode Status: Success");
-                var result = _databaseContext.GetCustomerById(companyCode, customerCode);
-                if (result == null)
-                {
-                    ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
-                    response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
-                    return response;
-                }
-                                
-                response.CustomerInformationModel = Converter.Convert(result,companyCode);
-                ApplicationLogger.InfoLogger("Data to Business Model conversion successfull");
+                ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
+                response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                return response;
             }
 
-            ApplicationLogger.InfoLogger("InputValidation.ValidateCompanyCode and CustomerCode Status: Failed");
+            response.CustomerInformationModel = Converter.Convert(result, companyCode);
+            ApplicationLogger.InfoLogger("Data to Business Model conversion successful");
             return response;
         }
 
@@ -80,21 +69,114 @@ namespace CustomerInformation.BusinessLayer
         {
             ApplicationLogger.InfoLogger($"Business Method Name: GetCustomerByName :: Custome Input: companyCode: [{companyCode}] And customerName: [{customerName}]");
             var response = new CustomerSearchByNameResponse();
-            if (!InputValidation.ValidateCompanyCode(companyCode, response) && !InputValidation.ValidateCustomerName(customerName, response))
+            var result = _databaseContext.GetCustomerByName(companyCode, customerName);
+            if (result == null)
             {
-                var result = _databaseContext.GetCustomerByName(companyCode, customerName);
-                if (result == null)
-                {
-                    ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
-                    response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
-                    return response;
-                }
-
-                ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count()}]");
-                response.Customers.AddRange(Converter.Convert(result, companyCode));
-                
-                ApplicationLogger.InfoLogger("Data to Business Model conversion successfull");
+                ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
+                response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                return response;
             }
+
+            ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count()}]");
+            response.Customers.AddRange(Converter.Convert(result, companyCode));
+
+            ApplicationLogger.InfoLogger("Data to Business Model conversion successful");
+
+            return response;
+        }
+
+        public CustomerSearchByEmailIdResponse GetCustomerByEmailId(string companyCode, string emailId)
+        {
+            ApplicationLogger.InfoLogger($"Business Method Name: GetCustomerByEmailId :: Custome Input: companyCode: [{companyCode}] And emailId: [{emailId}]");
+            var response = new CustomerSearchByEmailIdResponse();
+            var result = _databaseContext.GetCustomerByEmailId(companyCode, emailId);
+            if (result == null)
+            {
+                ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
+                response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                return response;
+            }
+
+            ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count()}]");
+            response.Customers.AddRange(Converter.Convert(result, companyCode));
+            ApplicationLogger.InfoLogger("Data to Business Model conversion successful");
+
+            return response;
+        }
+
+        public CustomerSearchByPhoneNumberResponse GetCustomerByPhoneNumber(string companyCode, string phoneNumber)
+        {
+            ApplicationLogger.InfoLogger($"Business Method Name: GetCustomerByPhoneNumber :: Custome Input: companyCode: {companyCode} And phone number: [{phoneNumber}]");
+            var response = new CustomerSearchByPhoneNumberResponse();
+            var result = _databaseContext.GetCustomerByPhoneNumber(companyCode, phoneNumber);
+            if (result == null)
+            {
+                ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
+                response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                return response;
+            }
+
+            ApplicationLogger.InfoLogger($"Data Lenght: [{result.Count()}]");
+            response.Customers.AddRange(Converter.Convert(result, companyCode));
+            ApplicationLogger.InfoLogger("Data to Business Model conversion successful");
+
+            return response;
+        }
+
+        public CustomerSearchByCategoryResponse GetCustomerByCategory(string companyCode, string category)
+        {
+            ApplicationLogger.InfoLogger($"Business Method Name: GetCustomerByCategory :: Customer Input: companyCode: {companyCode} And Category: {category}");
+            var response = new CustomerSearchByCategoryResponse();
+            var result = _databaseContext.GetCustomerByCategory(companyCode, category);
+            if (result == null)
+            {
+                ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
+                response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                return response;
+            }
+
+            ApplicationLogger.InfoLogger($"Data Lenght: {result.Count()}");
+            response.Customers.AddRange(Converter.Convert(result, companyCode));
+            ApplicationLogger.InfoLogger("Data to Business Model conversion successful");
+
+            return response;
+        }
+
+        public CustomerSearchByCustomerAlternateNameResponse GetCustomerByCustomerAlternateName(string companyCode, string customerAlternateName)
+        {
+            ApplicationLogger.InfoLogger($"Business Method Name: GetCustomerByCustomerAlternateName :: Customer Input: companyCode: {companyCode} And CustomerAlternateName: {customerAlternateName}");
+            var response = new CustomerSearchByCustomerAlternateNameResponse();
+            var result = _databaseContext.GetCustomerByAlternateName(companyCode, customerAlternateName);
+            if (result == null)
+            {
+                ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
+                response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                return response;
+            }
+
+            ApplicationLogger.InfoLogger($"Data Lenght: {result.Count()}");
+            response.Customers.AddRange(Converter.Convert(result, companyCode));
+            ApplicationLogger.InfoLogger("Data to Business Model conversion successful");
+
+            return response;
+        }
+
+        public CustomerSearchByCountryCodeResponse GetCustomerByCountryCode(string companyCode, string countryCode)
+        {
+            ApplicationLogger.InfoLogger($"Business Method Name: GetCustomerByCountryCode :: Customer Input: companyCode: {companyCode} And CountryCode: {countryCode}");
+            var response = new CustomerSearchByCountryCodeResponse();
+            var result = _databaseContext.GetCustomerByCountryCode(companyCode, countryCode);
+            if (result == null)
+            {
+                ApplicationLogger.InfoLogger("Error: No Data Found. Data Lenght is 0");
+                response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
+                return response;
+            }
+
+            ApplicationLogger.InfoLogger($"Data Lenght: {result.Count()}");
+            response.Customers.AddRange(Converter.Convert(result, companyCode));
+
+            ApplicationLogger.InfoLogger("Data to Business Model conversion successful");
 
             return response;
         }

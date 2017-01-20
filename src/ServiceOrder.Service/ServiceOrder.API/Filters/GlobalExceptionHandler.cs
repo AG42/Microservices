@@ -7,7 +7,7 @@ using System.Net.Http;
 using ServiceOrder.Common.Logger;
 using ServiceOrder.Common;
 
-namespace ProductInventory.API.Filters
+namespace ServiceOrder.API.Filters
 {
     public class GlobalExceptionHandler : IExceptionHandler
     {

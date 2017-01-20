@@ -42,6 +42,10 @@
         /// </summary>
         public string sl01009 { get; set; }
         /// <summary>
+        /// Category
+        /// </summary>
+        public string sl01010 { get; set; }
+        /// <summary>
         /// Telephone No.
         /// </summary>
         public string sl01011 { get; set; }
@@ -65,6 +69,14 @@
         /// Terms of Delivery
         /// </summary>
         public string sl01026 { get; set; }
+        /// <summary>
+        /// Remark1 (EmailId)
+        /// </summary>
+        public string sl01052 { get; set; }
+        /// <summary>
+        /// Alpha Search Key
+        /// </summary>
+        public string sl01054 { get; set; }
         /// <summary>
         /// Shipment Block Flag
         /// </summary>
@@ -121,5 +133,13 @@
         /// Amount Credit Limit
         /// </summary>
         public string sl01037 { get; set; }
+        /// <summary>
+        /// Licensed From
+        /// </summary>
+        public string sl01220 { get; set; }
+        /// <summary>
+        /// Licensed To
+        /// </summary>
+        public string sl01221 { get; set; }
     }
 }

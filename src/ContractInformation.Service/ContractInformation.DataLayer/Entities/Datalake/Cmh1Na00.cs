@@ -13,6 +13,7 @@ namespace ContractInformation.DataLayer.Entities.Datalake
         public string Cmh1040 { get; set; }
         public string Cmh1068 { get; set; }
         public string Cmh1091 { get; set; }
+        //...Customer Name
         public string Cmh1093 { get; set; }
         public string Cmh1096 { get; set; }
         //public string Cmh1021 { get; set; }
