@@ -1,0 +1,119 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "SalesLedgerInvoicing.Service", "SalesLedgerInvoicing\SalesLedgerInvoicing.Service.sfproj", "{A244A40F-DE58-41A5-97ED-4B60A7C627EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLedgerInvoicing.API", "SalesLedgerInvoicing.API\SalesLedgerInvoicing.API.csproj", "{9DD4BBF8-9C88-4A83-ABEF-12572E242F81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLedgerInvoicing.BusinessLayer", "SalesLedgerInvoicing.BusinessLayer\SalesLedgerInvoicing.BusinessLayer.csproj", "{AE104DC4-F586-4C76-8F0D-1BEEBEFCF760}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLedgerInvoicing.Common", "SalesLedgerInvoicing.Common\SalesLedgerInvoicing.Common.csproj", "{706C7F06-491E-4444-B1AD-340367B96303}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLedgerInvoicing.DataLayer", "SalesLedgerInvoicing.DataLayer\SalesLedgerInvoicing.DataLayer.csproj", "{8F1CF30A-0DB1-4E8A-898C-58D44E7CCD0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLedgerInvoicing.LoadTest", "SalesLedgerInvoicing.LoadTest\SalesLedgerInvoicing.LoadTest.csproj", "{6DA5086A-6EB1-4AEF-B625-A683165B4CCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLedgerInvoicing.Model", "SalesLedgerInvoicing.Model\SalesLedgerInvoicing.Model.csproj", "{6FC5D4ED-B3E1-4F42-9CFF-ACF77AEE8312}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLedgerInvoicing.UnitTest", "SalesLedgerInvoicing.UnitTest\SalesLedgerInvoicing.UnitTest.csproj", "{4F6FB1FF-4872-46B8-A45D-3CC63231AF50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A244A40F-DE58-41A5-97ED-4B60A7C627EA}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A244A40F-DE58-41A5-97ED-4B60A7C627EA}.Debug|x64.ActiveCfg = Debug|x64
+		{A244A40F-DE58-41A5-97ED-4B60A7C627EA}.Debug|x64.Build.0 = Debug|x64
+		{A244A40F-DE58-41A5-97ED-4B60A7C627EA}.Debug|x64.Deploy.0 = Debug|x64
+		{A244A40F-DE58-41A5-97ED-4B60A7C627EA}.Release|Any CPU.ActiveCfg = Release|x64
+		{A244A40F-DE58-41A5-97ED-4B60A7C627EA}.Release|x64.ActiveCfg = Release|x64
+		{A244A40F-DE58-41A5-97ED-4B60A7C627EA}.Release|x64.Build.0 = Release|x64
+		{A244A40F-DE58-41A5-97ED-4B60A7C627EA}.Release|x64.Deploy.0 = Release|x64
+		{9DD4BBF8-9C88-4A83-ABEF-12572E242F81}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{9DD4BBF8-9C88-4A83-ABEF-12572E242F81}.Debug|x64.ActiveCfg = Debug|x64
+		{9DD4BBF8-9C88-4A83-ABEF-12572E242F81}.Debug|x64.Build.0 = Debug|x64
+		{9DD4BBF8-9C88-4A83-ABEF-12572E242F81}.Release|Any CPU.ActiveCfg = Release|x64
+		{9DD4BBF8-9C88-4A83-ABEF-12572E242F81}.Release|x64.ActiveCfg = Release|x64
+		{9DD4BBF8-9C88-4A83-ABEF-12572E242F81}.Release|x64.Build.0 = Release|x64
+		{AE104DC4-F586-4C76-8F0D-1BEEBEFCF760}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{AE104DC4-F586-4C76-8F0D-1BEEBEFCF760}.Debug|x64.ActiveCfg = Debug|x64
+		{AE104DC4-F586-4C76-8F0D-1BEEBEFCF760}.Debug|x64.Build.0 = Debug|x64
+		{AE104DC4-F586-4C76-8F0D-1BEEBEFCF760}.Release|Any CPU.ActiveCfg = Release|x64
+		{AE104DC4-F586-4C76-8F0D-1BEEBEFCF760}.Release|x64.ActiveCfg = Release|x64
+		{AE104DC4-F586-4C76-8F0D-1BEEBEFCF760}.Release|x64.Build.0 = Release|x64
+		{706C7F06-491E-4444-B1AD-340367B96303}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{706C7F06-491E-4444-B1AD-340367B96303}.Debug|x64.ActiveCfg = Debug|x64
+		{706C7F06-491E-4444-B1AD-340367B96303}.Debug|x64.Build.0 = Debug|x64
+		{706C7F06-491E-4444-B1AD-340367B96303}.Release|Any CPU.ActiveCfg = Release|x64
+		{706C7F06-491E-4444-B1AD-340367B96303}.Release|x64.ActiveCfg = Release|x64
+		{706C7F06-491E-4444-B1AD-340367B96303}.Release|x64.Build.0 = Release|x64
+		{8F1CF30A-0DB1-4E8A-898C-58D44E7CCD0D}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{8F1CF30A-0DB1-4E8A-898C-58D44E7CCD0D}.Debug|x64.ActiveCfg = Debug|x64
+		{8F1CF30A-0DB1-4E8A-898C-58D44E7CCD0D}.Debug|x64.Build.0 = Debug|x64
+		{8F1CF30A-0DB1-4E8A-898C-58D44E7CCD0D}.Release|Any CPU.ActiveCfg = Release|x64
+		{8F1CF30A-0DB1-4E8A-898C-58D44E7CCD0D}.Release|x64.ActiveCfg = Release|x64
+		{8F1CF30A-0DB1-4E8A-898C-58D44E7CCD0D}.Release|x64.Build.0 = Release|x64
+		{6DA5086A-6EB1-4AEF-B625-A683165B4CCB}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{6DA5086A-6EB1-4AEF-B625-A683165B4CCB}.Debug|x64.ActiveCfg = Debug|x64
+		{6DA5086A-6EB1-4AEF-B625-A683165B4CCB}.Debug|x64.Build.0 = Debug|x64
+		{6DA5086A-6EB1-4AEF-B625-A683165B4CCB}.Release|Any CPU.ActiveCfg = Release|x64
+		{6DA5086A-6EB1-4AEF-B625-A683165B4CCB}.Release|x64.ActiveCfg = Release|x64
+		{6DA5086A-6EB1-4AEF-B625-A683165B4CCB}.Release|x64.Build.0 = Release|x64
+		{6FC5D4ED-B3E1-4F42-9CFF-ACF77AEE8312}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{6FC5D4ED-B3E1-4F42-9CFF-ACF77AEE8312}.Debug|x64.ActiveCfg = Debug|x64
+		{6FC5D4ED-B3E1-4F42-9CFF-ACF77AEE8312}.Debug|x64.Build.0 = Debug|x64
+		{6FC5D4ED-B3E1-4F42-9CFF-ACF77AEE8312}.Release|Any CPU.ActiveCfg = Release|x64
+		{6FC5D4ED-B3E1-4F42-9CFF-ACF77AEE8312}.Release|x64.ActiveCfg = Release|x64
+		{6FC5D4ED-B3E1-4F42-9CFF-ACF77AEE8312}.Release|x64.Build.0 = Release|x64
+		{4F6FB1FF-4872-46B8-A45D-3CC63231AF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F6FB1FF-4872-46B8-A45D-3CC63231AF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F6FB1FF-4872-46B8-A45D-3CC63231AF50}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4F6FB1FF-4872-46B8-A45D-3CC63231AF50}.Debug|x64.Build.0 = Debug|Any CPU
+		{4F6FB1FF-4872-46B8-A45D-3CC63231AF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F6FB1FF-4872-46B8-A45D-3CC63231AF50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F6FB1FF-4872-46B8-A45D-3CC63231AF50}.Release|x64.ActiveCfg = Release|Any CPU
+		{4F6FB1FF-4872-46B8-A45D-3CC63231AF50}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://c-mumsm12:8080/tfs/businesssolutions
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SalesLedgerInvoicing.API\\SalesLedgerInvoicing.API.csproj
+		SccProjectName1 = SalesLedgerInvoicing.API
+		SccLocalPath1 = SalesLedgerInvoicing.API
+		SccProjectUniqueName2 = SalesLedgerInvoicing.BusinessLayer\\SalesLedgerInvoicing.BusinessLayer.csproj
+		SccProjectName2 = SalesLedgerInvoicing.BusinessLayer
+		SccLocalPath2 = SalesLedgerInvoicing.BusinessLayer
+		SccProjectUniqueName3 = SalesLedgerInvoicing.Common\\SalesLedgerInvoicing.Common.csproj
+		SccProjectName3 = SalesLedgerInvoicing.Common
+		SccLocalPath3 = SalesLedgerInvoicing.Common
+		SccProjectUniqueName4 = SalesLedgerInvoicing.DataLayer\\SalesLedgerInvoicing.DataLayer.csproj
+		SccProjectName4 = SalesLedgerInvoicing.DataLayer
+		SccLocalPath4 = SalesLedgerInvoicing.DataLayer
+		SccProjectUniqueName5 = SalesLedgerInvoicing.LoadTest\\SalesLedgerInvoicing.LoadTest.csproj
+		SccProjectName5 = SalesLedgerInvoicing.LoadTest
+		SccLocalPath5 = SalesLedgerInvoicing.LoadTest
+		SccProjectUniqueName6 = SalesLedgerInvoicing.Model\\SalesLedgerInvoicing.Model.csproj
+		SccProjectName6 = SalesLedgerInvoicing.Model
+		SccLocalPath6 = SalesLedgerInvoicing.Model
+		SccProjectUniqueName7 = SalesLedgerInvoicing.UnitTest\\SalesLedgerInvoicing.UnitTest.csproj
+		SccProjectName7 = SalesLedgerInvoicing.UnitTest
+		SccLocalPath7 = SalesLedgerInvoicing.UnitTest
+		SccProjectUniqueName8 = SalesLedgerInvoicing\\SalesLedgerInvoicing.Service.sfproj
+		SccProjectName8 = SalesLedgerInvoicing
+		SccLocalPath8 = SalesLedgerInvoicing
+	EndGlobalSection
+EndGlobal

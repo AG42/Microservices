@@ -1,0 +1,2414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="fd10bcdf-3c3d-40a0-9b4a-bcc4fb0e4214" activeEnvironment="Default environment" name="Product Inventory-N" lastOpened="2017-01-05T16:22:59.986+05:30" resourceRoot="" soapui-version="6.0.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d4190a7f-4d26-4d0a-a92d-3b38ea2d90a9" wadlVersion="http://wadl.dev.java.net/2009/02" name="REST Service 1" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints/><con:resource name="/" path="/" id="582e3024-af75-4650-9b27-1bc29c0cb755"><con:settings/><con:parameters/><con:method name="GET" id="0f5ae826-1346-4cd5-9944-d94f3c5d3ccf" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>404 400</con:status><con:params/><con:element xmlns:com="http://mum-dev/api/serviceOrder/companyCode/">com:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>200</con:status><con:params/><con:element>Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=us-ascii</con:mediaType><con:status>404</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="GET Request" id="7c72bc76-7a13-4393-bd46-72cba9330765" mediaType="application/json"><con:settings/><con:endpoint>http://${host}${colon}${port}${backslash}${context1}${backslash}${companyCode}</con:endpoint><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="c7b93057-e6ab-4676-b623-5f80f55c92ea" name="Product Inventory-Azure"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:runType>SEQUENTIAL</con:runType><con:testCase id="db09cbd9-87ed-42aa-b736-06bc44e26202" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="GetProductById" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="GetURI" id="58144318-57f6-4c52-ae3d-dae9622d73bc"><con:settings/><con:config><script>import jxl.*
+import java.lang.*
+
+
+try {
+               wb = Workbook.getWorkbook(new File('C:/TestDetails/CheckProduct InventoryURL.xls'))
+               //sheet = wb.getSheetName("GetByProjectNumber");
+           	sheet = wb.getSheet(0)
+			//log.info "Rows : " + sheet.getRows();
+         		def Domain = sheet.getCell(1,0).getContents()
+      		//log.info Domain 
+      		def Port = sheet.getCell(1,1).getContents()
+      		//log.info Port
+      		def context1 = sheet.getCell(1,2).getContents() 
+      		//log.info context1
+		
+			context["host"]= Domain
+			context["port"]= Port
+			context["context1"]= context1		
+			context["colon"] = ":"
+			context["backslash"] = "/"	
+               context["productCode"]="productCode"
+               
+		sheet = wb.getSheet(1)
+		log.info "Sheet 1 Rows Count : " +sheet.getRows();
+               for (i=1 ; i&lt;sheet.getRows() ; i++){
+                   def CompanyCode = sheet.getCell(0,i).getContents(); 
+                   log.info CompanyCode
+                   context["CompanyCode"] = CompanyCode
+                                  for (j=1 ; j&lt;= sheet.getColumns()-1 ; j++){
+                                  
+                                  //log.info sheet.getCell(j, i).getContents();
+                                  context["proCode"] = sheet.getCell(j, i).getContents();
+                                  //log.info "ServiceOrdNo : " + context["ServiceOrdNo"]
+                                             def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]
+                                             def str2 = context["CompanyCode"] + context["backslash"] + context["productCode"]+ context["backslash"]+ context["proCode"]
+                                             log.info "URI : " + str1 + str2
+                                             //testRunner.runTestStepByName("REST Request") 
+                                             Thread.sleep(8000)
+                                            // testRunner.runTestStepByName("Call_Fun")
+                                             //http://mum-dev:5006/api/serviceOrder/companyCode/8M/serviceOrderNo/1601138000
+                                 
+                                  	}                                  	
+                              }  
+               } catch (Exception err) {
+                              log.error err
+                              log.error "Check Test Data file Path."        
+}
+wb.close()
+</script></con:config></con:testStep><con:testStep type="restrequest" name="REST Request" id="6ed17ce6-6272-457e-99cc-45837771beae"><con:settings/><con:config service="REST Service 1" resourcePath="/" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request" id="6c68ab72-40ab-4c2e-835c-cc65d330b6d2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${host}${colon}${port}${backslash}${context1}${backslash}${companycode}${backslash}${comcode}</con:endpoint><con:request/><con:originalUri>http://mum-dev/api/serviceOrder/companyCode/</con:originalUri><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Func_Lib" id="fcce6af7-041d-41af-a98d-07ccd14b300e"><con:settings/><con:config><script><![CDATA[import groovy.json.JsonSlurper
+import static com.jayway.jsonpath.JsonPath.parse
+import com.eviware.soapui.model.project.ProjectFactoryRegistry
+import com.eviware.soapui.impl.wsdl.WsdlProjectFactory
+
+class Func_Lib
+{
+	def log
+	def testRunner
+	def context
+	def attribute = []
+	def i
+
+	def Func_Lib(logIn, contextIn, testRunnerIn)
+	{
+		this.log = logIn;
+		this.testRunner = testRunnerIn;
+		this.context = contextIn
+		}		
+
+		public def ERP_ID__c()
+		{
+			//log.error " ********************* ERP_ID__c Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_ID__c = parse(response).read('$..ERP_ID__c')
+			def 	ERP_ID__Company_Code = parse(response).read('$..ERP_Company_Code__c')
+			def 	ERP_ProductCode = parse(response).read('$..ProductCode')
+			def 	ERP_ID = "I"+ERP_ID__Company_Code + ERP_ProductCode			
+				
+							
+					if (ERP_ID == ERP_ID__c  )
+					{
+						log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+				
+											
+			return ERP_ID__c[ERP_ID__c];
+			}
+
+
+		public def ProductCode()
+		{
+			//log.error " ********************* Account Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_ProductCode = parse(response).read('$..ProductCode')
+			
+			
+				
+				for (i = 0 ; i< ProductCode.size() ; i++ )
+				{
+					
+				//	log.info Account[i]
+					if (ProductCode[i-1] != null && ProductCode[i-1].length() <=18  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return ProductCode[i]							
+			}
+
+			public def Description()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	Description = parse(response).read('$..Description')
+			
+			
+				
+				for (i = 0 ; i< Description.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (Description[i-1] != null && Description[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return Description[i]							
+			}
+
+public def ERP_Location_ID__c()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	Description = parse(response).read('$..ERP_Location_ID__c')
+			
+			
+				
+				for (i = 0 ; i< ERP_Location_ID__c.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (ERP_Location_ID__c[i-1] != null && ERP_Location_ID__c[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return ERP_Location_ID__c[i]							
+			}
+			
+		public def ERP_Stock_Code__c()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_Stock_Code = parse(response).read('$..ERP_Stock_Code__c')
+			def 	ProductCode = parse(response).read('$..ProductCode')
+			
+				
+					
+					//log.info Description[i]
+					if (ERP_Stock_Code  == ProductCode )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					return ERP_Stock_Code__c[ProductCode]
+				}
+											
+			
+			
+			
+log.info "Func_Lib is set going to Call function"
+context.setProperty("dk", new Func_Lib(log, context, testRunner))
+//context.setProperty("nk", new Func_Lib(log, context, testRunner))
+
+
+	]]></script></con:config></con:testStep><con:testStep type="groovy" name="Call_Fun" id="801eca62-9eca-4162-8f68-ef817acf9712"><con:settings/><con:config><script>lib = testRunner.testCase.testSuite.project.testSuites["GetProjectOrderHeader"].testCases["TestCase_GetByCompanyCode"].testSteps["Func_Lib"]
+
+lib.run(testRunner, context)
+
+def rd = context.dk
+log.info  "To run class function object is created"
+//def rd1 = context.nk
+//log.info rd
+
+//def Genfunc = rd.Genfunc()
+//log.info  "Test Case " +Genfunc
+
+def  ERP_ID = rd. ERP_ID__c()
+log.info " ERP_ID Method executed succesfully "
+
+def ProductCod = rd.ProductCode()
+log.info "  ProductCode   Method executed succesfully "
+
+//log.info "ERP_Project_Number__c "+ "Test Case " + ERP_Project
+def Description_O= rd.Description(
+log.info "Description method executed"
+
+def ERP_Location_ID= rd.ERP_Location_ID__c())
+log.info  "ERP_Location_ID method executed"
+
+def ERP_Stock_Code= rd.ERP_Stock_Code__c()
+log.info  "ERP_Stock_Code method executed"
+
+//log.info "2"</script></con:config></con:testStep><con:testStep type="groovy" name="test" id="53207735-ec1a-4064-b7f2-fc53abe9850d" disabled="true"><con:settings/><con:config><script>lib = testRunner.testCase.testSuite.project.testSuites["GetProjectOrderHeader"].testCases["TestCase_GetByCompanyCode"].testSteps["Func_Lib"]
+
+lib.run(testRunner, context)
+
+def rd = context.dk
+log.info  "To run class function object is created"
+//def rd1 = context.nk
+//log.info rd
+
+//def Genfunc = rd.Genfunc()
+//log.info  "Test Case " +Genfunc
+
+
+
+def Account_O = rd.Account()
+log.info " Account Method executed succesfully "</script></con:config></con:testStep><con:testStep type="groovy" name="Teset 2" id="56b78e65-6cf1-4967-a97d-cecac556d3f2" disabled="true"><con:settings/><con:config><script/></con:config></con:testStep><con:properties><con:property><con:name>ID</con:name><con:value>serId_8M</con:value></con:property></con:properties><con:reportParameters/><con:breakPoints><con:testStepId>adafef1e-59e7-49cd-ad1a-941864529d52</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>8ec9fbe4-5f8c-482f-bdf1-64e2b9263273</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase id="c4777a92-aaa2-4ace-8ba0-a72d1e181a47" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="GetProductByDescription" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="GetURI" id="245b44c7-3bd1-445f-bdda-77de1a9a852f"><con:settings/><con:config><script>import jxl.*
+import java.lang.*
+
+
+try {
+               wb = Workbook.getWorkbook(new File('C:/TestDetails/CheckProduct InventoryURL.xls'))
+               //sheet = wb.getSheetName("GetByProjectNumber");
+               wb = Workbook.getWorkbook(new File('C:/TestDetails/CheckProduct InventoryURL.xls'))
+			sheet = wb.getSheet(0)
+			//log.info "Rows : " + sheet.getRows();
+         		def Domain = sheet.getCell(1,0).getContents()
+      		//log.info Domain 
+      		def Port = sheet.getCell(1,1).getContents()
+      		//log.info Port
+      		def context1 = sheet.getCell(1,2).getContents() 
+      		//log.info context1
+		
+			context["host"]= Domain
+			context["port"]= Port
+			context["context1"]= context1		
+			context["colon"] = ":"
+			context["backslash"] = "/"	
+               context["productCode"]="productCode"
+               
+		sheet = wb.getSheet(2)
+		log.info "Sheet 1 Rows Count : " +sheet.getRows();
+               for (i=1 ; i&lt;sheet.getRows() ; i++){
+                   def CompanyCode = sheet.getCell(0,i).getContents(); 
+                   log.info CompanyCode
+                   context["CompanyCode"] = CompanyCode
+                                  for (j=1 ; j&lt;= sheet.getColumns()-1 ; j++){
+                                  
+                                  //log.info sheet.getCell(j, i).getContents();
+                                  context["proCode"] = sheet.getCell(j, i).getContents();
+                                  //log.info "ServiceOrdNo : " + context["ServiceOrdNo"]
+                                             def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]
+                                             def str2 = context["CompanyCode"] + context["backslash"] + context["productCode"]+ context["backslash"]+ context["proCode"]
+                                             log.info "URI : " + str1 + str2
+                                             //testRunner.runTestStepByName("REST Request") 
+                                             Thread.sleep(8000)
+                                            // testRunner.runTestStepByName("Call_Fun")
+                                             //http://mum-dev:5006/api/serviceOrder/companyCode/8M/serviceOrderNo/1601138000
+                                 
+                                  	}                                  	
+                              }  
+               } catch (Exception err) {
+                              log.error err
+                              log.error "Check Test Data file Path."        
+}
+wb.close()
+</script></con:config></con:testStep><con:testStep type="httprequest" name="REST Request" id="0689984c-6bea-4f3a-a720-76840cec082c"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" id="7890fcc1-d04b-4976-8e33-8a6b3d9c1b8e" name="REST Request" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${host}${colon}${port}${backslash}${context1}${backslash}${companycode}${backslash}${comcode}${backslash}${projectNumber}${backslash}${proCode1}</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:config></con:testStep><con:testStep type="restrequest" name="REST Request__" id="6f28ea3a-b453-4705-b50d-35abbecdd5a1" disabled="true"><con:settings/><con:config service="REST Service 1" resourcePath="/" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request__" id="6c68ab72-40ab-4c2e-835c-cc65d330b6d2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${host}${colon}${port}${backslash}${context1}${backslash}${companycode}${backslash}${comcode}${backslash}${projectNumber}${backslash}${proCode1}</con:endpoint><con:request/><con:originalUri>http://mum-dev/api/serviceOrder/companyCode/</con:originalUri><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Func_Lib" id="f0ad710d-45c7-4b95-aec8-95e948eb7b11"><con:settings/><con:config><script><![CDATA[import groovy.json.JsonSlurper
+import static com.jayway.jsonpath.JsonPath.parse
+import com.eviware.soapui.model.project.ProjectFactoryRegistry
+import com.eviware.soapui.impl.wsdl.WsdlProjectFactory
+
+class Func_Lib
+{
+	def log
+	def testRunner
+	def context
+	def attribute = []
+	def i
+
+	def Func_Lib(logIn, contextIn, testRunnerIn)
+	{
+		this.log = logIn;
+		this.testRunner = testRunnerIn;
+		this.context = contextIn
+		}		
+		public def Description()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	Description = parse(response).read('$..Description')
+			
+			
+				
+				for (i = 0 ; i< Description.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (Description[i-1] != null && Description[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return Description[i]							
+			}
+	public def ERP_Company_Code()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	Description = parse(response).read('$..ERP_Company_Code__c')
+			
+			
+				
+				for (i = 0 ; i< Description.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (Description[i-1] != null && Description[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return ERP_Company_Code[i]							
+			}
+
+		public def Name()
+		{
+			//log.error " ********************* ERP_ID__c Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_ID = parse(response).read('$..Name')
+			def 	Description = parse(response).read('$..Description')
+						
+				
+							
+					if (ERP_ID.contains(Description) )
+					{
+						log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+				
+											
+			return ERP_ID__c[ERP_ID__c];
+			}
+
+
+		public def ERP_Available_Quantity()
+		{
+			//log.error " ********************* Account Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_Available_Quantity = parse(response).read('$..ERP_Available_Quantity_ce')
+			
+			
+				
+								
+				//	log.info Account[i]
+					if (ERP_Available_Quantity != null  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				
+				return ERP_Available_Quantity							
+			}
+
+			
+public def ProductCode()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ProductCode = parse(response).read('$..ProductCode')
+			
+			
+				
+				for (i = 0 ; i< ProductCode.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (ProductCode[i-1] != null && ProductCode[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return ProductCode[i]							
+			}
+			
+				
+			
+			
+			
+log.info "Func_Lib is set going to Call function"
+context.setProperty("dk", new Func_Lib(log, context, testRunner))
+//context.setProperty("nk", new Func_Lib(log, context, testRunner))
+
+
+	]]></script></con:config></con:testStep><con:testStep type="groovy" name="Call_Fun" id="b5fc1892-f378-46df-a338-8de71eba49c0"><con:settings/><con:config><script>lib = testRunner.testCase.testSuite.project.testSuites["GetProjectOrderHeader"].testCases["TestCase_GetByProjectNumber"].testSteps["Func_Lib"]
+
+lib.run(testRunner, context)
+
+def rd = context.dk
+log.info  "To run class function object is created"
+//def rd1 = context.nk
+//log.info rd
+
+//def Genfunc = rd.Genfunc()
+//log.info  "Test Case " +Genfunc
+
+
+
+def Description = rd.Description()
+log.info " Description Method executed succesfully "
+
+def ERP_Company_Code = rd.ERP_Company_Code()
+log.info "  ERP_Company_Code Method executed succesfully "
+
+
+//log.info "ERP_Project_Number__c "+ "Test Case " + ERP_Project
+def Name_O= rd.Name()
+log.info "Name method executed"
+
+def ERP_Available_Quantity_O= rd.ERP_Available_Quantity()
+log.info  "ERP_Available_Quantityc method executed"
+
+
+def ProductCode()_O= rd.ProductCode()
+log.info  "ProductCode() method executed"
+
+//log.info "2"</script></con:config></con:testStep><con:testStep type="groovy" name="test" id="b6bd4dd4-4141-4b5a-9481-03e85407f10d" disabled="true"><con:settings/><con:config><script>lib = testRunner.testCase.testSuite.project.testSuites["GetProjectOrderHeader"].testCases["TestCase_GetByProjectNumber"].testSteps["Func_Lib"]
+
+lib.run(testRunner, context)
+
+def rd = context.dk
+log.info  "To run class function object is created"
+//def rd1 = context.nk
+//log.info rd
+
+//def Genfunc = rd.Genfunc()
+//log.info  "Test Case " +Genfunc
+
+
+
+def Account_O = rd.Account()
+log.info " Account Method executed succesfully "</script></con:config></con:testStep><con:testStep type="groovy" name="Teset 2" id="b66a0261-f107-4a7f-b725-2d2675b60d92" disabled="true"><con:settings/><con:config><script>lib = testRunner.testCase.testSuite.project.testSuites["GetProjectOrderHeader"].testCases["TestCase_GetByProjectNumber"].testSteps["Func_Lib"]
+
+lib.run(testRunner, context)
+
+def rd = context.dk
+log.info  "To run class function object is created"
+//def rd1 = context.nk
+//log.info rd
+
+//def Genfunc = rd.Genfunc()
+//log.info  "Test Case " +Genfunc
+
+
+
+def Account_O = rd.Account()
+log.info " Account Method executed succesfully "
+
+
+</script></con:config></con:testStep><con:properties><con:property><con:name>ID</con:name><con:value>serId_8M</con:value></con:property></con:properties><con:reportParameters/><con:breakPoints><con:testStepId>adafef1e-59e7-49cd-ad1a-941864529d52</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>8ec9fbe4-5f8c-482f-bdf1-64e2b9263273</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c056ea81-f957-4767-ae1c-d83199345290</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase id="813d09ae-33d2-43c8-b9ab-b1de08e6e70a" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="GetProduct" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="GetURI" id="f1dd1656-984e-4caa-8022-66a6a9977974"><con:settings/><con:config><script>import jxl.*
+import java.lang.*
+
+
+try {
+               wb = Workbook.getWorkbook(new File('C:/TestDetails/CheckProduct InventoryURL.xls'))
+               //sheet = wb.getSheetName("GetByProjectNumber");
+           	sheet = wb.getSheet(0)
+			//log.info "Rows : " + sheet.getRows();
+         		def Domain = sheet.getCell(1,0).getContents()
+      		//log.info Domain 
+      		def Port = sheet.getCell(1,1).getContents()
+      		//log.info Port
+      		def context1 = sheet.getCell(1,2).getContents() 
+      		//log.info context1
+		
+			context["host"]= Domain
+			context["port"]= Port
+			context["context1"]= context1		
+			context["colon"] = ":"
+			context["backslash"] = "/"	
+               context["productCode"]="productCode"
+               
+		sheet = wb.getSheet(3)
+		log.info "Sheet 1 Rows Count : " +sheet.getRows();
+               for (i=1 ; i&lt;sheet.getRows() ; i++){
+                   def CompanyCode = sheet.getCell(0,i).getContents(); 
+                   log.info CompanyCode
+                   context["CompanyCode"] = CompanyCode
+                                  for (j=1 ; j&lt;= sheet.getColumns()-1 ; j++){
+                                  
+                                  //log.info sheet.getCell(j, i).getContents();
+                                  context["proCode"] = sheet.getCell(j, i).getContents();
+                                  //log.info "ServiceOrdNo : " + context["ServiceOrdNo"]
+                                             def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]
+                                             def str2 = context["CompanyCode"] + context["backslash"] + context["productCode"]+ context["backslash"]+ context["proCode"]
+                                             log.info "URI : " + str1 + str2
+                                             //testRunner.runTestStepByName("REST Request") 
+                                             Thread.sleep(8000)
+                                            // testRunner.runTestStepByName("Call_Fun")
+                                             //http://mum-dev:5006/api/serviceOrder/companyCode/8M/serviceOrderNo/1601138000
+                                 
+                                  	}                                  	
+                              }  
+               } catch (Exception err) {
+                              log.error err
+                              log.error "Check Test Data file Path."        
+}
+wb.close()
+</script></con:config></con:testStep><con:testStep type="httprequest" name="REST Request" id="833b02a0-c547-4b3e-8e49-30b8d9489246"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" id="47d00935-1f49-4e15-8fe0-855c90c5a994" name="REST Request" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${host}${colon}${port}${backslash}${context1}${backslash}${companycode}${backslash}${comcode}${backslash}${projectName}${backslash}${proName1}</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:config></con:testStep><con:testStep type="restrequest" name="REST Request__" id="3a562604-e42a-4c82-83bf-f3a95753ec7d" disabled="true"><con:settings/><con:config service="REST Service 1" resourcePath="/" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request__" id="6c68ab72-40ab-4c2e-835c-cc65d330b6d2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${host}${colon}${port}${backslash}${context1}${backslash}${companycode}${backslash}${comcode}${backslash}${projectName}${backslash}${proName1}</con:endpoint><con:request/><con:originalUri>http://mum-dev/api/serviceOrder/companyCode/</con:originalUri><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Func_Lib" id="f166cf5b-83a4-4966-951e-f91ed3462a3d"><con:settings/><con:config><script><![CDATA[import groovy.json.JsonSlurper
+import static com.jayway.jsonpath.JsonPath.parse
+import com.eviware.soapui.model.project.ProjectFactoryRegistry
+import com.eviware.soapui.impl.wsdl.WsdlProjectFactory
+
+class Func_Lib
+{
+	def log
+	def testRunner
+	def context
+	def attribute = []
+	def i
+
+	def Func_Lib(logIn, contextIn, testRunnerIn)
+	{
+		this.log = logIn;
+		this.testRunner = testRunnerIn;
+		this.context = contextIn
+		}		
+		
+		public def ERP_Company_Code()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	Description = parse(response).read('$..ERP_Company_Code__c')
+			
+			
+				
+				for (i = 0 ; i< Description.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (Description[i-1] != null && Description[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return ERP_Company_Code[i]							
+			}
+
+		public def ProductCode()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ProductCode = parse(response).read('$..ProductCode')
+			
+			
+				
+				for (i = 0 ; i< ProductCode.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (ProductCode[i-1] != null && ProductCode[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return ProductCode[i]							
+			}
+			
+
+
+public def SVMXC__Location__c()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	LocationID = parse(response).read('$..SVMXC__Location__c')
+			
+			
+				
+				for (i = 0 ; i< LocationID.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (LocationID[i-1] != null && LocationID[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return LocationID[i]							
+			}
+	
+
+public def ERP_ID__c()
+		{
+			//log.error " ********************* ERP_ID__c Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_ID__c = parse(response).read('$..ERP_ID__c')
+			def 	ERP_ID__Company_Code = parse(response).read('$..ERP_Company_Code__c')
+			def 	ERP_ProductCode = parse(response).read('$..ProductCode')
+			def 	ERP_ID = "I"+ERP_ID__Company_Code + ERP_ProductCode			
+				
+							
+					if (ERP_ID == ERP_ID__c  )
+					{
+						log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+				
+											
+			return ERP_ID__c[ERP_ID__c];
+			}
+
+
+
+			
+		public def Family()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	Family = parse(response).read('$..Family')
+			
+			
+				
+				for (i = 0 ; i< Family.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (Family[i-1] != null && Family[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return Family[i]							
+			}
+	
+
+		public def Name()
+		{
+			//log.error " ********************* ERP_ID__c Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_ID = parse(response).read('$..Name')
+			def 	Description = parse(response).read('$..Description')
+						
+				
+							
+					if (ERP_ID.contains(Description) )
+					{
+						log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+				
+											
+			return ERP_ID__c[ERP_ID__c];
+			}
+
+
+		public def ERP_Available_Quantity()
+		{
+			//log.error " ********************* Account Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_Available_Quantity = parse(response).read('$..ERP_Available_Quantity_ce')
+			
+			
+				
+								
+				//	log.info Account[i]
+					if (ERP_Available_Quantity != null  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				
+				return ERP_Available_Quantity							
+			}
+
+			
+			
+log.info "Func_Lib is set going to Call function"
+context.setProperty("dk", new Func_Lib(log, context, testRunner))
+//context.setProperty("nk", new Func_Lib(log, context, testRunner))
+
+
+	]]></script></con:config></con:testStep><con:testStep type="groovy" name="Call_Fun" id="720d5622-bdd0-4a19-8ee5-036aa66c67b7"><con:settings/><con:config><script>lib = testRunner.testCase.testSuite.project.testSuites["GetProjectOrderHeader"].testCases["TestCase_GetByProjectNumber"].testSteps["Func_Lib"]
+
+lib.run(testRunner, context)
+
+def rd = context.dk
+log.info  "To run class function object is created"
+//def rd1 = context.nk
+//log.info rd
+
+//def Genfunc = rd.Genfunc()
+//log.info  "Test Case " +Genfunc
+
+
+
+def Family= rd.Family()
+log.info " Family   Method executed succesfully "
+
+def ERP_Company_Code = rd.ERP_Company_Code()
+log.info "  ERP_Company_Code Method executed succesfully "
+
+
+//log.info "ERP_Project_Number__c "+ "Test Case " + ERP_Project
+def Name_O= rd.Name()
+log.info "Name method executed"
+
+def ERP_Available_Quantity_O= rd.ERP_Available_Quantity()
+log.info  "ERP_Available_Quantityc method executed"
+
+
+def ProductCode()_O= rd.ProductCode()
+log.info  "ProductCode() method executed"
+
+def SVMXC__Location= rd.SVMXC__Location__c()
+log.info  "SVMXC__Location__c method executed"
+
+def ERP_ID= rd.ERP_ID__c()
+log.info  "ERP_ID__c  method executed"
+
+
+//log.info "2"</script></con:config></con:testStep><con:testStep type="groovy" name="test" id="13160b07-d995-433e-9cce-e4727e4e688f" disabled="true"><con:settings/><con:config><script>class Callee {
+ 
+  String hello() {
+     return "Hello world! "
+  }
+ 
+  def static salute( who, log ) { log.info "Hello again $who!" }
+}
+
+//Caller.groovy
+c = new Callee()
+log.info c.hello()
+</script></con:config></con:testStep><con:testStep type="groovy" name="Teset 2" id="f2ebc483-4a12-4340-95a9-6f7eb993f140" disabled="true"><con:settings/><con:config><script/></con:config></con:testStep><con:properties><con:property><con:name>ID</con:name><con:value>serId_8M</con:value></con:property></con:properties><con:reportParameters/><con:breakPoints><con:testStepId>adafef1e-59e7-49cd-ad1a-941864529d52</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>8ec9fbe4-5f8c-482f-bdf1-64e2b9263273</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>f8744394-b237-439e-b3d8-1fc44d501e03</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:testCase id="b8c1dbe7-6fe5-4b98-be29-24ec4376e4c9" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="GetProductByLocationId" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="GetURI" id="00373a27-058c-4927-862c-224e89308696"><con:settings/><con:config><script>import jxl.*
+import java.lang.*
+
+
+try {
+               wb = Workbook.getWorkbook(new File('C:/TestDetails/CheckProduct InventoryURL.xls'))
+               //sheet = wb.getSheetName("GetByProjectNumber");
+           	sheet = wb.getSheet(0)
+			//log.info "Rows : " + sheet.getRows();
+         		def Domain = sheet.getCell(1,0).getContents()
+      		//log.info Domain 
+      		def Port = sheet.getCell(1,1).getContents()
+      		//log.info Port
+      		def context1 = sheet.getCell(1,2).getContents() 
+      		//log.info context1
+		
+			context["host"]= Domain
+			context["port"]= Port
+			context["context1"]= context1		
+			context["colon"] = ":"
+			context["backslash"] = "/"	
+               context["productCode"]="productCode"
+               
+		sheet = wb.getSheet(4)
+		log.info "Sheet 1 Rows Count : " +sheet.getRows();
+               for (i=1 ; i&lt;sheet.getRows() ; i++){
+                   def CompanyCode = sheet.getCell(0,i).getContents(); 
+                   log.info CompanyCode
+                   context["CompanyCode"] = CompanyCode
+                                  for (j=1 ; j&lt;= sheet.getColumns()-1 ; j++){
+                                  
+                                  //log.info sheet.getCell(j, i).getContents();
+                                  context["proCode"] = sheet.getCell(j, i).getContents();
+                                  //log.info "ServiceOrdNo : " + context["ServiceOrdNo"]
+                                             def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]
+                                             def str2 = context["CompanyCode"] + context["backslash"] + context["productCode"]+ context["backslash"]+ context["proCode"]
+                                             log.info "URI : " + str1 + str2
+                                             //testRunner.runTestStepByName("REST Request") 
+                                             Thread.sleep(8000)
+                                            // testRunner.runTestStepByName("Call_Fun")
+                                             //http://mum-dev:5006/api/serviceOrder/companyCode/8M/serviceOrderNo/1601138000
+                                 
+                                  	}                                  	
+                              }  
+               } catch (Exception err) {
+                              log.error err
+                              log.error "Check Test Data file Path."        
+}
+wb.close()
+</script></con:config></con:testStep><con:testStep type="restrequest" name="REST Request__" id="0ba43c47-4431-4a1e-91a3-063ede44a5b6" disabled="true"><con:settings/><con:config service="REST Service 1" resourcePath="/" methodName="GET" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="REST Request__" id="6c68ab72-40ab-4c2e-835c-cc65d330b6d2" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${host}${colon}${port}${backslash}${context1}${backslash}${companycode}${backslash}${comcode}${backslash}${Account}${backslash}${Account1}</con:endpoint><con:request/><con:originalUri>http://mum-dev/api/serviceOrder/companyCode/</con:originalUri><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="httprequest" name="REST Request" id="8fe2da21-60ed-49cc-b18f-8b363f9f6c82"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" id="de673c1b-e803-4398-baf2-a6f3cc3b5308" name="REST Request" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://${host}${colon}${port}${backslash}${context1}${backslash}${companycode}${backslash}${comcode}${backslash}${startDate}${backslash}${startDate1} ${backslash}${endDate}${backslash}${endDate1}</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:config></con:testStep><con:testStep type="groovy" name="Func_Lib" id="6a2e3b89-874b-4c7a-bb25-48983b06f317"><con:settings/><con:config><script><![CDATA[import groovy.json.JsonSlurper
+import static com.jayway.jsonpath.JsonPath.parse
+import com.eviware.soapui.model.project.ProjectFactoryRegistry
+import com.eviware.soapui.impl.wsdl.WsdlProjectFactory
+
+class Func_Lib
+{
+	def log
+	def testRunner
+	def context
+	def attribute = []
+	def i
+
+	def Func_Lib(logIn, contextIn, testRunnerIn)
+	{
+		this.log = logIn;
+		this.testRunner = testRunnerIn;
+		this.context = contextIn
+		}		
+		
+		public def ERP_Company_Code()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	Description = parse(response).read('$..ERP_Company_Code__c')
+			
+			
+				
+				for (i = 0 ; i< Description.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (Description[i-1] != null && Description[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return ERP_Company_Code[i]							
+			}
+
+		public def ProductCode()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ProductCode = parse(response).read('$..ProductCode')
+			
+			
+				
+				for (i = 0 ; i< ProductCode.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (ProductCode[i-1] != null && ProductCode[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return ProductCode[i]							
+			}
+			
+
+
+public def ERP_Stock_Location_Code_Key__c()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_Stock_Location_Code_Key = parse(response).read('$..ERP_Stock_Location_Code_Key__c')
+			
+			
+				
+				for (i = 0 ; i< ERP_Stock_Location_Code_Key.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (ERP_Stock_Location_Code_Key[i-1] != null && ERP_Stock_Location_Code_Key[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return LocationID[i]							
+			}
+	
+
+public def ERP_ID__c()
+		{
+			//log.error " ********************* ERP_ID__c Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_ID__c = parse(response).read('$..ERP_ID__c')
+			def 	ERP_ID__Company_Code = parse(response).read('$..ERP_Company_Code__c')
+			def 	ERP_ProductCode = parse(response).read('$..ProductCode')
+			def 	ERP_ID = "I"+ERP_ID__Company_Code + ERP_ProductCode			
+				
+							
+					if (ERP_ID == ERP_ID__c  )
+					{
+						log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+				
+											
+			return ERP_ID__c[ERP_ID__c];
+			}
+
+
+
+			
+		public def Family()
+		{
+			//log.error " ********************* Description Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	Family = parse(response).read('$..Family')
+			
+			
+				
+				for (i = 0 ; i< Family.size() ; i++ )
+				{
+					
+					//log.info Description[i]
+					if (Family[i-1] != null && Family[i-1].length() <=70  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				}
+				return Family[i]							
+			}
+	
+
+		public def Name()
+		{
+			//log.error " ********************* ERP_ID__c Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	ERP_ID = parse(response).read('$..Name')
+			def 	Description = parse(response).read('$..Description')
+						
+				
+							
+					if (ERP_ID.contains(Description) )
+					{
+						log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+				
+											
+			return ERP_ID;
+			}
+
+
+		public def SVMXC__Product_Cost()
+		{
+			//log.error " ********************* Account Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	SVMXC__Product_Cost = parse(response).read('$..SVMXC__Product_Cost__c')
+			
+			
+				
+								
+				//	log.info Account[i]
+					if (SVMXC__Product_Cost != null  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				
+				return SVMXC__Product_Cost							
+			}
+               
+
+
+
+public def SVMXC__Product_Line()
+		{
+			//log.error " ********************* Account Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	SVMXC__Product_Line = parse(response).read('$..SVMXC__Product_Line__c')
+			
+			
+				
+								
+				//	log.info Account[i]
+					if (SVMXC__Product_Line != null  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				
+				return SVMXC__Product_Line							
+			}
+
+
+			public def SVMXC__Status()
+		{
+			//log.error " ********************* Account Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	SVMXC__Status = parse(response).read('$..SVMXC__Status__c')
+			
+			
+				
+								
+				//	log.info Account[i]
+					if (SVMXC__Status != null  )
+					{
+						//log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+					
+				
+				return SVMXC__Product_Line							
+			}
+
+
+
+		public def ERP_ID__c()
+		{
+			//log.error " ********************* ERP_ID__c Field Validation *******************"	
+			def response = context.expand( '${REST Request#Response}' )
+			def 	RP_Location_ID = parse(response).read('$..RP_Location_ID__c')
+			def 	SVMXC__Location = parse(response).read('$..SVMXC__Location__c')
+			def 	ERP_ID__Company_Code = parse(response).read('$..ERP_Company_Code__c')
+			def 	SRP_Location_ID__c = "I"+ERP_ID__Company_Code + SVMXC__Location			
+				
+							
+					if (RP_Location_ID == SRP_Location_ID__c  )
+					{
+						log.info "TC PASS"
+						
+					}
+					else
+					{
+								log.error "TC FAILED"
+								//return testRunner.fail("FAILED")
+					 }
+				
+											
+			return ERP_ID__c[ERP_ID__c];
+			}
+
+
+
+
+
+			
+			
+log.info "Func_Lib is set going to Call function"
+context.setProperty("dk", new Func_Lib(log, context, testRunner))
+//context.setProperty("nk", new Func_Lib(log, context, testRunner))
+
+
+	]]></script></con:config></con:testStep><con:testStep type="groovy" name="Call_Fun" id="54d9c850-7930-4f17-9738-60545a66a338"><con:settings/><con:config><script>lib = testRunner.testCase.testSuite.project.testSuites["GetProjectOrderHeader"].testCases["TestCase_GetByProjectNumber"].testSteps["Func_Lib"]
+
+lib.run(testRunner, context)
+
+def rd = context.dk
+log.info  "To run class function object is created"
+//def rd1 = context.nk
+//log.info rd
+
+//def Genfunc = rd.Genfunc()
+//log.info  "Test Case " +Genfunc
+
+
+
+def Family= rd.Family()
+log.info " Family   Method executed succesfully "
+
+def ERP_Company_Code = rd.ERP_Company_Code()
+log.info "  ERP_Company_Code Method executed succesfully "
+
+
+//log.info "ERP_Project_Number__c "+ "Test Case " + ERP_Project
+def Name_O= rd.Name()
+log.info "Name method executed"
+
+def ERP_Available_Quantity_O= rd.ERP_Available_Quantity()
+log.info  "ERP_Available_Quantityc method executed"
+
+
+def ProductCode()_O= rd.ProductCode()
+log.info  "ProductCode() method executed"
+
+def SVMXC__Location= rd.SVMXC__Location__c()
+log.info  "SVMXC__Location__c method executed"
+
+def ERP_ID= rd.ERP_ID__c()
+log.info  "ERP_ID__c  method executed"
+
+
+//log.info "2"</script></con:config></con:testStep><con:testStep type="groovy" name="test" id="9c1e40d2-e0da-4650-a2e2-829fa66bea46" disabled="true"><con:settings/><con:config><script>class Callee {
+ 
+  String hello() {
+     return "Hello world! "
+  }
+ 
+  def static salute( who, log ) { log.info "Hello again $who!" }
+}
+
+//Caller.groovy
+c = new Callee()
+log.info c.hello()
+</script></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="eee86c2d-e49a-4e28-8ee4-413fda47c12d" disabled="true"><con:settings/><con:config><script>import jxl.*
+
+def companyCode_no = []
+def startDate = []
+def endDate = []
+def step_count
+
+wb = Workbook.getWorkbook(new File('C:/Work Docs/Test Project/Framework Practice/TestData_Demo.xls'))
+sheet = wb.getSheet(4)
+//log.info "Rows : " + sheet.getRows();
+         	def Domain = sheet.getCell(1,2).getContents()
+      	//log.info Domain 
+      	def Port = sheet.getCell(1,3).getContents()
+      	//log.info Port
+      	def context1 = sheet.getCell(1,4).getContents() 
+      	//log.info context1     	
+		def companycode = sheet.getCell(0,5).getContents()
+
+		context["host"]= Domain
+		context["port"]= Port
+		context["context1"]= context1
+		context["companycode"]= companycode
+		context["colon"] = ":"
+		context["backslash"] = "/"
+		context["startDate"]="startDate"	
+		context["endDate"]="endDate"	
+		
+def cnt =0
+for (def i = 5 ; i&lt;= sheet.getRows()-1 ; i++)
+{//sheet.getRows()-1
+	def comCode =  sheet.getCell(1,i).getContents()
+	//def comCode =  sheet.getCell(1,i).getContents()
+	context["comcode"] = comCode
+	
+	//log.info i
+	for(def j=2; j&lt;=sheet.getColumns()-1; j++)
+	{ 
+		for(k=2; k&lt;=sheet.getColumns()-1; k++)
+		{
+			endDate.add(sheet.getCell(k,i).getContents())
+			context["endDate1"] = endDate[cnt]
+		//log.info j+" "+i
+	 //proCode.add(sheet.getCell(j,i).getContents())
+	  startDate.add(sheet.getCell(j,i).getContents())
+	  
+	 //log.info sheet.getCell(j,i).getContents()
+	// step_count = proCode.size()
+	// log.info proCode
+	//def length = proCode[].length
+	//log.info length
+	context["startDate1"] = startDate[cnt]
+	cnt++	
+	def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]+ context["companycode"]
+	def str2 = 
+	context["backslash"]+context["comcode"]+context["backslash"]+context["startDate"]+context["backslash"]+context["startDate1"]+context["backslash"]+context["endDate"]+context["backslash"]+context["endDate1"]
+	log.info "URI  " + str1 + str2
+
+/*	Thread.sleep(10000)
+	testRunner.runTestStepByName("REST Request")
+	testRunner.runTestStepByName("Call_Fun")
+*/
+	//testRunner.runTestStepByName("Func_Lib")
+	
+	
+	}
+	
+	}	
+}
+wb.close() </script></con:config></con:testStep><con:testStep type="groovy" name="Teset 2" id="ee516b3d-c522-4a51-b01c-07fe0a8e05ac" disabled="true"><con:settings/><con:config><script>import jxl.*
+
+def companyCode_no = []
+def startDate = []
+def endDate = []
+def step_count
+
+wb = Workbook.getWorkbook(new File('C:/Work Docs/Test Project/Framework Practice/TestData_Demo.xls'))
+sheet = wb.getSheet(4)
+//log.info "Rows : " + sheet.getRows();
+         	def Domain = sheet.getCell(1,2).getContents()
+      	//log.info Domain 
+      	def Port = sheet.getCell(1,3).getContents()
+      	//log.info Port
+      	def context1 = sheet.getCell(1,4).getContents() 
+      	//log.info context1     	
+		def companycode = sheet.getCell(0,5).getContents()
+
+		context["host"]= Domain
+		context["port"]= Port
+		context["context1"]= context1
+		context["companycode"]= companycode
+		context["colon"] = ":"
+		context["backslash"] = "/"
+		context["startDate"]="startDate"	
+		context["endDate"]="endDate"	
+		
+def cnt =0
+for (def i = 5 ; i&lt;= sheet.getRows()-1 ; i++)
+{//sheet.getRows()-1
+	def comCode =  sheet.getCell(1,i).getContents()
+	//def comCode =  sheet.getCell(1,i).getContents()
+	context["comcode"] = comCode
+	
+	//log.info i
+	for(def j=2; j&lt;=sheet.getColumns()-1; j++)
+	{ 
+		for(k=2; k&lt;=sheet.getColumns()-1; k++)
+		{
+			endDate.add(sheet.getCell(k,i).getContents())
+			context["endDate1"] = endDate[cnt]
+			//log.info j+" "+i
+	 		//proCode.add(sheet.getCell(j,i).getContents())
+	  		startDate.add(sheet.getCell(j,i).getContents())
+	  
+			 //log.info sheet.getCell(j,i).getContents()
+			// step_count = proCode.size()
+			// log.info proCode
+			//def length = proCode[].length
+			//log.info length
+			context["startDate1"] = startDate[cnt]
+
+	if(i&lt;=7)
+	{
+	cnt++
+	}
+	else
+	{
+		
+		log.info "Loop breaked"
+		break
+		}	
+	def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]+ context["companycode"]
+	def str2 = 
+	context["backslash"]+context["comcode"]+context["backslash"]+context["startDate"]+context["backslash"]+context["startDate1"]+context["backslash"]+context["endDate"]+context["backslash"]+context["endDate1"]
+	log.info "URI  " + str1 + str2
+
+/*	Thread.sleep(10000)
+	testRunner.runTestStepByName("REST Request")
+	testRunner.runTestStepByName("Call_Fun")
+*/
+	//testRunner.runTestStepByName("Func_Lib")
+	
+	
+	}
+	
+	}	
+}
+wb.close() </script></con:config></con:testStep><con:properties><con:property><con:name>ID</con:name><con:value>serId_8M</con:value></con:property></con:properties><con:reportParameters/><con:breakPoints><con:testStepId>adafef1e-59e7-49cd-ad1a-941864529d52</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>8ec9fbe4-5f8c-482f-bdf1-64e2b9263273</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>027b0791-d4d6-4cdb-b977-836e8c1b875c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>4bf1a53e-645a-4ca4-8902-a33a802dbb56</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>3226ed5b-7050-402c-ac17-a47d1badbf92</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints></con:testCase><con:properties/><con:tearDownScript>def currentUser = System.getProperty("user.name")
+String object1 = new File("C:/Users/" + currentUser + "/.readyapi/logs/global-groovy.log").getText('UTF-8')
+today = new Date()
+log.info today
+sdf = new java.text.SimpleDateFormat("dd-MM-yyyy-hh-mm")
+log.info sdf
+todayStr = sdf.format(today)
+log.info todayStr
+def projectDir = context.expand('${projectDir}')
+new File( projectDir + "/" +todayStr + "_Report.txt" ).write(object1, "UTF-8" ) 
+</con:tearDownScript><con:reportParameters/></con:testSuite><con:testSuite id="048da79e-33c8-491f-a0f5-83d99521ae02" name="Product Inventory-Apigee"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:runType>SEQUENTIAL</con:runType><con:testCase id="4647cdfa-9b3c-47d9-9113-5c33be7e8af3" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="Gen_Lib" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="REST Status Class" id="8d1d952d-8cca-4d09-89bb-128f63baa263"><con:settings/><con:config><script>class REST_Status{
+	def log;
+	def context;
+	def testRunner;
+
+	REST_Status(def logIn, def contextIn, def testRunnerIn){
+		this.log = logIn;
+		this.context = contextIn;
+		this.testRunner = testRunnerIn;
+		}
+public checkStatus(){
+def resMsg = respMsg()
+//log.info resMsg
+if (status() == "200"){
+	log.info "************************* REST RESPONSE *************************"
+	//log.info resMsg
+	return resMsg	
+	}else if(status() == "201"){
+		//log.warn resMsg
+		return resMsg
+		}else if(status() == "202"){
+			//log.warn resMsg
+			return resMsg
+				}else if(status() == "203"){
+					//log.warn resMsg
+					return resMsg
+					}else if(status() == "204"){
+						//log.warn resMsg
+						return resMsg
+						}else{
+							//log.error resMsg
+							return resMsg
+								}
+}
+public def respMsg(){
+def ResponseMsg
+switch (status()) {
+	case "200":
+			//ResponseMsg =  "The request has succeeded."
+			log.info "The request was processed and returned successfully."
+			break;
+			
+			case "201":
+			ResponseMsg = "The request has been fulfilled and resulted in a new resource being created."
+			break;
+			
+			case "202":
+			ResponseMsg = "The request has been accepted for processing, but the processing has not been completed."
+			break;
+
+			case "203":
+			ResponseMsg = "Non-Authoritative Information"
+			break;
+
+			case "204":
+			ResponseMsg = "The server has fulfilled the request but does not need to return an entity-body, and might want to return updated metainformation. "
+			break;
+			
+			case "400":
+			ResponseMsg = "400 Bad Request."
+			//log.info "The request could not be understood by the server due to malformed syntax."
+			break;
+
+			case "401":
+			ResponseMsg = " 401 Unauthorized."
+			//log.info "The request requires user authentication."
+			break;
+
+			case "403":
+			ResponseMsg = "403 Forbidden"
+			//log.info "The server understood the request, but is refusing to fulfill it."
+			break;
+
+			case "404":
+			//ResponseMsg = "404 Not Found"
+			ResponseMsg = "404"
+			//log.error "The server has not found anything matching the Request-URI."
+			break;
+
+			case "408":
+			ResponseMsg = "408 Request Timeout"
+			//log.error "The client did not produce a request within the time that the server was prepared to wait."
+			break;
+
+			case "414":
+			ResponseMsg = "414 Request-URI Too Long"
+			//log.error "The server is refusing to service the request because the Request-URI is longer than the server is willing to interpret."
+			break;
+
+			case "417":
+			ResponseMsg = "417 Expectation Failed"
+			//log.error "Failed to load resource: the server responded with a status of 417 (Expectation Failed)" 
+			break;
+			
+			case "431":
+			ResponseMsg = "431 Request Header Fields Too Large"
+			//log.error "The 431 status code indicates that the server is unwilling to process the request because its header fields are too large."
+			break;
+
+			case "444":
+			ResponseMsg = "444 No Response"
+			//log.error "The server returns no information to the client and closes the connection" 
+			break;
+			
+			case "450":
+			ResponseMsg = "450 Blocked by Windows Parental Controls"
+			//log.error "This error is given when Windows Parental Controls are turned on and are blocking access to the given webpage." 
+			break;
+
+			case "500":
+			ResponseMsg = " 500 Internal Server Error."
+			//log.error "The server encountered an unexpected condition which prevented it from fulfilling the request." 
+			break;
+
+			case "502":
+			ResponseMsg = "502 Bad Gateway"
+			//log.error "The server, while acting as a gateway or proxy, received an invalid response from the upstream server it accessed in attempting to fulfill the request." 
+			break;
+				
+			default:
+			ResponseMsg = "Bad Request"
+			break;
+	}
+return ResponseMsg
+}
+
+public def status(){
+		def groovyUtils = new com.eviware.soapui.support.GroovyUtils( context )
+		def httpResponseHeaders = context.testCase.testSteps["REST Request"].testRequest.response.responseHeaders
+		//log.info httpResponseHeaders
+		def httpStatus = httpResponseHeaders["#status#"]
+		//log.info httpStatus[0]
+		def httpStatusCode = (httpStatus =~ "[1-5]\\d\\d")[0]
+		//log.info "httpStatusCode : " + httpStatusCode
+		def stat = ("HTTP status code: " + httpStatusCode)
+		//log.info stat
+		return httpStatusCode
+	}
+
+}
+
+//context.setProperty("res", new REST_Status(log, context, testRunner))
+
+obj = new REST_Status(log, context, testRunner)
+//obj.status()
+context.setProperty("Resp_Status_Obj", obj)
+
+</script></con:config></con:testStep><con:testStep type="groovy" name="Func_Lib" id="1d3f6827-cfb2-4b6e-bb26-e7f4a677c1ab"><con:settings/><con:config><script><![CDATA[import groovy.json.JsonSlurper
+import static com.jayway.jsonpath.JsonPath.parse
+import com.eviware.soapui.model.project.ProjectFactoryRegistry
+import com.eviware.soapui.impl.wsdl.WsdlProjectFactory
+
+class Parts Availability{
+
+	def log;
+	def testRunner;
+	def context;
+
+	Parts Availability{(logIn, contextIn, testRunnerIn){
+		this.log = logIn;
+		this.context = contextIn;
+		this.testRunner = testRunnerIn;
+		}
+
+/* *****************************************************************************
+Purpose : To Find API Response Time
+Autor : Nashim Khan
+Date :  3rd jan. 2017
+* *****************************************************************************
+*/
+
+public def ResponseTime(){
+	def Response = "API Responce get beyond time \n TC FAILED"
+	def iTime = testRunner.testCase.testSteps["REST Request"].testRequest.response.timeTaken
+	log.info testRunner.testCase.name + " Responce Time Taken " + iTime + "ms"	
+	if (iTime <= 500){
+		log.info "API Responce get within time \n TC PASS"
+		return "PASS"
+		}else{
+			log.error "API Responce get beyond time \n TC FAILED"
+			return "FAILED"
+			//sendResponse(Response)
+			}
+	}
+
+/* *****************************************************************************
+Purpose : To Find API Response Time
+Autor : Nashim Khan
+Date :  3rd jan. 2017
+******************************************************************************/
+
+public def env(){
+		// Get Environment
+		//def env = testRunner.testCase.testSuite.project.activeEnvironment.name
+		def env = testRunner.testCase.testSuite.getPropertyValue("Environment")
+		log.info "Test Environment : " + env
+		//return testRunner.testCase.testSuite.getPropertyValue("Environment")
+		return env		
+	}
+
+/* *****************************************************************************
+Purpose : To Find API Response Time
+Autor : Nashim Khan
+Date :  3rd jan. 2017
+******************************************************************************/
+
+
+public def headers(){
+	def all_Headers = []
+		def harResponse = context.expand( '${REST Request#HarResponse}' )
+		//all_Headers << harResponse
+		
+		log.info " ************ HTTP VERSION ****************"
+		
+		def httpVersion = parse(harResponse).read('$..httpVersion')
+		all_Headers <<  "httpVersion : " + httpVersion[0]
+		
+		all_Headers <<  " ************ API STATUS ****************"
+		def status = parse(harResponse).read('$..status')
+		all_Headers <<  "Response Status : " + status[0]
+		
+		def headers = parse(harResponse).read('$..headers')
+		def conLength = parse(headers).read('$..value') 
+		
+		all_Headers <<  " ************ API #STATUS# ****************"
+		all_Headers <<  "API #STATUS# : " + conLength[0]
+		
+		all_Headers <<  " ************ API Content-Length ****************"
+		all_Headers <<  "API Content-Length : " + conLength[1]
+		
+		all_Headers <<  " ************ API Content-Type ****************"
+		all_Headers <<  "API Content-Type : " + conLength[2]
+		
+		all_Headers <<  " ************ Date ****************"
+		all_Headers <<  "Date : " + conLength[3]
+		
+		all_Headers <<  " ************ Server ****************"
+		all_Headers <<  "Server : " + conLength[4]
+		return all_Headers
+}
+
+/* ***************************************************************************
+Purpose : To Find API Response Time
+Autor : Nashim Khan
+Date :  3rd jan. 2017
+*****************************************************************************/
+public def ProductFamily(){	
+def Description  = context.expand( '${REST Request#Response}' )
+def var = true
+def Description= []
+for (def i = 0 ; i < Description.size() ; i++){
+	if (Description[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+
+	}
+
+
+
+
+/* ***************************************************************************
+Purpose : To Find API Response Time
+Autor : Nashim Khan
+Date :  3rd jan. 2017
+*****************************************************************************/
+public def Product_line(){	
+def Description  = context.expand( '${REST Request#Response}' )
+def var = true
+def Description= []
+for (def i = 0 ; i < Description.size() ; i++){
+	if (Description[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+
+	}
+
+
+// ****************************************************************************************
+
+public def Product_Stock(){	
+def StockStatus  = context.expand( '${REST Request#Response}' )
+def var = true
+def StockStatus= []
+for (def i = 0 ; i < StockStatus.size() ; i++){
+	if (Description[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+
+	}
+
+
+	
+//**************************************************************************************************
+
+public def Product_Status(){	
+def ProStatus  = context.expand( '${REST Request#Response}' )
+def var = true
+def ProStatus= []
+for (def i = 0 ; i < ProStatus.size() ; i++){
+	if (Description[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+
+	}
+	
+//**************************************************************************************************
+public def QtyLocationId(){
+
+	def response = context.expand( '${REST Request#Response}' )
+			def 	LocationId = parse(response).read('$..LocationId')
+
+def var = true
+def LocationId = []
+for (def i = 0 ; i < LocationId.size() ; i++){
+	if (LocationId[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+	
+	}
+
+
+public def ProductAvlQty(){
+
+	def response = context.expand( '${REST Request#Response}' )
+			def 	AvailableQuantity = parse(response).read('$..AvailableQuantity')
+			
+def var = true
+def AvailableQuantity = []
+for (def i = 0 ; i < AvailableQuantity.size() ; i++){
+	if (AvailableQuantity[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+	
+	}
+
+public def ProductCode(){
+
+	def response = context.expand( '${REST Request#Response}' )
+			def 	ProdCode = parse(response).read('$..ProductCode')
+			
+def var = true
+def ProdCode = []
+for (def i = 0 ; i < ProdCode.size() ; i++){
+	if (ProdCode[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+	
+	}
+
+public def ProductavlQtyLocation(){
+
+	def LocationWise = context.expand( '${REST Request#Response}' )
+			
+			
+def var = true
+def LocationWise = []
+for (def i = 0 ; i < LocationWise.size() ; i++){
+	if (LocationWise[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+	
+	}
+
+
+public def productStockBalance(){
+
+	def StockBal = context.expand( '${REST Request#Response}' )
+			
+			
+def var = true
+def StockBal = []
+for (def i = 0 ; i < StockBal.size() ; i++){
+	if (StockBal[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+	
+	}
+	//ProductQuantity
+
+public def ProductQuantity(){
+
+	def response = context.expand( '${REST Request#Response}' )
+			def 	ProductQty = parse(response).read('$..ProductCode')
+			
+def var = true
+def ProductQty = []
+for (def i = 0 ; i < ProductQty.size() ; i++){
+	if (ProductQty[i] !=null ){
+		retval << "PASS"
+		//log.info "PASS"
+		}else{
+			retval << "FAILED"
+			//log.info "FAILED"
+			}
+	}
+	
+	}
+
+
+	
+//**************************************************************************************************
+public def sendResponse(def Response){	
+	testRunner.testCase.testSuite.setPropertyValue("JSON_Response", Response);
+	
+	//testRunner.runTestStepByName("TriggerMail")
+	def tCase = testRunner.testCase.testSuite.testCases["Gen_Lib"]	
+	def tStep = tCase.testSteps["TriggerMail"]	
+	tStep.run(testRunner, context)
+
+	
+	log.error "Trigger Mail"							
+
+	return "FAILED"
+	testRunner.testCase.testSteps["Mail"].disabled = true
+}
+
+
+	
+}
+context.setProperty("dk", new Order_Secure_Revenue(log, context, testRunner))
+
+
+
+]]></script></con:config></con:testStep><con:testStep type="groovy" name="Call_Func" id="3b8d9d9c-cf43-4580-88ce-7dd491de5968"><con:settings/><con:config><script><![CDATA[import groovy.json.JsonSlurper
+import static com.jayway.jsonpath.JsonPath.parse
+import com.eviware.soapui.model.project.ProjectFactoryRegistry
+import com.eviware.soapui.impl.wsdl.WsdlProjectFactory
+import static org.codehaus.groovy.runtime.StackTraceUtils.sanitize
+
+lib1 = testRunner.testCase.testSuite.project.testSuites["Parts Availability{"].testCases["Gen_Lib"].testSteps["REST Status Class"]
+lib1.run(testRunner, context)
+def restStatus = context.Resp_Status_Obj
+//log.info restStatus
+
+lib2 = testRunner.testCase.testSuite.project.testSuites["Parts Availability{"].testCases["Gen_Lib"].testSteps["Func_Lib"]
+lib2.run(testRunner, context)
+def rk = context.dk
+
+log.info "REST API STATUS : " + restStatus.status()
+restStatus.checkStatus()
+//Res_Status.respMsg()
+
+
+ErrorList = []
+response = context.expand( '${REST Request#Response}' )
+if(restStatus.status() == "200"){
+	
+	rk.env()
+	def headers = rk.headers()
+	for(def i=0 ; i<headers.size();i++){
+		log.info headers[i]
+		}	
+	//rk.ResponseTime()
+	//log.info "Test : "+rk.ResponseTime()
+	def RespTime = rk.ResponseTime()
+	if(RespTime == "FAILED"){
+		ErrorList << "Response get Beyond Limit Test Case : " + RespTime
+		}
+	def manField = rk.mandatoryfield()
+	if(manField == "FAILED"){
+		ErrorList << "Response get Beyond Limit Test Case : " + manField
+		}
+
+// Validate BVA
+	def Order_Number = rk.BVATest(1, 40, parse(response).read('$..Order_Number'), "Order_Number")
+	log.info "BVA Test Case " + Order_Number + " for Order_Number attribute." 
+	if(Order_Number == "FAILED"){
+		ErrorList << "BVA Test Case " + Order_Number + " for Order_Number attribute."
+		}
+
+	def Line_Number = rk.BVATest(1, 6, parse(response).read('$..Line_Number'), "Line_Number")
+	log.info "BVA Test Case " + Line_Number + " for Line_Number attribute." 
+	if(Line_Number == "FAILED"){
+		ErrorList << "BVA Test Case " + Line_Number + " for Line_Number attribute."
+		}
+
+	def Line_Type = rk.BVATest(1, 255, parse(response).read('$..Line_Type'), "Line_Type")
+	log.info "BVA Test Case " + Line_Type + " for Line_Type attribute." 
+	if(Line_Type == "FAILED"){
+		ErrorList << "BVA Test Case " + Line_Type + " for Line_Type attribute."
+	}
+
+	def Invoice_Number = rk.BVATest(1, 15, parse(response).read('$..Invoice_Number'), "Invoice_Number")
+	log.info "BVA Test Case " + Invoice_Number + " for Invoice_Number attribute." 
+	if(Invoice_Number == "FAILED"){
+		ErrorList << "BVA Test Case " + Invoice_Number + " for Invoice_Number attribute."
+		}
+		
+
+	def Unit_Price = rk.BVATest(1, 24, parse(response).read('$..Unit_Price'), "Unit_Price")
+	log.info "BVA Test Case " + Unit_Price + " for Unit_Price attribute." 
+	if(Unit_Price == "FAILED"){
+		ErrorList << "BVA Test Case " + Unit_Price + " for Unit_Price attribute."
+		}
+
+	def Unit_Cost_Price = rk.BVATest(1, 24, parse(response).read('$..Unit_Cost_Price'), "Unit_Cost_Price")
+	log.info "BVA Test Case " + Unit_Cost_Price + " for Unit_Cost_Price attribute." 
+	if(Unit_Cost_Price == "FAILED"){
+		ErrorList << "BVA Test Case " + Unit_Cost_Price + " for Unit_Cost_Price attribute."
+		}
+
+	def Qty_Ordered = rk.BVATest(1, 29, parse(response).read('$..Qty_Ordered'), "Qty_Ordered")
+	log.info "BVA Test Case " + Qty_Ordered + " for Qty_Ordered attribute." 
+	if(Qty_Ordered == "FAILED"){
+		ErrorList << "BVA Test Case " + Qty_Ordered + " for Qty_Ordered attribute."
+		}
+/*
+	def Revenue = rk.BVATest(1, 25, parse(response).read('$..Revenue'), "Revenue")
+	log.info "BVA Test Case " + Revenue + " for Revenue attribute." 
+	if(Revenue == "FAILED"){
+		ErrorList << "BVA Test Case " + Revenue + " for Revenue attribute."
+		}*/
+
+	def Company_Code = rk.BVATest(1, 25, parse(response).read('$..Company_Code'), "Company_Code")
+	log.info "BVA Test Case " + Company_Code + " for Company_Code attribute." 
+	if(Company_Code == "FAILED"){
+		ErrorList << "BVA Test Case " + Company_Code + " for Company_Code attribute."
+		}
+
+	// ************************************************************************************
+	//def response = context.expand( '${REST Request#Response}' )
+	def Revenue1 = parse(response).read('$..Revenue')
+	def Unit_Price1 = parse(response).read('$..Unit_Price')
+	def Qty_Ordered1 = parse(response).read('$..Qty_Ordered')
+	def Rev = rk.validate_Revenue(Revenue1, Unit_Price1, Qty_Ordered1)
+	log.info "Business valibdation Test case " + Rev + " for Revenue attribute."
+	if (Rev == "FAILED"){
+		ErrorList << "Business valibdation Test case " + Rev + " for Revenue attribute."
+		}
+
+
+
+
+	
+		
+	}else{
+			def Response = Res_Status.status() 
+			rd.sendResponse(Response)
+	}
+
+// **********************************************************************************************************
+// Error List
+public def formatErrors(){
+	def errors = ""
+	for(def p=0 ; p<ErrorList.size() ; p++){
+	errors += "<li>" +  ErrorList[p] + "</li>"	
+	}	
+	return errors
+	}
+
+// Trigger Failed Test Case Mail to Stake Holder
+	public def TriggerMail(def Response){
+	testRunner.testCase.testSuite.setPropertyValue("JSON_Response", Response);
+	log.info Response
+	log.info "Mail Trigger to Stake Holder."
+	def tCase = testRunner.testCase.testSuite.testCases["Gen_Lib"]	
+	def tStep = tCase.testSteps["TriggerMail"]	
+	tStep.run(testRunner, context)			
+	return "Sent Mail to Stake Holder."	
+	}
+
+
+if(ErrorList.size() > 0)	{		
+	   TriggerMail(formatErrors())
+	}else{
+		log.info "No Errors Found."
+		}
+	]]></script></con:config></con:testStep><con:testStep type="groovy" name="TriggerMail" id="fae7a77b-f8b3-4846-8e92-09c8ac869b71"><con:settings/><con:config><script><![CDATA[import javax.mail.internet.*;
+import javax.mail.*
+import javax.activation.*
+import javax.mail.Multipart;
+import javax.mail.internet.MimeMultipart;
+import groovy.text.GStringTemplateEngine;
+import com.sun.mail.smtp.SMTPTransport;
+import java.security.Security;
+import java.util.Date;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+ 
+//Current Date and Time
+def mydate = new Date()
+
+//Assign To
+def AssignTo = "Vinod Bhoite, Vivek Waykole"
+
+
+//Get Comment Manager
+
+ 
+//get value of customField_email
+//to = issue.getCustomFieldValue( customField_email )
+
+to = "vikas.kamble-ext@jci.com"
+
+
+
+
+//Email Headers
+sender="Microservices_QA_SupportTeam@jci.com"//"vikas.kamble-ext@jci.com"
+sendername="Microservices QA Team"
+
+ 
+//Email acccount credentials
+username="vikas.kamble-ext@jci.com"
+password="xxxxxxxxxxxx"
+
+//Gmail Default port
+port = 25
+def Proj_Name = testRunner.testCase.name
+def Method_Name = testRunner.testCase.testSuite.name
+def API = testRunner.testCase.testSuite.getPropertyValue("URI")
+def Resp_Error = testRunner.testCase.testSuite.getPropertyValue("JSON_Response")
+def Environment = testRunner.testCase.testSuite.getPropertyValue("Environment")
+if (Environment == "10.71.16.100"){
+	Environment = "Azure Environment"
+	}else if(Environment == "mum-dev"){
+		Environment = "Local Dev Environment"
+		}else{
+			Environment = "Apigee Environment"
+			}
+
+
+//Email Body
+content = """\
+<html>
+<body>
+<div>
+Dear User, <br /><br /><br />
+
+
+
+During API testing following error occourd.<br /><br />
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+</style>
+</head>
+<body>
+
+<h2>API Details:</h2>
+<table style="width:100%">
+  <tr>
+    <th>Sr. No</th>
+    <th colspan="2">Bug Details</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>API Name</td>
+    <td>$Proj_Name</td>
+  </tr>
+<tr>
+    <td>2</td>
+    <td>Method Name</td>
+    <td>$Method_Name</td>
+  </tr>
+<tr>
+    <td>3</td>
+    <td>API</td>
+    <td>$API</td>
+  </tr>
+
+<tr>
+    <td>4</td>
+    <td>Environment</td>
+    <td>$Environment</td>
+  </tr>
+
+  <tr>
+    <td>5</td>
+    <td>Date and Time</td>
+    <td>$mydate</td>
+  </tr>
+
+   <tr>
+    <td>6</td>
+    <td>Assigned To</td>
+    <td>$AssignTo</td>
+  </tr>
+
+
+</table>
+<p>Error Details: </p>
+<ul>
+<font color="red">$Resp_Error</font>
+</ul>
+<br /><br />
+Regards,<br />
+Micro-Services QA Team <br /> <br /> <br />
+
+You have received this email because you are member of microservices team.<br/>
+This is autogenerated email - please do not replay to it.<br /><br /><br />
+</div>
+</body>
+</html>
+"""
+
+//Creat first part of email, Email Body
+
+ 
+Multipart mp = new MimeMultipart("mixed");
+
+MimeBodyPart htmlPart = new MimeBodyPart();
+htmlPart.setContent(content.toString(), "text/html");
+mp.addBodyPart(htmlPart);
+
+ 
+//Email Properties
+
+props = new Properties()
+props.put("mail.smtp.port", port);
+props.put("mail.smtp.socketFactory.fallback", "false");
+props.put("mail.smtp.quitwait", "false");
+props.put("mail.smtp.host", "smtp.jci.com");
+props.put("mail.smtp.auth", "true");
+
+
+Session session = Session.getInstance(props,
+          new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+          });
+
+
+MimeMessage message = new MimeMessage(session);
+message.setFrom(new InternetAddress(sender));
+//message.setSubject("${issue.getKey()}"); //Test
+message.setSubject("$Method_Name"+"_Business Validation failed.")
+//message.setContent(content.toString(), "text/html");//Test
+
+
+message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+//message.addRecipients(Message.RecipientType.TO, to);
+message.setContent(mp)
+
+try{
+        Transport transport = session.getTransport("smtp");
+        transport.connect( "smtp.jci.com",port,username,password );
+        transport.sendMessage(message,message.getAllRecipients());
+        transport.close();
+       // log.warn ("mail sent sucesfully to : "+ issue.getCustomFieldValue( customField_email).toString())
+
+}catch (MessagingException mex) {
+         mex.printStackTrace();
+}
+
+]]></script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:testCase id="89f68f02-aefc-4e1e-a115-33ca0a4d86ed" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="GetProductById" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="GetData" id="b90c5dde-b48e-4a47-af3e-d39f7d50f390"><con:settings/><con:config><script>import jxl.*
+import java.lang.*
+
+
+try {
+               wb = Workbook.getWorkbook(new File('C:/TestDetails/ProductInventory_Apigee.xls'))
+               //sheet = wb.getSheetName("GetByProjectNumber");
+           	sheet = wb.getSheet(0)
+			//log.info "Rows : " + sheet.getRows();
+         		def Domain = sheet.getCell(1,0).getContents()
+      		//log.info Domain 
+      		def Port = sheet.getCell(1,1).getContents()
+      		//log.info Port
+      		def context1 = sheet.getCell(1,2).getContents() 
+      		//log.info context1
+		
+			context["host"]= Domain
+			context["port"]= Port
+			context["context1"]= context1		
+			context["colon"] = ":"
+			context["backslash"] = "/"	
+               context["productCode"]="productCode"
+               context["CompanyCode"]="CompanyCode"
+               
+		sheet = wb.getSheet(1)
+		log.info "Sheet 1 Rows Count : " +sheet.getRows();
+               for (i=1 ; i&lt;sheet.getRows() ; i++){
+                   def CompanyCode = sheet.getCell(0,i).getContents(); 
+                   log.info CompanyCode
+                   context["CompanyCode"] = CompanyCode
+                                  for (j=1 ; j&lt;= sheet.getColumns()-1 ; j++){
+                                  
+                                  //log.info sheet.getCell(j, i).getContents();
+                                  context["proCode"] = sheet.getCell(j, i).getContents();
+                                  //log.info "ServiceOrdNo : " + context["ServiceOrdNo"]
+                                             def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]
+                                             def str2 = context["CompanyCode"] + context["backslash"] + context["productCode"]+ context["backslash"]+ context["proCode"]
+                                             log.info "URI : " + str1 + str2
+                                             testRunner.runTestStepByName("REST Request") 
+                                             Thread.sleep(8000)
+                                             testRunner.runTestStepByName("Call_Fun")
+                                             //http://mum-dev:5006/api/serviceOrder/companyCode/8M/serviceOrderNo/1601138000
+                                 
+                                  	}                                  	
+                              }  
+               } catch (Exception err) {
+                              log.error err
+                              log.error "Check Test Data file Path."        
+}
+wb.close()
+</script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:testCase id="2286d18a-c339-493a-9589-9b9a18f1a39e" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="GetProductByDescription" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="GetData" id="2eb8483e-c9dc-4972-8cec-facf27202706"><con:settings/><con:config><script>import jxl.*
+import java.lang.*
+
+
+try {
+               wb = Workbook.getWorkbook(new File('C:/TestDetails/ProductInventory_Apigee.xls'))
+               //sheet = wb.getSheetName("GetByProjectNumber");
+           	sheet = wb.getSheet(0)
+			//log.info "Rows : " + sheet.getRows();
+         		def Domain = sheet.getCell(1,0).getContents()
+      		//log.info Domain 
+      		def Port = sheet.getCell(1,1).getContents()
+      		//log.info Port
+      		def context1 = sheet.getCell(1,2).getContents() 
+      		//log.info context1
+		
+			context["host"]= Domain
+			context["port"]= Port
+			context["context1"]= context1		
+			context["colon"] = ":"
+			context["backslash"] = "/"	
+               context["productCode"]="productCode"
+               context["CompanyCode"]="CompanyCode"
+               
+		sheet = wb.getSheet(1)
+		log.info "Sheet 1 Rows Count : " +sheet.getRows();
+               for (i=1 ; i&lt;sheet.getRows() ; i++){
+                   def CompanyCode = sheet.getCell(0,i).getContents(); 
+                   log.info CompanyCode
+                   context["CompanyCode"] = CompanyCode
+                                  for (j=1 ; j&lt;= sheet.getColumns()-1 ; j++){
+                                  
+                                  //log.info sheet.getCell(j, i).getContents();
+                                  context["proCode"] = sheet.getCell(j, i).getContents();
+                                  //log.info "ServiceOrdNo : " + context["ServiceOrdNo"]
+                                             def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]
+                                             def str2 = context["CompanyCode"] + context["backslash"] + context["productCode"]+ context["backslash"]+ context["proCode"]
+                                             log.info "URI : " + str1 + str2
+                                             testRunner.runTestStepByName("REST Request") 
+                                             Thread.sleep(8000)
+                                             testRunner.runTestStepByName("Call_Fun")
+                                             //http://mum-dev:5006/api/serviceOrder/companyCode/8M/serviceOrderNo/1601138000
+                                 
+                                  	}                                  	
+                              }  
+               } catch (Exception err) {
+                              log.error err
+                              log.error "Check Test Data file Path."        
+}
+wb.close()
+</script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:testCase id="065809b1-b406-4c5c-8952-c6c8b8ece1e2" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="GetProduct" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="GetData" id="606694fa-ff65-467a-80b7-7a1fc487215d"><con:settings/><con:config><script>import jxl.*
+import java.lang.*
+
+
+try {
+               wb = Workbook.getWorkbook(new File('C:/TestDetails/ProductInventory_Apigee.xls'))
+               //sheet = wb.getSheetName("GetByProjectNumber");
+           	sheet = wb.getSheet(0)
+			//log.info "Rows : " + sheet.getRows();
+         		def Domain = sheet.getCell(1,0).getContents()
+      		//log.info Domain 
+      		def Port = sheet.getCell(1,1).getContents()
+      		//log.info Port
+      		def context1 = sheet.getCell(1,8).getContents() 
+      		//log.info context1
+		
+			context["host"]= Domain
+			context["port"]= Port
+			context["context1"]= context1		
+			context["colon"] = ":"
+			context["backslash"] = "/"	
+               context["productCode"]="productCode"
+               context["CompanyCode"]="CompanyCode"
+               context["locationid"]="locationid"
+               
+		sheet = wb.getSheet(1)
+		log.info "Sheet 1 Rows Count : " +sheet.getRows();
+               for (i=1 ; i&lt;sheet.getRows() ; i++){
+                   def CompanyCode = sheet.getCell(0,i).getContents(); 
+                   log.info CompanyCode
+                   context["CompanyCode"] = CompanyCode
+                                  for (j=1 ; j&lt;= sheet.getColumns()-1 ; j++){
+                                  
+                                  //log.info sheet.getCell(j, i).getContents();
+                                  context["proCode"] = sheet.getCell(j, i).getContents();
+                                  }
+                                  sheet2 = wb.getSheet(2)
+		                        log.info "Sheet 2 Rows Count : " +sheet2.getRows();
+                                  for (k=1 ; k&lt;= sheet.getColumns()-1 ; k++){
+                                  
+                                  //log.info sheet.getCell(j, i).getContents();
+                                  context["locid"] = sheet2.getCell(k, 1).getContents();
+                                  
+                                  
+                      def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]
+  def str2 = context["CompanyCode"] + context["backslash"] + context["productCode"]+ context["backslash"]+ context["proCode"]+context["backslash"]+ context["locationid"]+context["backslash"]+ context["locid"]
+                                             log.info "URI : " + str1 + str2
+                                             testRunner.runTestStepByName("REST Request") 
+                                             Thread.sleep(8000)
+                                           //testRunner.runTestStepByName("Call_Fun")
+                                           //http://mum-dev:5006/api/serviceOrder/companyCode/8M/serviceOrderNo/1601138000
+                                 
+                                  	}                                  	
+                              }  
+               }
+catch (Exception err) {
+                              log.error err
+                              log.error "Check Test Data file Path."        
+}
+wb.close()
+</script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:testCase id="d0c93989-9cb5-4d49-8683-7c813e09cd12" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="GetProductByLocationId" searchProperties="true" timeout="0"><con:settings/><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="GetData" id="57fa1346-357f-47f6-bf0b-683d3f66a2cd"><con:settings/><con:config><script>import jxl.*
+import java.lang.*
+
+
+try {
+               wb = Workbook.getWorkbook(new File('C:/TestDetails/ProductInventory_Apigee.xls'))
+               //sheet = wb.getSheetName("GetByProjectNumber");
+           	sheet = wb.getSheet(0)
+			//log.info "Rows : " + sheet.getRows();
+         		def Domain = sheet.getCell(1,0).getContents()
+      		//log.info Domain 
+      		def Port = sheet.getCell(1,1).getContents()
+      		//log.info Port
+      		def context1 = sheet.getCell(1,2).getContents() 
+      		//log.info context1
+		
+			context["host"]= Domain
+			context["port"]= Port
+			context["context1"]= context1		
+			context["colon"] = ":"
+			context["backslash"] = "/"	
+               context["productCode"]="productCode"
+               context["CompanyCode"]="CompanyCode"
+               
+		sheet = wb.getSheet(1)
+		log.info "Sheet 1 Rows Count : " +sheet.getRows();
+               for (i=1 ; i&lt;sheet.getRows() ; i++){
+                   def CompanyCode = sheet.getCell(0,i).getContents(); 
+                   log.info CompanyCode
+                   context["CompanyCode"] = CompanyCode
+                                  for (j=1 ; j&lt;= sheet.getColumns()-1 ; j++){
+                                  
+                                  //log.info sheet.getCell(j, i).getContents();
+                                  context["proCode"] = sheet.getCell(j, i).getContents();
+                                  //log.info "ServiceOrdNo : " + context["ServiceOrdNo"]
+                                             def str1 = "http://" + context["host"] + context["colon"] +context["port"] + context["backslash"] +context["context1"] + context["backslash"]
+                                             def str2 = context["CompanyCode"] + context["backslash"] + context["productCode"]+ context["backslash"]+ context["proCode"]
+                                             log.info "URI : " + str1 + str2
+                                             testRunner.runTestStepByName("REST Request") 
+                                             Thread.sleep(8000)
+                                             testRunner.runTestStepByName("Call_Fun")
+                                             //http://mum-dev:5006/api/serviceOrder/companyCode/8M/serviceOrderNo/1601138000
+                                 
+                                  	}                                  	
+                              }  
+               } catch (Exception err) {
+                              log.error err
+                              log.error "Check Test Data file Path."        
+}
+wb.close()
+</script></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:savedRecentRuns>1</con:savedRecentRuns><con:requirements/><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:reporting><con:reportTemplates/><con:xmlTemplates/><con:xmlTemplates/><con:parameters/><con:parameters/></con:reporting><con:reporting/><con:authRepository/><con:tags/></con:soapui-project>
