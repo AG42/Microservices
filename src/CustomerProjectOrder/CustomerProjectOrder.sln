@@ -104,34 +104,4 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://c-mumsm12.asia.jci.com:8080/tfs/businesssolutions
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = CustomerProjectOrder.API\\CustomerProjectOrder.API.csproj
-		SccProjectName1 = CustomerProjectOrder.API
-		SccLocalPath1 = CustomerProjectOrder.API
-		SccProjectUniqueName2 = CustomerProjectOrder.BusinessLayer\\CustomerProjectOrder.BusinessLayer.csproj
-		SccProjectName2 = CustomerProjectOrder.BusinessLayer
-		SccLocalPath2 = CustomerProjectOrder.BusinessLayer
-		SccProjectUniqueName3 = CustomerProjectOrder.Common\\CustomerProjectOrder.Common.csproj
-		SccProjectName3 = CustomerProjectOrder.Common
-		SccLocalPath3 = CustomerProjectOrder.Common
-		SccProjectUniqueName4 = CustomerProjectOrder.DataLayer\\CustomerProjectOrder.DataLayer.csproj
-		SccProjectName4 = CustomerProjectOrder.DataLayer
-		SccLocalPath4 = CustomerProjectOrder.DataLayer
-		SccProjectUniqueName5 = CustomerProjectOrder.LoadTest\\CustomerProjectOrder.LoadTest.csproj
-		SccProjectName5 = CustomerProjectOrder.LoadTest
-		SccLocalPath5 = CustomerProjectOrder.LoadTest
-		SccProjectUniqueName6 = CustomerProjectOrder.Model\\CustomerProjectOrder.Model.csproj
-		SccProjectName6 = CustomerProjectOrder.Model
-		SccLocalPath6 = CustomerProjectOrder.Model
-		SccProjectUniqueName7 = CustomerProjectOrder.UnitTest\\CustomerProjectOrder.UnitTest.csproj
-		SccProjectName7 = CustomerProjectOrder.UnitTest
-		SccLocalPath7 = CustomerProjectOrder.UnitTest
-		SccProjectUniqueName8 = CustomerProjectOrder\\CustomerProjectOrder.sfproj
-		SccProjectName8 = CustomerProjectOrder
-		SccLocalPath8 = CustomerProjectOrder
-	EndGlobalSection
 EndGlobal
