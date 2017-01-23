@@ -34,7 +34,7 @@ namespace PurchaseOrder.Controllers
         /// <summary>
         /// Get Purchase Order By Company Code
         /// </summary>
-        /// <param name="companyCode"> company </param>
+        /// <param name="companyCode">company code as string</param>
         /// <returns></returns>
         [HttpGet]
         [Route("{companycode}")]

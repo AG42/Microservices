@@ -53,5 +53,13 @@
 
         #endregion
 
+        #region Data Layer
+        public const string ParentCompanyCode = "";
+        public const string ColPurchaseOrderNumber = "Pc01001";
+        public const string ColOrderType = "Pc01002";
+        public const string OrderDate = "Pc01015";
+        public const string DeliveryDate = "Pc01016";
+        public const string ColProjectNumber = "Pc01056";
+        #endregion
     }
 }

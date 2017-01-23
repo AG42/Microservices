@@ -49,35 +49,30 @@ namespace PurchaseOrder.BusinessLayer
             };
         }
 
-        public static List<PurchaseOrderModel> ConvertToPurchaseOrderList(IEnumerable<Pc01> purchaseOrderPc01, string companyCode)
+        public static IEnumerable<PurchaseOrderModel> ConvertToPurchaseOrderList(IEnumerable<Pc01> purchaseOrderPc01, string companyCode)
         {
-            var purchaseOrderList = new List<PurchaseOrderModel>();
             foreach (var purchaseOrderModel in purchaseOrderPc01)
             {
-                purchaseOrderList.Add(ConvertToPurchaseOrderModel(purchaseOrderModel, companyCode));
+                yield return (ConvertToPurchaseOrderModel(purchaseOrderModel, companyCode));
             }
-            return purchaseOrderList;
         }
 
-        public static List<PurchaseOrderCustomerModel> ConvertToPurchaseOrderCustomerModel(IEnumerable<Pc04> purchaseOrderCustomers, string companyCode)
+        public static IEnumerable<PurchaseOrderCustomerModel> ConvertToPurchaseOrderCustomerModel(IEnumerable<Pc04> purchaseOrderCustomers, string companyCode)
         {
-            var purchaseOrderCustomerModels = new List<PurchaseOrderCustomerModel>();
-            foreach (var purchaseOrderCustomer in purchaseOrderCustomers)
+            var customers = purchaseOrderCustomers.GroupBy(po => po.Pc04002);
+
+            foreach (var customer in customers)
             {
-                var purchaseOrderCustomerModel = purchaseOrderCustomerModels.Any()? purchaseOrderCustomerModels.First(po => po.CustomerName.Equals(purchaseOrderCustomer.Pc04002)) : null;
-                if (purchaseOrderCustomerModel == null)
+                PurchaseOrderCustomerModel purchaseOrderCustomer = new PurchaseOrderCustomerModel();
+                purchaseOrderCustomer.PurchaseOrders = new List<PurchaseOrderModel>();
+                purchaseOrderCustomer.CustomerName = customer.Key;
+                foreach (var order in customer)
                 {
-                    purchaseOrderCustomerModel = new PurchaseOrderCustomerModel
-                    {
-                        CustomerName = purchaseOrderCustomer.Pc04002,
-                        TelephoneNo = purchaseOrderCustomer.Pc04008,
-                        PurchaseOrders = new List<PurchaseOrderModel>()
-                    };
-                    purchaseOrderCustomerModels.Add(purchaseOrderCustomerModel);
+                    purchaseOrderCustomer.TelephoneNo = order.Pc04008;
+                    purchaseOrderCustomer.PurchaseOrders.Add(ConvertToPurchaseOrderModel(order, companyCode));
                 }
-                purchaseOrderCustomerModel.PurchaseOrders.Add(ConvertToPurchaseOrderModel(purchaseOrderCustomer,companyCode));
+                yield return purchaseOrderCustomer;
             }
-            return purchaseOrderCustomerModels;
         }
     }
 }

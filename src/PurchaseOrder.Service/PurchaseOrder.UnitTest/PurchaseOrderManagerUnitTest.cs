@@ -4,7 +4,6 @@ using PurchaseOrder.DataLayer;
 using PurchaseOrder.DataLayer.Entities.Datalake;
 using PurchaseOrder.DataLayer.Interfaces;
 using Rhino.Mocks;
-using System.Linq;
 using System.Collections.Generic;
 using PurchaseOrder.Common.Enum;
 using System;
@@ -23,15 +22,15 @@ namespace PurchaseOrder.UnitTest
         private string _orderType = "0";
         private string _customerName = "ABCD";
         private string _projectNumber = "346457567";
-        private string _deliveryStartDate = DateTime.Now.ToString("dd-MMM-yyyy");
-        private string _deliveryEndDate = DateTime.Now.ToString("dd-MMM-yyyy");
-        private string _orderStartDate = DateTime.Now.ToString("dd-MMM-yyyy");
-        private string _orderEndDate = DateTime.Now.ToString("dd-MMM-yyyy");
+        readonly string _deliveryStartDate = DateTime.Now.ToString("dd-MMM-yyyy");
+        readonly string _deliveryEndDate = DateTime.Now.ToString("dd-MMM-yyyy");
+        readonly string _orderStartDate = DateTime.Now.ToString("dd-MMM-yyyy");
+        readonly string _orderEndDate = DateTime.Now.ToString("dd-MMM-yyyy");
 
         public Pc01 PurchaseOrderModel = new Pc01();
         public List<Pc01> PurchaseOrderList = new List<Pc01>();
 
-        public List<Pc01> PurchaseOrderCustomerList = new List<Pc01>();
+        public List<Pc04> PurchaseOrderCustomerList = new List<Pc04>();
 
         #endregion
 
@@ -363,6 +362,60 @@ namespace PurchaseOrder.UnitTest
 
         }
 
+        [TestMethod]
+        public void GetPurchaseOrderByCustomerNameTest()
+        {
+
+            var mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            SetMockDataForPurchaseOrderCustomerList();
+
+            //...Positive unit test case 
+            mockRepository.Stub(x => x.GetPurchaseOrderByCustomerName(_companyCode, _customerName))
+                            .IgnoreArguments()
+                            .Return(PurchaseOrderCustomerList);
+            _purchaseOrderManager = new PurchaseOrderManager(mockRepository);
+            var result = _purchaseOrderManager.GetPurchaseOrdersByCustomerName(_companyCode, _customerName);
+            Assert.IsNotNull(result);
+
+            //...Negative unit test case : CompanyCode empty
+            mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            mockRepository.Stub(x => x.GetPurchaseOrderByCustomerName(_companyCode, _customerName))
+                            .IgnoreArguments()
+                            .Return(null);
+            _purchaseOrderManager = new PurchaseOrderManager(mockRepository);
+            result = _purchaseOrderManager.GetPurchaseOrdersByCustomerName(string.Empty, _customerName);
+            Assert.IsTrue(result.Status == ResponseStatus.Failure);
+
+            //...Negative unit test case : Customer name is empty
+            mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            mockRepository.Stub(x => x.GetPurchaseOrderByCustomerName(_companyCode, _customerName))
+                            .IgnoreArguments()
+                            .Return(null);
+            _purchaseOrderManager = new PurchaseOrderManager(mockRepository);
+            result = _purchaseOrderManager.GetPurchaseOrdersByCustomerName(_companyCode, string.Empty);
+            Assert.IsTrue(result.Status == ResponseStatus.Failure);
+
+            //...Negative unit test case : Output list is null
+            PurchaseOrderCustomerList.Clear();
+            mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            mockRepository.Stub(x => x.GetPurchaseOrderByCustomerName(_companyCode, _customerName))
+                         .IgnoreArguments()
+                         .Return(PurchaseOrderCustomerList);
+            _purchaseOrderManager = new PurchaseOrderManager(mockRepository);
+            result = _purchaseOrderManager.GetPurchaseOrdersByCustomerName(_companyCode, string.Empty);
+            Assert.IsTrue(result.ErrorInfo.Count > 0);
+
+            //...Negative unit test case : Output is null
+            mockRepository = MockRepository.GenerateMock<IDataLayerContext>();
+            mockRepository.Stub(x => x.GetPurchaseOrderByCustomerName(_companyCode, _customerName))
+                          .IgnoreArguments()
+                          .Return(null);
+            _purchaseOrderManager = new PurchaseOrderManager(mockRepository);
+            result = _purchaseOrderManager.GetPurchaseOrdersByCustomerName(_companyCode, string.Empty);
+            Assert.IsTrue(result.PurchaseOrderCustomers == null);
+
+        }
+
         #endregion.................................
 
         #region MockData Methods
@@ -594,6 +647,92 @@ namespace PurchaseOrder.UnitTest
             });
             #endregion
         }
+
+        public void SetMockDataForPurchaseOrderCustomerList()
+        {
+            #region SamplePurchaseOrderCustomerList
+            PurchaseOrderCustomerList.Add(new Pc04()
+            {
+                //Customer Name
+                Pc04002 = "ABCD",
+
+                //Telephone Number
+                Pc04008 ="2534645",
+
+                //PurchOrderNo
+                Pc01001 ="354657",
+
+                //Order Type
+                Pc01002 ="0",
+
+                //Supplier Code
+                Pc01003 ="0",
+
+                //Customer Code Delivery
+                Pc01004 ="0",
+
+                //Remark Line 1
+                Pc01005 ="eegfdrgd x",
+
+                //Remark Line 2
+                Pc01006 ="dads s",
+
+                //Purchase Order Print Status
+                Pc01007 ="0",
+
+                //Reminder of Confirmation Print Status
+                Pc01008 ="0",
+
+                //Reminder of Shipment Print Status
+                Pc01009 ="0",
+
+                //Invoice Entered
+                Pc01011 ="",
+
+                //Payment Terms
+                Pc01012 ="",
+
+                //Delivery Terms
+                Pc01013 ="",
+
+                //Delivery Method
+                Pc01014 ="",
+
+                //Order Date
+                Pc01015 ="",
+
+                //Delivery Date
+                Pc01016 ="",
+
+                //Order Discount
+                Pc01019 ="0",
+
+                //Order Value 
+                Pc01020 ="0",
+
+                //Currency Code
+                Pc01022 ="",
+
+                //Purchase Code 
+                Pc01046 ="",
+
+                //Project Number 
+                Pc01056 ="",
+
+                //Customer Purchase Order Number 
+                Pc01058 ="",
+
+                //Customer Request Number 
+                Pc01062 ="",
+
+                //Project Linked Option 
+                Pc01068 =""
+    });
+            
+            #endregion
+        }
+
+
         #endregion
 
     }

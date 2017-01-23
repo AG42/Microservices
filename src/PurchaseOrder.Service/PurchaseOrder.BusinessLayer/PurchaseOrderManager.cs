@@ -18,9 +18,9 @@ namespace PurchaseOrder.BusinessLayer
 
 
         /// <summary>
-        /// 
+        /// Gets the Purchase order details by company code at business logic
         /// </summary>
-        /// <param name="companyCode"></param>
+        /// <param name="companyCode">company code as string</param>
         /// <returns></returns>
         public PurchaseOrdersResponse GetPurchaseOrderByCompanyCode(string companyCode)
         {
@@ -28,7 +28,7 @@ namespace PurchaseOrder.BusinessLayer
             var purchaseOrders = _dataLayerContext.GetPurchaseOrderByCompanyCode(companyCode);
             if (purchaseOrders != null && purchaseOrders.Any())
             {
-                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseOrders, companyCode);
+                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseOrders, companyCode).ToList();
             }
             else
             {
@@ -39,10 +39,10 @@ namespace PurchaseOrder.BusinessLayer
 
 
         /// <summary>
-        /// 
+        /// Gets the Purchase order detail by company code and purchase order number at business logic
         /// </summary>
-        /// <param name="companyCode"></param>
-        /// <param name="purchaseOrderNumber"></param>
+        /// <param name="companyCode">company code as string</param>
+        /// <param name="purchaseOrderNumber">purchase order number as string</param>
         /// <returns></returns>
         public PurchaseOrderResponse GetPurchaseOrderByPurchaseOrderNumber(string companyCode, string purchaseOrderNumber)
         {
@@ -63,10 +63,10 @@ namespace PurchaseOrder.BusinessLayer
 
 
         /// <summary>
-        /// 
+        /// Gets the Purchase order details by company code and order type at business logic
         /// </summary>
-        /// <param name="companyCode"></param>
-        /// <param name="orderType"></param>
+        /// <param name="companyCode">company code as string</param>
+        /// <param name="orderType">type of order as string</param>
         /// <returns></returns>
         public PurchaseOrdersResponse GetPurchaseOrderByOrderType(string companyCode, string orderType)
         {
@@ -75,7 +75,7 @@ namespace PurchaseOrder.BusinessLayer
             var purchaseOrders = _dataLayerContext.GetPurchaseOrderByOrderType(companyCode, orderType);
             if (purchaseOrders != null && purchaseOrders.Any())
             {
-                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseOrders, companyCode);
+                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseOrders, companyCode).ToList();
             }
             else
             {
@@ -85,8 +85,11 @@ namespace PurchaseOrder.BusinessLayer
         }
 
 
-        /// <param name="companyCode"></param>
-        /// <param name="customerName"></param>
+        /// <summary>
+        /// Gets the Purchase order details by company code and customer name at business logic
+        /// </summary>
+        /// <param name="companyCode">company code as string</param>
+        /// <param name="customerName">name of customer as string</param>
         /// <returns></returns>
         public PurchaseOrderCustomersResponse GetPurchaseOrdersByCustomerName(string companyCode, string customerName)
         {
@@ -95,7 +98,7 @@ namespace PurchaseOrder.BusinessLayer
             if (purchaseOrderCustomers != null && purchaseOrderCustomers.Any())
             {
                 response.PurchaseOrderCustomers = Converter.ConvertToPurchaseOrderCustomerModel(purchaseOrderCustomers,
-                    companyCode);
+                    companyCode).ToList();
             }
             else
                 response.ErrorInfo.Add(new ErrorInfo(Constants.NoDataFoundMessage));
@@ -104,10 +107,10 @@ namespace PurchaseOrder.BusinessLayer
 
 
         /// <summary>
-        /// 
+        /// Gets the Purchase order details by company code and project number at business logic
         /// </summary>
-        /// <param name="companyCode"></param>
-        /// <param name="projectNumber"></param>
+        /// <param name="companyCode">company code as string</param>
+        /// <param name="projectNumber">project number as string</param>
         /// <returns></returns>
         public PurchaseOrdersResponse GetPurchaseOrderByProjectNumber(string companyCode, string projectNumber)
         {
@@ -116,7 +119,7 @@ namespace PurchaseOrder.BusinessLayer
             var purchaseOrders = _dataLayerContext.GetPurchaseOrderByProjectNumber(companyCode, projectNumber);
             if (purchaseOrders != null && purchaseOrders.Any())
             {
-                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseOrders, companyCode);
+                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseOrders, companyCode).ToList();
             }
             else
             {
@@ -139,7 +142,7 @@ namespace PurchaseOrder.BusinessLayer
             var purchaseOrders = _dataLayerContext.GetPurchaseOrderByDeliveryDateRange(companyCode, deliveryStartDate, deliveryEndDate);
             if (purchaseOrders != null && purchaseOrders.Any())
             {
-                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseOrders, companyCode);
+                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseOrders, companyCode).ToList();
             }
             else
             {
@@ -164,7 +167,7 @@ namespace PurchaseOrder.BusinessLayer
                 orderEndDate);
             if (purchaseorders != null && purchaseorders.Any())
             {
-                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseorders, companyCode);
+                response.PurchaseOrders = Converter.ConvertToPurchaseOrderList(purchaseorders, companyCode).ToList();
             }
             else
             {
@@ -172,7 +175,5 @@ namespace PurchaseOrder.BusinessLayer
             }
             return response;
         }
-
-       
     }
 }
