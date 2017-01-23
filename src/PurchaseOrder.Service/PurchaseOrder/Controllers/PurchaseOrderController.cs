@@ -41,7 +41,6 @@ namespace PurchaseOrder.Controllers
         [Route("companycode/{*companycode}")]
         public IHttpActionResult GetPurchaseOrderByCompanyCode([ModelBinder(typeof(SlashInValueBinder))]string companyCode)
         {
-
             var response = _purchaseOrderManager.GetPurchaseOrderByCompanyCode(companyCode);
 
             if (response.Status == ResponseStatus.Success)
