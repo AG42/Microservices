@@ -1,21 +1,17 @@
-<?xml version="1.0"?>
-<project name="AntDemo" default="testreport" basedir=".">
-
-<target name="SoapUI"> 
-<exec dir="." executable="C:\Users\ckhan83\Desktop\ReadyAPI-1.8.0\bin\testrunner.bat">
-<arg line="-r -j -o -f 'C:\Users\ckhan83\Desktop\Ant_Demo' -sTestSuite 1 'C:\Users\ckhan83\Desktop\Ant_Demo\AntDemo-soapui-project.xml'">
-</arg>
-</exec>
-</target>
-
-<target name="testreport" depends="SoapUI">
-<junitreport todir="C:\Users\ckhan83\Desktop\Ant_Demo\AntDemo">
-<fileset dir="C:\Users\ckhan83\Desktop\Ant_Demo\AntDemo">
-<include name="test-*.xml"></include>
-</fileset>
-
-<report todir="C:\Users\ckhan83\Desktop\Ant_Demo\AntDemo">
-</report>
-</junitreport>
-</target>
+<project name="simpleCompile" default="deploy" basedir=".">
+   <target name="init">
+      <property name="sourceDir" value="src"/ >
+      <property name="outputDir" value="classes" />
+      
+   </target>
+   <target name="clean" depends="init">
+      <deltree dir="${outputDir}" />
+   </target>
+   <target name="prepare" depends="clean">
+      <mkdir dir="${outputDir}" />
+   </target>
+   <target name="compile" depends="prepare">
+     <javac srcdir="${sourceDir}" destdir="${outputDir}" />
+   </target>
+   
 </project>
