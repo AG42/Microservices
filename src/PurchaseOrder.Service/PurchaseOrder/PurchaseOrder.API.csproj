@@ -158,19 +158,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PurchaseOrder.BusinessLayer\PurchaseOrder.BusinessLayer.csproj">
-      <Project>{2082FC90-AE93-4B69-973C-14D177205C90}</Project>
+      <Project>{2082fc90-ae93-4b69-973c-14d177205c90}</Project>
       <Name>PurchaseOrder.BusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\PurchaseOrder.Common\PurchaseOrder.Common.csproj">
-      <Project>{5C92C03F-BE61-40C5-AADD-62759F1D0DDB}</Project>
+      <Project>{5c92c03f-be61-40c5-aadd-62759f1d0ddb}</Project>
       <Name>PurchaseOrder.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\PurchaseOrder.DataLayer\PurchaseOrder.DataLayer.csproj">
-      <Project>{6A5A7AB6-99F2-49E9-83EA-F0D019E06AE4}</Project>
+      <Project>{6a5a7ab6-99f2-49e9-83ea-f0d019e06ae4}</Project>
       <Name>PurchaseOrder.DataLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\PurchaseOrder.Model\PurchaseOrder.Model.csproj">
-      <Project>{465AD69C-874B-488E-90E5-6714127B95C1}</Project>
+      <Project>{465ad69c-874b-488e-90e5-6714127b95c1}</Project>
       <Name>PurchaseOrder.Model</Name>
     </ProjectReference>
   </ItemGroup>
