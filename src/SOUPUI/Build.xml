@@ -1,17 +1,34 @@
-<project name="simpleCompile" default="compile" basedir=".">
-   <target name="init">
-      <property name="sourceDir" value="src"/>
-      <property name="outputDir" value="classes" />
-      
-   </target>
-   <target name="clean" depends="init">
-      <deltree dir="${outputDir}" />
-   </target>
-   <target name="prepare" depends="clean">
-      <mkdir dir="${outputDir}" />
-   </target>
-   <target name="compile" depends="prepare">
-     <javac srcdir="${sourceDir}" destdir="${outputDir}" />
-   </target>
-   
+<?xml version="1.0" encoding="windows-1252" ?>
+<project default="soapui-report">
+ <property environment="env"/>
+ <property name="soapui.home" value="${env.SOAPUI_HOME}"/>
+ <property name="testrunner.bat" location="${soapui.home}\bin\testrunner.bat"/>
+ <property name="testrunner.sh" location="${soapui.home}/bin/testrunner.sh"/>
+
+ <property name="test" location="C:\soapUIprojects\soapui-project.xml"/>
+           
+ <target name="soapui-report">
+ 
+  <echo>os.name = ${os.name}</echo>
+  <mkdir dir="reports"/>
+  <echo>soapui.home = ${soapui.home} testrunner.bat = ${testrunner.bat} test = ${test}</echo>
+ 
+  <exec executable="cmd.exe" osfamily="windows" failonerror="false">
+   <arg line="/c ${testrunner.bat} -j  -freports  ${test}"/>
+  </exec>
+ 
+  <property name="testrunner.sh" location="${soapui.home}/bin/testrunner.sh"/>
+  <exec executable="${testrunner.sh}" os="Linux" failonerror="true">
+   <arg line="-j -freports ${testxmllinux}"/>
+  </exec>
+ 
+  <junitreport todir="reports">
+   <fileset dir="reports">
+    <include name="TESTS-*.xml"/>
+   </fileset>
+   <report format="frames" todir="reports/html"/>
+  </junitreport>
+ 
+ </target>
+
 </project>
