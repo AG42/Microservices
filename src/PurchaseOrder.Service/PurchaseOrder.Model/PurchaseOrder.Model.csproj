@@ -5,7 +5,6 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProjectGuid>{465AD69C-874B-488E-90E5-6714127B95C1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
