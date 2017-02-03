@@ -55,7 +55,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microservices.Common">
-      <HintPath>..\..\..\GitHubJCIPublic\Microservices\src\Binref\Microservices.Common.dll</HintPath>
+      <HintPath>..\..\GitHubJCIPublic\Microservices\src\Binref\Microservices.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
