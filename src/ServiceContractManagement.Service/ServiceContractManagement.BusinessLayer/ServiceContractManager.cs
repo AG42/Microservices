@@ -4,7 +4,6 @@ using ServiceContractManagement.DataLayer.Interfaces;
 using ServiceContractManagement.Model.Responses;
 using ServiceContractManagement.Common.Logger;
 using ServiceContractManagement.Common.Error;
-using ServiceContractManagement.Common.Enums;
 using ServiceContractManagement.Common;
 
 namespace ServiceContractManagement.BusinessLayer

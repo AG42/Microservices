@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ServiceContractManagement.Model.Responses;
+﻿using ServiceContractManagement.Model.Responses;
 
 namespace ServiceContractManagement.BusinessLayer.Interface
 {

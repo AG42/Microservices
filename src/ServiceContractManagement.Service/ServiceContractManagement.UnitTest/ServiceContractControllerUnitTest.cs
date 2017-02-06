@@ -20,7 +20,7 @@ namespace ServiceContractManagement.UnitTest
 
         private ServiceContractController _serviceContractController;
         private List<ServiceContractMasterModel> _serviceContractMasterModelList;
-        private ServiceContractMasterModel serviceContractMasterModel;
+        private ServiceContractMasterModel _serviceContractMasterModel;
         private List<ErrorInfo> _errorInfoList;
         private readonly string _companyCode = "j1";
         private readonly string _contractNumber = "9200910138";
@@ -35,7 +35,7 @@ namespace ServiceContractManagement.UnitTest
             _serviceContractController.Request.Properties.Add(HttpPropertyKeys.HttpConfigurationKey,
                 new HttpConfiguration());
             _serviceContractMasterModelList = new List<ServiceContractMasterModel>();
-            serviceContractMasterModel = new ServiceContractMasterModel();
+            _serviceContractMasterModel = new ServiceContractMasterModel();
             _errorInfoList = new List<ErrorInfo>();
         }
 
@@ -145,8 +145,7 @@ namespace ServiceContractManagement.UnitTest
 
         public void GetServiceContractTypeByContractNumberTestWithNoData()
         {
-            var data = new ServiceContractTypeByContractNumberResponse();
-            data.ContractType = null;
+            var data = new ServiceContractTypeByContractNumberResponse {ContractType = null};
             _serviceContractManagerMock.Stub(
                     x => x.GetServiceContractTypeByContractNumber(_companyCode, _contractNumber))
                 .IgnoreArguments()
@@ -296,8 +295,7 @@ namespace ServiceContractManagement.UnitTest
         [TestMethod]
         public void GetServiceContractPaymentTermsByContractNumberTestWithValidInput()
         {
-            var data = new ServiceContractPaymentTermsByContractNumberResponse();
-            data.PaymentTerms = "10";
+            var data = new ServiceContractPaymentTermsByContractNumberResponse {PaymentTerms = "10"};
             _serviceContractManagerMock.Stub(
                     x => x.GetServiceContractPaymentTermsByContractNumber(_companyCode, _contractNumber))
                 .IgnoreArguments()
@@ -337,13 +335,12 @@ namespace ServiceContractManagement.UnitTest
         [TestMethod]
         public void GetServiceContractContractValueByContractNumberTestWithValidInput()
         {
-            var data = new ServiceContractValueByContractNumberResponse();
-            data.ContractValue = "10";
+            var data = new ServiceContractValueByContractNumberResponse {ContractValue = "10"};
             _serviceContractManagerMock.Stub(
                     x => x.GetServiceContractValueByContractNumber(_companyCode, _contractNumber))
                 .IgnoreArguments()
                 .Return(data);
-            var response = _serviceContractController.GetServiceContractPaymentTermsByContractNumber(_companyCode, _contractNumber);
+            var response = _serviceContractController.GetServiceContractValueByContractNumber(_companyCode, _contractNumber);
             Assert.IsNotNull(response);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }

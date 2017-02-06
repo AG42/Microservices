@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ServiceContractManagement.Model.Responses;
+﻿using System.Collections.Generic;
 
 namespace ServiceContractManagement.Model
 {
@@ -24,7 +19,7 @@ namespace ServiceContractManagement.Model
         public string OurReference { get; set; }
         public string InvoiceCurrencyCode { get; set; }
         public string ContractCurrencyCode { get; set; }
-        public string CustomerSearchKey { get; set; }
+        public string CustomerAlphaSearchKey { get; set; }
 
         public List<ServiceContractLinesModel> ServiceContractLineDetails { get; } = new List<ServiceContractLinesModel>();
     }

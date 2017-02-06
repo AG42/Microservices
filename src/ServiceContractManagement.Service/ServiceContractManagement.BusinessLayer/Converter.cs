@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 using ServiceContractManagement.DataLayer.Entities.Datalake;
 using ServiceContractManagement.Model;
-using ServiceContractManagement.Common;
 
 namespace ServiceContractManagement.BusinessLayer
 {
@@ -30,7 +28,7 @@ namespace ServiceContractManagement.BusinessLayer
                 InvoiceCurrencyCode = sm11.SM11023,
                 ContractCurrencyCode = sm11.SM11027,
                 ContractType = sm11.SM11068,
-                CustomerSearchKey = sm11.SM11093
+                CustomerAlphaSearchKey = sm11.SM11093
             };
         }
         public static ServiceContractLinesModel Convert(SM13 sm13, string companyCode, string contractCode)
@@ -101,24 +99,20 @@ namespace ServiceContractManagement.BusinessLayer
         }
         public static List<ServiceContractMasterModel> ConvertServiceContracts(IEnumerable<SM11> contractMasterDetails, IEnumerable<SM13> contractLinesDetails, string companyCode)
         {
-            List<ServiceContractMasterModel> ServiceContractModelList = new List<ServiceContractMasterModel>();
-            ServiceContractMasterModel masterModel = new ServiceContractMasterModel();
-
+            List<ServiceContractMasterModel> serviceContractModelList = new List<ServiceContractMasterModel>();
 
             foreach (var contractMaster in contractMasterDetails)
             {
-                if (contractMaster != null)
-                {
-                    masterModel = new ServiceContractMasterModel();
-                    masterModel = Convert(contractMaster, companyCode);
+                if (contractMaster == null) continue;
 
-                    var contractLine = contractLinesDetails.Where(cust => cust.SM13001 == contractMaster.SM11001).ToList();
-                    masterModel.ServiceContractLineDetails.AddRange(ConvertLineDetails(contractLine, companyCode, masterModel.ServiceContractNo));
-                    ServiceContractModelList.Add(masterModel);
-                }
+                var masterModel = Convert(contractMaster, companyCode);
+
+                var contractLine = contractLinesDetails.Where(cust => cust.SM13001 == contractMaster.SM11001).ToList();
+                masterModel.ServiceContractLineDetails.AddRange(ConvertLineDetails(contractLine, companyCode, masterModel.ServiceContractNo));
+                serviceContractModelList.Add(masterModel);
             }
 
-            return ServiceContractModelList;
+            return serviceContractModelList;
         }
     }
 }

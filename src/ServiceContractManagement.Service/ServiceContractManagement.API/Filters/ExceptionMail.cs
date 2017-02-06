@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.Web.Http.ExceptionHandling;
-using ServiceContractManagement.Common.Enums;
 using ServiceContractManagement.Common.Logger;
 using ServiceContractManagement.Common.Mail;
 

@@ -11,7 +11,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 
 namespace ServiceContractManagement.API.Controllers
 {    
@@ -45,7 +44,7 @@ namespace ServiceContractManagement.API.Controllers
             var response = _serviceContractManager.GetServiceContractDetailsByContractNumber(companyCode, contractNumber);
             if (response.Status == ResponseStatus.Success)
             {
-                ApplicationLogger.InfoLogger($"Response Status: Success");
+                ApplicationLogger.InfoLogger("Response Status: Success");
 
                 if (response.ServiceContractDetails != null)
                 {
@@ -76,7 +75,7 @@ namespace ServiceContractManagement.API.Controllers
             var response = _serviceContractManager.GetServiceContractDetailsByContractDate(companyCode, startDate, endDate);
             if (response.Status == ResponseStatus.Success)
             {
-                ApplicationLogger.InfoLogger($"Response Status: Success");
+                ApplicationLogger.InfoLogger("Response Status: Success");
 
                 if (response.ServiceContractDetails.Any())
                 {
@@ -110,7 +109,7 @@ namespace ServiceContractManagement.API.Controllers
             var response = _serviceContractManager.GetServiceContractUnitPriceByContractNumber(companyCode, contractNumber);
             if (response.Status == ResponseStatus.Success)
             {
-                ApplicationLogger.InfoLogger($"Response Status: Success");
+                ApplicationLogger.InfoLogger("Response Status: Success");
 
                 if (response.ServiceContractLineItemUnitPrice.Any())
                 {
@@ -134,7 +133,7 @@ namespace ServiceContractManagement.API.Controllers
             var response = _serviceContractManager.GetServiceContractInvoiceQuantityByContractNumber(companyCode, contractNumber);
             if (response.Status == ResponseStatus.Success)
             {
-                ApplicationLogger.InfoLogger($"Response Status: Success");
+                ApplicationLogger.InfoLogger("Response Status: Success");
 
                 if (response.ServiceContractLineItemQuantity.Any())
                 {
@@ -159,7 +158,7 @@ namespace ServiceContractManagement.API.Controllers
             var response = _serviceContractManager.GetServiceContractDebitCreditValueByContractNumber(companyCode, contractNumber);
             if (response.Status == ResponseStatus.Success)
             {
-                ApplicationLogger.InfoLogger($"Response Status: Success");
+                ApplicationLogger.InfoLogger("Response Status: Success");
 
                 if (response.ServiceContractLineItemDebitCreditValue.Any())
                 {

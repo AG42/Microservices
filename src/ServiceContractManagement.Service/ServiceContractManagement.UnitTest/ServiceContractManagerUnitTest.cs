@@ -3,10 +3,7 @@ using ServiceContractManagement.BusinessLayer;
 using ServiceContractManagement.DataLayer.Entities.Datalake;
 using ServiceContractManagement.DataLayer.Interfaces;
 using ServiceContractManagement.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Rhino.Mocks;
 
@@ -21,11 +18,11 @@ namespace ServiceContractManagement.UnitTest
         private const string COMPANY_CODE = "j1";
         private SM11 _sm11 = new SM11();
         private SM13 _sm13 = new SM13();
-        private List<SM11> _serviceContractMasterList  = new List<SM11>();
-        private List<SM13> _serviceContractLinesList = new List<SM13>();
+        private readonly List<SM11> _serviceContractMasterList  = new List<SM11>();
+        private readonly List<SM13> _serviceContractLinesList = new List<SM13>();
         private ServiceContractMasterModel _contractMasterModel = new ServiceContractMasterModel();
-        private List<ServiceContractMasterModel> _contractMasterModelList = new List<ServiceContractMasterModel>();
-        private List<ServiceContractLinesModel> _contractLineModelList = new List<ServiceContractLinesModel>();
+        private readonly List<ServiceContractMasterModel> _contractMasterModelList = new List<ServiceContractMasterModel>();
+        private readonly List<ServiceContractLinesModel> _contractLineModelList = new List<ServiceContractLinesModel>();
         private ServiceContractLinesModel _contractLineModel = new ServiceContractLinesModel();
 
         #endregion
@@ -48,12 +45,14 @@ namespace ServiceContractManagement.UnitTest
             SetMockDataForServiceContractLines();
             SetMockDataForServiceMasterModel();
 
-            var data = new Model.Responses.ServiceContractDetailsByContractNumberResponse();
-            data.ServiceContractDetails = _contractMasterModel;
+            var data = new Model.Responses.ServiceContractDetailsByContractNumberResponse
+            {
+                ServiceContractDetails = _contractMasterModel
+            };
 
             mockRepository.Stub(x => x.GetServiceContractDetailsByContractCodeAsync("j1", "961120034"))
                             .IgnoreArguments()
-                            .Return(Task.FromResult((SM11)_sm11));
+                            .Return(Task.FromResult(_sm11));
 
             mockRepository.Stub(x => x.GetServiceContractLineDetailsByContractCodeAsync("j1", "961120034"))
                             .IgnoreArguments()
@@ -99,12 +98,11 @@ namespace ServiceContractManagement.UnitTest
             SetMockDataForServiceContractLines();
             SetMockDataForServiceMasterModel();
 
-            var data = new Model.Responses.ServiceContractTypeByContractNumberResponse();
-            data.ContractType = "Test";
+            var data = new Model.Responses.ServiceContractTypeByContractNumberResponse {ContractType = "Test"};
 
             mockRepository.Stub(x => x.GetServiceContractDetailsByContractCodeAsync("j1", "961120034"))
                             .IgnoreArguments()
-                            .Return(Task.FromResult((SM11)_sm11));
+                            .Return(Task.FromResult(_sm11));
 
             _serviceContractManager = new ServiceContractManager(mockRepository);
             var result = _serviceContractManager.GetServiceContractTypeByContractNumber("j1", "961120034");
@@ -179,12 +177,11 @@ namespace ServiceContractManagement.UnitTest
             SetMockDataForServiceContractLines();
             SetMockDataForServiceMasterModel();
 
-            var data = new Model.Responses.ServiceContractPaymentTermsByContractNumberResponse();
-            data.PaymentTerms="60";
+            var data = new Model.Responses.ServiceContractPaymentTermsByContractNumberResponse {PaymentTerms = "60"};
 
             mockRepository.Stub(x => x.GetServiceContractDetailsByContractCodeAsync("j1", "961120034"))
                             .IgnoreArguments()
-                            .Return(Task.FromResult((SM11)_sm11));
+                            .Return(Task.FromResult(_sm11));
 
             _serviceContractManager = new ServiceContractManager(mockRepository);
             var result = _serviceContractManager.GetServiceContractPaymentTermsByContractNumber("j1", "961120034");
@@ -199,12 +196,11 @@ namespace ServiceContractManagement.UnitTest
             SetMockDataForServiceContractLines();
             SetMockDataForServiceMasterModel();
 
-            var data = new Model.Responses.ServiceContractSalesmanNoByContractNumberResponse();
-            data.SalesmanNo = "60ty566";
+            var data = new Model.Responses.ServiceContractSalesmanNoByContractNumberResponse {SalesmanNo = "60ty566"};
 
             mockRepository.Stub(x => x.GetServiceContractDetailsByContractCodeAsync("j1", "961120034"))
                             .IgnoreArguments()
-                            .Return(Task.FromResult((SM11)_sm11));
+                            .Return(Task.FromResult(_sm11));
 
             _serviceContractManager = new ServiceContractManager(mockRepository);
             var result = _serviceContractManager.GetServiceContractSalesmanNoByContractNumber("j1", "961120034");
@@ -219,12 +215,11 @@ namespace ServiceContractManagement.UnitTest
             SetMockDataForServiceContractLines();
             SetMockDataForServiceMasterModel();
 
-            var data = new Model.Responses.ServiceContractValueByContractNumberResponse();
-            data.ContractValue = "123345";
+            var data = new Model.Responses.ServiceContractValueByContractNumberResponse {ContractValue = "123345"};
 
             mockRepository.Stub(x => x.GetServiceContractDetailsByContractCodeAsync("j1", "961120034"))
                             .IgnoreArguments()
-                            .Return(Task.FromResult((SM11)_sm11));
+                            .Return(Task.FromResult(_sm11));
 
             _serviceContractManager = new ServiceContractManager(mockRepository);
             var result = _serviceContractManager.GetServiceContractValueByContractNumber("j1", "961120034");
@@ -309,12 +304,14 @@ namespace ServiceContractManagement.UnitTest
             SetMockDataForServiceContractLines();
             SetMockDataForServiceMasterModel();
 
-            var data = new Model.Responses.ServiceContractDetailsByContractNumberResponse();
-            data.ServiceContractDetails= _contractMasterModel;
+            var data = new Model.Responses.ServiceContractDetailsByContractNumberResponse
+            {
+                ServiceContractDetails = _contractMasterModel
+            };
 
             mockRepository.Stub(x => x.GetServiceContractDetailsByContractCodeAsync("j1", "23456"))
                 .IgnoreArguments()
-                .Return(Task.FromResult((SM11)_sm11));
+                .Return(Task.FromResult(_sm11));
 
             mockRepository.Stub(x => x.GetServiceContractLineDetailsByContractCodeAsync("j1", "123456"))
                             .IgnoreArguments()

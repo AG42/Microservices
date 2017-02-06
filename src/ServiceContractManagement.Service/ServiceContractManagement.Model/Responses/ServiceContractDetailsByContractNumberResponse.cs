@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ServiceContractManagement.Model.Responses
+﻿namespace ServiceContractManagement.Model.Responses
 {
     public class ServiceContractDetailsByContractNumberResponse : BaseResponse
     {
