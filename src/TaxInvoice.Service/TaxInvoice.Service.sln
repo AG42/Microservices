@@ -1,0 +1,142 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "TaxInvoice.Service", "TaxInvoice.Service\TaxInvoice.Service.sfproj", "{24FC398A-BACC-434A-934B-75E7346AA849}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxInvoice.API", "TaxInvoice.API\TaxInvoice.API.csproj", "{227CFB35-5B10-47FF-AC92-8EC7D5D95AE2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{01D19A16-C7BD-447A-90D4-097D315B1C54} = {01D19A16-C7BD-447A-90D4-097D315B1C54}
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB} = {9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1} = {A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97} = {D72B17E0-E094-47D6-A391-DC58CCFC5B97}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxInvoice.BusinessLayer", "TaxInvoice.BusinessLayer\TaxInvoice.BusinessLayer.csproj", "{01D19A16-C7BD-447A-90D4-097D315B1C54}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB} = {9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1} = {A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97} = {D72B17E0-E094-47D6-A391-DC58CCFC5B97}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxInvoice.Common", "TaxInvoice.Common\TaxInvoice.Common.csproj", "{D72B17E0-E094-47D6-A391-DC58CCFC5B97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxInvoice.DataLayer", "TaxInvoice.DataLayer\TaxInvoice.DataLayer.csproj", "{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxInvoice.Model", "TaxInvoice.Model\TaxInvoice.Model.csproj", "{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxInvoice.UnitTest", "TaxInvoice.UnitTest\TaxInvoice.UnitTest.csproj", "{3ACB0A68-62A7-4318-9F75-22B1CE734BD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxInvoice.LoadTest", "TaxInvoice.LoadTest\TaxInvoice.LoadTest.csproj", "{50FCEF3F-7F2E-45C3-9FCE-09FCAA475218}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B01FD5E9-8FFA-40A6-AB8B-7B2BA5945D2D}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24FC398A-BACC-434A-934B-75E7346AA849}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{24FC398A-BACC-434A-934B-75E7346AA849}.Debug|x64.ActiveCfg = Debug|x64
+		{24FC398A-BACC-434A-934B-75E7346AA849}.Debug|x64.Build.0 = Debug|x64
+		{24FC398A-BACC-434A-934B-75E7346AA849}.Debug|x64.Deploy.0 = Debug|x64
+		{24FC398A-BACC-434A-934B-75E7346AA849}.Release|Any CPU.ActiveCfg = Release|x64
+		{24FC398A-BACC-434A-934B-75E7346AA849}.Release|x64.ActiveCfg = Release|x64
+		{24FC398A-BACC-434A-934B-75E7346AA849}.Release|x64.Build.0 = Release|x64
+		{24FC398A-BACC-434A-934B-75E7346AA849}.Release|x64.Deploy.0 = Release|x64
+		{227CFB35-5B10-47FF-AC92-8EC7D5D95AE2}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{227CFB35-5B10-47FF-AC92-8EC7D5D95AE2}.Debug|x64.ActiveCfg = Debug|x64
+		{227CFB35-5B10-47FF-AC92-8EC7D5D95AE2}.Debug|x64.Build.0 = Debug|x64
+		{227CFB35-5B10-47FF-AC92-8EC7D5D95AE2}.Release|Any CPU.ActiveCfg = Release|x64
+		{227CFB35-5B10-47FF-AC92-8EC7D5D95AE2}.Release|x64.ActiveCfg = Release|x64
+		{227CFB35-5B10-47FF-AC92-8EC7D5D95AE2}.Release|x64.Build.0 = Release|x64
+		{01D19A16-C7BD-447A-90D4-097D315B1C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D19A16-C7BD-447A-90D4-097D315B1C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D19A16-C7BD-447A-90D4-097D315B1C54}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{01D19A16-C7BD-447A-90D4-097D315B1C54}.Debug|x64.Build.0 = Debug|Any CPU
+		{01D19A16-C7BD-447A-90D4-097D315B1C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D19A16-C7BD-447A-90D4-097D315B1C54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01D19A16-C7BD-447A-90D4-097D315B1C54}.Release|x64.ActiveCfg = Release|Any CPU
+		{01D19A16-C7BD-447A-90D4-097D315B1C54}.Release|x64.Build.0 = Release|Any CPU
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97}.Debug|x64.Build.0 = Debug|Any CPU
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97}.Release|x64.ActiveCfg = Release|Any CPU
+		{D72B17E0-E094-47D6-A391-DC58CCFC5B97}.Release|x64.Build.0 = Release|Any CPU
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}.Debug|x64.Build.0 = Debug|Any CPU
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A4C171B-0FDB-4A04-8056-5C8850E4D7AB}.Release|x64.Build.0 = Release|Any CPU
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}.Debug|x64.Build.0 = Debug|Any CPU
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}.Release|x64.ActiveCfg = Release|Any CPU
+		{A41BD0AD-F85A-4064-ADEB-40B64D80EBE1}.Release|x64.Build.0 = Release|Any CPU
+		{3ACB0A68-62A7-4318-9F75-22B1CE734BD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ACB0A68-62A7-4318-9F75-22B1CE734BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ACB0A68-62A7-4318-9F75-22B1CE734BD7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3ACB0A68-62A7-4318-9F75-22B1CE734BD7}.Debug|x64.Build.0 = Debug|Any CPU
+		{3ACB0A68-62A7-4318-9F75-22B1CE734BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ACB0A68-62A7-4318-9F75-22B1CE734BD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ACB0A68-62A7-4318-9F75-22B1CE734BD7}.Release|x64.ActiveCfg = Release|Any CPU
+		{3ACB0A68-62A7-4318-9F75-22B1CE734BD7}.Release|x64.Build.0 = Release|Any CPU
+		{50FCEF3F-7F2E-45C3-9FCE-09FCAA475218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FCEF3F-7F2E-45C3-9FCE-09FCAA475218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50FCEF3F-7F2E-45C3-9FCE-09FCAA475218}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{50FCEF3F-7F2E-45C3-9FCE-09FCAA475218}.Debug|x64.Build.0 = Debug|Any CPU
+		{50FCEF3F-7F2E-45C3-9FCE-09FCAA475218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50FCEF3F-7F2E-45C3-9FCE-09FCAA475218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FCEF3F-7F2E-45C3-9FCE-09FCAA475218}.Release|x64.ActiveCfg = Release|Any CPU
+		{50FCEF3F-7F2E-45C3-9FCE-09FCAA475218}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://c-mumsm12.asia.jci.com:8080/tfs/businesssolutions
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TaxInvoice.API\\TaxInvoice.API.csproj
+		SccProjectName1 = TaxInvoice.API
+		SccLocalPath1 = TaxInvoice.API
+		SccProjectUniqueName2 = TaxInvoice.Service\\TaxInvoice.Service.sfproj
+		SccProjectName2 = TaxInvoice.Service
+		SccLocalPath2 = TaxInvoice.Service
+		SccProjectUniqueName3 = TaxInvoice.BusinessLayer\\TaxInvoice.BusinessLayer.csproj
+		SccProjectName3 = TaxInvoice.BusinessLayer
+		SccLocalPath3 = TaxInvoice.BusinessLayer
+		SccProjectUniqueName4 = TaxInvoice.Common\\TaxInvoice.Common.csproj
+		SccProjectName4 = TaxInvoice.Common
+		SccLocalPath4 = TaxInvoice.Common
+		SccProjectUniqueName5 = TaxInvoice.DataLayer\\TaxInvoice.DataLayer.csproj
+		SccProjectName5 = TaxInvoice.DataLayer
+		SccLocalPath5 = TaxInvoice.DataLayer
+		SccProjectUniqueName6 = TaxInvoice.Model\\TaxInvoice.Model.csproj
+		SccProjectName6 = TaxInvoice.Model
+		SccLocalPath6 = TaxInvoice.Model
+		SccProjectUniqueName7 = TaxInvoice.UnitTest\\TaxInvoice.UnitTest.csproj
+		SccProjectName7 = TaxInvoice.UnitTest
+		SccLocalPath7 = TaxInvoice.UnitTest
+		SccProjectUniqueName8 = TaxInvoice.LoadTest\\TaxInvoice.LoadTest.csproj
+		SccProjectName8 = TaxInvoice.LoadTest
+		SccLocalPath8 = TaxInvoice.LoadTest
+	EndGlobalSection
+EndGlobal
