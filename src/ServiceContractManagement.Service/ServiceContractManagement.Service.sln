@@ -1,0 +1,125 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "ServiceContractManagement", "ServiceContractManagement\ServiceContractManagement.sfproj", "{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{78750662-1E73-4F3F-B3C2-A442BEFE659C} = {78750662-1E73-4F3F-B3C2-A442BEFE659C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContractManagement.BusinessLayer", "ServiceContractManagement.BusinessLayer\ServiceContractManagement.BusinessLayer.csproj", "{D3446E94-04C0-41DC-984A-E224A8C7B9B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContractManagement.DataLayer", "ServiceContractManagement.DataLayer\ServiceContractManagement.DataLayer.csproj", "{A253638E-26B5-43E3-AC2B-574BBB14EEFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContractManagement.Common", "ServiceContractManagement.Common\ServiceContractManagement.Common.csproj", "{DD3AD7B0-BEC9-4D23-895A-E5EB925CBB1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContractManagement.Model", "ServiceContractManagement.Model\ServiceContractManagement.Model.csproj", "{3C55F2F2-953E-4FB8-8D7A-C992238A8341}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContractManagement.LoadTest", "ServiceContractManagement.LoadTest\ServiceContractManagement.LoadTest.csproj", "{38A465BF-22D3-4453-897C-509B2885E571}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContractManagement.API", "ServiceContractManagement.API\ServiceContractManagement.API.csproj", "{78750662-1E73-4F3F-B3C2-A442BEFE659C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContractManagement.UnitTest", "ServiceContractManagement.UnitTest\ServiceContractManagement.UnitTest.csproj", "{4E63A49F-7C3B-4D01-A104-6AF70A708E97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}.Debug|Any CPU.Build.0 = Debug|x64
+		{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}.Debug|x64.ActiveCfg = Debug|x64
+		{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}.Debug|x64.Build.0 = Debug|x64
+		{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}.Debug|x64.Deploy.0 = Debug|x64
+		{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}.Release|Any CPU.ActiveCfg = Release|x64
+		{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}.Release|x64.ActiveCfg = Release|x64
+		{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}.Release|x64.Build.0 = Release|x64
+		{1E0E31CF-8528-4B92-88EA-AFC7C2084C6A}.Release|x64.Deploy.0 = Release|x64
+		{D3446E94-04C0-41DC-984A-E224A8C7B9B0}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{D3446E94-04C0-41DC-984A-E224A8C7B9B0}.Debug|Any CPU.Build.0 = Debug|x64
+		{D3446E94-04C0-41DC-984A-E224A8C7B9B0}.Debug|x64.ActiveCfg = Debug|x64
+		{D3446E94-04C0-41DC-984A-E224A8C7B9B0}.Debug|x64.Build.0 = Debug|x64
+		{D3446E94-04C0-41DC-984A-E224A8C7B9B0}.Release|Any CPU.ActiveCfg = Release|x64
+		{D3446E94-04C0-41DC-984A-E224A8C7B9B0}.Release|x64.ActiveCfg = Release|x64
+		{D3446E94-04C0-41DC-984A-E224A8C7B9B0}.Release|x64.Build.0 = Release|x64
+		{A253638E-26B5-43E3-AC2B-574BBB14EEFC}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{A253638E-26B5-43E3-AC2B-574BBB14EEFC}.Debug|Any CPU.Build.0 = Debug|x64
+		{A253638E-26B5-43E3-AC2B-574BBB14EEFC}.Debug|x64.ActiveCfg = Debug|x64
+		{A253638E-26B5-43E3-AC2B-574BBB14EEFC}.Debug|x64.Build.0 = Debug|x64
+		{A253638E-26B5-43E3-AC2B-574BBB14EEFC}.Release|Any CPU.ActiveCfg = Release|x64
+		{A253638E-26B5-43E3-AC2B-574BBB14EEFC}.Release|x64.ActiveCfg = Release|x64
+		{A253638E-26B5-43E3-AC2B-574BBB14EEFC}.Release|x64.Build.0 = Release|x64
+		{DD3AD7B0-BEC9-4D23-895A-E5EB925CBB1B}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{DD3AD7B0-BEC9-4D23-895A-E5EB925CBB1B}.Debug|Any CPU.Build.0 = Debug|x64
+		{DD3AD7B0-BEC9-4D23-895A-E5EB925CBB1B}.Debug|x64.ActiveCfg = Debug|x64
+		{DD3AD7B0-BEC9-4D23-895A-E5EB925CBB1B}.Debug|x64.Build.0 = Debug|x64
+		{DD3AD7B0-BEC9-4D23-895A-E5EB925CBB1B}.Release|Any CPU.ActiveCfg = Release|x64
+		{DD3AD7B0-BEC9-4D23-895A-E5EB925CBB1B}.Release|x64.ActiveCfg = Release|x64
+		{DD3AD7B0-BEC9-4D23-895A-E5EB925CBB1B}.Release|x64.Build.0 = Release|x64
+		{3C55F2F2-953E-4FB8-8D7A-C992238A8341}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{3C55F2F2-953E-4FB8-8D7A-C992238A8341}.Debug|Any CPU.Build.0 = Debug|x64
+		{3C55F2F2-953E-4FB8-8D7A-C992238A8341}.Debug|x64.ActiveCfg = Debug|x64
+		{3C55F2F2-953E-4FB8-8D7A-C992238A8341}.Debug|x64.Build.0 = Debug|x64
+		{3C55F2F2-953E-4FB8-8D7A-C992238A8341}.Release|Any CPU.ActiveCfg = Release|x64
+		{3C55F2F2-953E-4FB8-8D7A-C992238A8341}.Release|x64.ActiveCfg = Release|x64
+		{3C55F2F2-953E-4FB8-8D7A-C992238A8341}.Release|x64.Build.0 = Release|x64
+		{38A465BF-22D3-4453-897C-509B2885E571}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{38A465BF-22D3-4453-897C-509B2885E571}.Debug|Any CPU.Build.0 = Debug|x64
+		{38A465BF-22D3-4453-897C-509B2885E571}.Debug|x64.ActiveCfg = Debug|x64
+		{38A465BF-22D3-4453-897C-509B2885E571}.Debug|x64.Build.0 = Debug|x64
+		{38A465BF-22D3-4453-897C-509B2885E571}.Release|Any CPU.ActiveCfg = Release|x64
+		{38A465BF-22D3-4453-897C-509B2885E571}.Release|x64.ActiveCfg = Release|x64
+		{38A465BF-22D3-4453-897C-509B2885E571}.Release|x64.Build.0 = Release|x64
+		{78750662-1E73-4F3F-B3C2-A442BEFE659C}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{78750662-1E73-4F3F-B3C2-A442BEFE659C}.Debug|Any CPU.Build.0 = Debug|x64
+		{78750662-1E73-4F3F-B3C2-A442BEFE659C}.Debug|x64.ActiveCfg = Debug|x64
+		{78750662-1E73-4F3F-B3C2-A442BEFE659C}.Debug|x64.Build.0 = Debug|x64
+		{78750662-1E73-4F3F-B3C2-A442BEFE659C}.Release|Any CPU.ActiveCfg = Release|x64
+		{78750662-1E73-4F3F-B3C2-A442BEFE659C}.Release|x64.ActiveCfg = Release|x64
+		{78750662-1E73-4F3F-B3C2-A442BEFE659C}.Release|x64.Build.0 = Release|x64
+		{4E63A49F-7C3B-4D01-A104-6AF70A708E97}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{4E63A49F-7C3B-4D01-A104-6AF70A708E97}.Debug|Any CPU.Build.0 = Debug|x64
+		{4E63A49F-7C3B-4D01-A104-6AF70A708E97}.Debug|x64.ActiveCfg = Debug|x64
+		{4E63A49F-7C3B-4D01-A104-6AF70A708E97}.Debug|x64.Build.0 = Debug|x64
+		{4E63A49F-7C3B-4D01-A104-6AF70A708E97}.Release|Any CPU.ActiveCfg = Release|x64
+		{4E63A49F-7C3B-4D01-A104-6AF70A708E97}.Release|x64.ActiveCfg = Release|x64
+		{4E63A49F-7C3B-4D01-A104-6AF70A708E97}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://c-mumsm12:8080/tfs/businesssolutions
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ServiceContractManagement\\ServiceContractManagement.sfproj
+		SccProjectName1 = ServiceContractManagement
+		SccLocalPath1 = ServiceContractManagement
+		SccProjectUniqueName2 = ServiceContractManagement.LoadTest\\ServiceContractManagement.LoadTest.csproj
+		SccProjectName2 = ServiceContractManagement.LoadTest
+		SccLocalPath2 = ServiceContractManagement.LoadTest
+		SccProjectUniqueName3 = ServiceContractManagement.Common\\ServiceContractManagement.Common.csproj
+		SccProjectName3 = ServiceContractManagement.Common
+		SccLocalPath3 = ServiceContractManagement.Common
+		SccProjectUniqueName4 = ServiceContractManagement.DataLayer\\ServiceContractManagement.DataLayer.csproj
+		SccProjectName4 = ServiceContractManagement.DataLayer
+		SccLocalPath4 = ServiceContractManagement.DataLayer
+		SccProjectUniqueName5 = ServiceContractManagement.Model\\ServiceContractManagement.Model.csproj
+		SccProjectName5 = ServiceContractManagement.Model
+		SccLocalPath5 = ServiceContractManagement.Model
+		SccProjectUniqueName6 = ServiceContractManagement.BusinessLayer\\ServiceContractManagement.BusinessLayer.csproj
+		SccProjectName6 = ServiceContractManagement.BusinessLayer
+		SccLocalPath6 = ServiceContractManagement.BusinessLayer
+		SccProjectUniqueName7 = ServiceContractManagement.API\\ServiceContractManagement.API.csproj
+		SccProjectName7 = ServiceContractManagement.API
+		SccLocalPath7 = ServiceContractManagement.API
+		SccProjectUniqueName8 = ServiceContractManagement.UnitTest\\ServiceContractManagement.UnitTest.csproj
+		SccProjectName8 = ServiceContractManagement.UnitTest
+		SccLocalPath8 = ServiceContractManagement.UnitTest
+	EndGlobalSection
+EndGlobal
