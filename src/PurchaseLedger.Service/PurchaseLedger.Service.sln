@@ -1,0 +1,126 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "PurchaseLedger.Service", "PurchaseLedger.Service\PurchaseLedger.Service.sfproj", "{EA431CD8-753C-47A8-9598-9712E7D1EF02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchaseLedger.API", "PurchaseLedger.API\PurchaseLedger.API.csproj", "{D4706E78-921C-402E-8B98-EA4CC343B8C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchaseLedger.BusinessLayer", "PurchaseLedger.BusinessLayer\PurchaseLedger.BusinessLayer.csproj", "{50686FF3-46D6-4B7B-9E5F-0D8DEE4AE193}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchaseLedger.Common", "PurchaseLedger.Common\PurchaseLedger.Common.csproj", "{B8355810-0657-4C47-9D13-AED4E39D2CB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchaseLedger.DataLayer", "PurchaseLedger.DataLayer\PurchaseLedger.DataLayer.csproj", "{BE9EA82F-C24E-45BF-AF82-AE62B2FDBB77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchaseLedger.Model", "PurchaseLedger.Model\PurchaseLedger.Model.csproj", "{CF2D3B68-B2C9-4CD9-B8FA-60BC28917BEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchaseLedger.LoadTest", "PurchaseLedger.LoadTest\PurchaseLedger.LoadTest.csproj", "{BE32D7A1-FA0C-4A0D-A14B-335C68152249}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchaseLedger.UnitTest", "PurchaseLedger.UnitTest\PurchaseLedger.UnitTest.csproj", "{BF8A6CDE-A5EF-4A12-9970-E49B8C79F6D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA431CD8-753C-47A8-9598-9712E7D1EF02}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{EA431CD8-753C-47A8-9598-9712E7D1EF02}.Debug|x64.ActiveCfg = Debug|x64
+		{EA431CD8-753C-47A8-9598-9712E7D1EF02}.Debug|x64.Build.0 = Debug|x64
+		{EA431CD8-753C-47A8-9598-9712E7D1EF02}.Debug|x64.Deploy.0 = Debug|x64
+		{EA431CD8-753C-47A8-9598-9712E7D1EF02}.Release|Any CPU.ActiveCfg = Release|x64
+		{EA431CD8-753C-47A8-9598-9712E7D1EF02}.Release|x64.ActiveCfg = Release|x64
+		{EA431CD8-753C-47A8-9598-9712E7D1EF02}.Release|x64.Build.0 = Release|x64
+		{EA431CD8-753C-47A8-9598-9712E7D1EF02}.Release|x64.Deploy.0 = Release|x64
+		{D4706E78-921C-402E-8B98-EA4CC343B8C1}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{D4706E78-921C-402E-8B98-EA4CC343B8C1}.Debug|x64.ActiveCfg = Debug|x64
+		{D4706E78-921C-402E-8B98-EA4CC343B8C1}.Debug|x64.Build.0 = Debug|x64
+		{D4706E78-921C-402E-8B98-EA4CC343B8C1}.Release|Any CPU.ActiveCfg = Release|x64
+		{D4706E78-921C-402E-8B98-EA4CC343B8C1}.Release|x64.ActiveCfg = Release|x64
+		{D4706E78-921C-402E-8B98-EA4CC343B8C1}.Release|x64.Build.0 = Release|x64
+		{50686FF3-46D6-4B7B-9E5F-0D8DEE4AE193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50686FF3-46D6-4B7B-9E5F-0D8DEE4AE193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50686FF3-46D6-4B7B-9E5F-0D8DEE4AE193}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{50686FF3-46D6-4B7B-9E5F-0D8DEE4AE193}.Debug|x64.Build.0 = Debug|Any CPU
+		{50686FF3-46D6-4B7B-9E5F-0D8DEE4AE193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50686FF3-46D6-4B7B-9E5F-0D8DEE4AE193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50686FF3-46D6-4B7B-9E5F-0D8DEE4AE193}.Release|x64.ActiveCfg = Release|Any CPU
+		{50686FF3-46D6-4B7B-9E5F-0D8DEE4AE193}.Release|x64.Build.0 = Release|Any CPU
+		{B8355810-0657-4C47-9D13-AED4E39D2CB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8355810-0657-4C47-9D13-AED4E39D2CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8355810-0657-4C47-9D13-AED4E39D2CB6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B8355810-0657-4C47-9D13-AED4E39D2CB6}.Debug|x64.Build.0 = Debug|Any CPU
+		{B8355810-0657-4C47-9D13-AED4E39D2CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8355810-0657-4C47-9D13-AED4E39D2CB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8355810-0657-4C47-9D13-AED4E39D2CB6}.Release|x64.ActiveCfg = Release|Any CPU
+		{B8355810-0657-4C47-9D13-AED4E39D2CB6}.Release|x64.Build.0 = Release|Any CPU
+		{BE9EA82F-C24E-45BF-AF82-AE62B2FDBB77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9EA82F-C24E-45BF-AF82-AE62B2FDBB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9EA82F-C24E-45BF-AF82-AE62B2FDBB77}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BE9EA82F-C24E-45BF-AF82-AE62B2FDBB77}.Debug|x64.Build.0 = Debug|Any CPU
+		{BE9EA82F-C24E-45BF-AF82-AE62B2FDBB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9EA82F-C24E-45BF-AF82-AE62B2FDBB77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE9EA82F-C24E-45BF-AF82-AE62B2FDBB77}.Release|x64.ActiveCfg = Release|Any CPU
+		{BE9EA82F-C24E-45BF-AF82-AE62B2FDBB77}.Release|x64.Build.0 = Release|Any CPU
+		{CF2D3B68-B2C9-4CD9-B8FA-60BC28917BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF2D3B68-B2C9-4CD9-B8FA-60BC28917BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF2D3B68-B2C9-4CD9-B8FA-60BC28917BEC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CF2D3B68-B2C9-4CD9-B8FA-60BC28917BEC}.Debug|x64.Build.0 = Debug|Any CPU
+		{CF2D3B68-B2C9-4CD9-B8FA-60BC28917BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF2D3B68-B2C9-4CD9-B8FA-60BC28917BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF2D3B68-B2C9-4CD9-B8FA-60BC28917BEC}.Release|x64.ActiveCfg = Release|Any CPU
+		{CF2D3B68-B2C9-4CD9-B8FA-60BC28917BEC}.Release|x64.Build.0 = Release|Any CPU
+		{BE32D7A1-FA0C-4A0D-A14B-335C68152249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE32D7A1-FA0C-4A0D-A14B-335C68152249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE32D7A1-FA0C-4A0D-A14B-335C68152249}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BE32D7A1-FA0C-4A0D-A14B-335C68152249}.Debug|x64.Build.0 = Debug|Any CPU
+		{BE32D7A1-FA0C-4A0D-A14B-335C68152249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE32D7A1-FA0C-4A0D-A14B-335C68152249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE32D7A1-FA0C-4A0D-A14B-335C68152249}.Release|x64.ActiveCfg = Release|Any CPU
+		{BE32D7A1-FA0C-4A0D-A14B-335C68152249}.Release|x64.Build.0 = Release|Any CPU
+		{BF8A6CDE-A5EF-4A12-9970-E49B8C79F6D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF8A6CDE-A5EF-4A12-9970-E49B8C79F6D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF8A6CDE-A5EF-4A12-9970-E49B8C79F6D6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BF8A6CDE-A5EF-4A12-9970-E49B8C79F6D6}.Debug|x64.Build.0 = Debug|Any CPU
+		{BF8A6CDE-A5EF-4A12-9970-E49B8C79F6D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF8A6CDE-A5EF-4A12-9970-E49B8C79F6D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF8A6CDE-A5EF-4A12-9970-E49B8C79F6D6}.Release|x64.ActiveCfg = Release|Any CPU
+		{BF8A6CDE-A5EF-4A12-9970-E49B8C79F6D6}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://c-mumsm12.asia.jci.com:8080/tfs/businesssolutions
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PurchaseLedger.Service\\PurchaseLedger.Service.sfproj
+		SccProjectName1 = PurchaseLedger.Service
+		SccLocalPath1 = PurchaseLedger.Service
+		SccProjectUniqueName2 = PurchaseLedger.BusinessLayer\\PurchaseLedger.BusinessLayer.csproj
+		SccProjectName2 = PurchaseLedger.BusinessLayer
+		SccLocalPath2 = PurchaseLedger.BusinessLayer
+		SccProjectUniqueName3 = PurchaseLedger.DataLayer\\PurchaseLedger.DataLayer.csproj
+		SccProjectName3 = PurchaseLedger.DataLayer
+		SccLocalPath3 = PurchaseLedger.DataLayer
+		SccProjectUniqueName4 = PurchaseLedger.LoadTest\\PurchaseLedger.LoadTest.csproj
+		SccProjectName4 = PurchaseLedger.LoadTest
+		SccLocalPath4 = PurchaseLedger.LoadTest
+		SccProjectUniqueName5 = PurchaseLedger.API\\PurchaseLedger.API.csproj
+		SccProjectName5 = PurchaseLedger.API
+		SccLocalPath5 = PurchaseLedger.API
+		SccProjectUniqueName6 = PurchaseLedger.UnitTest\\PurchaseLedger.UnitTest.csproj
+		SccProjectName6 = PurchaseLedger.UnitTest
+		SccLocalPath6 = PurchaseLedger.UnitTest
+		SccProjectUniqueName7 = PurchaseLedger.Common\\PurchaseLedger.Common.csproj
+		SccProjectName7 = PurchaseLedger.Common
+		SccLocalPath7 = PurchaseLedger.Common
+		SccProjectUniqueName8 = PurchaseLedger.Model\\PurchaseLedger.Model.csproj
+		SccProjectName8 = PurchaseLedger.Model
+		SccLocalPath8 = PurchaseLedger.Model
+	EndGlobalSection
+EndGlobal
